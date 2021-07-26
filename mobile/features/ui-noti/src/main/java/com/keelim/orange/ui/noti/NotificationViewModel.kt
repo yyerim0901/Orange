@@ -22,11 +22,17 @@ class NotificationViewModel @Inject constructor(
             NotificationState.Loading
         )
 
-        setState(
-            NotificationState.Success(
-                notificationUseCase.invoke()
+        try{
+            setState(
+                NotificationState.Success(
+                    notificationUseCase.invoke()
+                )
             )
-        )
+        } catch (e:Exception){
+            setState(
+                NotificationState.Error
+            )
+        }
     }
 
     private fun setState(state: NotificationState) {
