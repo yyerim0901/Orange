@@ -19,6 +19,7 @@ listOf(
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":domain"))
     implementation("com.google.android.material:material:1.4.0")
 
     implementation(AndroidX.navigation_ui)
