@@ -19,10 +19,15 @@ listOf(
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":common"))
+
     implementation("com.google.android.material:material:1.4.0")
 
     implementation(AndroidX.navigation_ui)
     implementation(AndroidX.navigation_fragment)
-    
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+
 }
 
