@@ -1,5 +1,7 @@
 package com.keelim.orange.di
 
+import com.keelim.orange.data.datasource.LoginDataSource
+import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.NotificationRepositoryImpl
 import dagger.Module
@@ -22,4 +24,15 @@ object RepositoryModule {
             dispatcher,
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideLoginRepository(
+        dataSource:LoginDataSource
+    ): LoginRepository{
+        return LoginRepository(
+            dataSource
+        )
+    }
+
 }

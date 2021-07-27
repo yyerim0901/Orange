@@ -64,5 +64,4 @@ dependencies {
     androidTestImplementation(AppTest.androidJunit)
     androidTestImplementation(AppTest.espressoCore)
     androidTestImplementation(Kotlin.Coroutines.test)
-    implementation("androidx.core:core-ktx:+")
 }
