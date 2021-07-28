@@ -1,11 +1,11 @@
 package com.keelim.orange.domain.theme
 
 import com.keelim.orange.data.repository.theme.ThemeRepository
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 class GetAppThemeUseCase @Inject constructor(
-    themeRepository: ThemeRepository
+  themeRepository: ThemeRepository
 ) {
-    val appTheme: Flow<Int> = themeRepository.getUserTheme()
+  val appTheme: Flow<Int> = themeRepository.getUserTheme()
 }

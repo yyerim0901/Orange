@@ -41,10 +41,10 @@ object RepositoryModule {
   @Provides
   @Singleton
   fun provideThemeRepository(
-      @ApplicationContext context: Context
-  ): ThemeRepository{
+    @ApplicationContext context: Context
+  ): ThemeRepository {
     return ThemeRepository(
-        context
+      context
     )
   }
 }
