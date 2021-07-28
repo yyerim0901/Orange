@@ -4,6 +4,6 @@ package com.keelim.orange.ui.auth.signup
  * Authentication result : success (user details) or error message.
  */
 data class LoginResult(
-    val success: LoggedInUserView? = null,
-    val error: Int? = null
+  val success: LoggedInUserView? = null,
+  val error: Int? = null
 )

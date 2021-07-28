@@ -11,13 +11,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
-    @Singleton
-    @Provides
-    fun provideLoginDataSource(
-        @IoDispatcher dispatcher: CoroutineDispatcher
-    ): LoginDataSource {
-        return LoginDataSource(
-            dispatcher
-        )
-    }
+  @Singleton
+  @Provides
+  fun provideLoginDataSource(
+    @IoDispatcher dispatcher: CoroutineDispatcher
+  ): LoginDataSource {
+    return LoginDataSource(
+      dispatcher
+    )
+  }
 }

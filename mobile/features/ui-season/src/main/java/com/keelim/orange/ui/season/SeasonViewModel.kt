@@ -7,31 +7,29 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SeasonViewModel @Inject constructor(
-    
-) : ViewModel() {
-    private val _state = MutableLiveData<SeasonState>()
-    val state: LiveData<SeasonState> = _state
+class SeasonViewModel @Inject constructor() : ViewModel() {
+  private val _state = MutableLiveData<SeasonState>()
+  val state: LiveData<SeasonState> = _state
 
-    fun fetchData() {
-        setState(
-            SeasonState.UnInitialized
+  fun fetchData() {
+    setState(
+      SeasonState.UnInitialized
+    )
+    try {
+      setState(
+        SeasonState.Success(
+          emptyList()
+          // todo
         )
-        try {
-            setState(
-                SeasonState.Success(
-                    emptyList()
-                    //todo
-                )
-            )
-        } catch (e: Exception) {
-            setState(
-                SeasonState.Error
-            )
-        }
+      )
+    } catch (e: Exception) {
+      setState(
+        SeasonState.Error
+      )
     }
+  }
 
-    private fun setState(value: SeasonState) {
-        _state.value = value
-    }
+  private fun setState(value: SeasonState) {
+    _state.value = value
+  }
 }

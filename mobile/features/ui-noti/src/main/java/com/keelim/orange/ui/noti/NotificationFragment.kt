@@ -1,11 +1,9 @@
 package com.keelim.orange.ui.noti
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,62 +14,64 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NotificationFragment : Fragment() {
-    private var _binding: FragmentNotificationBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<NotificationViewModel>()
-    private val notificationAdapter by lazy {
-        NotificationAdapter(
-            TODO()
-        )
-    }
+  private var _binding: FragmentNotificationBinding? = null
+  private val binding get() = _binding!!
+  private val viewModel by viewModels<NotificationViewModel>()
+  private val notificationAdapter by lazy {
+    NotificationAdapter(
+      clickListener = {
+        viewModel.friendsOk()
+      }
+    )
+  }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    _binding = FragmentNotificationBinding.inflate(inflater, container, false)
+    return binding.root
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews()
-        observeData()
-        viewModel.fetchData()
-    }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initViews()
+    observeData()
+    viewModel.fetchData()
+  }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 
-    private fun observeData() = viewModel.state.observe(viewLifecycleOwner){
-        when(it){
-            is NotificationState.UnInitialized -> handleUnInitialized()
-            is NotificationState.Loading -> handleLoading()
-            is NotificationState.Success -> handleSuccess(it.data)
-            is NotificationState.Error -> handleError()
-        }
+  private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
+    when (it) {
+      is NotificationState.UnInitialized -> handleUnInitialized()
+      is NotificationState.Loading -> handleLoading()
+      is NotificationState.Success -> handleSuccess(it.data)
+      is NotificationState.Error -> handleError()
     }
+  }
 
-    private fun initViews() = with(binding) {
-        notificationRecycler.adapter = notificationAdapter
-        notificationRecycler.layoutManager = LinearLayoutManager(requireContext())
-    }
+  private fun initViews() = with(binding) {
+    notificationRecycler.adapter = notificationAdapter
+    notificationRecycler.layoutManager = LinearLayoutManager(requireContext())
+  }
 
-    private fun handleUnInitialized(){
-        requireActivity().toast("데이터 초기화 중입니다.")
-    }
+  private fun handleUnInitialized() {
+    requireActivity().toast("데이터 초기화 중입니다.")
+  }
 
-    private fun handleLoading(){
-        requireActivity().toast("데이터 초기화 중입니다.")
-    }
-    private fun handleSuccess(data:List<Notification>){
-        notificationAdapter.submitList(data)
-    }
+  private fun handleLoading() {
+    requireActivity().toast("데이터 초기화 중입니다.")
+  }
+  private fun handleSuccess(data: List<Notification>) {
+    notificationAdapter.submitList(data)
+  }
 
-    private fun handleError(){
-        requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
-    }
+  private fun handleError() {
+    requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
+  }
 }

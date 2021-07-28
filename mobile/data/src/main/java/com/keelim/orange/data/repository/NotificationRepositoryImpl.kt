@@ -7,9 +7,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NotificationRepositoryImpl @Inject constructor(
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+  @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : NotificationRepository {
-    override suspend fun getAllNotificationList(): List<Notification> = withContext(dispatcher){
-        emptyList()
-    }
+  override suspend fun getAllNotificationList(): List<Notification> = withContext(dispatcher) {
+    emptyList()
+  }
 }
