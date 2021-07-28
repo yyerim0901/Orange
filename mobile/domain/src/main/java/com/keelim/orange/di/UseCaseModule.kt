@@ -1,6 +1,7 @@
 package com.keelim.orange.di
 
 import com.keelim.orange.data.repository.NotificationRepository
+import com.keelim.orange.domain.FriendsOkUseCase
 import com.keelim.orange.domain.NotificationUseCase
 import com.keelim.orange.domain.SendTokenServerUseCase
 import dagger.Module
@@ -26,5 +27,11 @@ object UseCaseModule {
   @Singleton
   fun provideSendTokenServerUseCase(): SendTokenServerUseCase {
     return SendTokenServerUseCase()
+  }
+
+  @Provides
+  @Singleton
+  fun provideFriendsOkUseCase(): FriendsOkUseCase {
+    return FriendsOkUseCase()
   }
 }
