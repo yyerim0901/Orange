@@ -1,8 +1,8 @@
 package com.keelim.orange.data.repository
 
 import com.keelim.orange.data.datasource.LoginDataSource
-import com.keelim.orange.data.model.Result
 import com.keelim.orange.data.model.LoggedInUser
+import com.keelim.orange.data.model.Result
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -11,38 +11,38 @@ import com.keelim.orange.data.model.LoggedInUser
 
 class LoginRepository(val dataSource: LoginDataSource) {
 
-    // in-memory cache of the loggedInUser object
-    var user: LoggedInUser? = null
-        private set
+  // in-memory cache of the loggedInUser object
+  var user: LoggedInUser? = null
+    private set
 
-    val isLoggedIn: Boolean
-        get() = user != null
+  val isLoggedIn: Boolean
+    get() = user != null
 
-    init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-        user = null
+  init {
+    // If user credentials will be cached in local storage, it is recommended it be encrypted
+    // @see https://developer.android.com/training/articles/keystore
+    user = null
+  }
+
+  suspend fun logout() {
+    user = null
+    dataSource.logout()
+  }
+
+  suspend fun login(username: String, password: String): Result<LoggedInUser> {
+    // handle login
+    val result = dataSource.login(username, password)
+
+    if (result is Result.Success) {
+      setLoggedInUser(result.data)
     }
 
-    suspend fun logout(){
-        user = null
-        dataSource.logout()
-    }
+    return result
+  }
 
-    suspend fun login(username: String, password: String): Result<LoggedInUser> {
-        // handle login
-        val result = dataSource.login(username, password)
-
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
-        }
-
-        return result
-    }
-
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
-        this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-    }
+  private fun setLoggedInUser(loggedInUser: LoggedInUser) {
+    this.user = loggedInUser
+    // If user credentials will be cached in local storage, it is recommended it be encrypted
+    // @see https://developer.android.com/training/articles/keystore
+  }
 }

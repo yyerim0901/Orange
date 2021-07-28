@@ -12,23 +12,19 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
-    @Provides
-    @Singleton
-    fun provideNotificationUseCase(
-        notificationRepository: NotificationRepository,
-    ):NotificationUseCase{
-        return NotificationUseCase(
-            notificationRepository
-        )
-    }
+  @Provides
+  @Singleton
+  fun provideNotificationUseCase(
+    notificationRepository: NotificationRepository,
+  ): NotificationUseCase {
+    return NotificationUseCase(
+      notificationRepository
+    )
+  }
 
-    @Provides
-    @Singleton
-    fun provideSendTokenServerUseCase(
-
-    ): SendTokenServerUseCase{
-        return SendTokenServerUseCase(
-
-        )
-    }
+  @Provides
+  @Singleton
+  fun provideSendTokenServerUseCase(): SendTokenServerUseCase {
+    return SendTokenServerUseCase()
+  }
 }

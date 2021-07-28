@@ -15,24 +15,23 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-    @Provides
-    @Singleton
-    fun provideNotificationRepository(
-        @IoDispatcher dispatcher: CoroutineDispatcher,
-    ):NotificationRepository{
-        return NotificationRepositoryImpl(
-            dispatcher,
-        )
-    }
+  @Provides
+  @Singleton
+  fun provideNotificationRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+  ): NotificationRepository {
+    return NotificationRepositoryImpl(
+      dispatcher,
+    )
+  }
 
-    @Provides
-    @Singleton
-    fun provideLoginRepository(
-        dataSource:LoginDataSource
-    ): LoginRepository{
-        return LoginRepository(
-            dataSource
-        )
-    }
-
+  @Provides
+  @Singleton
+  fun provideLoginRepository(
+    dataSource: LoginDataSource
+  ): LoginRepository {
+    return LoginRepository(
+      dataSource
+    )
+  }
 }

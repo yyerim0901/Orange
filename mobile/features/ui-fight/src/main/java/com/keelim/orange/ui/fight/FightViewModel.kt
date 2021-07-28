@@ -7,31 +7,29 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FightViewModel @Inject constructor(
-    
-) : ViewModel() {
-    private val _state = MutableLiveData<FightState>()
-    val state: LiveData<FightState> = _state
+class FightViewModel @Inject constructor() : ViewModel() {
+  private val _state = MutableLiveData<FightState>()
+  val state: LiveData<FightState> = _state
 
-    fun fetchData() {
-        setState(
-            FightState.UnInitialized
+  fun fetchData() {
+    setState(
+      FightState.UnInitialized
+    )
+    try {
+      setState(
+        FightState.Success(
+          emptyList()
+          // todo
         )
-        try {
-            setState(
-                FightState.Success(
-                    emptyList()
-                    //todo
-                )
-            )
-        } catch (e: Exception) {
-            setState(
-                FightState.Error
-            )
-        }
+      )
+    } catch (e: Exception) {
+      setState(
+        FightState.Error
+      )
     }
+  }
 
-    private fun setState(value: FightState) {
-        _state.value = value
-    }
+  private fun setState(value: FightState) {
+    _state.value = value
+  }
 }
