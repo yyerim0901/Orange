@@ -1,13 +1,18 @@
 <template>
   <div>
-      <h1>login</h1>
+    <h1>로그인 페이지</h1>
+    <LoginForm></LoginForm>
   </div>
 </template>
 
 <script>
-export default {
-    name: "Login",
+import LoginForm from '@/components/user/LoginForm.vue'
 
+export default {
+  name: "Login",
+  components: {
+    LoginForm
+  },
 }
 </script>
 
