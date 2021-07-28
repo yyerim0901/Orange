@@ -19,7 +19,9 @@ class NotificationFragment : Fragment() {
   private val viewModel by viewModels<NotificationViewModel>()
   private val notificationAdapter by lazy {
     NotificationAdapter(
-      TODO()
+      clickListener = {
+        viewModel.friendsOk()
+      }
     )
   }
 
