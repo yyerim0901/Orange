@@ -81,7 +81,10 @@ gantt
     Feed		  	:done, 07-26, 5d
     notification	 :done, 07-28, 5d
 	auth   	  		:done, 07-31, 4d
+	develp->master :done, 07-29,1d
     profile	 	 		:done, 08-02,5d
+   	develp->master :done, 08-05,1d
+    develp->master :done, 08-12,1d
 	Challange		 	   :done, 08-06,7d
 	search                 :done, 08-12, 2d
 	sync (unit)                   :done, 08-14, 2d 
@@ -90,6 +93,9 @@ gantt
     Feed		  	:done, 07-26, 5d
     notification	 :done, 07-28, 5d
    	FCM              :done, 07-28, 5d
+    develp->master :done, 07-29,1d
+    develp->master :done, 08-05,1d
+    develp->master :done, 08-12,1d
 	auth   	  		:done, 07-31, 4d
     profile	 	 		:done, 08-02,5d
 	Challange		 	   :done, 08-06,7d
@@ -97,8 +103,11 @@ gantt
 	sync (unit)                   :done, 08-14, 2d 
 	
     section Backend
-    auth   	  		:done, 07-26, 4d
+    auth   	  		:done, 07-27, 4d
     profile	 	 		:done, 07-28,5d
+    develp->master :done, 07-29,1d
+    develp->master :done, 08-05,1d
+    develp->master :done, 08-12,1d
     search                 :done, 08-01, 3d
     Feed		  	:done, 08-01, 5d
     notification	 :done, 08-03, 5d
