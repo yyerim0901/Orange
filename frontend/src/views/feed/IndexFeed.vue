@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h1>Index</h1>
+    <CarouselForm></CarouselForm>
   </div>
 </template>
 
 <script>
+import CarouselForm from '@/components/main/CarouselForm.vue'
+
 export default {
   name: 'IndexFeed',
+  components: {
+    CarouselForm,
+  }
 }
 </script>
 
