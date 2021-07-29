@@ -2,6 +2,10 @@
 
 [toc]
 
+## 기술 스택 정리
+
+![기술 스택](./README.assets/기술 스택.png)
+
 ## 프로젝트 기능 리스트 업
 
 
@@ -74,10 +78,13 @@ gantt
     개발 환경 구성             :done, 07-22, 5d
 	
 	section Frontend
-    Feed		  	:done, 07-26, 5d
-    notification	 :done, 07-28, 5d
-	auth   	  		:done, 07-31, 4d
+    auth		  	:done, 07-26, 5d
+    feed	 :done, 07-28, 5d
+	notification   	  		:done, 07-31, 4d
+	develp->master :done, 07-29,1d
     profile	 	 		:done, 08-02,5d
+   	develp->master :done, 08-05,1d
+    develp->master :done, 08-12,1d
 	Challange		 	   :done, 08-06,7d
 	search                 :done, 08-12, 2d
 	sync (unit)                   :done, 08-14, 2d 
@@ -85,6 +92,10 @@ gantt
     section Mobile
     Feed		  	:done, 07-26, 5d
     notification	 :done, 07-28, 5d
+   	FCM              :done, 07-28, 5d
+    develp->master :done, 07-29,1d
+    develp->master :done, 08-05,1d
+    develp->master :done, 08-12,1d
 	auth   	  		:done, 07-31, 4d
     profile	 	 		:done, 08-02,5d
 	Challange		 	   :done, 08-06,7d
@@ -92,8 +103,12 @@ gantt
 	sync (unit)                   :done, 08-14, 2d 
 	
     section Backend
-    auth   	  		:done, 07-26, 4d
+    auth   	  		:done, 07-27, 4d
+    JPA 학습 			:done, 07-28, 4d
     profile	 	 		:done, 07-28,5d
+    develp->master :done, 07-29,1d
+    develp->master :done, 08-05,1d
+    develp->master :done, 08-12,1d
     search                 :done, 08-01, 3d
     Feed		  	:done, 08-01, 5d
     notification	 :done, 08-03, 5d
