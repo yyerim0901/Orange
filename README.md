@@ -78,9 +78,9 @@ gantt
     개발 환경 구성             :done, 07-22, 5d
 	
 	section Frontend
-    Feed		  	:done, 07-26, 5d
-    notification	 :done, 07-28, 5d
-	auth   	  		:done, 07-31, 4d
+    auth		  	:done, 07-26, 5d
+    feed	 :done, 07-28, 5d
+	notification   	  		:done, 07-31, 4d
 	develp->master :done, 07-29,1d
     profile	 	 		:done, 08-02,5d
    	develp->master :done, 08-05,1d
@@ -104,6 +104,7 @@ gantt
 	
     section Backend
     auth   	  		:done, 07-27, 4d
+    JPA 학습 			:done, 07-28, 4d
     profile	 	 		:done, 07-28,5d
     develp->master :done, 07-29,1d
     develp->master :done, 08-05,1d
