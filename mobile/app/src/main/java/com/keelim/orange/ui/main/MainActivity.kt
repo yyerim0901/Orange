@@ -28,13 +28,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.notificationFragment, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController(), appBarConfiguration)
         binding.navView.setupWithNavController(navController())
     }
 
