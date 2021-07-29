@@ -12,17 +12,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 @HiltAndroidApp
 class MyApplication : Application() {
-    @Inject
-    lateinit var componentLogger: ComponentLogger
 
     override fun onCreate() {
         super.onCreate()
 //        KakaoSdk.init(this, TODO())
-        componentLogger.initialize(this)
-
+        Timber.plant(Timber.DebugTree())
     }
 }
