@@ -1,16 +1,16 @@
 <template>
   <div>
-    <AppHeader></AppHeader>
+    <Navbar></Navbar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import AppHeader from '@/components/common/AppHeader.vue';
+import Navbar from '@/components/common/Navbar.vue';
 
 export default {
   components: {
-    AppHeader,
+    Navbar,
   },
 }
 </script>
