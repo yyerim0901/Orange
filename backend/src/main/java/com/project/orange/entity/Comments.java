@@ -18,20 +18,20 @@ public class Comments {
     @Column(name = "article_id")
     private Long articleId;
     @Column(name = "user_id")
-    private Long userid;
+    private Long userId;
     @Column(name = "comment_content")
     private String commentContent;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "comment_writetime")
-    private Date commentTime;
+    private Date commentWritetime;
 
     @Builder
-    public Comments(Long commentId, Long articleId, Long userid, String commentContent, Timestamp commentTime) {
+    public Comments(Long commentId, Long articleId, Long userId, String commentContent, Timestamp commentWritetime) {
         this.commentId = commentId;
         this.articleId = articleId;
-        this.userid = userid;
+        this.userId = userId;
         this.commentContent = commentContent;
-        this.commentTime = commentTime;
+        this.commentWritetime = commentWritetime;
     }
 }

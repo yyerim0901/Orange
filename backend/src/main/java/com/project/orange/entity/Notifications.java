@@ -14,19 +14,19 @@ public class Notifications {
 
     @Id
     @Column(name = "notification_id")
-    private Long notifyId;
+    private Long notificationId;
     @Column(name = "user_id")
-    private Long userid;
+    private Long userId;
     @Column(name = "notification_title")
-    private String notifyTitle;
+    private String notificationTitle;
     @Column(name = "notification_content")
-    private String notifyContent;
+    private String notificationContent;
 
     @Builder
-    public Notifications(Long notifyId, Long userid, String notifyTitle, String notifyContent) {
-        this.notifyId = notifyId;
-        this.userid = userid;
-        this.notifyTitle = notifyTitle;
-        this.notifyContent = notifyContent;
+    public Notifications(Long notificationId, Long userId, String notificationTitle, String notificationContent) {
+        this.notificationId = notificationId;
+        this.userId = userId;
+        this.notificationTitle = notificationTitle;
+        this.notificationContent = notificationContent;
     }
 }

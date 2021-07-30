@@ -16,17 +16,17 @@ public class Reports {
     @Column(name = "report_id")
     private Long reportId;
     @Column(name = "user_id")
-    private Long userid;
+    private Long userId;
     @Column(name = "report_category_id")
-    private Long reportCatId;
+    private Long reportCategoryId;
     @Column(name = "report_content")
     private String reportContent;
 
     @Builder
-    public Reports(Long reportId, Long userid, Long reportCatId, String reportContent) {
+    public Reports(Long reportId, Long userId, Long reportCategoryId, String reportContent) {
         this.reportId = reportId;
-        this.userid = userid;
-        this.reportCatId = reportCatId;
+        this.userId = userId;
+        this.reportCategoryId = reportCategoryId;
         this.reportContent = reportContent;
     }
 }

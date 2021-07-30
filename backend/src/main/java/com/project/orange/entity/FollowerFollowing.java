@@ -10,20 +10,20 @@ import javax.persistence.Id;
 @ToString
 @Getter
 @Entity
-public class Follow {
+public class FollowerFollowing {
 
     @Id
     @Column(name = "id")
     private Long followId;
     @Column(name = "from")
-    private Long fromId;
+    private Long from;
     @Column(name = "to")
-    private Long toId;
+    private Long to;
 
     @Builder
-    public Follow(Long followId, Long fromId, Long toId) {
+    public FollowerFollowing(Long followId, Long from, Long to) {
         this.followId = followId;
-        this.fromId = fromId;
-        this.toId = toId;
+        this.from = from;
+        this.to = to;
     }
 }

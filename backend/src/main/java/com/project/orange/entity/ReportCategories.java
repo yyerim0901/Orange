@@ -10,17 +10,17 @@ import javax.persistence.Id;
 @ToString
 @Getter
 @Entity
-public class ReportCat {
+public class ReportCategories {
 
     @Id
     @Column(name = "report_category_id")
-    private Long reportCatId;
+    private Long reportCategoryId;
     @Column(name = "report_category_name")
-    private String reportCatName;
+    private String reportCategoryName;
 
     @Builder
-    public ReportCat(Long reportCatId, String reportCatName) {
-        this.reportCatId = reportCatId;
-        this.reportCatName = reportCatName;
+    public ReportCategories(Long reportCategoryId, String reportCategoryName) {
+        this.reportCategoryId = reportCategoryId;
+        this.reportCategoryName = reportCategoryName;
     }
 }
