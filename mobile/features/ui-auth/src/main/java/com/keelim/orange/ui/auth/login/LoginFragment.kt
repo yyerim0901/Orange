@@ -16,11 +16,13 @@ import com.kakao.sdk.user.UserApiClient
 import com.keelim.orange.common.toast
 import com.keelim.orange.ui.auth.R
 import com.keelim.orange.ui.auth.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
-  private val loginViewModel by viewModels<LoginViewModel>()
   private var _binding: FragmentLoginBinding? = null
   private val binding get() = _binding!!
+  private val loginViewModel:LoginViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -53,30 +55,30 @@ class LoginFragment : Fragment() {
       }
 
       override fun afterTextChanged(s: Editable) {
-        loginViewModel.loginDataChanged(
-          username.text.toString(),
-          password.text.toString()
-        )
+//        loginViewModel.loginDataChanged(
+//          username.text.toString(),
+//          password.text.toString()
+//        )
       }
     }
     username.addTextChangedListener(afterTextChangedListener)
     password.addTextChangedListener(afterTextChangedListener)
     password.setOnEditorActionListener { _, actionId, _ ->
       if (actionId == EditorInfo.IME_ACTION_DONE) {
-        loginViewModel.login(
-          username.text.toString(),
-          password.text.toString()
-        )
+//        loginViewModel.login(
+//          username.text.toString(),
+//          password.text.toString()
+//        )
       }
       false
     }
 
     login.setOnClickListener {
       binding.loading.visibility = View.VISIBLE
-      loginViewModel.login(
-        username.text.toString(),
-        password.text.toString()
-      )
+//      loginViewModel.login(
+//        username.text.toString(),
+//        password.text.toString()
+//      )
     }
 
     btnKakaoLogin.setOnClickListener {
@@ -85,29 +87,29 @@ class LoginFragment : Fragment() {
   }
 
   private fun observeData() {
-    loginViewModel.loginFormState.observe(viewLifecycleOwner) { loginFormState ->
-      if (loginFormState == null) {
-        return@observe
-      }
-      binding.login.isEnabled = loginFormState.isDataValid
-      loginFormState.usernameError?.let {
-        binding.username.error = getString(it)
-      }
-      loginFormState.passwordError?.let {
-        binding.password.error = getString(it)
-      }
-    }
+//    loginViewModel.loginFormState.observe(viewLifecycleOwner) { loginFormState ->
+//      if (loginFormState == null) {
+//        return@observe
+//      }
+//      binding.login.isEnabled = loginFormState.isDataValid
+//      loginFormState.usernameError?.let {
+//        binding.username.error = getString(it)
+//      }
+//      loginFormState.passwordError?.let {
+//        binding.password.error = getString(it)
+//      }
+//    }
 
-    loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
-      loginResult ?: return@observe
-      binding.loading.visibility = View.GONE
-      loginResult.error?.let {
-        requireContext().toast(it)
-      }
-      loginResult.success?.let {
-        updateUiWithUser(it)
-      }
-    }
+//    loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
+//      loginResult ?: return@observe
+//      binding.loading.visibility = View.GONE
+//      loginResult.error?.let {
+//        requireContext().toast(it)
+//      }
+//      loginResult.success?.let {
+//        updateUiWithUser(it)
+//      }
+//    }
   }
 
   private fun updateUiWithUser(model: LoggedInUserView) {
@@ -122,7 +124,7 @@ class LoginFragment : Fragment() {
       requireActivity().finish()
     } else if (token != null) {
       Log.i(TAG, "로그인 성공 ${token.accessToken}")
-      loginViewModel.sendTokenToServer(token)
+//      loginViewModel.sendTokenToServer(token)
     }
   }
 
