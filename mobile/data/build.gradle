@@ -1,37 +1,23 @@
-val kotlin_version: String by extra
 plugins {
     id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    id("kotlin-android")
+    id("kotlin-kapt")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
 }
-apply {
-    plugin("kotlin-android")
-}
 
-listOf(
-    "android.gradle",
-).forEach { file ->
-    apply(from = "${rootDir}/gradle/${file}")
-}
+apply from: rootProject.file('gradle/android.gradle')
+
 
 android {
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true",
-                    "room.expandProjection" to "true"
-                )
+                arguments = [
+                        "room.incremental": "true"
+                ]
             }
         }
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    sourceSets {
-        getByName("androidTest").assets.srcDirs("$projectDir/schemas")
     }
 }
 
@@ -47,7 +33,7 @@ dependencies {
     kapt(Room.compiler)
 
     implementation(SquareUp.timber)
-    implementation(Kotlin.Coroutines.android)
+    implementation(Coroutines.android)
 
     implementation(SquareUp.core)
     implementation(SquareUp.loggingInterceptor)
@@ -63,5 +49,5 @@ dependencies {
     androidTestImplementation(Room.testing)
     androidTestImplementation(AppTest.androidJunit)
     androidTestImplementation(AppTest.espressoCore)
-    androidTestImplementation(Kotlin.Coroutines.test)
+    androidTestImplementation(Coroutines.test)
 }

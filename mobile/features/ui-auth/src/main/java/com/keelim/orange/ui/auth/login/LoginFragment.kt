@@ -11,16 +11,19 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.keelim.orange.common.toast
 import com.keelim.orange.ui.auth.R
 import com.keelim.orange.ui.auth.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
-  private val loginViewModel by viewModels<LoginViewModel>()
   private var _binding: FragmentLoginBinding? = null
   private val binding get() = _binding!!
+  private val loginViewModel:LoginViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -45,11 +48,11 @@ class LoginFragment : Fragment() {
   private fun initViews() = with(binding) {
     val afterTextChangedListener = object : TextWatcher {
       override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-        // ignore
+         //ignore
       }
 
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        // ignore
+         //ignore
       }
 
       override fun afterTextChanged(s: Editable) {
@@ -81,6 +84,10 @@ class LoginFragment : Fragment() {
 
     btnKakaoLogin.setOnClickListener {
       auth()
+    }
+
+    btnSignup.setOnClickListener {
+      findNavController().navigate(R.id.signUpFragment)
     }
   }
 
@@ -126,12 +133,13 @@ class LoginFragment : Fragment() {
     }
   }
 
-  // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+//   카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
   private fun auth() {
     if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
       UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = callback)
     } else {
       UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
+
     }
   }
 }

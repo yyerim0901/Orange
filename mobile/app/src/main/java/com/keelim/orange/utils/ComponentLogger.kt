@@ -7,8 +7,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 private const val loggerTag = "Logger"
 
