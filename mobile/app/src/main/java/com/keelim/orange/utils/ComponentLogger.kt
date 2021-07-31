@@ -1,4 +1,5 @@
 package com.keelim.orange.utils
+
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -7,8 +8,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 private const val loggerTag = "Logger"
 
@@ -23,7 +24,7 @@ private fun Activity.printLifecycle(lifecycleScope: String) {
     Timber.tag(loggerTag).d("[Activity] $lifecycleScope - ${javaClassName}(${hashCode()})")
 }
 
-class ComponentLogger @Inject constructor() {
+object ComponentLogger {
     fun initialize(application: Application) {
         application.registerActivityLifecycleCallbacks(
             object : Application.ActivityLifecycleCallbacks {

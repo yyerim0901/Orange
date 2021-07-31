@@ -80,6 +80,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.kakao.sdk:v2-user:2.5.2"
+}
 
-
+kapt {
+    useBuildCache = true
 }
