@@ -3,6 +3,8 @@ package com.keelim.orange
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.kakao.sdk.common.KakaoSdk
+import com.keelim.orange.common.ThemeHelper
+import com.keelim.orange.common.ThemeType
 import com.keelim.orange.data.repository.theme.ThemeRepository
 import com.keelim.orange.utils.ComponentLogger
 import dagger.hilt.android.HiltAndroidApp
@@ -21,6 +23,9 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 //        KakaoSdk.init(this, TODO())
+
         Timber.plant(Timber.DebugTree())
+        ComponentLogger.initialize(this)
+        ThemeHelper.applyTheme(ThemeType.DEFAULT)
     }
 }
