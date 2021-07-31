@@ -1,23 +1,20 @@
 package com.keelim.orange.ui.main
 
-import MaterialDialog.Companion.negativeButton
-import MaterialDialog.Companion.positiveButton
-import MaterialDialog.Companion.singleChoiceItems
-import MaterialDialog.Companion.title
+import com.keelim.orange.utils.MaterialDialog.Companion.negativeButton
+import com.keelim.orange.utils.MaterialDialog.Companion.positiveButton
+import com.keelim.orange.utils.MaterialDialog.Companion.singleChoiceItems
+import com.keelim.orange.utils.MaterialDialog.Companion.title
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.keelim.orange.R
 import com.keelim.orange.data.repository.theme.AppTheme
 import com.keelim.orange.databinding.ActivityMainBinding
+import com.keelim.orange.utils.MaterialDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.NonCancellable.cancel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

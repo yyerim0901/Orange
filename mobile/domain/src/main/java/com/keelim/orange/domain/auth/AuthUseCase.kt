@@ -6,7 +6,7 @@ import com.keelim.orange.data.repository.LoginRepository
 import javax.inject.Inject
 
 
-class AuthUseCase(
+class AuthUseCase @Inject constructor(
     private val loginRepository: LoginRepository
 ) {
 

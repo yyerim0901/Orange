@@ -21,5 +21,6 @@ dependencies {
 
     implementation(AndroidX.navigation_ui)
     implementation(AndroidX.navigation_fragment)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 }
 

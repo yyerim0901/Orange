@@ -2,10 +2,12 @@ package com.keelim.orange.di
 
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
+import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.domain.FriendsOkUseCase
 import com.keelim.orange.domain.NotificationUseCase
 import com.keelim.orange.domain.SendTokenServerUseCase
 import com.keelim.orange.domain.auth.AuthUseCase
+import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,13 +41,4 @@ object UseCaseModule {
     return FriendsOkUseCase()
   }
 
-  @Provides
-  @ViewModelScoped
-  fun provideAuthUseCase(
-    loginRepository:LoginRepository
-  ): AuthUseCase{
-    return AuthUseCase(
-      loginRepository = loginRepository
-    )
-  }
 }

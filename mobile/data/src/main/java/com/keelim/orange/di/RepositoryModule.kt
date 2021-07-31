@@ -5,6 +5,7 @@ import com.keelim.orange.data.datasource.LoginDataSource
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.NotificationRepositoryImpl
+import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.theme.ThemeRepository
 import dagger.Module
 import dagger.Provides
@@ -46,5 +47,13 @@ object RepositoryModule {
     return ThemeRepository(
       context
     )
+  }
+
+  @Provides
+  @Singleton
+  fun provideRankingRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+  ): RankingRepository{
+    return RankingRepository(dispatcher)
   }
 }

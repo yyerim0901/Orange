@@ -14,10 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SeasonFragment : Fragment() {
 
-  companion object {
-    fun newInstance() = SeasonFragment()
-  }
-
   private val viewModel by viewModels<SeasonViewModel>()
   private var _binding: FragmentSeasonBinding? = null
   private val binding get() = _binding!!
