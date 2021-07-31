@@ -10,11 +10,11 @@ import com.keelim.orange.data.model.Result
 import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.ui.auth.R
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class SignUpViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
 ) : ViewModel() {
 
@@ -24,9 +24,9 @@ class LoginViewModel @Inject constructor(
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) = viewModelScope.launch {
+    fun signup(username: String, password: String) = viewModelScope.launch {
         // can be launched in a separate asynchronous job
-        val result = authUseCase.login(username, password)
+        val result = authUseCase.signup(username, password)
         when (result) {
             is Result.Success -> {
                 setLoginResult(
@@ -41,13 +41,15 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun loginDataChanged(username: String, password: String) = viewModelScope.launch {
-        when {
-            !isUserNameValid(username) -> setLoginForm(LoginFormState(usernameError = R.string.invalid_username))
-            !isPasswordValid(password) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_password))
-            else -> setLoginForm(LoginFormState(isDataValid = true))
+    fun loginDataChanged(username: String, password: String, passwordConfirmation: String) =
+        viewModelScope.launch {
+            when {
+                !isUserNameValid(username) -> setLoginForm(LoginFormState(usernameError = R.string.invalid_username))
+                !isPasswordValid(password) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_password))
+                !isPasswordConfirmation(password, passwordConfirmation) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_passwordConfirmation))
+                else -> setLoginForm(LoginFormState(isDataValid = true))
+            }
         }
-    }
 
     fun sendTokenToServer(token: OAuthToken) = viewModelScope.launch {
     }
@@ -60,7 +62,6 @@ class LoginViewModel @Inject constructor(
         _loginForm.value = value
     }
 
-    // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains("@")) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
@@ -73,4 +74,7 @@ class LoginViewModel @Inject constructor(
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
     }
+
+    private fun isPasswordConfirmation(password: String, passwordConfirmation: String): Boolean =
+        password == passwordConfirmation
 }

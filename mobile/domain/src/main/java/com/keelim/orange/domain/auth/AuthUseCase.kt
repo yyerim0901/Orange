@@ -6,7 +6,7 @@ import com.keelim.orange.data.repository.LoginRepository
 import javax.inject.Inject
 
 
-class AuthUseCase @Inject constructor(
+class AuthUseCase(
     private val loginRepository: LoginRepository
 ) {
 
@@ -16,5 +16,9 @@ class AuthUseCase @Inject constructor(
 
     suspend fun logout() {
         loginRepository.logout()
+    }
+
+    suspend fun signup(username:String, password:String): Result<LoggedInUser>{
+        return loginRepository.signup(username, password)
     }
 }

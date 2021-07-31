@@ -41,4 +41,12 @@ object UseCaseModule {
     return FriendsOkUseCase()
   }
 
+  @Provides
+  @ViewModelScoped
+  fun provideAuthUseCase(
+    loginRepository:LoginRepository
+  ): AuthUseCase{
+    return AuthUseCase(loginRepository)
+  }
+
 }

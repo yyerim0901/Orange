@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.keelim.orange.common.toast
@@ -47,69 +48,73 @@ class LoginFragment : Fragment() {
   private fun initViews() = with(binding) {
     val afterTextChangedListener = object : TextWatcher {
       override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-        // ignore
+         //ignore
       }
 
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        // ignore
+         //ignore
       }
 
       override fun afterTextChanged(s: Editable) {
-//        loginViewModel.loginDataChanged(
-//          username.text.toString(),
-//          password.text.toString()
-//        )
+        loginViewModel.loginDataChanged(
+          username.text.toString(),
+          password.text.toString()
+        )
       }
     }
     username.addTextChangedListener(afterTextChangedListener)
     password.addTextChangedListener(afterTextChangedListener)
     password.setOnEditorActionListener { _, actionId, _ ->
       if (actionId == EditorInfo.IME_ACTION_DONE) {
-//        loginViewModel.login(
-//          username.text.toString(),
-//          password.text.toString()
-//        )
+        loginViewModel.login(
+          username.text.toString(),
+          password.text.toString()
+        )
       }
       false
     }
 
     login.setOnClickListener {
       binding.loading.visibility = View.VISIBLE
-//      loginViewModel.login(
-//        username.text.toString(),
-//        password.text.toString()
-//      )
+      loginViewModel.login(
+        username.text.toString(),
+        password.text.toString()
+      )
     }
 
     btnKakaoLogin.setOnClickListener {
       auth()
     }
+
+    btnSignup.setOnClickListener {
+      findNavController().navigate(R.id.signUpFragment)
+    }
   }
 
   private fun observeData() {
-//    loginViewModel.loginFormState.observe(viewLifecycleOwner) { loginFormState ->
-//      if (loginFormState == null) {
-//        return@observe
-//      }
-//      binding.login.isEnabled = loginFormState.isDataValid
-//      loginFormState.usernameError?.let {
-//        binding.username.error = getString(it)
-//      }
-//      loginFormState.passwordError?.let {
-//        binding.password.error = getString(it)
-//      }
-//    }
+    loginViewModel.loginFormState.observe(viewLifecycleOwner) { loginFormState ->
+      if (loginFormState == null) {
+        return@observe
+      }
+      binding.login.isEnabled = loginFormState.isDataValid
+      loginFormState.usernameError?.let {
+        binding.username.error = getString(it)
+      }
+      loginFormState.passwordError?.let {
+        binding.password.error = getString(it)
+      }
+    }
 
-//    loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
-//      loginResult ?: return@observe
-//      binding.loading.visibility = View.GONE
-//      loginResult.error?.let {
-//        requireContext().toast(it)
-//      }
-//      loginResult.success?.let {
-//        updateUiWithUser(it)
-//      }
-//    }
+    loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
+      loginResult ?: return@observe
+      binding.loading.visibility = View.GONE
+      loginResult.error?.let {
+        requireContext().toast(it)
+      }
+      loginResult.success?.let {
+        updateUiWithUser(it)
+      }
+    }
   }
 
   private fun updateUiWithUser(model: LoggedInUserView) {
@@ -124,16 +129,17 @@ class LoginFragment : Fragment() {
       requireActivity().finish()
     } else if (token != null) {
       Log.i(TAG, "로그인 성공 ${token.accessToken}")
-//      loginViewModel.sendTokenToServer(token)
+      loginViewModel.sendTokenToServer(token)
     }
   }
 
-  // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+//   카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
   private fun auth() {
     if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
       UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = callback)
     } else {
       UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
+
     }
   }
 }

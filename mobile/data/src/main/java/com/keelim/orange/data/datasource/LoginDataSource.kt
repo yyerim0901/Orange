@@ -14,6 +14,7 @@ import javax.inject.Inject
  */
 class LoginDataSource @Inject constructor(
   @IoDispatcher private val dispatcher: CoroutineDispatcher,
+
 ) {
 
   suspend fun login(username: String, password: String): Result<LoggedInUser> = withContext(dispatcher) {
@@ -28,5 +29,15 @@ class LoginDataSource @Inject constructor(
 
   suspend fun logout() {
     // TODO: revoke authentication
+  }
+
+  suspend fun signup(username:String, password:String): Result<LoggedInUser> = withContext(dispatcher) {
+    try {
+      // TODO: handle loggedInUser authentication
+      val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Jane Doe")
+      return@withContext Result.Success(fakeUser)
+    } catch (e: Throwable) {
+      return@withContext Result.Error(IOException("Error logging in", e))
+    }
   }
 }

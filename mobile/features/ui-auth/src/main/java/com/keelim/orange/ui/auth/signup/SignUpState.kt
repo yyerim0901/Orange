@@ -1,10 +1,9 @@
-package com.keelim.orange.ui.auth.login
+package com.keelim.orange.ui.auth.signup
 
-/**
- * Data validation state of the login form.
- */
-data class LoginFormState(
-  val usernameError: Int? = null,
-  val passwordError: Int? = null,
-  val isDataValid: Boolean = false
-)
+
+sealed class SignUpState {
+    object UnInitialized : SignUpState()
+    object Loading : SignUpState()
+    object Error : SignUpState()
+    object Success : SignUpState()
+}
