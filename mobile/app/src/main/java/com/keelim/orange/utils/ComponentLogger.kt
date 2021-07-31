@@ -1,5 +1,4 @@
 package com.keelim.orange.utils
-
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -24,7 +23,7 @@ private fun Activity.printLifecycle(lifecycleScope: String) {
     Timber.tag(loggerTag).d("[Activity] $lifecycleScope - ${javaClassName}(${hashCode()})")
 }
 
-object ComponentLogger {
+class ComponentLogger @Inject constructor() {
     fun initialize(application: Application) {
         application.registerActivityLifecycleCallbacks(
             object : Application.ActivityLifecycleCallbacks {
