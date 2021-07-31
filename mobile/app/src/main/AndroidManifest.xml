@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.keelim.orange">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,7 +34,7 @@
                     android:scheme="kakao123" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SplashActivity"
+        <activity android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,6 +46,27 @@
         <activity android:name=".ui.auth.AuthActivity"
             android:exported="true">
         </activity>
+
+        <service android:name=".services.MyFirebaseMessagingService"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="com.keelim.orange.initialize.TimberInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.keelim.orange.initialize.CoilInitializer"
+                android:value="androidx.startup" />
+
+        </provider>
     </application>
 
 </manifest>
