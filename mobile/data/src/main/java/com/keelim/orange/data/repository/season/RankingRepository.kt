@@ -10,4 +10,8 @@ class RankingRepository(
   suspend fun getSeason(): List<Ranking> = withContext(dispatcher) {
     emptyList()
   }
+
+  suspend fun getRanking():List<Ranking> = withContext(dispatcher){
+    emptyList()
+  }
 }
