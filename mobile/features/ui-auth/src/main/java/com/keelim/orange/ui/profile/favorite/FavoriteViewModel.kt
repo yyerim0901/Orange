@@ -6,35 +6,35 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keelim.orange.domain.auth.FavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    private val favoriteUseCase: FavoriteUseCase,
-): ViewModel(){
-    private val _state = MutableLiveData<FavoriteState>(FavoriteState.UnInitialized)
-    val state:LiveData<FavoriteState> get() = _state
+  private val favoriteUseCase: FavoriteUseCase,
+) : ViewModel() {
+  private val _state = MutableLiveData<FavoriteState>(FavoriteState.UnInitialized)
+  val state: LiveData<FavoriteState> get() = _state
 
-    fun fetchData() = viewModelScope.launch {
-        setState(
-            FavoriteState.Loading
+  fun fetchData() = viewModelScope.launch {
+    setState(
+      FavoriteState.Loading
+    )
+
+    try {
+      setState(
+        FavoriteState.Success(
+          favoriteUseCase.invoke()
         )
-
-        try {
-            setState(
-                FavoriteState.Success(
-                    favoriteUseCase.invoke()
-                )
-            )
-        } catch (e: Exception) {
-            setState(
-                FavoriteState.Error
-            )
-        }
+      )
+    } catch (e: Exception) {
+      setState(
+        FavoriteState.Error
+      )
     }
+  }
 
-    private fun setState(value:FavoriteState){
-        _state.value = value
-    }
+  private fun setState(value: FavoriteState) {
+    _state.value = value
+  }
 }

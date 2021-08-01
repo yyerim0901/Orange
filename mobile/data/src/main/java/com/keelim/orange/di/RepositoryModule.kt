@@ -53,7 +53,7 @@ object RepositoryModule {
   @Singleton
   fun provideRankingRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
-  ): RankingRepository{
+  ): RankingRepository {
     return RankingRepository(dispatcher)
   }
 }

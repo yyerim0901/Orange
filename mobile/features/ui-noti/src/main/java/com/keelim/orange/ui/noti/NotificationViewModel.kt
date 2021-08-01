@@ -27,7 +27,7 @@ class NotificationViewModel @Inject constructor(
       setState(
         NotificationState.Success(
 //          notificationUseCase.invoke()
-        emptyList()
+          emptyList()
         )
       )
     } catch (e: Exception) {

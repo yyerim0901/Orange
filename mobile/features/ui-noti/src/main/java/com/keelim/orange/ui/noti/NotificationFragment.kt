@@ -46,7 +46,6 @@ class NotificationFragment : Fragment() {
     _binding = null
   }
 
-
   private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
     when (it) {
       is NotificationState.UnInitialized -> handleUnInitialized()

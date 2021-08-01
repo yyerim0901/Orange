@@ -7,6 +7,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RankingViewModel @Inject constructor(
-    private val rankingUseCase: RankingUseCase,
-):ViewModel()  {
-}
+  private val rankingUseCase: RankingUseCase,
+) : ViewModel()

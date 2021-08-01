@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
   private var _binding: FragmentLoginBinding? = null
   private val binding get() = _binding!!
-  private val loginViewModel:LoginViewModel by viewModels()
+  private val loginViewModel: LoginViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -50,11 +50,11 @@ class LoginFragment : Fragment() {
   private fun initViews() = with(binding) {
     val afterTextChangedListener = object : TextWatcher {
       override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-         //ignore
+        // ignore
       }
 
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-         //ignore
+        // ignore
       }
 
       override fun afterTextChanged(s: Editable) {
@@ -132,7 +132,7 @@ class LoginFragment : Fragment() {
     } else if (token != null) {
       Log.i(TAG, "로그인 성공 ${token.accessToken}")
       loginViewModel.sendTokenToServer(token)
-      requireActivity().startActivity(Intent(requireContext(),MainActivity::class.java ))
+      requireActivity().startActivity(Intent(requireContext(), MainActivity::class.java))
       requireActivity().finish()
     }
   }
