@@ -46,6 +46,7 @@ class NotificationFragment : Fragment() {
     _binding = null
   }
 
+
   private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
     when (it) {
       is NotificationState.UnInitialized -> handleUnInitialized()
@@ -54,7 +55,6 @@ class NotificationFragment : Fragment() {
       is NotificationState.Error -> handleError()
     }
   }
-
   private fun initViews() = with(binding) {
     notificationRecycler.adapter = notificationAdapter
     notificationRecycler.layoutManager = LinearLayoutManager(requireContext())
