@@ -54,7 +54,6 @@ class NotificationFragment : Fragment() {
       is NotificationState.Error -> handleError()
     }
   }
-
   private fun initViews() = with(binding) {
     notificationRecycler.adapter = notificationAdapter
     notificationRecycler.layoutManager = LinearLayoutManager(requireContext())

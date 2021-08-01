@@ -61,7 +61,7 @@ import androidx.work.WorkManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.keelim.orange.R
-import com.keelim.orange.ui.main.MainActivity
+import MainActivity
 import com.keelim.orange.worker.MyWorker
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {

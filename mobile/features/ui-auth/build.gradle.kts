@@ -17,8 +17,11 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":common"))
     implementation(project(":domain"))
-    implementation("com.google.android.material:material:1.4.0")
+    implementation(project(":ui-main"))
     implementation ("com.kakao.sdk:v2-user:2.5.2")
+    implementation("com.google.android.material:material:1.3.0")
+    implementation("io.coil-kt:coil:1.3.1")
+
     implementation(AndroidX.navigation_ui)
     implementation(AndroidX.navigation_fragment)
 }

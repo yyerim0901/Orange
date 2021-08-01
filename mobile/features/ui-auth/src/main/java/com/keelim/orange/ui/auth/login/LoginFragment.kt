@@ -1,6 +1,7 @@
 package com.keelim.orange.ui.auth.login
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,13 +18,14 @@ import com.kakao.sdk.user.UserApiClient
 import com.keelim.orange.common.toast
 import com.keelim.orange.ui.auth.R
 import com.keelim.orange.ui.auth.databinding.FragmentLoginBinding
+import com.keelim.orange.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
   private var _binding: FragmentLoginBinding? = null
   private val binding get() = _binding!!
-  private val loginViewModel:LoginViewModel by viewModels()
+  private val loginViewModel: LoginViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -48,11 +50,11 @@ class LoginFragment : Fragment() {
   private fun initViews() = with(binding) {
     val afterTextChangedListener = object : TextWatcher {
       override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-         //ignore
+        // ignore
       }
 
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-         //ignore
+        // ignore
       }
 
       override fun afterTextChanged(s: Editable) {
@@ -130,6 +132,8 @@ class LoginFragment : Fragment() {
     } else if (token != null) {
       Log.i(TAG, "로그인 성공 ${token.accessToken}")
       loginViewModel.sendTokenToServer(token)
+      requireActivity().startActivity(Intent(requireContext(), MainActivity::class.java))
+      requireActivity().finish()
     }
   }
 
@@ -139,7 +143,6 @@ class LoginFragment : Fragment() {
       UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = callback)
     } else {
       UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
-
     }
   }
 }

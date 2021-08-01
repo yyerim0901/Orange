@@ -31,7 +31,7 @@ class LoginDataSource @Inject constructor(
     // TODO: revoke authentication
   }
 
-  suspend fun signup(username:String, password:String): Result<LoggedInUser> = withContext(dispatcher) {
+  suspend fun signup(username: String, password: String): Result<LoggedInUser> = withContext(dispatcher) {
     try {
       // TODO: handle loggedInUser authentication
       val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Jane Doe")
