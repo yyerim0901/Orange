@@ -58,7 +58,7 @@ object UseCaseModule {
   @ViewModelScoped
   fun provideRankingUseCase(
     rankingRepository: RankingRepository
-  ): RankingUseCase{
+  ): RankingUseCase {
     return RankingUseCase(
       rankingRepository
     )

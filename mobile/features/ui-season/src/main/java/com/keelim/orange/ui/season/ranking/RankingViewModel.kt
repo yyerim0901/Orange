@@ -4,18 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keelim.orange.data.model.Ranking
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class RankingViewModel @Inject constructor(
   private val rankingUseCase: RankingUseCase,
-) : ViewModel(){
+) : ViewModel() {
   private var _state = MutableLiveData<RankingState>(RankingState.UnInitialized)
-  val state:LiveData<RankingState> = _state
+  val state: LiveData<RankingState> = _state
 
   fun fetchData() = viewModelScope.launch {
     setState(

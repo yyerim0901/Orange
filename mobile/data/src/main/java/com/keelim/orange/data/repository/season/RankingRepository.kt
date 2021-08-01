@@ -11,7 +11,7 @@ class RankingRepository(
     emptyList()
   }
 
-  suspend fun getRanking():List<Ranking> = withContext(dispatcher){
+  suspend fun getRanking(): List<Ranking> = withContext(dispatcher) {
     emptyList()
   }
 }
