@@ -20,15 +20,19 @@ public class BadgesUsers {
     private Long id;
 
     @Column(name = "badge_count")
-    private Integer badge_count;
+    private Integer badgeCount;
 
+//    테스트를 위한 코드
+//    @Column(name = "badge_id")
+//    private Long badgeId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "badge_id")
-    private Badges badge_id;
+    private Badges badgeId;
 
-    @Column(name = "user_id")
-    private Integer user_id;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user_id;
+//    테스트를 위한 코드
+//    @Column(name = "user_id")
+//    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User userId;
 }
