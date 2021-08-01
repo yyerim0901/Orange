@@ -2,9 +2,7 @@ package com.project.orange.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
@@ -13,12 +11,15 @@ import javax.persistence.Id;
 public class FollowerFollowing {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long followId;
     @Column(name = "from")
     private Long from;
     @Column(name = "to")
     private Long to;
+
+    //Users와 1:N , N:1 관계...
 
     @Builder
     public FollowerFollowing(Long followId, Long from, Long to) {

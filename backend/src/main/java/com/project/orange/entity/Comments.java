@@ -3,6 +3,7 @@ package com.project.orange.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.awt.image.ImageProducer;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -13,25 +14,69 @@ import java.util.Date;
 public class Comments {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "comment_id")
     private Long commentId;
-    @Column(name = "article_id")
-    private Long articleId;
-    @Column(name = "user_id")
-    private Long userId;
     @Column(name = "comment_content")
     private String commentContent;
-
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "comment_writetime")
     private Date commentWritetime;
 
-    @Builder
-    public Comments(Long commentId, Long articleId, Long userId, String commentContent, Timestamp commentWritetime) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id")
+    private Long articleId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Users user;
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
         this.commentId = commentId;
-        this.articleId = articleId;
-        this.userId = userId;
+    }
+
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
         this.commentContent = commentContent;
+    }
+
+    public Date getCommentWritetime() {
+        return commentWritetime;
+    }
+
+    public void setCommentWritetime(Date commentWritetime) {
         this.commentWritetime = commentWritetime;
     }
+
+    public Long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    //    @Builder
+//    public Comments(Long commentId, Long articleId, Long userId, String commentContent, Timestamp commentWritetime) {
+//        this.commentId = commentId;
+//        this.articleId = articleId;
+//        this.userId = userId;
+//        this.commentContent = commentContent;
+//        this.commentWritetime = commentWritetime;
+//    }
 }
