@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
-@Getter
+@AllArgsConstructor
+@Data
 @Entity
 public class Comments {
 
@@ -25,51 +25,11 @@ public class Comments {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
-    private Long articleId;
+    private Articles article;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users user;
-
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getCommentContent() {
-        return commentContent;
-    }
-
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
-    }
-
-    public Date getCommentWritetime() {
-        return commentWritetime;
-    }
-
-    public void setCommentWritetime(Date commentWritetime) {
-        this.commentWritetime = commentWritetime;
-    }
-
-    public Long getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
-    }
-
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-        this.user = user;
-    }
 
     //    @Builder
 //    public Comments(Long commentId, Long articleId, Long userId, String commentContent, Timestamp commentWritetime) {
