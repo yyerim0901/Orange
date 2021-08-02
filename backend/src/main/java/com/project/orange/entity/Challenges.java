@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -39,9 +40,9 @@ public class Challenges {
     @Column(name="current_members")
     private Integer currentMembers;
 
-    @OneToMany
-    private List<UsersChallenges> usersChallengesList;
+    @OneToMany(mappedBy = "challenge")
+    private List<UsersChallenges> usersChallengesList = new ArrayList<>();
 
-    @OneToMany
-    private List<Articles> articlesList;
+    @OneToMany(mappedBy = "challenge")
+    private List<Articles> articlesList = new ArrayList<>();
 }
