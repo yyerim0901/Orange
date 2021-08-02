@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -37,4 +38,10 @@ public class Challenges {
     private Integer maxMembers;
     @Column(name="current_members")
     private Integer currentMembers;
+
+    @OneToMany
+    private List<UsersChallenges> usersChallengesList;
+
+    @OneToMany
+    private List<Articles> articlesList;
 }

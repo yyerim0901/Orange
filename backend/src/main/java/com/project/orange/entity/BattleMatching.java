@@ -14,8 +14,12 @@ public class BattleMatching {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="blue_team")
-    private Long blueTeam;
-    @Column(name="red_team")
-    private Long redTeam;
+
+    @OneToOne
+    @JoinColumn(name="blue_team")
+    private Challenges blue_team;
+
+    @OneToOne
+    @JoinColumn(name="red_team")
+    private Challenges red_team;
 }
