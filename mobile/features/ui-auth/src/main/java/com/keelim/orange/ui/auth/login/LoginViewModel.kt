@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakao.sdk.auth.model.OAuthToken
 import com.keelim.orange.data.model.Result
-import com.keelim.orange.data.repository.LoginRepository
-import com.keelim.orange.domain.SendTokenServerUseCase
+import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.ui.auth.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-  private val loginRepository: LoginRepository,
-  private val senTokenUseCase: SendTokenServerUseCase,
+  private val authUseCase: AuthUseCase,
 ) : ViewModel() {
 
   private val _loginForm = MutableLiveData<LoginFormState>()
@@ -28,7 +26,7 @@ class LoginViewModel @Inject constructor(
 
   fun login(username: String, password: String) = viewModelScope.launch {
     // can be launched in a separate asynchronous job
-    val result = loginRepository.login(username, password)
+    val result = authUseCase.login(username, password)
     when (result) {
       is Result.Success -> {
         setLoginResult(
@@ -52,7 +50,6 @@ class LoginViewModel @Inject constructor(
   }
 
   fun sendTokenToServer(token: OAuthToken) = viewModelScope.launch {
-    senTokenUseCase.invoke(token.accessToken)
   }
 
   private fun setLoginResult(value: LoginResult) {

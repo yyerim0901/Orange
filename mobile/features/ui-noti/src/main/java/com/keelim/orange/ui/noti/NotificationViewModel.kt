@@ -26,8 +26,7 @@ class NotificationViewModel @Inject constructor(
     try {
       setState(
         NotificationState.Success(
-//          notificationUseCase.invoke()
-        emptyList()
+          emptyList()
         )
       )
     } catch (e: Exception) {
@@ -37,11 +36,11 @@ class NotificationViewModel @Inject constructor(
     }
   }
 
-  fun friendsOk() = viewModelScope.launch {
-//    friendsOkUseCase.invoke()
-  }
-
   private fun setState(state: NotificationState) {
     _state.value = state
+  }
+
+  fun friendsOk() = viewModelScope.launch {
+//    friendsOkUseCase.invoke()
   }
 }
