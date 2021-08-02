@@ -17,6 +17,11 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":common"))
     implementation(project(":domain"))
+    implementation(project(":ui-feed"))
+    implementation(project(":ui-fight"))
+    implementation(project(":ui-noti"))
+    implementation(project(":ui-season"))
+
     implementation("com.google.android.material:material:1.4.0")
 
     implementation(AndroidX.navigation_ui)
