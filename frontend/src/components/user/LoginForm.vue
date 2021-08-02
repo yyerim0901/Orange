@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="form" lazy-validation>
+  <v-form ref="form" lazy-validation @submit.prevent="submitForm">
     <v-row class="container">
       <v-col cols="12">
         <v-text-field
@@ -14,13 +14,9 @@
         <v-text-field
           v-model="password"
           id="password"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="passwordRules"
           type="password"
           label="password"
-          hint="At least 8 characters"
-          counter
-          @click:append="show1 = !show1"
         ></v-text-field>
       </v-col>
 
@@ -55,7 +51,6 @@ export default {
         v => !(v && v.length >= 20) || '패스워드는 20자 이상 입력할 수 없습니다.',
         v => v.length >= 8 || 'At least 8 characters',
       ],
-      show1: false,
       password: '',
       checkbox: false,
     }
