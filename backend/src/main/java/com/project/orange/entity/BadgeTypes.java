@@ -6,9 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "badge_types")
 public class BadgeTypes {

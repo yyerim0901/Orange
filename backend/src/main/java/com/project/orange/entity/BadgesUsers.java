@@ -27,12 +27,12 @@ public class BadgesUsers {
 //    private Long badgeId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "badge_id")
-    private Badges badgeId;
+    private Badges badge;
 
 //    테스트를 위한 코드
 //    @Column(name = "user_id")
 //    private Long userId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User userId;
+    private Users user;
 }
