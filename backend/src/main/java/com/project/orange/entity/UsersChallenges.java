@@ -14,10 +14,15 @@ public class UsersChallenges {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="user_id")
-    private Long userId;
-    @Column(name="challenge_id")
-    private Long challengeId;
+
+    @JoinColumn(name="user_id")
+    @ManyToOne
+    private Users user;
+
+    @JoinColumn(name="challenge_id")
+    @ManyToOne
+    private Challenges challenge;
+
     @Column(name="point")
     private Integer point;
 }
