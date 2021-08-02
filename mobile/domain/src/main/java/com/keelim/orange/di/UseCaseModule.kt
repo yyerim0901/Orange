@@ -1,13 +1,18 @@
 package com.keelim.orange.di
 
+import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.season.RankingRepository
+import com.keelim.orange.data.repository.season.create.CreateRepository
+import com.keelim.orange.data.repository.season.other.OtherRepository
 import com.keelim.orange.domain.FriendsOkUseCase
 import com.keelim.orange.domain.NotificationUseCase
+import com.keelim.orange.domain.fight.OtherUseCase
 import com.keelim.orange.domain.SendTokenServerUseCase
 import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.domain.auth.FavoriteUseCase
+import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
 import dagger.Provides
@@ -61,6 +66,26 @@ object UseCaseModule {
   ): RankingUseCase {
     return RankingUseCase(
       rankingRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideOtherUseCase(
+    otherRepository: OtherRepository,
+  ): OtherUseCase {
+    return OtherUseCase(
+      otherRepository,
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideCreateUseCase(
+    createRepository: CreateRepository,
+  ): CreateUseCase{
+    return CreateUseCase(
+      createRepository,
     )
   }
 }
