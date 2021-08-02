@@ -28,11 +28,11 @@ extend('max', {
 })
 extend('min', {
   ...min,
-  message: '{_field_} 필드는 {length}자 미만 이어야 합니다.'
+  message: '{_field_} 필드는 {length}자이상 입력해야 합니다.'
 })
 extend('numeric', {
   ...numeric,
-  message: '{_field_} 필드는 숫자로만 구성되어야합니다.'
+  message: '{_field_} 필드는 숫자로만 구성되어야 합니다.'
 })
 extend('required', {
   ...required,
@@ -42,6 +42,16 @@ extend('confirmed', {
   ...confirmed,
   message: '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
 })
+extend('korAlphaNum', {
+  validate: value => {
+    let regex = /^([a-zA-Z|가-힣]).{1,16}$/.test(value);
+    if (!regex) {
+      return '닉네임은 한글, 영문, 숫자만 가능하며 2-16자리 가능.';
+    } else {
+      return true;
+    }
+  }
+});
 
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)

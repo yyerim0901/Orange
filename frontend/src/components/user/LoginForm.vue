@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height">
-    <v-row justify="center">
+    <v-row class="justify-content-center my-5">
       <v-col cols="auto">
         <v-card
           width="460"
@@ -12,7 +12,7 @@
             >
               <v-form
                 ref="form"
-                @submit.prevent="signIn"
+                @submit.prevent="LoginForm"
               >
                 <div class="text-h4 font-weight-black mb-10">
                   로그인
@@ -22,6 +22,7 @@
                   name="이메일"
                   :rules="{
                     required: true,
+                    email: true,
                   }"
                 >
                   <v-text-field
@@ -37,10 +38,12 @@
                   name="비밀번호"
                   :rules="{
                     required: true,
+                    min: 8,
                   }"
                 >
                   <v-text-field
                     v-model="password"
+                    type="password"
                     label="비밀번호"
                     clearable
                     prepend-icon="mdi-lock-outline"
@@ -89,45 +92,18 @@ export default {
     password: null,
   }),
   methods: {
-    signIn () {
-      this.$refs.observer.validate().then(result => {
+    async LoginForm () {
+      const result = await this.$refs.observer.validate()
         if (result) {
           alert('로그인 성공')
         }
-      })
+      }
     }
   }
-  // data() {
-  //   return {
-  //     state:'ins',
-  //     email: '',
-  //     emailRules: [
-  //       v => !!v || '이메일은 필수 입력사항입니다.',
-  //       v => /.+@.+\..+/.test(v) || '해당 이메일을 사용할 수 없습니다.',
-  //     ],
-  //     passwordRules: [
-  //       v => this.state === 'ins' ? !!v || '패스워드는 필수 입력사항입니다.' : true,
-  //       v => !(v && v.length >= 20) || '패스워드는 20자 이상 입력할 수 없습니다.',
-  //       v => v.length >= 8 || 'At least 8 characters',
-  //     ],
-  //     password: '',
-  //     checkbox: false,
-  //   }
-  // },
-  
-  // methods: {
-  //   submitForm() {
-  //     console.log("로그인 완료")
-  //   },
-  //   validate () {
-  //     this.$refs.form.validate()
-  //   },
-  // }
-}
+
+
 </script>
 
 <style>
-.btn-color {
-  color: #FF9800;
-}
+
 </style>
