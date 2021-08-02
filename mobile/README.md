@@ -61,7 +61,7 @@ import androidx.work.WorkManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.keelim.orange.R
-import com.keelim.orange.ui.main.MainActivity
+import MainActivity
 import com.keelim.orange.worker.MyWorker
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -199,3 +199,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 - 다크 테마 기능 검토 -> UI? 
 - SplashScreen 검토 -> 알파버전인데....
+
+## 2021 07 29
+
+- Splash Activity 도입 완료
+
+![splash activity first version](../README.assets/splash activity first version.gif)
+
+- Fragment 기능 구성 -> ui 별 레이아웃작업 시작
+
+- IBM app builder 도입 검토
