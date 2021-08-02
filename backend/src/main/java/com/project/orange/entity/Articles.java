@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "articles")
 public class Articles {
@@ -23,23 +21,24 @@ public class Articles {
 
 //    피드에서 이미지와 댓글에 접근
     @OneToMany(mappedBy = "images")
-    private List<Images> articleImages = new ArrayList<>();
+    private List<Images> imagesList = new ArrayList<>();
 
     @OneToMany(mappedBy = "comments")
-    private List<Comments> articleComments = new ArrayList<>();
+    private List<Comments> commentsList = new ArrayList<>();
 
 //    피드에서 챌린지와 유저에 접근
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "challenge_id")
-    private Challenges challengeTd;
+    private Challenges challenge;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User userTd;
+    private Users user;
 
     @Column(name = "title")
     private String title;
 
+    @Lob
     @Column(name = "article_content")
     private String articleContent;
 

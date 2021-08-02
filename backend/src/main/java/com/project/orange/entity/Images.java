@@ -3,11 +3,10 @@ package com.project.orange.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Blob;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @Entity
 @Table(name = "images")
@@ -21,6 +20,7 @@ public class Images {
     @Column(name = "article_id")
     private Long articleId;
 
+    @Lob
     @Column(name = "content")
-    private String content;
+    private Blob content;
 }
