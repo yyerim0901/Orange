@@ -61,6 +61,9 @@
                 >
                   로그인
                 </v-btn>
+                <KakaoLogin
+                v-on:click="KakaoLogin()">
+                </KakaoLogin>
                 <div class="mt-5">
                   <router-link
                     class="text-decoration-none"
@@ -85,7 +88,12 @@
 </template>
 
 <script>
+import KakaoLogin from '@/components/user/KakaoLogin.vue';
+
 export default {
+  components: {
+    KakaoLogin,
+  },
   name: 'LoginForm',
     data: () => ({
     email: null,
@@ -97,9 +105,17 @@ export default {
         if (result) {
           alert('로그인 성공')
         }
-      }
+      },
+    KakaoLogin: function () {
+      window.Kakao.Auth.authorize({
+        redirectUri: "http://localhost:4000/auth/kakao/callback",
+      });  
     }
+  },
+  beforeMount(){
+  
   }
+}
 
 
 </script>
