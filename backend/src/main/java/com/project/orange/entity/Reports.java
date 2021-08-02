@@ -5,8 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
-@Getter
+@AllArgsConstructor
+@Data
 @Entity
 public class Reports {
 
@@ -32,50 +32,4 @@ public class Reports {
 //        this.reportCategoryId = reportCategoryId;
 //        this.reportContent = reportContent;
 //    }
-
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-
-        //기존 관계 제거
-        if(this.user != null){
-            this.user.getReportsList().remove(this);
-        }
-        this.user = user;
-        user.getReportsList().add(this);
-    }
-
-    public ReportCategories getReportCategories() {
-        return reportCategories;
-    }
-
-    public void setReportCategories(ReportCategories reportCategories) {
-
-        //기존 관계 제거
-        if(this.reportCategories != null) {
-            this.reportCategories.getReportsList().remove(this);
-        }
-        this.reportCategories = reportCategories;
-        reportCategories.getReportsList().add(this);
-    }
-
-    public Long getReportId() {
-        return reportId;
-    }
-
-    public void setReportId(Long reportId) {
-        this.reportId = reportId;
-    }
-
-    public String getReportContent() {
-        return reportContent;
-    }
-
-    public void setReportContent(String reportContent) {
-        this.reportContent = reportContent;
-    }
-
-
 }
