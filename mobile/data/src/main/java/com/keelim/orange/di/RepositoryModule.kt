@@ -1,11 +1,16 @@
 package com.keelim.orange.di
 
 import android.content.Context
+import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.datasource.LoginDataSource
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.NotificationRepositoryImpl
+import com.keelim.orange.data.repository.season.other.OtherRepositoryImpl
 import com.keelim.orange.data.repository.season.RankingRepository
+import com.keelim.orange.data.repository.season.create.CreateRepository
+import com.keelim.orange.data.repository.season.create.CreateRepositoryImpl
+import com.keelim.orange.data.repository.season.other.OtherRepository
 import com.keelim.orange.data.repository.theme.ThemeRepository
 import dagger.Module
 import dagger.Provides
@@ -55,5 +60,29 @@ object RepositoryModule {
     @IoDispatcher dispatcher: CoroutineDispatcher,
   ): RankingRepository {
     return RankingRepository(dispatcher)
+  }
+
+  @Provides
+  @Singleton
+  fun provideOtherRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): OtherRepository {
+    return OtherRepositoryImpl(
+      dispatcher,
+      apiRequestFactory,
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideCreateRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ):CreateRepository{
+    return CreateRepositoryImpl(
+    dispatcher,
+      apiRequestFactory
+    )
   }
 }
