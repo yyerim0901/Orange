@@ -31,9 +31,15 @@ public class Users {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY) //한 명의 user는 여러 개의 comment를 가진다.
     List<Comments> commentsList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
+    List<FollowerFollowing> followerList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "toUser", fetch = FetchType.LAZY)
+    List<FollowerFollowing> followingList = new ArrayList<>();
+
 //    @OneToMany(mappedBy = "user")
 //    List<Articles> articlesList = new ArrayList<>();
-    
+
     //getter setter와는 다른, 따로 존재하는 메소드인듯,,?
     public void addNotificationList(Notifications notification){
         notificationsList.add(notification);
@@ -49,7 +55,16 @@ public class Users {
         commentsList.add(comment);
         comment.setUser(this);
     }
-//
+    //////////////////////////////////
+    public void addFollowerList(FollowerFollowing follower){
+        followerList.add(follower);
+        follower.setFromUser(this);
+    }
+    public void addFollowingList(FollowerFollowing following){
+        followingList.add(following);
+        following.setToUser(this);
+    }
+//////////////////////////////////
 //    //단축키 alt+insert
 //    @Builder
 //    public Users(Long userId, String email, String nickname) {
@@ -58,6 +73,22 @@ public class Users {
 //        this.nickname = nickname;
 //    }
 
+
+    public List<FollowerFollowing> getFollowerList() {
+        return followerList;
+    }
+
+    public void setFollowerList(List<FollowerFollowing> followerList) {
+        this.followerList = followerList;
+    }
+
+    public List<FollowerFollowing> getFollowingList() {
+        return followingList;
+    }
+
+    public void setFollowingList(List<FollowerFollowing> followingList) {
+        this.followingList = followingList;
+    }
 
     public Long getUserId() {
         return userId;
