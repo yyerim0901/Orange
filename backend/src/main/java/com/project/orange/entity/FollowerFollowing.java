@@ -5,8 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
-@Getter
+@AllArgsConstructor
+@Data
 @Entity
 public class FollowerFollowing {
 
@@ -14,17 +14,20 @@ public class FollowerFollowing {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long followId;
-    @Column(name = "from")
-    private Long from;
-    @Column(name = "to")
-    private Long to;
 
-    //Users와 1:N , N:1 관계...
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users fromUser;
 
-    @Builder
-    public FollowerFollowing(Long followId, Long from, Long to) {
-        this.followId = followId;
-        this.from = from;
-        this.to = to;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users toUser;
+
+
+//    @Builder
+//    public FollowerFollowing(Long followId, Long from, Long to) {
+//        this.followId = followId;
+//        this.from = from;
+//        this.to = to;
+//    }
 }
