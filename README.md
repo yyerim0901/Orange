@@ -78,11 +78,11 @@ gantt
     개발 환경 구성             :done, 07-22, 5d
 	
 	section Frontend
-    auth		  	:done, 07-26, 5d
-    feed	 :done, 07-28, 5d
-	notification   	  		:done, 07-31, 4d
+    notification		  	:done, 07-26, 5d
+    auth	 :done, 07-28, 5d
 	develp->master :done, 07-29,1d
     profile	 	 		:done, 08-02,5d
+    feed   	  		:done, 08-04, 4d
    	develp->master :done, 08-05,1d
     develp->master :done, 08-12,1d
 	Challange		 	   :done, 08-06,7d
@@ -110,6 +110,7 @@ gantt
     develp->master :done, 08-05,1d
     develp->master :done, 08-12,1d
     search                 :done, 08-01, 3d
+    contrller level :done, 08-02, 7d
     Feed		  	:done, 08-01, 5d
     notification	 :done, 08-03, 5d
 	Challange		 	   :done, 08-06,9d

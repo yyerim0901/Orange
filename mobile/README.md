@@ -209,3 +209,34 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 - Fragment 기능 구성 -> ui 별 레이아웃작업 시작
 
 - IBM app builder 도입 검토
+
+## 2021 08 02
+
+- 레이아웃 전체 검토 (feed, noti, create, other, )
+- mock api 검토
+- 이미지 해싱 검토
+- 카메라 사용 검토
+```kotlin
+class OtherRepositoryImpl @Inject constructor(
+    private val dispatcher: CoroutineDispatcher,
+    private val apiRequestFactory: ApiRequestFactory,
+) : OtherRepository {
+    override suspend fun sue(): Boolean = withContext(dispatcher) {
+        apiRequestFactory.retrofit.sue().isExecuted
+    }
+
+    override suspend fun like(): Boolean = withContext(dispatcher){
+        apiRequestFactory.retrofit.like().isExecuted
+    }
+
+    override suspend fun share(): Boolean = withContext(dispatcher) {
+        apiRequestFactory.retrofit.share().isExecuted
+    }
+
+    override suspend fun authenticate(): Boolean  = withContext(dispatcher){
+        apiRequestFactory.retrofit.share().isExecuted
+    }
+}
+```
+
+
