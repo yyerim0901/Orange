@@ -1,6 +1,5 @@
 <template>
   <div>
-    <AppHeader></AppHeader>
     <b-navbar variant="navbar-light bg-light justify-content-between" type="light">
       <b-navbar-brand tag="h1">
         <router-link to="/" class="nav-brand-text">Orange</router-link>
