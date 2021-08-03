@@ -8,7 +8,7 @@ stages:
     - deploy
 
 test:
-    state: test
+    stage: test
     only:
         - develop
         - master
