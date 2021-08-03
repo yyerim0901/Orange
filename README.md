@@ -97,6 +97,7 @@ gantt
     develp->master :done, 08-05,1d
     develp->master :done, 08-12,1d
 	auth   	  		:done, 07-31, 4d
+	aws ec2 setting  :done, 08-03, 2d
     profile	 	 		:done, 08-02,5d
 	Challange		 	   :done, 08-06,7d
 	search                 :done, 08-12, 2d
