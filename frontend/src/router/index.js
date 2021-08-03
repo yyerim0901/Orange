@@ -26,12 +26,12 @@ const routes = [
     component: () => import('@/layouts/main/Index.vue'),
     children: [
       {
-        path: '/',
+        path: '',
         name: 'IndexFeed',
         component: () => import('@/views/feed/IndexFeed.vue'),
       },
       {
-        path: '/profile',
+        path: 'profile',
         name: 'Profile',
         component: () => import('@/views/user/Profile.vue')
       },

@@ -7,7 +7,9 @@
       <b-navbar-nav class="d-flex">
         <b-nav-item>About</b-nav-item>
         <b-nav-item><b-icon icon="bell"></b-icon></b-nav-item>
-        <b-nav-item><b-icon icon="person"></b-icon></b-nav-item>
+        
+        <b-nav-item><router-link to="/profile"><b-icon icon="person"></b-icon></router-link></b-nav-item>
+        
       </b-navbar-nav>
     </b-navbar>
   </div>
