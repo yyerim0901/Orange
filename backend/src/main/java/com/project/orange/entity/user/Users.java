@@ -10,16 +10,23 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "salt")
+    private Salt salt;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name="email")
     private String email;
@@ -32,6 +39,7 @@ public class Users {
 
     @Column(name="profile_image_path")
     private String profileImagePath;
+
 
     //일대다 관계는 엔티티를 하나 이상 참조할 수 있으므로, 자바 컬렉션인 Collection, List, Set, Map 중에 하나를 사용해야한다.(p209)
     //@OneToMany는 연관관계의 주인이 될 수 없다.
