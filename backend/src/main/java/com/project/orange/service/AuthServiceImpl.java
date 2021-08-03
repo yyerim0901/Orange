@@ -2,6 +2,7 @@ package com.project.orange.service;
 
 import com.project.orange.entity.user.Salt;
 import com.project.orange.entity.user.Users;
+import com.project.orange.repository.user.SaltRepository;
 import com.project.orange.repository.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private SaltRepository saltRepository;
+    @Autowired
+    private SaltRepository saltRepository;
 
     @Autowired
     private SaltUtil saltUtil;
@@ -32,8 +33,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Users loginUser(String id, String  password) throws Exception{
-        Users user = userRepository.findByUsername(id);
+    public Users loginUser(String nickname, String  password) throws Exception{
+        Users user = userRepository.findByNickname(nickname);
         if(user == null) throw new Exception("멤버가 조회되지 않습니다.");
         String salt = user.getSalt().getSalt();
         password = saltUtil.encodePassword(salt,password);
