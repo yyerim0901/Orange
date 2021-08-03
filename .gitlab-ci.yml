@@ -17,6 +17,7 @@ test:
 step-deploy-prod:
     stage: deploy
     only:
+        - develop
         - master
     script:
         - sudo apt-get install -y python-pip
