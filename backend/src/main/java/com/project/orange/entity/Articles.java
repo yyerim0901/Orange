@@ -20,10 +20,10 @@ public class Articles {
     private Long articleId;
 
 //    피드에서 이미지와 댓글에 접근
-    @OneToMany(mappedBy = "images")
+    @OneToMany(mappedBy = "article")
     private List<Images> imagesList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "comments")
+    @OneToMany(mappedBy = "article")
     private List<Comments> commentsList = new ArrayList<>();
 
 //    피드에서 챌린지와 유저에 접근

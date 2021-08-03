@@ -40,7 +40,7 @@ public class Challenges {
     @Column(name="current_members")
     private Integer currentMembers;
 
-    @OneToMany(mappedBy = "challenge")
+    @OneToMany(mappedBy = "challenge") // 주체가 아닌 애가 주인을 가리키기 위해서 쓰는 거
     private List<UsersChallenges> usersChallengesList = new ArrayList<>();
 
     @OneToMany(mappedBy = "challenge")

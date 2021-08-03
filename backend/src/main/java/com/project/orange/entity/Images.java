@@ -23,4 +23,8 @@ public class Images {
     @Lob
     @Column(name = "content")
     private Blob content;
+
+    @JoinColumn(name="articles")
+    @ManyToOne
+    private Articles article;
 }
