@@ -47,8 +47,8 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         // BattleMatching 테이블에 존재하지 않는 Challenge만 선별
         for(Challenges each : samePeriodChallengesList){
-            if(battleMatchingRepository.findByBlueTeamId(currentChallengeId) == null &&
-                battleMatchingRepository.findByRedTeamId(currentChallengeId) == null){
+            if(battleMatchingRepository.findByBlueTeamId(currentChallengeId).isPresent() &&
+                battleMatchingRepository.findByRedTeamId(currentChallengeId).isPresent()){
                 matchmakingPool.add(each);
             }
         }
@@ -61,8 +61,8 @@ public class ChallengeServiceImpl implements ChallengeService{
 
             // matchmaking 결과를 DB에 저장
             BattleMatching newBattleMatching = new BattleMatching();
-            newBattleMatching.setBlue_team(currentChallenge);
-            newBattleMatching.setRed_team(opponentChallenge);
+            newBattleMatching.setBlueTeam(currentChallenge);
+            newBattleMatching.setRedTeam(opponentChallenge);
             savedBattleMatching = battleMatchingRepository.save(newBattleMatching);
         }
 
