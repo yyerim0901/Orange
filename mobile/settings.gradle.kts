@@ -15,20 +15,4 @@ include(
     ":data",
     ":common",
     ":domain",
-    ":ui-auth",
-    ":ui-feed",
-    ":ui-fight",
-    ":ui-noti",
-    ":ui-season",
-    ":ui-main",
 )
-arrayOf(
-    ":ui-auth",
-    ":ui-feed",
-    ":ui-fight",
-    ":ui-noti",
-    ":ui-season",
-    ":ui-main",
-).forEach { name ->
-    project(name).projectDir = File(rootDir, "features/${name.substring(startIndex = 1)}")
-}
