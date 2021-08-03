@@ -62,8 +62,7 @@
                   로그인
                 </v-btn>
                 <KakaoLogin
-                v-on:click="KakaoLogin()">
-                </KakaoLogin>
+                v-on:click="KakaoLogin()" />
                 <div class="mt-5">
                   <router-link
                     class="text-decoration-none"
@@ -73,7 +72,7 @@
                   </router-link> |
                   <router-link
                     class="text-decoration-none"
-                    to="/signup"
+                    to="/authentication/sign-up"
                   >
                     회원가입
                   </router-link>
@@ -108,7 +107,7 @@ export default {
       },
     KakaoLogin: function () {
       window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:4000/auth/kakao/callback",
+        redirectUri: "http://localhost:8080/auth/kakao/callback",
       });  
     }
   },

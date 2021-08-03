@@ -19,8 +19,8 @@ export default {
     alert(code);
     var details = {
       grant_type: "authorization_code",
-      client_id: "381fdf3995c9049e5775ebb6242c1f15",
-      redirect_uri: "http://localhost:4000/auth/kakao/callback",
+      client_id: "7366b5af072a0f66a3be9fa5278e3bfe",
+      redirect_uri: "http://localhost:8080/auth/kakao/callback",
       code: code,
     };
     var formBody = [];

@@ -5,7 +5,7 @@
       고객센터
       </div>
       <div>
-        <router-link to="/login">로그인</router-link>
+        <router-link to="/authentication/login">로그인</router-link>
       </div>
     </div>
   </div>
