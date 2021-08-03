@@ -108,7 +108,7 @@ export default {
       },
     KakaoLogin: function () {
       window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:4000/auth/kakao/callback",
+        redirectUri: "http://localhost:8080/auth/kakao/callback",
       });  
     }
   },

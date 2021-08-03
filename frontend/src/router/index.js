@@ -28,6 +28,12 @@ const routes = [
     path: '/NotFoundPage',
     component: () => import('@/views/user/NotFoundPage.vue'),
   },
+  // kakao callback
+  {
+    path: '/auth/kakao/callback',
+    name: 'AuthKakaoCallback',
+    component: () => import('../views/user/AuthKakaoCallback.vue')
+  },
 ];
 
 const router = new VueRouter({
