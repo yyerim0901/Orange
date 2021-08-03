@@ -21,14 +21,14 @@
         android:id="@+id/notificationFragment"
         android:name="com.keelim.orange.ui.noti.NotificationFragment"
         android:label="NotificationFragment" />
-    <dialog
-        android:id="@+id/createFragment"
-        android:name="com.keelim.orange.ui.fight.sheet.create.CreateFragment"
-        android:label="CreateFragment" />
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.keelim.orange.ui.feed.FeedFragment"
-        android:label="FeedFragment" />
+        android:label="FeedFragment" >
+        <action
+            android:id="@+id/action_feedFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fightFragment"
         android:name="com.keelim.orange.ui.fight.FightFragment"
@@ -45,4 +45,13 @@
         android:id="@+id/seasonFragment"
         android:name="com.keelim.orange.ui.season.SeasonFragment"
         android:label="SeasonFragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.keelim.orange.ui.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="uid"
+            app:argType="string"
+            android:defaultValue="0000" />
+    </fragment>
 </navigation>

@@ -10,18 +10,22 @@ class OtherRepositoryImpl @Inject constructor(
     private val apiRequestFactory: ApiRequestFactory,
 ) : OtherRepository {
     override suspend fun sue(): Boolean = withContext(dispatcher) {
-        apiRequestFactory.retrofit.sue().isExecuted
+        apiRequestFactory.retrofit.sue().body()
+        return@withContext false
     }
 
     override suspend fun like(): Boolean = withContext(dispatcher){
-        apiRequestFactory.retrofit.like().isExecuted
+        apiRequestFactory.retrofit.like().body()
+        return@withContext false
     }
 
     override suspend fun share(): Boolean = withContext(dispatcher) {
-        apiRequestFactory.retrofit.share().isExecuted
+        apiRequestFactory.retrofit.share().body()
+        return@withContext false
     }
 
     override suspend fun authenticate(): Boolean  = withContext(dispatcher){
-        apiRequestFactory.retrofit.share().isExecuted
+        apiRequestFactory.retrofit.share().body()
+        return@withContext false
     }
 }
