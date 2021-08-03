@@ -1,6 +1,7 @@
 package com.project.orange.entity;
 
-import com.project.orange.repository.PeriodsRepository;
+import com.project.orange.entity.challenge.Periods;
+import com.project.orange.repository.challenge.PeriodsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
