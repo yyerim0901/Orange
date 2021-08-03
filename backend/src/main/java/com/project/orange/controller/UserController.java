@@ -4,18 +4,13 @@ import com.project.orange.entity.user.Users;
 import com.project.orange.service.AuthService;
 
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+//@CrossOrigin("*")
 @RequestMapping("/user")
 public class UserController {
 
@@ -23,13 +18,12 @@ public class UserController {
     private AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signUpUser(@RequestBody Users user){
-
+    public ResponseEntity<String> signUpUser(@RequestBody Users user) {
         try {
-            return new ResponseEntity<>("success", HttpStatus.OK);
-        }
-        catch (Exception e){
-            return new ResponseEntity<>("fail", HttpStatus.NO_CONTENT);
+            authService.signUpUser(user);
+            return new ResponseEntity<String>("success", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("fail",HttpStatus.NO_CONTENT);
         }
     }
 
