@@ -1,29 +1,13 @@
-image: docker:latest
+image: tmaier/docker-compose:latest
 
 services:
   - docker:dind
 
-stages:
-  - test
-  - deploy
+before_script:
+  - docker info
+  - docker-compose --version
 
-test:
-    stage: test
-    only:
-        - develop
-        - master
-    script:
-        - echo run tests in this section
-deploy:
-    stage: deploy
-    only:
-        - develop
-        - master
-    script:
-        - sudo apt-get install -y python-pip
-        - sudo pip install docker-compose
-        - sudo docker image prune -f
-        - sudo docker-compose -f docker-compose.yml build --no-cache
-        - sudo docker-compose -f docker-compose.yml up -d
-    environment: master
-    when: manual
+build image:
+  stage: build
+  script:
+    - docker-compose build
