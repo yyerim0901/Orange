@@ -1,15 +1,14 @@
 <template>
   <div class="text-center">
-    <v-menu offset-y>
+    <v-menu offset-y open-on-hover>
       <template v-slot:activator="{ on, attrs }">
-
-          <v-btn icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-bell-ring-outline</v-icon>
-          </v-btn>
-
+        <v-btn 
+          icon
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon>mdi-bell-ring-outline</v-icon>
+        </v-btn>
       </template>
       <v-list>
         <v-list-item
