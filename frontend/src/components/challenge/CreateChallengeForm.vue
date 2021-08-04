@@ -15,11 +15,11 @@
                 @submit.prevent="signUp"
               >
                 <div class="text-h4 font-weight-black mb-10">
-                  회원가입
+                  챌린지 생성
                 </div>
                 <validation-provider
                   v-slot="{ errors }"
-                  name="이메일"
+                  name="챌린지 제목"
                   :rules="{
                     required: true,
                     email: true,
@@ -27,9 +27,26 @@
                 >
                   <v-text-field
                     v-model="email"
-                    label="이메일"
+                    label="챌린지 제목"
                     clearable
                     prepend-icon="mdi-email"
+                    :error-messages="errors"
+                  />
+                </validation-provider>
+
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="카테고리"
+                  :rules="{
+                    required: true,
+                    kor: true,
+                  }"
+                >
+                  <v-text-field
+                    v-model="username"
+                    label="카테고리"
+                    clearable
+                    prepend-icon="mdi-account"
                     :error-messages="errors"
                   />
                 </validation-provider>
@@ -139,7 +156,7 @@
 
 <script>
 export default {
-  name: 'SignupForm',
+  name: 'CreateChallengeForm',
   data: () => ({
     email: null,
     username: null,
