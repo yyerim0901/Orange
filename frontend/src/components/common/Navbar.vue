@@ -17,6 +17,7 @@
                 icon
                 v-bind="attrs"
                 v-on="on"
+                @click="goCreateChallenge"
               >
                 <v-icon dark>
                   mdi-trophy
@@ -66,6 +67,9 @@ export default {
     goHome() {
       this.$router.push({path:'/'}).catch(()=> {});
     },
+    goCreateChallenge() {
+      this.$router.push({path:'/create-challenge'}).catch(()=> {});
+    }
   }
 }
 </script>
