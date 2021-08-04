@@ -18,12 +18,12 @@ public class NotificationController {
 
     @GetMapping("/select/{userId}")
     public ResponseEntity<List<Notifications>> selectAllByUserId(@PathVariable Long userId){
-        List<Notifications> list = notificationService.selectAllByUserId(userId);
-        if(list != null && !list.isEmpty()){
-            return new ResponseEntity<>(list, HttpStatus.OK);
-        }
-        else{
+        List<Notifications> list;
+        list = notificationService.selectAllByUserId(userId);
+        if (list == null || list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
 

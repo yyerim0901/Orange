@@ -18,12 +18,12 @@ public class CategoryController {
 
     @GetMapping("/api/category/list")
     public ResponseEntity<List<Categories>> selectAll(){
-        List<Categories> list = categoryService.selectAll();
-        if(list != null && !list.isEmpty()) {
-            return new ResponseEntity<List<Categories>>(list, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        List<Categories> list;
+        list = categoryService.selectAll();
+        if (list == null || list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
 }

@@ -19,23 +19,24 @@ public class BattleMatchingController {
 
     @GetMapping("/select/{id}")
     public ResponseEntity<BattleMatching> selectOne(@PathVariable Long id){
-        Optional<BattleMatching> battleMatching = battleMatchingService.selectOne(id);
+        Optional<BattleMatching> battleMatching;
+        battleMatching = battleMatchingService.selectOne(id);
         if(battleMatching != null){
-            return new ResponseEntity<BattleMatching>(battleMatching.get(), HttpStatus.OK);
+            return new ResponseEntity<>(battleMatching.get(), HttpStatus.OK);
         }
         else{
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @GetMapping("select/list")
     public ResponseEntity<List<BattleMatching>> selectAll(){
-        List<BattleMatching> list = battleMatchingService.selectAll();
-        if(list != null && !list.isEmpty()){
-            return new ResponseEntity<List<BattleMatching>>(list, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        List<BattleMatching> list;
+        list = battleMatchingService.selectAll();
+        if (list == null || list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
 }
