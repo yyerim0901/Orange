@@ -12,10 +12,6 @@ demonstrator:
 
   image: docker/compose
 
-  tags:
-    - docker
-    - linux
-
   variables:
     # Use a distinct name for each job.
     COMPOSE_PROJECT_NAME: docker-compose-demonstrator-$CI_JOB_ID
