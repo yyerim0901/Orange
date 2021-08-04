@@ -23,12 +23,7 @@
               </v-card>
             </v-col>
             <v-col cols="auto">
-              <v-btn
-                outlined
-                small
-              >
-                Badge
-              </v-btn>
+              <BadgeDialog />
             </v-col>
           </v-row>
         </v-col>
@@ -51,8 +46,13 @@
 </template>
 
 <script>
+import BadgeDialog from '@/components/user/BadgeDialog.vue'
+
 export default {
   name: 'ProfileForm',
+  components: {
+    BadgeDialog,
+  }
 }
 </script>
 
