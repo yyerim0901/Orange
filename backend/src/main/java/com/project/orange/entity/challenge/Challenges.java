@@ -3,6 +3,7 @@ package com.project.orange.entity.challenge;
 import com.project.orange.entity.article.Articles;
 import com.project.orange.entity.user.UsersChallenges;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="challenges")
+@Builder
 public class Challenges {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,9 @@ public class Challenges {
 
     @Column(name="challenge_title")
     private String challengeTitle;
+
+    @Column(name="challenge_describe")
+    private String challengeDescribe;
 
     @Column(name="category_id")
     private Long categoryId;
