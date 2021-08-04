@@ -1,8 +1,48 @@
-image: docker
-services:
-    - docker:dind
-build:
-    script:
-        - apk add --no-cache docker-compose
-        - docker-compose up -d
-        
+stages:
+  - build
+
+.get-container-id: &get-container-id
+  |
+  # Getting Container ID
+  CONTAINER_ID=$(basename $(cat /proc/1/cpuset))
+  echo $CONTAINER_ID
+
+demonstrator:
+  stage: build
+
+  image: docker/compose
+
+  tags:
+    - docker
+    - linux
+
+  variables:
+    # Use a distinct name for each job.
+    COMPOSE_PROJECT_NAME: docker-compose-demonstrator-$CI_JOB_ID
+
+  before_script:
+    - docker-compose up --detach
+
+  script:
+    # Following two commands are for debugging purposes only.
+    - docker ps
+    - docker network list
+    - *get-container-id
+    # Connect current container to network created by compose.
+    - docker network connect ${COMPOSE_PROJECT_NAME}_default $CONTAINER_ID
+    # Note that we can even use hostnames specified in `docker-compose.yml`.
+    - wget -O - http://nginx
+
+  after_script:
+    - docker-compose logs || true
+    # Get again, `script` and `after_script` have different env blocks.
+    - *get-container-id
+    # Always use `|| true` on something that may fail we absolutely need
+    # to be sure all containers we created are stopped.
+    # Don't forget to detach current container from the network so `down`
+    # can clean it up.
+    - docker network disconnect ${COMPOSE_PROJECT_NAME}_default $CONTAINER_ID || true
+    - docker-compose down || true
+    # Following two commands are for debugging purposes only.
+    - docker ps
+    - docker network list
