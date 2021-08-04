@@ -1,12 +1,13 @@
 package com.keelim.orange.ui.friends
 
-import com.keelim.orange.data.model.Fight
+import com.keelim.orange.data.model.Friends
 
-sealed class FightState {
-  object UnInitialized : FightState()
-  object Loading : FightState()
+sealed class FriendsState {
+  object UnInitialized : FriendsState()
+  object Loading : FriendsState()
   data class Success(
-    val data: List<Fight>
-  ) : FightState()
-  object Error : FightState()
+    val data: List<Friends>
+  ) : FriendsState()
+  object InviteSuccess: FriendsState()
+  object Error : FriendsState()
 }

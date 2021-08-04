@@ -4,6 +4,7 @@ import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.feed.detail.DetailRepository
+import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -39,12 +40,6 @@ object UseCaseModule {
   @ViewModelScoped
   fun provideSendTokenServerUseCase(): SendTokenServerUseCase {
     return SendTokenServerUseCase()
-  }
-
-  @Provides
-  @ViewModelScoped
-  fun provideFriendsOkUseCase(): FriendsOkUseCase {
-    return FriendsOkUseCase()
   }
 
   @Provides
@@ -98,6 +93,16 @@ object UseCaseModule {
   ): GetDetailInformationUseCase{
     return GetDetailInformationUseCase(
       detailRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideFriendsUseCase(
+    friendsRepository: FriendsRepository
+  ): FriendsOkUseCase{
+    return FriendsOkUseCase(
+      friendsRepository
     )
   }
 }

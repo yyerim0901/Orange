@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.fight
+package com.keelim.orange.ui.friends
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,18 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Fight
+import com.keelim.orange.data.model.Friends
 import com.keelim.orange.databinding.FragmentFightBinding
+import com.keelim.orange.databinding.FragmentFriendsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FightFragment : Fragment() {
+class FriendsFragment
+
+
+  : Fragment() {
 
   companion object {
-    fun newInstance() = FightFragment()
+    fun newInstance() = FriendsFragment()
   }
 
-  private val viewModel by viewModels<FightViewModel>()
-  private var _binding: FragmentFightBinding? = null
+  private val viewModel by viewModels<FriendsViewModel>()
+  private var _binding: FragmentFriendsBinding? = null
   private val binding get() = _binding!!
 
   override fun onCreateView(
@@ -27,7 +32,7 @@ class FightFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    _binding = FragmentFightBinding.inflate(inflater, container, false)
+    _binding = FragmentFriendsBinding.inflate(inflater, container, false)
     return binding.root
   }
 
@@ -39,6 +44,7 @@ class FightFragment : Fragment() {
   }
 
   private fun initViews() = with(binding) {
+
   }
 
   override fun onDestroyView() {
@@ -48,10 +54,10 @@ class FightFragment : Fragment() {
 
   private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
     when (it) {
-      is FightState.UnInitialized -> handleUnInitialized()
-      is FightState.Loading -> handleLoading()
-      is FightState.Success -> handleSuccess(it.data)
-      is FightState.Error -> handleError()
+      is FriendsState.UnInitialized -> handleUnInitialized()
+      is FriendsState.Loading -> handleLoading()
+      is FriendsState.Success -> handleSuccess(it.data)
+      is FriendsState.Error -> handleError()
     }
   }
 
@@ -63,7 +69,7 @@ class FightFragment : Fragment() {
     requireActivity().toast("데이터 초기화 중입니다.")
   }
 
-  private fun handleSuccess(data: List<Fight>) {
+  private fun handleSuccess(data: List<Friends>) {
   }
 
   private fun handleError() {

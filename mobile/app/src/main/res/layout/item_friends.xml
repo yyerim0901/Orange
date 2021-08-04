@@ -13,57 +13,54 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="14dp">
+        >
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:textColor="@android:color/black"
-            android:textSize="8sp"
+        <ImageView
+            android:id="@+id/friends_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="2021-08-01" />
-
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date"
-            tools:text="Title" />
+            app:layout_constraintStart_toEndOf="@id/friends_img"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            />
 
         <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="@android:color/black"
-            android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="12sp"
+            android:id="@+id/desc"
+            app:layout_constraintStart_toEndOf="@id/friends_img"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="Description" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/accept"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="6"
+            tools:text="@tools:sample/lorem/random"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:background="#F83C00"
-            android:singleLine="true"
-            android:text="수락 >"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"/>
+        
+        <com.google.android.material.chip.Chip
+            android:id="@+id/invite"
+            android:backgroundTint="@color/orange"
+            android:text="초대"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            app:layout_constraintBottom_toTopOf="@id/desc"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

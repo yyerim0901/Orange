@@ -1,6 +1,8 @@
 package com.keelim.orange.data.api
 
 import com.keelim.orange.data.response.DetailResponse
+import com.keelim.orange.data.response.FriendsResponse
+import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
 import retrofit2.Response
 import retrofit2.http.Field
@@ -43,4 +45,13 @@ interface OrangeService {
         @Query("uid") uid:String
     ): Response<DetailResponse>
 
+    @POST("invite/")
+    fun invite(
+        @Query("uid") uid:String
+    ): Response<ResultResponse>
+
+    @GET("friends/{myid}")
+    fun getFriends(
+        @Query("myid") id:String
+    ): Response<FriendsResponse>
 }

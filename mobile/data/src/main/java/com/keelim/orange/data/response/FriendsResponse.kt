@@ -1,14 +1,9 @@
 package com.keelim.orange.data.response
 
 import com.google.gson.annotations.SerializedName
+import com.keelim.orange.data.model.Friends
 
-data class InviteResponse(
-    @SerializedName("img_url")
-    val img_url: String,
-
-    @SerializedName("tile")
-    val title: String,
-
-    @SerializedName("description")
-    val description: String,
+data class FriendsResponse(
+    @SerializedName("friends")
+    val friends: List<Friends>,
 )
