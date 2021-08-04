@@ -27,7 +27,7 @@ build:
     - docker-compose build
     - docker-compose push
   only:
-    - pre-prod
+    - develop
     - master
 
 deploy-to-stage:
@@ -42,7 +42,7 @@ deploy-to-stage:
     - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" pull
     - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" up -d
   only:
-    - pre-prod
+    - develop
     - master
 
 release:
