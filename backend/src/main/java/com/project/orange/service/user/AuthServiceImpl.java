@@ -33,8 +33,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Users loginUser(String username, String  password) throws Exception{
-        Users user = userRepository.findByUsername(username);
+    public Users loginUser(String email, String  password) throws Exception{
+        Users user = userRepository.findByEmail(email);
         if(user == null) throw new Exception("멤버가 조회되지 않습니다.");
         String salt = user.getSalt().getSalt();
         password = saltUtil.encodePassword(salt,password);

@@ -1,7 +1,7 @@
 package com.project.orange.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.orange.entity.user.SecurityUser;
+//import com.project.orange.entity.user.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +32,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         ResponseEntity response = new ResponseEntity("error", HttpStatus.NOT_FOUND);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        SecurityUser member = (SecurityUser)authentication.getPrincipal();
-        Collection<GrantedAuthority> authorities = member.getAuthorities();
+//        SecurityUser member = (SecurityUser)authentication.getPrincipal();
+//        Collection<GrantedAuthority> authorities = member.getAuthorities();
 
 //        if(hasRole(authorities,UserRole.ROLE_NOT_PERMITTED.name())){
 //            response.setMessage("사용자 인증메일을 받지 않았습니다.");
