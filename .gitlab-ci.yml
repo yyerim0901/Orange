@@ -53,6 +53,7 @@ release:
     - docker-compose build
     - docker-compose push
   only:
+    - develop
     - master
 
 deploy-to-prod:
