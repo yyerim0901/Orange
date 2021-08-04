@@ -1,44 +1,71 @@
+image: creatiwww/docker-compose:latest
+
+services:
+  - docker:dind
+
+variables:
+  STAGE_SERVER_IP: 10.10.10.1
+  PROD_SERVER_IP: 10.10.10.2
+  STAGE_SERVER_USER: gitlab
+  PROD_SERVER_USER: gitlab
+  STAGE_IMAGE_APP_TAG: registry.my_organiation.org/development/amazing_app/app:stage
+  PROD_IMAGE_APP_TAG: registry.my_organiation.org/development/amazing_app/app:prod
+  EXTERNAL_SERVICE_STAGE_API_BASE_URL: https://test.some-service.com/
+  EXTERNAL_SERVICE_PROD_API_BASE_URL: https://some-service.com/
+
 stages:
   - build
+  - staging
+  - release
+  - deploy
 
-.get-container-id: &get-container-id
-  |
-  # Getting Container ID
-  CONTAINER_ID=$(basename $(cat /proc/1/cpuset))
-  echo $CONTAINER_ID
-
-demonstrator:
+build:
   stage: build
-
-  image: docker/compose
-
-  variables:
-    # Use a distinct name for each job.
-    COMPOSE_PROJECT_NAME: docker-compose-demonstrator-$CI_JOB_ID
-
-  before_script:
-    - docker-compose up --detach
-
   script:
-    # Following two commands are for debugging purposes only.
-    - docker ps
-    - docker network list
-    - *get-container-id
-    # Connect current container to network created by compose.
-    - docker network connect ${COMPOSE_PROJECT_NAME}_default $CONTAINER_ID
-    # Note that we can even use hostnames specified in `docker-compose.yml`.
-    - wget -O - http://nginx
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
+    - echo "IMAGE_APP_TAG=$STAGE_IMAGE_APP_TAG" >> .env
+    - docker-compose build
+    - docker-compose push
+  only:
+    - pre-prod
+    - master
 
-  after_script:
-    - docker-compose logs || true
-    # Get again, `script` and `after_script` have different env blocks.
-    - *get-container-id
-    # Always use `|| true` on something that may fail we absolutely need
-    # to be sure all containers we created are stopped.
-    # Don't forget to detach current container from the network so `down`
-    # can clean it up.
-    - docker network disconnect ${COMPOSE_PROJECT_NAME}_default $CONTAINER_ID || true
-    - docker-compose down || true
-    # Following two commands are for debugging purposes only.
-    - docker ps
-    - docker network list
+deploy-to-stage:
+  stage: staging
+  script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_STAGE_SERVER_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
+    - echo "EXTERNAL_SERVICE_KEY=$EXTERNAL_SERVICE_STAGE_KEY" >> .env
+    - echo "IMAGE_APP_TAG=$STAGE_IMAGE_APP_TAG" >> .env
+    - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" down --remove-orphans
+    - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" pull
+    - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" up -d
+  only:
+    - pre-prod
+    - master
+
+release:
+  stage: release
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
+    - echo "IMAGE_APP_TAG=$PROD_IMAGE_APP_TAG" >> .env
+    - docker-compose build
+    - docker-compose push
+  only:
+    - master
+
+deploy-to-prod:
+  stage: deploy
+  script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PROD_SERVER_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY_IMAGE
+    - echo "EXTERNAL_SERVICE_KEY=$EXTERNAL_SERVICE_PROD_KEY" >> .env
+    - echo "IMAGE_APP_TAG=$PROD_IMAGE_APP_TAG" >> .env
+    - docker-compose -H "ssh://$PROD_SERVER_USER@$PROD_SERVER_IP" down --remove-orphans
+    - docker-compose -H "ssh://$PROD_SERVER_USER@$PROD_SERVER_IP" pull
+    - docker-compose -H "ssh://$PROD_SERVER_USER@$PROD_SERVER_IP" up -d
+  only:
+    - master
+  when: manual
