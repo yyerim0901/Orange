@@ -10,9 +10,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 public class Users {
 
@@ -45,6 +45,15 @@ public class Users {
 
     @Column
     String role;
+
+    public Users(){}
+
+    public Users(String username,  String password,  String nickname,  String email) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
+    }
 
 
     //일대다 관계는 엔티티를 하나 이상 참조할 수 있으므로, 자바 컬렉션인 Collection, List, Set, Map 중에 하나를 사용해야한다.(p209)
