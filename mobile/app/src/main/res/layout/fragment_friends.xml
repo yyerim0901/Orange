@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
     <ImageView
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Feed"
+        android:text="Friends"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -44,36 +45,20 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_heart"
+        android:src="@drawable/ic_baseline_bolt_24"
         app:layout_constraintEnd_toStartOf="@+id/noti_button"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/plain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:text="챌린지 피드"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/plain"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:itemCount="10"
-        tools:listitem="@layout/item_dashboard" />
+        android:padding="10dp"
+        tools:listitem="@layout/item_friends"
+        app:layout_constraintTop_toBottomOf="@id/orange_btn"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

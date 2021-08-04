@@ -6,6 +6,10 @@ import com.keelim.orange.data.datasource.LoginDataSource
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.NotificationRepositoryImpl
+import com.keelim.orange.data.repository.feed.detail.DetailRepository
+import com.keelim.orange.data.repository.feed.detail.DetailRepositoryImpl
+import com.keelim.orange.data.repository.friends.FriendsRepository
+import com.keelim.orange.data.repository.friends.FriendsRepositoryImpl
 import com.keelim.orange.data.repository.season.other.OtherRepositoryImpl
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.create.CreateRepository
@@ -82,6 +86,30 @@ object RepositoryModule {
   ):CreateRepository{
     return CreateRepositoryImpl(
     dispatcher,
+      apiRequestFactory
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideDetailRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): DetailRepository{
+    return DetailRepositoryImpl(
+      apiRequestFactory,
+      dispatcher
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideFriendsRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): FriendsRepository{
+    return FriendsRepositoryImpl(
+      dispatcher,
       apiRequestFactory
     )
   }
