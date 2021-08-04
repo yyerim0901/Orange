@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("/badge")
 public class BadgesController {
     @Autowired
     private BadgesService badgesService;
 
     @ApiOperation(value = "뱃지 목록", notes = "<big>모든 뱃지</big>의 <big>목록</big> 반환")
-    @GetMapping("/api/badge/list")
+    @GetMapping("/list")
     public ResponseEntity<List<Badges>> selectAll(){
         List<Badges> list = badgesService.selectAll();
         if(list != null && !list.isEmpty()) {
