@@ -42,7 +42,7 @@ deploy-to-stage:
     - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" pull
     - docker-compose -H "ssh://$STAGE_SERVER_USER@$STAGE_SERVER_IP" up -d
   only:
-    - develop
+    # - develop
     - master
 
 release:
@@ -53,7 +53,7 @@ release:
     - docker-compose build
     - docker-compose push
   only:
-    - develop
+    # - develop
     - master
 
 deploy-to-prod:
