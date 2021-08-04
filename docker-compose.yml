@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  foo:
+    image: alpine
+    command: sleep 3
+  bar:
+    image: alpine
+    command: sleep 3
