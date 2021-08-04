@@ -23,10 +23,12 @@
               </v-card>
             </v-col>
             <v-col cols="auto">
-              <v-card
-                outlined>
-                뱃지
-              </v-card>
+              <v-btn
+                outlined
+                small
+              >
+                Badge
+              </v-btn>
             </v-col>
           </v-row>
         </v-col>
