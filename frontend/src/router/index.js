@@ -6,19 +6,36 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/authentication',
+    component: () => import('@/layouts/authentication/Index.vue'),
+    children: [
+      {
+        path: 'login',
+        name: 'Login',
+        component: () => import('@/views/user/LoginPage.vue'),
+      },
+      {
+        path: 'sign-up',
+        name: 'Signup',
+        component: () => import('@/views/user/SignupPage.vue'),
+      },
+    ]
+  },
+  {
     path: '/',
-    name: 'IndexFeed',
-    component: () => import('@/views/feed/IndexFeed.vue'),
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/user/LoginPage.vue'),
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    component: () => import('@/views/user/SignupPage.vue'),
+    component: () => import('@/layouts/main/Index.vue'),
+    children: [
+      {
+        path: '',
+        name: 'IndexFeed',
+        component: () => import('@/views/feed/IndexFeed.vue'),
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('@/views/user/Profile.vue')
+      },
+    ]
   },
   {
     path: '*',
@@ -28,6 +45,13 @@ const routes = [
     path: '/NotFoundPage',
     component: () => import('@/views/user/NotFoundPage.vue'),
   },
+  // kakao callback
+  {
+    path: '/auth/kakao/callback',
+    name: 'AuthKakaoCallback',
+    component: () => import('@/views/user/AuthKakaoCallback.vue')
+  },
+
 ];
 
 const router = new VueRouter({

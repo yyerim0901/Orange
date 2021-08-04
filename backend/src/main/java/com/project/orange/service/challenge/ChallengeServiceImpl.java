@@ -58,7 +58,8 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         // BattleMatching 테이블에 존재하지 않는 Challenge 만 선별
         for(Challenges each : samePeriodChallengesList){
-            if(battleMatchingRepository.findByBlueTeamChallengeId(currentChallengeId).isEmpty() &&
+            if(each.getChallengeId() != currentChallengeId &&
+                    battleMatchingRepository.findByBlueTeamChallengeId(currentChallengeId).isEmpty() &&
                     battleMatchingRepository.findByRedTeamChallengeId(currentChallengeId).isEmpty()){
                 matchmakingPool.add(each);
             }
@@ -82,23 +83,24 @@ public class ChallengeServiceImpl implements ChallengeService{
             matchedChallenges.add(opponentChallenge);
 
             // 생성될 notification 을 담을 List
-            List<Notifications> notificationsForChallengeMembers = new ArrayList<>();
+            List<Notifications> notificationsForChallengeMembers;
+            notificationsForChallengeMembers = new ArrayList<>();
 
-            // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
-            for(Challenges eachChallenge : matchedChallenges){
-                for(UsersChallenges eachUsersChallenges : eachChallenge.getUsersChallengesList()){
-                    Notifications notification = new Notifications();
-                    notification.setUser(eachUsersChallenges.getUser());
-                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
-                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
-                                                        challengeMatchingAcceptedContent);
-
-                    notificationsForChallengeMembers.add(notification);
-                }
-            }
-
-            // 생성한 notification 을 DB에 저장
-            notificationsRepository.saveAll(notificationsForChallengeMembers);
+//            // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
+//            for(Challenges eachChallenge : matchedChallenges){
+//                for(UsersChallenges eachUsersChallenges : eachChallenge.getUsersChallengesList()){
+//                    Notifications notification = new Notifications();
+//                    notification.setUser(eachUsersChallenges.getUser());
+//                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
+//                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
+//                                                        challengeMatchingAcceptedContent);
+//
+//                    notificationsForChallengeMembers.add(notification);
+//                }
+//            }
+//
+//            // 생성한 notification 을 DB에 저장
+//            notificationsRepository.saveAll(notificationsForChallengeMembers);
         }
 
         return Optional.ofNullable(savedBattleMatching);

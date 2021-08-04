@@ -97,6 +97,20 @@
                 >
                   가입하기
                 </v-btn>
+                <div class="mt-5">
+                  <router-link
+                    class="text-decoration-none"
+                    to="/"
+                  >
+                    홈
+                  </router-link> |
+                  <router-link
+                    class="text-decoration-none"
+                    to="/authentication/login"
+                  >
+                    로그인
+                  </router-link>
+                </div>
               </v-form>
             </validation-observer>
           </v-card-text>
