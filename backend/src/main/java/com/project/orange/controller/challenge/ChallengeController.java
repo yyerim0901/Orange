@@ -19,7 +19,8 @@ public class ChallengeController {
 
     @GetMapping("/api/challenge/{challengeId}")
     public ResponseEntity<Challenges> selectOne(@PathVariable Long challengeId){
-        Optional<Challenges> challenge = challengeService.selectByChallengeId(challengeId);
+        Optional<Challenges> challenge;
+        challenge = challengeService.selectByChallengeId(challengeId);
         if(challenge.isPresent()){
             return new ResponseEntity<>(challenge.get(), HttpStatus.OK);
         }
@@ -30,18 +31,19 @@ public class ChallengeController {
 
     @GetMapping("/api/challenge/list")
     public ResponseEntity<List<Challenges>> selectAll(){
-        List<Challenges> list = challengeService.selectAll();
-        if(list != null && !list.isEmpty()){
-            return new ResponseEntity<>(list, HttpStatus.OK);
-        }
-        else{
+        List<Challenges> list;
+        list = challengeService.selectAll();
+        if (list == null || list.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
 
     @PostMapping("/api/challenge/register")
     public ResponseEntity<String> register(@RequestBody Challenges challenge){
-        Optional<BattleMatching> matchMakingResult = challengeService.registerNewChallenge(challenge);
+        Optional<BattleMatching> matchMakingResult;
+        matchMakingResult = challengeService.registerNewChallenge(challenge);
 
         if(matchMakingResult.isPresent()){
             // Todo : notification 연동

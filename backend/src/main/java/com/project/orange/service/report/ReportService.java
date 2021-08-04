@@ -7,4 +7,5 @@ import java.util.List;
 public interface ReportService {
     public List<Reports> selectAll();
     public List<Reports> selectAllByReportCategory(Long reportCategoryId);
+    public Reports insert(Reports reports);
 }
