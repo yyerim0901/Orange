@@ -21,6 +21,9 @@ public class Users {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "username")
+    private String username;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "salt")
     private Salt salt;
@@ -39,6 +42,9 @@ public class Users {
 
     @Column(name="profile_image_path")
     private String profileImagePath;
+
+    @Column
+    String role;
 
 
     //일대다 관계는 엔티티를 하나 이상 참조할 수 있으므로, 자바 컬렉션인 Collection, List, Set, Map 중에 하나를 사용해야한다.(p209)

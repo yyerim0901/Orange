@@ -32,7 +32,7 @@ public class AuthServiceTest {
     public void login(){
         RequestLoginUser loginUser = new RequestLoginUser("user222","a1234");
         try{
-            authService.loginUser(loginUser.getNickname(),loginUser.getPassword());
+            authService.loginUser(loginUser.getEmail(),loginUser.getPassword());
             log.info("로그인 성공");
         }catch(Exception e){
             e.printStackTrace();

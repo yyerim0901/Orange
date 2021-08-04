@@ -11,7 +11,6 @@ import lombok.*;
 public class Salt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull()
