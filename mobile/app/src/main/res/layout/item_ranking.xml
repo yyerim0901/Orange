@@ -15,11 +15,11 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="14dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/ranking_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:textColor="@android:color/black"
             android:textSize="8sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,25 +31,36 @@
             android:id="@+id/ranking_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
             android:textColor="@android:color/black"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date"
+            app:layout_constraintStart_toEndOf="@id/ranking_image"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
         <TextView
             android:id="@+id/ranking_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="20dp"
             android:textColor="@android:color/black"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toEndOf="@id/ranking_image"
+            app:layout_constraintTop_toBottomOf="@id/ranking_title"
             tools:text="Description" />
+
+        <ImageView
+            android:id="@+id/heart"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_heart"
+            app:layout_constraintEnd_toStartOf="@id/ranking"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/ranking"

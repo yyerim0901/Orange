@@ -9,7 +9,35 @@
         android:id="@+id/navigation_home"
         android:name="com.keelim.orange.ui.home.HomeFragment"
         android:label="홈"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_otherFragment"
+            app:destination="@id/otherFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_seasonFragment"
+            app:destination="@id/seasonFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_navigation_home_to_fightFragment"
+            app:destination="@id/fightFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_createFragment2"
+            app:destination="@id/createFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -54,4 +82,8 @@
             app:argType="string"
             android:defaultValue="0000" />
     </fragment>
+    <dialog
+        android:id="@+id/createFragment2"
+        android:name="com.keelim.orange.ui.fight.sheet.create.CreateFragment"
+        android:label="CreateFragment" />
 </navigation>

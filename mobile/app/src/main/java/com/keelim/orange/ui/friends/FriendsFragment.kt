@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Fight
 import com.keelim.orange.data.model.Friends
-import com.keelim.orange.databinding.FragmentFightBinding
 import com.keelim.orange.databinding.FragmentFriendsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +38,7 @@ class FriendsFragment
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
-    viewModel.fetchData()
+    viewModel.fetchData("12")
   }
 
   private fun initViews() = with(binding) {
