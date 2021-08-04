@@ -1,4 +1,4 @@
-package com.project.orange.service;
+package com.project.orange.service.challenge;
 
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
@@ -36,6 +36,10 @@ public class ChallengeServiceImpl implements ChallengeService{
         // 전달받은 Challenge 객체로 DB 저장
         Challenges currentChallenge = challengesRepository.save(challenge);
 
+        // 타이머? 어떻게? -> 스케줄러 ??
+        // 멤버 모집 기간 (피드 비활성화) -> battleMatching에서 ChallengeId 검색
+        // 제목/ 소개/ 시작일 -> 날짜/ 남은 일수 -> D-3!/ 남은 인원 : (3/10)
+
         // 현재 저장한 Challenge 정보
         Long currentChallengeId = currentChallenge.getChallengeId();
         Long currentPeriodId = currentChallenge.getPeriodId();
@@ -47,8 +51,8 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         // BattleMatching 테이블에 존재하지 않는 Challenge만 선별
         for(Challenges each : samePeriodChallengesList){
-            if(battleMatchingRepository.findByBlueTeamId(currentChallengeId).isPresent() &&
-                battleMatchingRepository.findByRedTeamId(currentChallengeId).isPresent()){
+            if(battleMatchingRepository.findByBlueTeamChallengeId(currentChallengeId).isEmpty() &&
+                    battleMatchingRepository.findByRedTeamChallengeId(currentChallengeId).isEmpty()){
                 matchmakingPool.add(each);
             }
         }

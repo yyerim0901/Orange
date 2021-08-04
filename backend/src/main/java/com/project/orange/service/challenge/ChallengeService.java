@@ -1,4 +1,4 @@
-package com.project.orange.service;
+package com.project.orange.service.challenge;
 
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;

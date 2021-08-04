@@ -1,8 +1,7 @@
-package com.project.orange.controller;
+package com.project.orange.controller.challenge;
 
 import com.project.orange.entity.challenge.Categories;
-import com.project.orange.service.CategoryService;
-import io.swagger.models.Response;
+import com.project.orange.service.challenge.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.project.orange.service;
+package com.project.orange.service.user;
 
 import com.project.orange.entity.user.Users;
 

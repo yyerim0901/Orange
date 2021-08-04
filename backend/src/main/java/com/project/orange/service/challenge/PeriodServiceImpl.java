@@ -1,8 +1,6 @@
-package com.project.orange.service;
+package com.project.orange.service.challenge;
 
-import com.project.orange.entity.challenge.Challenges;
 import com.project.orange.entity.challenge.Periods;
-import com.project.orange.repository.challenge.ChallengesRepository;
 import com.project.orange.repository.challenge.PeriodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package com.project.orange.controller;
+package com.project.orange.controller.challenge;
 
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
-import com.project.orange.service.ChallengeService;
+import com.project.orange.service.challenge.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

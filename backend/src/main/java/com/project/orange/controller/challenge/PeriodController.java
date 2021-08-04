@@ -1,7 +1,7 @@
-package com.project.orange.controller;
+package com.project.orange.controller.challenge;
 
 import com.project.orange.entity.challenge.Periods;
-import com.project.orange.service.PeriodService;
+import com.project.orange.service.challenge.PeriodService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

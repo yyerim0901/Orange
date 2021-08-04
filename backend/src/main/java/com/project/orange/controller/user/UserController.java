@@ -1,7 +1,7 @@
-package com.project.orange.controller;
+package com.project.orange.controller.user;
 
 import com.project.orange.entity.user.Users;
-import com.project.orange.service.AuthService;
+import com.project.orange.service.user.AuthService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

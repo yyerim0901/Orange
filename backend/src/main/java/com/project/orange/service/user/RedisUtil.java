@@ -1,4 +1,4 @@
-package com.project.orange.service;
+package com.project.orange.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;

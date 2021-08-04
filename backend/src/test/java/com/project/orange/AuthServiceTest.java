@@ -2,7 +2,7 @@ package com.project.orange;
 
 import com.project.orange.entity.user.RequestLoginUser;
 import com.project.orange.entity.user.Users;
-import com.project.orange.service.AuthService;
+import com.project.orange.service.user.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

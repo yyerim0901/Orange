@@ -1,7 +1,7 @@
-package com.project.orange.controller;
+package com.project.orange.controller.badge;
 
 import com.project.orange.entity.badge.Badges;
-import com.project.orange.service.BadgesService;
+import com.project.orange.service.badge.BadgesService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

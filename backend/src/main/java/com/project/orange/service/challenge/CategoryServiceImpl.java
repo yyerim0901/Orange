@@ -1,4 +1,4 @@
-package com.project.orange.service;
+package com.project.orange.service.challenge;
 
 import com.project.orange.entity.challenge.Categories;
 import com.project.orange.repository.challenge.CategoriesRepository;

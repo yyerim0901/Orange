@@ -1,4 +1,4 @@
-package com.project.orange.service;
+package com.project.orange.service.badge;
 
 import com.project.orange.entity.badge.Badges;
 
