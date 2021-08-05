@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.keelim.orange.databinding.ActivitySplashBinding
-import com.keelim.orange.ui.auth.AuthActivity
+import com.keelim.orange.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goNext() {
-        startActivity(Intent(this, AuthActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 }
