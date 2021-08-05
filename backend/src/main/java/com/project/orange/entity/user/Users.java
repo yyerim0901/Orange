@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
+@Data
 @Getter
 @Setter
 @Entity
@@ -21,30 +22,20 @@ public class Users {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "username")
     private String username;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "salt")
     private Salt salt;
 
-    @Column(name = "password")
     private String password;
-
-    @Column(name="email")
     private String email;
-
-    @Column(name="nickname")
     private String nickname;
-
-    @Column(name="token")
     private String token;
-
-    @Column(name="profile_image_path")
     private String profileImagePath;
 
     @Column
-    String role;
+    private String role;
 
     public Users(){}
 
