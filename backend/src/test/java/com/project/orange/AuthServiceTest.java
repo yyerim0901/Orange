@@ -30,7 +30,7 @@ public class AuthServiceTest {
 
     @Test
     public void login(){
-        RequestLoginUser loginUser = new RequestLoginUser("email","password");
+        RequestLoginUser loginUser = new RequestLoginUser("test2","1234");
         try{
             authService.loginUser(loginUser.getEmail(),loginUser.getPassword());
             log.info("로그인 성공");

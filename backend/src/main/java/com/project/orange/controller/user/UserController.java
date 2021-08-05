@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody RequestLoginUser loginUser,
+    public ResponseEntity<?> login(@RequestBody RequestLoginUser loginUser,
                                         HttpServletRequest req,
                                         HttpServletResponse res){
         try {

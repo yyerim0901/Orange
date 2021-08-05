@@ -17,12 +17,12 @@ public class FollowerFollowing {
     private Long followId;
 
     @ManyToOne
-    @JoinColumn//(name = "user_id")
-    private Users fromUser;
+    @JoinColumn(name = "from")
+    private Users from;
 
     @ManyToOne
-    @JoinColumn//(name = "user_id")
-    private Users toUser;
+    @JoinColumn(name = "to")
+    private Users to;
 
 
 //    @Builder
