@@ -8,6 +8,8 @@ import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
 import com.project.orange.repository.notification.NotificationsRepository;
+import com.project.orange.repository.user.UserRepository;
+import com.project.orange.repository.user.UsersChallengesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,10 @@ public class ChallengeServiceImpl implements ChallengeService{
     private BattleMatchingRepository battleMatchingRepository;
     @Autowired
     private NotificationsRepository notificationsRepository;
+    @Autowired
+    private UsersChallengesRepository usersChallengesRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Optional<Challenges> selectByChallengeId(Long challengeId) {
@@ -45,6 +51,13 @@ public class ChallengeServiceImpl implements ChallengeService{
         Challenges currentChallenge = challengesRepository.save(challenge);
 
         // Todo : userschallenges에서 이 챌린지 생성한 사용자를 manger 로 등록할 것!!!
+        UsersChallenges manager;
+        manager = UsersChallenges.builder()
+                .user(userRepository.findById(currentChallenge.getManagerId()).get())
+                .challenge(currentChallenge)
+                .build();
+
+        UsersChallenges currentChallengeManager = usersChallengesRepository.save(manager);
 
         // 타이머? 어떻게? -> 스케줄러 ??
         // 멤버 모집 기간 (피드 비활성화) -> battleMatching 에서 ChallengeId 검색
@@ -72,7 +85,9 @@ public class ChallengeServiceImpl implements ChallengeService{
         if(!matchmakingPool.isEmpty()){
             // matchmaking pool 에서 랜덤으로 Challenge 하나 선택, opponent Challenge 로 선정
             int selectedIdx = (int) (Math.random() * matchmakingPool.size());
-            Challenges opponentChallenge = challengesRepository.getById(matchmakingPool.get(selectedIdx).getChallengeId());
+            Challenges opponentChallenge;
+            opponentChallenge = challengesRepository.findById(matchmakingPool.get(selectedIdx).getChallengeId()).get();
+            currentChallenge = challengesRepository.findById(currentChallengeId).get();
 
             // matchmaking 결과를 DB에 저장
             BattleMatching newBattleMatching = new BattleMatching();
@@ -81,26 +96,38 @@ public class ChallengeServiceImpl implements ChallengeService{
             savedBattleMatching = battleMatchingRepository.save(newBattleMatching);
 
             // notification 생성을 위해 두 챌린지를 List 에 담음
-            List<List<UsersChallenges>> matchedChallenges = new ArrayList<>();
-            matchedChallenges.add(currentChallenge.getUsersChallengesList());
-            matchedChallenges.add(opponentChallenge.getUsersChallengesList());
+//            List<List<UsersChallenges>> matchedChallenges = new ArrayList<>();
+//            matchedChallenges.add(currentChallenge.getUsersChallengesList());
+//            matchedChallenges.add(opponentChallenge.getUsersChallengesList());
 
             // 생성될 notification 을 담을 List
             List<Notifications> notificationsForChallengeMembers;
             notificationsForChallengeMembers = new ArrayList<>();
 
+            List<Challenges> matchedChallenges = new ArrayList<>();
+            matchedChallenges.add(opponentChallenge);
+            matchedChallenges.add(currentChallenge);
+
+            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
+            System.out.println(currentChallenge.getUsersChallengesList() == null);
+            System.out.println(opponentChallenge.getUsersChallengesList() == null);
+            System.out.println(opponentChallenge.getUsersChallengesList().toString());
+            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
+
+
             // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
-//            for(Challenges eachChallenge : matchedChallenges){
-//                for(UsersChallenges eachUsersChallenges : eachChallenge.getUsersChallengesList()){
-//                    Notifications notification = new Notifications();
-//                    notification.setUser(eachUsersChallenges.getUser());
-//                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
-//                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
-//                                                        challengeMatchingAcceptedContent);
-//
-//                    notificationsForChallengeMembers.add(notification);
-//                }
-//            }
+            for(Challenges eachChallenge : matchedChallenges){
+                List<UsersChallenges> usersChallengesList = eachChallenge.getUsersChallengesList();
+                for(UsersChallenges eachUsersChallenges : usersChallengesList){
+                    Notifications notification = new Notifications();
+                    notification.setUser(eachUsersChallenges.getUser());
+                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
+                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
+                                                        challengeMatchingAcceptedContent);
+
+                    notificationsForChallengeMembers.add(notification);
+                }
+            }
 
 //            for(UsersChallenges uc : currentChallenge.getUsersChallengesList()){
 //                Notifications notification = new Notifications();

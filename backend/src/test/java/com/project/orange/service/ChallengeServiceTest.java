@@ -2,8 +2,10 @@ package com.project.orange.service;
 
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
+import com.project.orange.repository.user.UsersChallengesRepository;
 import com.project.orange.service.challenge.ChallengeService;
 import com.project.orange.service.challenge.PeriodService;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -32,6 +35,8 @@ public class ChallengeServiceTest {
     private ChallengesRepository challengesRepository;
     @Autowired
     private BattleMatchingRepository battleMatchingRepository;
+    @Autowired
+    private UsersChallengesRepository usersChallengesRepository;
 
     @Test
     void registerNewChallengeTest(){
@@ -47,11 +52,11 @@ public class ChallengeServiceTest {
         assertEquals(plusDate, 30);
         String profileImagePath = "testPath";
 
-        Long blueTeamManagerId = 1L;
+        Long blueTeamManagerId = 17L;
         String blueTeamTitle = "blueTeamTitle";
         String blueTeamDescribe = "blueTeamDescribe";
 
-        Long redTeamManagerId = 2L;
+        Long redTeamManagerId = 18L;
         String redTeamTitle = "redTeamTitle";
         String redTeamDescribe = "redTeamDescribe";
 
@@ -87,12 +92,17 @@ public class ChallengeServiceTest {
 
         //when
         Optional<BattleMatching> matchMakingResult1 = challengeService.registerNewChallenge(blueTeam);
-        assertEquals(matchMakingResult1.isEmpty(), true);
+        List<UsersChallenges> usersChallengesList1 = usersChallengesRepository.findAll();
+        assertEquals(true, matchMakingResult1.isEmpty());
+        assertEquals(1, usersChallengesList1.size());
 
         Optional<BattleMatching> matchMakingResult2 = challengeService.registerNewChallenge(redTeam);
-        assertEquals(matchMakingResult2.isPresent(), true);
+        List<UsersChallenges> usersChallengesList2 = usersChallengesRepository.findAll();
+        assertEquals(true, matchMakingResult2.isPresent());
+        assertEquals(2, usersChallengesList2.size());
 
         //then
+        usersChallengesRepository.deleteAll();
         battleMatchingRepository.deleteAll();
         challengesRepository.deleteAll();
     }
