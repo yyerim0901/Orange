@@ -75,9 +75,7 @@
                     ></v-text-field>
                   </template>
                 </v-slider>
-
                 <DateForm />
-
                 <validation-provider
                   v-slot="{ errors }"
                   name="챌린지 내용"
@@ -130,9 +128,6 @@ export default {
   },
   data: () => ({
     challengename: null,
-    username: null,
-    nickname: null,
-    password: null,
     challengetext: null,
     select: null,
     items: [
@@ -141,14 +136,14 @@ export default {
       '영양제',
     ],
     rules: [
-      v => 2 <= v <= 50 || '2-50명 제한',
+      v => v <= 50 || '50명 제한',
     ],
   }),
   methods: {
     async createPost () {
       const result = await this.$refs.observer.validate()
       if (result) {
-        alert('가입 완료')
+        alert('챌린지 생성 완료')
       }
     }
   }
