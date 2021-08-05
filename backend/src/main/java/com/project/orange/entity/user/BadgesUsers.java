@@ -24,6 +24,9 @@ public class BadgesUsers {
     @Column(name = "badge_count")
     private Integer badgeCount;
 
+    @Column(name = "represent_badge")
+    private boolean representBadge;
+
 //    테스트를 위한 코드
 //    @Column(name = "badge_id")
 //    private Long badgeId;

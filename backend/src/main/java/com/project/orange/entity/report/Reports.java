@@ -1,6 +1,6 @@
 package com.project.orange.entity.report;
 
-import com.project.orange.entity.user.Users;
+import com.project.orange.entity.article.Articles;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,8 +19,8 @@ public class Reports {
     private String reportContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @JoinColumn(name = "article_id")
+    private Articles article;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reportsList")

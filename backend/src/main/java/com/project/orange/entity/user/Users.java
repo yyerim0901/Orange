@@ -53,9 +53,6 @@ public class Users {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<Notifications> notificationsList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)//하나의 user가 여러 개의 report를 가진다.
-    List<Reports> reportsList = new ArrayList<>();
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY) //한 명의 user는 여러 개의 comment를 가진다.
     List<Comments> commentsList = new ArrayList<>();
 

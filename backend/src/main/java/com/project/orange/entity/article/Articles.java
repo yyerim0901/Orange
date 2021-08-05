@@ -49,6 +49,4 @@ public class Articles {
 
     @Column(name = "verified")
     private Boolean verified;
-
-
 }
