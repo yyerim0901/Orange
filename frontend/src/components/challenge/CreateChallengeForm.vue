@@ -129,6 +129,7 @@ export default {
   data: () => ({
     challengename: null,
     challengetext: null,
+    slider: null,
     select: null,
     items: [
       '운동',

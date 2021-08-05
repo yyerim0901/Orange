@@ -2,6 +2,7 @@
   <div>
     <FeedForm />
   </div>
+  
 </template>
 
 <script>

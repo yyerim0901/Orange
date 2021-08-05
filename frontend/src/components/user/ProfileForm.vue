@@ -11,7 +11,7 @@
         <v-col>
         <v-card
           outlined>
-          이름
+          {{ username }}
         </v-card> 
         </v-col>
         <v-col>
@@ -19,7 +19,7 @@
             <v-col cols="auto">
               <v-card
                 outlined>
-                뱃지
+                {{ bestbadge }}
               </v-card>
             </v-col>
             <v-col cols="auto">
@@ -27,19 +27,24 @@
             </v-col>
           </v-row>
         </v-col>
+        <v-divider class="ma-4"></v-divider>
         <v-col>
-          <v-row justify="space-between">
-            <v-col cols="auto">
-              Join  | 
-            </v-col>
-            <v-col cols="auto">
-              Followers  |
-            </v-col>
-            <v-col cols="auto">
-              Following 
-            </v-col>
-          </v-row>
+        <v-container class="d-flex flex-row justify-space-between text-center">
+          <v-flex>
+            <div class="subtitle-2">{{ join }}</div>
+            <div class="caption grey--text">JOIN</div>
+          </v-flex>
+          <v-flex>
+            <div class="subtitle-2">{{ followers }}</div>
+            <div class="caption grey--text">FOLLWERS</div>
+          </v-flex>
+          <v-flex>
+            <div class="subtitle-2">{{ followings }}</div>
+            <div class="caption grey--text">FOLLOWING</div>
+          </v-flex>
+        </v-container>
         </v-col>
+        <v-divider class="ma-4"></v-divider>
       </v-col>
     </v-row>
   </v-container>
@@ -52,6 +57,15 @@ export default {
   name: 'ProfileForm',
   components: {
     BadgeDialog,
+  },
+  data() {
+    return {
+      join: '784',
+      followers: '784',
+      followings: '784',
+      username: 'username',
+      bestbadge: 'bestbadge'
+    }
   }
 }
 </script>

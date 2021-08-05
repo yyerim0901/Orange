@@ -43,7 +43,7 @@ const routes = [
       {
         path: 'challenge',
         name: 'ChallengeFeed',
-        component: () => import('@/views/feed/ChallengeFeed.vue')
+        component: () => import('@/views/feed/ChallengeFeed.vue'),
       },
     ]
   },
