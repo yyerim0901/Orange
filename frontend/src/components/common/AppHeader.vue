@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="d-flex justify-content-end mx-3">
+      <v-btn text @click="goChall">
+        챌린지피드(임시)
+      </v-btn>
       <v-btn text>
-      고객센터
+        고객센터
       </v-btn>
       <v-btn 
         text
@@ -21,6 +24,9 @@ export default {
     goLogin() {
       this.$router.push({path:'/authentication/login'}).catch(()=> {});
     },
+    goChall() {
+      this.$router.push({path:'/challenge'}).catch(()=>{});
+    }
   }
 }
 </script>
