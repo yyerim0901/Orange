@@ -1,6 +1,5 @@
 package com.project.orange.entity.user;
 
-import com.project.orange.entity.user.Users;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,11 +23,4 @@ public class FollowerFollowing {
     @JoinColumn//(name = "user_id")
     private Users toUser;
 
-
-//    @Builder
-//    public FollowerFollowing(Long followId, Long from, Long to) {
-//        this.followId = followId;
-//        this.from = from;
-//        this.to = to;
-//    }
 }
