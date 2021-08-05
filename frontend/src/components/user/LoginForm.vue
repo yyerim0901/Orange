@@ -54,8 +54,7 @@
                   class="mt-6"
                   type="submit"
                   block
-                  x-large
-                  rounded
+                  large
                   color="primary"
                   :disabled="invalid"
                 >

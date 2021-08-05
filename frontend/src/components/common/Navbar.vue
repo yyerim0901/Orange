@@ -11,6 +11,23 @@
       </b-navbar-brand>
       <b-navbar-nav class="d-flex">
         <b-nav-item>
+          <v-autocomplete
+            prepend-icon="mdi-magnify"
+            v-model="model"
+            :loading="isloading"
+            :items="items"
+            :search-input.sync="search"
+            cache-items
+            class="mx-4"
+            flat
+            hide-no-data
+            hide-details
+            hide-selected
+            label="야너두 할 수 있어!"
+            solo
+          ></v-autocomplete>
+        </b-nav-item>
+        <b-nav-item>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -60,6 +77,14 @@ export default {
   components: {
     NotificationForm,
   },
+  data () {
+    return {
+      isloading: false,
+      items: [],
+      search: null,
+      model: null,
+    }
+  },
   methods: {
     goProfile() {
       this.$router.push({path:'/profile'}).catch(()=> {});
@@ -70,7 +95,19 @@ export default {
     goCreateChallenge() {
       this.$router.push({path:'/create-challenge'}).catch(()=> {});
     }
-  }
+  },
+  // api 연결하고 사용할거임
+  // watch: {
+  //   model (val) {
+  //     if (val != null) this.tab = 0
+  //     else this.tab = null
+  //   },
+  //   search (val) {
+  //     if (this.items.length > 0) return
+
+  //     this.isLoading = true
+  //   }
+  // }
 }
 </script>
 
