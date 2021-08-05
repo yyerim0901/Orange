@@ -96,6 +96,7 @@ export default {
       this.$router.push({path:'/create-challenge'}).catch(()=> {});
     }
   },
+  // api 연결하고 사용할거임
   // watch: {
   //   model (val) {
   //     if (val != null) this.tab = 0
