@@ -64,5 +64,9 @@ class HomeFragment : Fragment() {
     btn7.setOnClickListener {
       findNavController().navigate(R.id.seasonFragment)
     }
+
+    btn8.setOnClickListener {
+      findNavController().navigate(R.id.searchDetailFragment)
+    }
   }
 }

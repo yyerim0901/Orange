@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_navigation_home_to_createFragment2"
             app:destination="@id/createFragment2" />
+        <action
+            android:id="@+id/action_navigation_home_to_searchDetailFragment"
+            app:destination="@id/searchDetailFragment" />
     </fragment>
 
     <fragment
@@ -86,4 +89,13 @@
         android:id="@+id/createFragment2"
         android:name="com.keelim.orange.ui.fight.sheet.create.CreateFragment"
         android:label="CreateFragment" />
+    <fragment
+        android:id="@+id/searchDetailFragment"
+        android:name="com.keelim.orange.ui.search.SearchDetailFragment"
+        android:label="fragment_search_detail"
+        tools:layout="@layout/fragment_search_detail" >
+        <action
+            android:id="@+id/action_searchDetailFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>
