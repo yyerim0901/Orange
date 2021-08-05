@@ -11,7 +11,7 @@ import lombok.*;
 public class Salt {
 
     @Id
-//    @GeneratedValue
+    @GeneratedValue
     private int id;
 
     @NotNull()
