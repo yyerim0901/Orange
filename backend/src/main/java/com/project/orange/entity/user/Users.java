@@ -56,12 +56,6 @@ public class Users {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY) //한 명의 user는 여러 개의 comment를 가진다.
     List<Comments> commentsList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY)
-    List<FollowerFollowing> followerList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "toUser", fetch = FetchType.LAZY)
-    List<FollowerFollowing> followingList = new ArrayList<>();
-
     @OneToMany(mappedBy = "user")
     List<Articles> articlesList = new ArrayList<>();
 
@@ -70,5 +64,11 @@ public class Users {
 
     @OneToMany(mappedBy = "user")
     List<UsersChallenges> usersChallengesList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "from", fetch = FetchType.LAZY)
+    List<FollowerFollowing> followerList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "to", fetch = FetchType.LAZY)
+    List<FollowerFollowing> followingList = new ArrayList<>();
 
 }
