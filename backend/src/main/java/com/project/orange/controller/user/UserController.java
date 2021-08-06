@@ -64,7 +64,6 @@ public class UserController {
             res.addCookie(refreshToken);
             return new ResponseEntity<>("success",HttpStatus.OK);
         } catch (Exception e){
-            //이거 해결해야함
             return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
         }
     }

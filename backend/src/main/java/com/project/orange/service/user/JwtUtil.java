@@ -63,7 +63,7 @@ public class JwtUtil {
         return doGenerateToken(user.getEmail(), REFRESH_TOKEN_VALIDATION_SECOND);
     }
 
-    //토큰을 생성, 페이로드에 담길 값은 username => email로 변경..?
+    //토큰을 생성, 페이로드에 담길 값은 username => username || email
     public String doGenerateToken(String username, long expireTime) {
 
         Claims claims = Jwts.claims();
