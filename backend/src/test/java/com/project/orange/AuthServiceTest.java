@@ -19,9 +19,10 @@ public class AuthServiceTest {
     @Test
     public void signUp(){
         Users user = new Users();
-        user.setEmail("email");
-        user.setNickname("springtest");
-        user.setPassword("password");
+        user.setEmail("test1");
+        user.setNickname("test1");
+        user.setPassword("1234");
+        user.setUsername("test1");
 
         authService.signUpUser(user);
     }
