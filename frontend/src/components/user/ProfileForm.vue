@@ -31,15 +31,16 @@
         <v-col>
         <v-container class="d-flex flex-row justify-space-between text-center">
           <v-flex>
-            <div class="subtitle-2">{{ join }}</div>
-            <div class="caption grey--text">JOIN</div>
+            <div>
+              <div class="subtitle-2">{{ join }}</div>
+              <div class="caption grey--text">JOIN</div>
+            </div>
           </v-flex>
           <v-flex>
             <FollowerDialog />
           </v-flex>
           <v-flex>
-            <div class="subtitle-2">{{ followings }}</div>
-            <div class="caption grey--text">FOLLOWING</div>
+            <FollowingDialog />
           </v-flex>
         </v-container>
         </v-col>
@@ -52,17 +53,18 @@
 <script>
 import BadgeDialog from '@/components/user/BadgeDialog.vue'
 import FollowerDialog from '@/components/user/FollowerDialog.vue'
+import FollowingDialog from '@/components/user/FollowingDialog.vue'
 
 export default {
   name: 'ProfileForm',
   components: {
     BadgeDialog,
     FollowerDialog,
+    FollowingDialog,
   },
   data() {
     return {
       join: '784',
-      followings: '784',
       username: 'username',
       bestbadge: 'bestbadge'
     }
