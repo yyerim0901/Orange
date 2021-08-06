@@ -35,8 +35,7 @@
             <div class="caption grey--text">JOIN</div>
           </v-flex>
           <v-flex>
-            <div class="subtitle-2">{{ followers }}</div>
-            <div class="caption grey--text">FOLLWERS</div>
+            <FollowerDialog />
           </v-flex>
           <v-flex>
             <div class="subtitle-2">{{ followings }}</div>
@@ -52,16 +51,17 @@
 
 <script>
 import BadgeDialog from '@/components/user/BadgeDialog.vue'
+import FollowerDialog from '@/components/user/FollowerDialog.vue'
 
 export default {
   name: 'ProfileForm',
   components: {
     BadgeDialog,
+    FollowerDialog,
   },
   data() {
     return {
       join: '784',
-      followers: '784',
       followings: '784',
       username: 'username',
       bestbadge: 'bestbadge'
