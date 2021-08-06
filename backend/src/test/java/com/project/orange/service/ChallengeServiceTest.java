@@ -49,7 +49,7 @@ public class ChallengeServiceTest {
         int currentMembers = 1;
         LocalDateTime now = LocalDateTime.now();
         int plusDate = periodService.selectOne(periodId).get().getPeriodDays();
-        assertEquals(plusDate, 30);
+        assertEquals(15, plusDate);
         String profileImagePath = "testPath";
 
         Long blueTeamManagerId = 17L;

@@ -21,7 +21,7 @@ import java.util.Optional;
 import static com.project.orange.management.Constants.*;
 
 @Service
-@Transactional
+//@Transactional
 public class ChallengeServiceImpl implements ChallengeService{
 
     @Autowired
@@ -111,7 +111,8 @@ public class ChallengeServiceImpl implements ChallengeService{
             System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
             System.out.println(currentChallenge.getUsersChallengesList() == null);
             System.out.println(opponentChallenge.getUsersChallengesList() == null);
-            System.out.println(opponentChallenge.getUsersChallengesList().toString());
+            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
+            //System.out.println(opponentChallenge.getUsersChallengesList().toString());
             System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
 
 
@@ -150,8 +151,8 @@ public class ChallengeServiceImpl implements ChallengeService{
 //            }
 //
 //
-//            // 생성한 notification 을 DB에 저장
-//            notificationsRepository.saveAll(notificationsForChallengeMembers);
+            // 생성한 notification 을 DB에 저장
+            notificationsRepository.saveAll(notificationsForChallengeMembers);
         }
 
         return Optional.ofNullable(savedBattleMatching);
