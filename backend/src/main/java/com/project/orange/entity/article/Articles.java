@@ -28,6 +28,7 @@ public class Articles {
     private List<Comments> commentsList = new ArrayList<>();
 
 //    피드에서 챌린지와 유저에 접근
+    // one to many eager
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "challenge_id")
     private Challenges challenge;

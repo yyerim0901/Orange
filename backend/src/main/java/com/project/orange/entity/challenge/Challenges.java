@@ -62,6 +62,6 @@ public class Challenges {
     @OneToMany(mappedBy = "challenge", fetch = FetchType.EAGER) // 주체가 아닌 애가 주인을 가리키기 위해서 쓰는 거
     private List<UsersChallenges> usersChallengesList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "challenge", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "challenge")
     private List<Articles> articlesList = new ArrayList<>();
 }

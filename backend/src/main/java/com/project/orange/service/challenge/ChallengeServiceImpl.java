@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,9 +22,10 @@ import java.util.Optional;
 import static com.project.orange.management.Constants.*;
 
 @Service
-//@Transactional
+@Transactional
 public class ChallengeServiceImpl implements ChallengeService{
 
+    // field injection (생성자 주입으로 바꾸는게 더 깔끔하다!)
     @Autowired
     private ChallengesRepository challengesRepository;
     @Autowired
@@ -34,6 +36,9 @@ public class ChallengeServiceImpl implements ChallengeService{
     private UsersChallengesRepository usersChallengesRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Override
     public Optional<Challenges> selectByChallengeId(Long challengeId) {
@@ -48,8 +53,10 @@ public class ChallengeServiceImpl implements ChallengeService{
     @Override
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
+        // entity manager 를 autowire 로 불러와서 flush 혹은 clear
         Challenges currentChallenge = challengesRepository.save(challenge);
-
+        entityManager.flush(); // DB에 반영 (transaction 마지막에 flush 해줌)
+        entityManager.clear(); //
         // Todo : userschallenges에서 이 챌린지 생성한 사용자를 manger 로 등록할 것!!!
         UsersChallenges manager;
         manager = UsersChallenges.builder()
@@ -87,8 +94,9 @@ public class ChallengeServiceImpl implements ChallengeService{
             int selectedIdx = (int) (Math.random() * matchmakingPool.size());
             Challenges opponentChallenge;
             opponentChallenge = challengesRepository.findById(matchmakingPool.get(selectedIdx).getChallengeId()).get();
-            currentChallenge = challengesRepository.findById(currentChallengeId).get();
-
+            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
+            currentChallenge = challengesRepository.findById(currentChallengeId).get(); // 영속성 컨텍스트 안에 이미 있어서 DB를 거친게 아니고 그냥 있는걸 가져옴
+            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
             // matchmaking 결과를 DB에 저장
             BattleMatching newBattleMatching = new BattleMatching();
             newBattleMatching.setBlueTeam(currentChallenge);
@@ -112,11 +120,11 @@ public class ChallengeServiceImpl implements ChallengeService{
             System.out.println(currentChallenge.getUsersChallengesList() == null);
             System.out.println(opponentChallenge.getUsersChallengesList() == null);
             System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
-            //System.out.println(opponentChallenge.getUsersChallengesList().toString());
+            System.out.println(opponentChallenge.getUsersChallengesList().toString());
             System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
 
-
             // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
+            // fetch join ??? -> 한번에 받아온다? JPQL ! N+1 문제 ! <<< 면접 단골 ㄷㄷㄷ
             for(Challenges eachChallenge : matchedChallenges){
                 List<UsersChallenges> usersChallengesList = eachChallenge.getUsersChallengesList();
                 for(UsersChallenges eachUsersChallenges : usersChallengesList){
