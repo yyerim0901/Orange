@@ -19,11 +19,10 @@ public class AuthServiceTest {
     @Test
     public void signUp(){
         Users user = new Users();
-        user.setEmail("email11");
-        user.setNickname("test22");
-        user.setPassword("password");
-        user.setProfileImagePath("test");
-        user.setToken("testuser");
+        user.setEmail("test1");
+        user.setNickname("test1");
+        user.setPassword("1234");
+        user.setUsername("test1");
 
         authService.signUpUser(user);
     }
