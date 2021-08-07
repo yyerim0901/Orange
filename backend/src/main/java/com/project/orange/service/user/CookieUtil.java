@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CookieUtil {
 
     //token은 cookie 형태로 저장될 것이다.
-
     public Cookie createCookie(String cookieName, String value){
         Cookie token = new Cookie(cookieName,value);
         token.setHttpOnly(true);

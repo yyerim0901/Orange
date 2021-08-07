@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 //UserDetailService : 유저의 정보를 가져오는 인터페이스,
-//                  Spring Security에서 유저의 정보를 불러오기 위해서 구현해야하는 인터페이스
+//Spring Security에서 유저의 정보를 불러오기 위해서 구현해야하는 인터페이스
 
 //사용자의 정보를 담은 객체를 만든 뒤 (MyUserDetails) DB에서 유저 정보를 직접 가져오자.
 
