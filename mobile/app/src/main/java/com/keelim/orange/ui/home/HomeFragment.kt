@@ -1,5 +1,6 @@
 package com.keelim.orange.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keelim.orange.R
 import com.keelim.orange.databinding.FragmentHomeBinding
+import com.keelim.orange.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,6 +69,10 @@ class HomeFragment : Fragment() {
 
     btn8.setOnClickListener {
       findNavController().navigate(R.id.searchDetailFragment)
+    }
+
+    btn9.setOnClickListener {
+      requireActivity().startActivity(Intent(requireContext(), AuthActivity::class.java))
     }
   }
 }
