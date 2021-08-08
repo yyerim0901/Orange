@@ -13,12 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
-
+        <activity
+            android:name=".ui.splash.TutorialActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -41,7 +41,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="true" />
@@ -65,7 +64,6 @@
             <meta-data
                 android:name="com.keelim.orange.initialize.CoilInitializer"
                 android:value="androidx.startup" />
-
         </provider>
     </application>
 

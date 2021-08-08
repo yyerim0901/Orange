@@ -34,7 +34,18 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goNext() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        val pref = getSharedPreferences("checkFirst", MODE_PRIVATE)
+        val checkFirst = pref.getBoolean("checkFirst", false)
+        if (!checkFirst) {
+            val editor = pref.edit().apply(){
+                putBoolean("checkFirst", true)
+                apply()
+            }
+            startActivity(Intent(this, TutorialActivity::class.java))
+            finish()
+        } else {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 }
