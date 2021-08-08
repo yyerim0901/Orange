@@ -66,10 +66,6 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         UsersChallenges currentChallengeManager = usersChallengesRepository.save(manager);
 
-        // 타이머? 어떻게? -> 스케줄러 ??
-        // 멤버 모집 기간 (피드 비활성화) -> battleMatching 에서 ChallengeId 검색
-        // 제목/ 소개/ 시작일 -> 날짜/ 남은 일수 -> D-3!/ 남은 인원 : (3/10)
-
         // 현재 저장한 Challenge 정보
         Long currentChallengeId = currentChallenge.getChallengeId();
         Long currentPeriodId = currentChallenge.getPeriodId();
@@ -94,19 +90,12 @@ public class ChallengeServiceImpl implements ChallengeService{
             int selectedIdx = (int) (Math.random() * matchmakingPool.size());
             Challenges opponentChallenge;
             opponentChallenge = challengesRepository.findById(matchmakingPool.get(selectedIdx).getChallengeId()).get();
-            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
             currentChallenge = challengesRepository.findById(currentChallengeId).get(); // 영속성 컨텍스트 안에 이미 있어서 DB를 거친게 아니고 그냥 있는걸 가져옴
-            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
             // matchmaking 결과를 DB에 저장
             BattleMatching newBattleMatching = new BattleMatching();
             newBattleMatching.setBlueTeam(currentChallenge);
             newBattleMatching.setRedTeam(opponentChallenge);
             savedBattleMatching = battleMatchingRepository.save(newBattleMatching);
-
-            // notification 생성을 위해 두 챌린지를 List 에 담음
-//            List<List<UsersChallenges>> matchedChallenges = new ArrayList<>();
-//            matchedChallenges.add(currentChallenge.getUsersChallengesList());
-//            matchedChallenges.add(opponentChallenge.getUsersChallengesList());
 
             // 생성될 notification 을 담을 List
             List<Notifications> notificationsForChallengeMembers;
@@ -115,13 +104,6 @@ public class ChallengeServiceImpl implements ChallengeService{
             List<Challenges> matchedChallenges = new ArrayList<>();
             matchedChallenges.add(opponentChallenge);
             matchedChallenges.add(currentChallenge);
-
-            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
-            System.out.println(currentChallenge.getUsersChallengesList() == null);
-            System.out.println(opponentChallenge.getUsersChallengesList() == null);
-            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
-            System.out.println(opponentChallenge.getUsersChallengesList().toString());
-            System.out.println("@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#@#");
 
             // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
             // fetch join ??? -> 한번에 받아온다? JPQL ! N+1 문제 ! <<< 면접 단골 ㄷㄷㄷ
@@ -138,27 +120,6 @@ public class ChallengeServiceImpl implements ChallengeService{
                 }
             }
 
-//            for(UsersChallenges uc : currentChallenge.getUsersChallengesList()){
-//                Notifications notification = new Notifications();
-//                notification.setUser(uc.getUser());
-//                notification.setNotificationTitle(challengeMatchingAcceptedTitle);
-//                notification.setNotificationContent(currentChallenge.getChallengeTitle() +
-//                        challengeMatchingAcceptedContent);
-//
-//                notificationsForChallengeMembers.add(notification);
-//            }
-//
-//            for(UsersChallenges uc : opponentChallenge.getUsersChallengesList()){
-//                Notifications notification = new Notifications();
-//                notification.setUser(uc.getUser());
-//                notification.setNotificationTitle(challengeMatchingAcceptedTitle);
-//                notification.setNotificationContent(opponentChallenge.getChallengeTitle() +
-//                        challengeMatchingAcceptedContent);
-//
-//                notificationsForChallengeMembers.add(notification);
-//            }
-//
-//
             // 생성한 notification 을 DB에 저장
             notificationsRepository.saveAll(notificationsForChallengeMembers);
         }
