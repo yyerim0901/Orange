@@ -5,12 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.keelim.orange.R
-import com.keelim.orange.common.toast
+import com.google.android.material.tabs.TabLayoutMediator
 import com.keelim.orange.databinding.ActivityTutorialBinding
 import com.keelim.orange.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class TutorialActivity : AppCompatActivity() {
@@ -22,33 +20,36 @@ class TutorialActivity : AppCompatActivity() {
         initViews()
     }
 
-    private fun initViews() = with(binding){
+    private fun initViews() = with(binding) {
         viewpager.adapter = ViewPager2Adapter()
         btnSkip.setOnClickListener {
             goNext()
         }
         btnNext.setOnClickListener {
-            val current = viewpager.currentItem+1
-            if(current <4){
+            val current = viewpager.currentItem + 1
+            if (current < 4) {
                 viewpager.currentItem = current
-            } else{
+            } else {
                 goNext()
             }
         }
+        TabLayoutMediator(tabIndicator, viewpager) { tab, position ->
+        }.attach()
     }
 
-    private fun goNext(){
+    private fun goNext() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
-    inner class ViewPager2Adapter: FragmentStateAdapter(this){
+    inner class ViewPager2Adapter : FragmentStateAdapter(this) {
         private val fragments = listOf<Fragment>(
             TutorialFragment(),
             TutorialFragment(),
             TutorialFragment(),
             TutorialFragment(),
         )
+
         override fun getItemCount(): Int {
             return fragments.size
         }
