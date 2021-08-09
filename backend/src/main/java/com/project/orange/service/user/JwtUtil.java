@@ -32,7 +32,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    //토큰이 유효한 토큰인지 검사한 후, 토큰에 담긴 payload값을 가져온다.
+    //토큰이 유효한 토큰인지 검사한 후, 토큰에 담긴 payload값을 가져온다.(토큰 해석)
     public Claims extractAllClaims(String token) throws ExpiredJwtException{
         return Jwts.parserBuilder()
                     .setSigningKey(getSigningKey(SECRET_KEY))

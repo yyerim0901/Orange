@@ -44,7 +44,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         out.print(jsonResponse);
 
     }
-
+    
+    //얜 위에서 쓰는건데 안 써버리니까 지워도 되려나
     private boolean hasRole(Collection<GrantedAuthority> authorites, String role){
         return authorites.contains(new SimpleGrantedAuthority(role));
     }

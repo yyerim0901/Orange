@@ -1,13 +1,17 @@
 package com.project.orange;
 
 import com.project.orange.entity.user.RequestLoginUser;
-import com.project.orange.entity.user.Salt;
 import com.project.orange.entity.user.Users;
 import com.project.orange.service.user.AuthService;
+import com.project.orange.service.user.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Slf4j
@@ -16,13 +20,18 @@ public class AuthServiceTest {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Autowired
+    RedisTemplate redisTemplate;
+
     @Test
     public void signUp(){
         Users user = new Users();
-        user.setEmail("test2");
-        user.setNickname("test2");
+        user.setEmail("jwtTest");
+        user.setNickname("jwtTest");
         user.setPassword("1234");
-        user.setUsername("test2");
 
         authService.signUpUser(user);
     }
@@ -37,6 +46,26 @@ public class AuthServiceTest {
             e.printStackTrace();
         }
     }
+    //요것도 성공 redis.cli에 값 매우 잘 들어감
+    @Test
+    void setData(){
+        redisUtil.setDataExpire("11","11",20);
+    }
 
+    //성공하면 redis와 연결 잘 된 것것
+   @Test
+    void redisConnectionTest() {
+        final String key = "a";
+        final String data = "1";
+
+        final ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(key, data);
+
+        final String result = valueOperations.get(key);
+        assertEquals(data, result);
+    }
+    //테스트 진행 후 "\xac\xed\x00\x05t\x00\x01a" 이런 값이 들어감
+    //자바가 serialize하는 과정에서 "1"라는 데이터만 저장하는 것이 아니라 데이터의 클래스 정보도 추가로 저장하기 때문
+    //redis.cli 에서 get "\xac\xed\x00\x05t\x00\x01a" 하면 "\xac\xed\x00\x05t\x00\x011"로 잘 출력 됨
 
 }
