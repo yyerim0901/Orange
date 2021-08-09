@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ArticlesService {
     public Optional<Articles> selectOne(Long article);
     public List<Articles> selectAll();
+    public Optional<Articles> createArticle(Articles article);
 }

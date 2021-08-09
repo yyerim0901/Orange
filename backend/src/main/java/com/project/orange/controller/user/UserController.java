@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @Slf4j
 //@CrossOrigin("*")
-@RequestMapping("/user")
+@RequestMapping("api/user")
 public class UserController {
 
     @Autowired

@@ -27,7 +27,7 @@ public class Badges {
     private String badgeImagePath;
 
 //    뱃지에서 뱃지 타입에 접근
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "badge_type_id")
     private BadgeTypes badgeType;
 }

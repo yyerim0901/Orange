@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/battle-matching")
+@RequestMapping("api/battle-matching")
 public class BattleMatchingController {
 
     @Autowired

@@ -4,9 +4,13 @@ import com.project.orange.entity.user.Salt;
 import com.project.orange.entity.user.Users;
 import com.project.orange.repository.user.SaltRepository;
 import com.project.orange.repository.user.UserRepository;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.UUID;
 
 
 @Service
@@ -17,10 +21,10 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
 
     @Autowired
-    private SaltRepository saltRepository;
+    private SaltUtil saltUtil;
 
     @Autowired
-    private SaltUtil saltUtil;
+    private RedisUtil redisUtil;
 
     @Override
     public void signUpUser(Users user){

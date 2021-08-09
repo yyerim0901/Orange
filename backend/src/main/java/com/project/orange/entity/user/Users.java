@@ -1,5 +1,7 @@
 package com.project.orange.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.orange.entity.notification.Notifications;
 import com.project.orange.entity.report.Reports;
 import com.project.orange.entity.article.Articles;
@@ -11,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-@Data
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "userId")
 public class Users {
 
     @Id

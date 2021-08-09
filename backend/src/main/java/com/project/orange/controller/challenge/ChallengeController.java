@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/challenge")
 public class ChallengeController {
 
     @Autowired
     private ChallengeService challengeService;
 
-    @GetMapping("/api/challenge/{challengeId}")
+    @GetMapping("/{challengeId}")
     public ResponseEntity<Challenges> selectOne(@PathVariable Long challengeId){
         Optional<Challenges> challenge;
         challenge = challengeService.selectByChallengeId(challengeId);
@@ -29,7 +30,7 @@ public class ChallengeController {
         }
     }
 
-    @GetMapping("/api/challenge/list")
+    @GetMapping("/list")
     public ResponseEntity<List<Challenges>> selectAll(){
         List<Challenges> list;
         list = challengeService.selectAll();
@@ -40,7 +41,7 @@ public class ChallengeController {
         }
     }
 
-    @PostMapping("/api/challenge/register")
+    @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody Challenges challenge){
         Optional<BattleMatching> matchMakingResult;
         matchMakingResult = challengeService.registerNewChallenge(challenge);
