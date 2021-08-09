@@ -10,6 +10,7 @@ import java.util.Collection;
 //UserDetails : Spring Security에서 사용자의 정보를 담는 인터페이스
 //이 인터페이스를 구현하게 되면 Spring Security에서 구현한 클래스를 사용자 정보로 인식하고 인증 작업
 
+//User에 해당하는 Model에 userDetails를 구현하여 SpringSecurity가 이해할 수 있는 형태의 User로 만들어주어야 함.
 //이 클래스는 사용자의 정보를 모두 담아두는 클래스
 @Getter
 public class MyUserDetails implements UserDetails, Serializable {
