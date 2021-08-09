@@ -44,7 +44,7 @@ public class ChallengeServiceTest {
         int currentMembers = 1;
         LocalDateTime now = LocalDateTime.now();
         int plusDate = periodService.selectOne(periodId).get().getPeriodDays();
-        assertEquals(plusDate, 30);
+        assertEquals(plusDate, 15);
         String profileImagePath = "testPath";
 
         Long blueTeamManagerId = 1L;
@@ -93,7 +93,7 @@ public class ChallengeServiceTest {
         assertEquals(matchMakingResult2.isPresent(), true);
 
         //then
-        battleMatchingRepository.deleteAll();
-        challengesRepository.deleteAll();
+//        battleMatchingRepository.deleteAll();
+//        challengesRepository.deleteAll();
     }
 }
