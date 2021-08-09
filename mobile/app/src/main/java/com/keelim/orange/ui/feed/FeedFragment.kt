@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Fight
 import com.keelim.orange.data.model.Filter
@@ -25,6 +27,11 @@ class FeedFragment : Fragment() {
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<FeedViewModel>()
+    private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid ->
+        findNavController().navigate(
+            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid)
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -94,6 +101,7 @@ class FeedFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
+        searchRecycler.adapter = searchRecyclerAdapter
     }
 
     private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {

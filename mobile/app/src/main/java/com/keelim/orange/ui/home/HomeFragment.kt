@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     }
 
     btn3.setOnClickListener{
-      findNavController().navigate(R.id.createFragment)
+      findNavController().navigate(R.id.createFragment2)
     }
 
     btn4.setOnClickListener{
@@ -63,6 +63,10 @@ class HomeFragment : Fragment() {
 
     btn7.setOnClickListener {
       findNavController().navigate(R.id.seasonFragment)
+    }
+
+    btn8.setOnClickListener {
+      findNavController().navigate(R.id.searchDetailFragment)
     }
   }
 }

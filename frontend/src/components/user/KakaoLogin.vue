@@ -1,7 +1,8 @@
 <template>
     <img
-        class="kakao_btn"
+        class="kakao_btn my-3"
         src="@/assets/images/kakao_login_medium_wide.png"
+        width="365px"
         @click="loginWithKakao"
     />
 </template>

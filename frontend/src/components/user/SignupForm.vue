@@ -36,6 +36,23 @@
 
                 <validation-provider
                   v-slot="{ errors }"
+                  name="이름"
+                  :rules="{
+                    required: true,
+                    kor: true,
+                  }"
+                >
+                  <v-text-field
+                    v-model="username"
+                    label="이름"
+                    clearable
+                    prepend-icon="mdi-account"
+                    :error-messages="errors"
+                  />
+                </validation-provider>
+
+                <validation-provider
+                  v-slot="{ errors }"
                   name="닉네임"
                   :rules="{
                     required: true,
@@ -125,6 +142,7 @@ export default {
   name: 'SignupForm',
   data: () => ({
     email: null,
+    username: null,
     nickname: null,
     password: null,
     passwordConfirm: null,

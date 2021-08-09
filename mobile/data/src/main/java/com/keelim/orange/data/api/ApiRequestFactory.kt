@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class ApiRequestFactory @Inject constructor() {
-  private val baseUrl = ""
+  private val baseUrl = "https://www.naver.com"
 
   val retrofit = Retrofit.Builder()
     .baseUrl(baseUrl)

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:background="?attr/colorPrimarySurface"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:theme="@style/Orange"
+    app:paddingLeftSystemWindowInsets="true"
+    app:paddingRightSystemWindowInsets="true"
+    app:paddingTopSystemWindowInsets="true"
+    tools:context=".ui.search.SearchDetailFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/Orange.Dark"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/search_results">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:menu="@menu/account"
+            app:navigationIcon="@drawable/ic_search">
+
+            <EditText
+                android:background="@null"
+                android:hint="검색해주세요"
+                android:imeOptions="actionSearch"
+                android:inputType="textCapWords"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:lines="1"
+                android:selectAllOnFocus="true"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_results"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_search_detail" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

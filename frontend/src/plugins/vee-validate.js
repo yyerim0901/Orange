@@ -46,12 +46,31 @@ extend('korAlphaNum', {
   validate: value => {
     let regex = /^([a-zA-Z|가-힣]).{1,16}$/.test(value);
     if (!regex) {
-      return '닉네임은 한글, 영문, 숫자만 가능하며 2-16자리 가능.';
+      return '닉네임은 한글, 영문, 숫자만 가능하며 2-16자리 가능합니다.';
     } else {
       return true;
     }
   }
-});
-
+})
+extend('kor', {
+  validate: value => {
+    let regex = /^[가-힣]+.{1,30}$/.test(value);
+    if (!regex) {
+      return '이름은 2자리 이상 한글만 가능합니다.';
+    } else {
+      return true;
+    }
+  }
+})
+extend('ChallengeTitle', {
+  validate: value => {
+    let regex = /^([a-zA-Z|가-힣]).{2,50}$/.test(value);
+    if (!regex) {
+      return '제목은 3-50자리 이상 한글, 영문, 숫자만 가능합니다.';
+    } else {
+      return true;
+    }
+  }
+})
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)
