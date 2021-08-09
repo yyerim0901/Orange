@@ -33,7 +33,7 @@ const routes = [
       {
         path: 'profile',
         name: 'Profile',
-        component: () => import('@/views/user/Profile.vue')
+        component: () => import('@/views/user/Profile.vue'),
       },
       {
         path: 'create-challenge',
@@ -43,7 +43,7 @@ const routes = [
       {
         path: 'challenge',
         name: 'ChallengeFeed',
-        component: () => import('@/views/feed/ChallengeFeed.vue')
+        component: () => import('@/views/feed/ChallengeFeed.vue'),
       },
     ]
   },
