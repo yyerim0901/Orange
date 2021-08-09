@@ -25,17 +25,26 @@ import static com.project.orange.management.Constants.*;
 @Transactional
 public class ChallengeServiceImpl implements ChallengeService{
 
-    // field injection (생성자 주입으로 바꾸는게 더 깔끔하다!)
+    // 생성자 주입 (Constructor Injection)
+    private final ChallengesRepository challengesRepository;
+    private final BattleMatchingRepository battleMatchingRepository;
+    private final NotificationsRepository notificationsRepository;
+    private final UsersChallengesRepository usersChallengesRepository;
+    private final UserRepository userRepository;
+
+
     @Autowired
-    private ChallengesRepository challengesRepository;
-    @Autowired
-    private BattleMatchingRepository battleMatchingRepository;
-    @Autowired
-    private NotificationsRepository notificationsRepository;
-    @Autowired
-    private UsersChallengesRepository usersChallengesRepository;
-    @Autowired
-    private UserRepository userRepository;
+    public ChallengeServiceImpl(ChallengesRepository challengesRepository,
+                                BattleMatchingRepository battleMatchingRepository,
+                                NotificationsRepository notificationsRepository,
+                                UsersChallengesRepository usersChallengesRepository,
+                                UserRepository userRepository) {
+        this.challengesRepository = challengesRepository;
+        this.battleMatchingRepository = battleMatchingRepository;
+        this.notificationsRepository = notificationsRepository;
+        this.usersChallengesRepository = usersChallengesRepository;
+        this.userRepository = userRepository;
+    }
 
     @Autowired
     private EntityManager entityManager;
@@ -57,6 +66,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         Challenges currentChallenge = challengesRepository.save(challenge);
         entityManager.flush(); // DB에 반영 (transaction 마지막에 flush 해줌)
         entityManager.clear(); //
+
         // Todo : userschallenges에서 이 챌린지 생성한 사용자를 manger 로 등록할 것!!!
         UsersChallenges manager;
         manager = UsersChallenges.builder()

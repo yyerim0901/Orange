@@ -1,5 +1,6 @@
 package com.project.orange.entity.article;
 
+import com.fasterxml.jackson.databind.deser.BasicDeserializerFactory;
 import com.project.orange.entity.user.Users;
 import com.project.orange.entity.challenge.Challenges;
 import lombok.*;

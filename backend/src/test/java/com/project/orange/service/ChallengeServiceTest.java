@@ -1,10 +1,13 @@
 package com.project.orange.service;
 
+import com.project.orange.entity.article.Articles;
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.notification.Notifications;
 import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
+import com.project.orange.repository.notification.NotificationsRepository;
 import com.project.orange.repository.user.UsersChallengesRepository;
 import com.project.orange.service.challenge.ChallengeService;
 import com.project.orange.service.challenge.PeriodService;
@@ -37,6 +40,8 @@ public class ChallengeServiceTest {
     private BattleMatchingRepository battleMatchingRepository;
     @Autowired
     private UsersChallengesRepository usersChallengesRepository;
+    @Autowired
+    private NotificationsRepository notificationsRepository;
 
     @Test
     void registerNewChallengeTest(){
@@ -101,9 +106,13 @@ public class ChallengeServiceTest {
         assertEquals(true, matchMakingResult2.isPresent());
         assertEquals(2, usersChallengesList2.size());
 
+        List<Notifications> notificationsList = notificationsRepository.findAll();
+        assertEquals(2, notificationsList.size());
+
         //then
-        usersChallengesRepository.deleteAll();
-        battleMatchingRepository.deleteAll();
-        challengesRepository.deleteAll();
+//        usersChallengesRepository.deleteAll();
+//        battleMatchingRepository.deleteAll();
+//        challengesRepository.deleteAll();
+//        notificationsRepository.deleteAll();
     }
 }
