@@ -19,6 +19,16 @@
           </v-chip>
         </div>
       </v-img>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn text color="blue">
+          랭킹
+        </v-btn>
+
+        <v-btn text color="orange">
+          인증하기
+        </v-btn>
+      </v-card-actions>
     </v-card>
     <FeedTab />
   </v-container>
