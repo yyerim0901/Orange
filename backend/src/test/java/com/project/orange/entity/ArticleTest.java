@@ -45,7 +45,7 @@ public class ArticleTest {
                 .build();
 
         Optional<Articles> createdArticle = articlesService.createArticle(article);
-        assertEquals(createdArticle.isEmpty(), true);
+        assertEquals(createdArticle.isEmpty(), false);
 
 
     }
