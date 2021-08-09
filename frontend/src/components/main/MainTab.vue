@@ -23,14 +23,14 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            인증목록
+            <NewMainForm />
           </v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            1:1 배틀
+            <RecommendMainForm />
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -40,10 +40,15 @@
 
 <script>
 import PopularMainForm from '@/components/challenge/PopularMainForm.vue'
+import NewMainForm from '@/components/challenge/NewMainForm.vue'
+import RecommendMainForm from '@/components/challenge/RecommendMainForm.vue'
+
 export default {
   name: 'MainTab',
   components: {
     PopularMainForm,
+    NewMainForm,
+    RecommendMainForm,
   },
   data: () => {
     return { 

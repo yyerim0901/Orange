@@ -31,7 +31,7 @@
 
 <script>
   export default {
-    name: 'PopularMainForm',
+    name: 'NewMainForm',
     data: () => ({
       cards: [
         { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
