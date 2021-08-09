@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keelim.orange.common.toast
 import com.keelim.orange.databinding.FragmentSignupBinding
-import com.keelim.orange.ui.auth.login.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

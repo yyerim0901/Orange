@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
         val pref = getSharedPreferences("checkFirst", MODE_PRIVATE)
         val checkFirst = pref.getBoolean("checkFirst", false)
         if (!checkFirst) {
-            val editor = pref.edit().apply(){
+            val editor = pref.edit().apply {
                 putBoolean("checkFirst", true)
                 apply()
             }

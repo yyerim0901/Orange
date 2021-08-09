@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.materialstudies.owl.util
+package com.keelim.orange.utils
 
 import android.animation.ValueAnimator
 import android.content.Context

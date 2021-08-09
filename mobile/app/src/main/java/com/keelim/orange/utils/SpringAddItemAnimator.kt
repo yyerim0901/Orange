@@ -5,7 +5,6 @@ import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
-import com.materialstudies.owl.util.spring
 
 class SpringAddItemAnimator : DefaultItemAnimator() {
 
