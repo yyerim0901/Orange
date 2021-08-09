@@ -52,7 +52,6 @@ public class UserController {
                                         HttpServletResponse res){
         try {
             final Users user = authService.loginUser(loginUser.getEmail(), loginUser.getPassword());
-            System.out.println("유저 정보 : "+user.toString());
             final String token = jwtUtil.generateToken(user);
             System.out.println("토큰 정보"+token);
             final String refreshJwt = jwtUtil.generateRefreshToken(user);
