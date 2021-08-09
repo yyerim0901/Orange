@@ -4,6 +4,7 @@ import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.feed.detail.DetailRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
+import com.keelim.orange.data.repository.history.HistoryRepository
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -15,6 +16,7 @@ import com.keelim.orange.domain.auth.FavoriteUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.fight.OtherUseCase
+import com.keelim.orange.domain.history.HistoryUseCase
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
 import dagger.Provides
@@ -102,6 +104,16 @@ object UseCaseModule {
   ): FriendsOkUseCase {
     return FriendsOkUseCase(
       friendsRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideHistoryUseCase(
+    historyRepository: HistoryRepository,
+  ): HistoryUseCase{
+    return HistoryUseCase(
+      historyRepository
     )
   }
 }
