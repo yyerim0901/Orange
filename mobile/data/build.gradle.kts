@@ -6,18 +6,29 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-apply from: rootProject.file('gradle/android.gradle')
+listOf(
+    "android.gradle",
+).forEach { file ->
+    apply(from = "${rootDir}/gradle/${file}")
+}
 
 
 android {
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [
-                        "room.incremental": "true"
-                ]
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
             }
         }
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        getByName("androidTest").assets.srcDirs("$projectDir/schemas")
     }
 }
 
