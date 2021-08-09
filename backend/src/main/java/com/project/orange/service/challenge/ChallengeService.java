@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface ChallengeService {
     public Optional<Challenges> selectByChallengeId(Long challengeId);
     public List<Challenges> selectAll();
+    public List<Challenges> selectAllSortedByTotalPoint();
+    public List<Challenges> selectAllSortedByStartDate();
     // registerNewChallenge : 새로운 Challenge 등록 -> Challenge의 BattleMatching 결과 리턴
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge);
     public void deleteById(Long id);

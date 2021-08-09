@@ -41,6 +41,28 @@ public class ChallengeController {
         }
     }
 
+    @GetMapping("/ranking/point")
+    public ResponseEntity<List<Challenges>> selectAllSoretedByTotalPointDesc(){
+        List<Challenges> list;
+        list = challengeService.selectAllSortedByTotalPoint();
+        if (list == null || list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/ranking/startdate")
+    public ResponseEntity<List<Challenges>> selectAllSortedByStartDate(){
+        List<Challenges> list;
+        list = challengeService.selectAllSortedByStartDate();
+        if (list == null || list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody Challenges challenge){
         Optional<BattleMatching> matchMakingResult;

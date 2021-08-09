@@ -11,6 +11,7 @@ import com.project.orange.repository.notification.NotificationsRepository;
 import com.project.orange.repository.user.UserRepository;
 import com.project.orange.repository.user.UsersChallengesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,6 +61,16 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
+    public List<Challenges> selectAllSortedByTotalPoint() {
+        return challengesRepository.findAll(Sort.by(Sort.Direction.DESC, "totalPoint"));
+    }
+
+    @Override
+    public List<Challenges> selectAllSortedByStartDate() {
+        return challengesRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
+    }
+
+    @Override
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
         // entity manager 를 autowire 로 불러와서 flush 혹은 clear
@@ -72,6 +83,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         manager = UsersChallenges.builder()
                 .user(userRepository.findById(currentChallenge.getManagerId()).get())
                 .challenge(currentChallenge)
+                .isManager(true)
                 .build();
 
         UsersChallenges currentChallengeManager = usersChallengesRepository.save(manager);
@@ -86,10 +98,18 @@ public class ChallengeServiceImpl implements ChallengeService{
         List<Challenges> matchmakingPool = new ArrayList<>();
 
         // BattleMatching 테이블에 존재하지 않는 Challenge 만 선별
+//        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+//        System.out.println(currentChallengeId);
+//        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+//        System.out.println(battleMatchingRepository.findByBlueTeamChallengeId(currentChallengeId).isEmpty());
+//        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+//        System.out.println(battleMatchingRepository.findByRedTeamChallengeId(currentChallengeId).isEmpty());
+//        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+
         for(Challenges each : samePeriodChallengesList){
             if(each.getChallengeId() != currentChallengeId &&
-                    battleMatchingRepository.findByBlueTeamChallengeId(currentChallengeId).isEmpty() &&
-                    battleMatchingRepository.findByRedTeamChallengeId(currentChallengeId).isEmpty()){
+                    battleMatchingRepository.findByBlueTeamChallengeId(each.getChallengeId()).isEmpty() &&
+                    battleMatchingRepository.findByRedTeamChallengeId(each.getChallengeId()).isEmpty()){
                 matchmakingPool.add(each);
             }
         }
