@@ -13,12 +13,25 @@
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="item in items"
-        :key="item.tab"
-      >
+      <v-tab-item>
         <v-card flat>
-          <v-card-text>{{ item.content }}</v-card-text>
+          <v-card-text>
+            소개
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            인증목록
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <v-card-text>
+            1:1 배틀
+          </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -28,13 +41,16 @@
 <script>
 export default {
   name: 'FeedTab',
+  conponents: {
+    
+  },
   data () {
     return {
       tab: null,
       items: [
-        { tab: '소개', content: 'Tab 1 Content' },
-        { tab: '인증 목록', content: 'Tab 2 Content' },
-        { tab: '커뮤니티', content: 'Tab 3 Content' },
+        { tab: '소개' },
+        { tab: '인증 목록' },
+        { tab: '1:1 배틀' },
       ],
     }
   },
