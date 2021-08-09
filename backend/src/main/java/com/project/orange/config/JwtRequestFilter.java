@@ -32,6 +32,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     //UsernamePasswordAuthennticationFilter : 로그인 요청이 들어오면 아이디/비밀번호 기반의 인증을 수행한다.
     //FilterSecurityInterceptor : 인증에 성공한 사용자가 해당 리소스에 접근할 권한이 있는지를 검증
 
+    //JWT 토큰의 인증 정보를 현재 쓰레드의 SecurityContext 에 저장하는 역할 수행
+
     @Autowired
     private MyUserDetailsService userDetailsService;
 
@@ -49,7 +51,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         final Cookie jwtToken = cookieUtil.getCookie(httpServletRequest,JwtUtil.ACCESS_TOKEN_NAME);
 
-        String email = null;
+        String email = null; //여기 들어가는게 email이 맞을까,,?
         String jwt = null;
         String refreshJwt = null;
         String refreshUname = null;
@@ -57,13 +59,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         try{
             if(jwtToken != null){
                 jwt = jwtToken.getValue();
-                email = jwtUtil.getEmail(jwt);
+                email = jwtUtil.getEmail(jwt); //jwtUtil에서는 username으로 가져온다고 되어있음
             }
             if(email!=null){
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email); //UserDetailService에서도 username으로 들고온다고 되어 있음
 
-                if(jwtUtil.validateToken(jwt,userDetails)){
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                if(jwtUtil.validateToken(jwt,userDetails)){ //유효한 토큰인지 검사한다.
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                            = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities()); //getAuthorities...?
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
@@ -81,14 +84,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             if(refreshJwt != null){
                 refreshUname = redisUtil.getData(refreshJwt);
 
-                if(refreshUname.equals(jwtUtil.getEmail(refreshJwt))){
+                if(refreshUname.equals(jwtUtil.getEmail(refreshJwt))){ //JwtUtil에 getEmail 아무리 봐도 고쳐야 할 것 같은데 ㅎ
                     UserDetails userDetails = userDetailsService.loadUserByUsername(refreshUname);
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+                            = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
                     Users user = new Users();
-                    user.setEmail(refreshUname);
+                    user.setEmail(refreshUname); //여기서는 또 email이란 말이지
                     String newToken =jwtUtil.generateToken(user);
 
                     Cookie newAccessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME,newToken);
