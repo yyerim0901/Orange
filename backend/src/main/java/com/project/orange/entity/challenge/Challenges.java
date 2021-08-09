@@ -59,7 +59,8 @@ public class Challenges {
     @Column(name="image_path")
     private String imagePath;
 
-    @OneToMany(mappedBy = "challenge") // 주체가 아닌 애가 주인을 가리키기 위해서 쓰는 거
+    // fetch-join으로 ?
+    @OneToMany(mappedBy = "challenge", fetch = FetchType.EAGER) // 주체가 아닌 애가 주인을 가리키기 위해서 쓰는 거
     private List<UsersChallenges> usersChallengesList = new ArrayList<>();
 
     @OneToMany(mappedBy = "challenge")

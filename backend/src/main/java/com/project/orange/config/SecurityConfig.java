@@ -40,10 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()
                 .antMatchers("/user/login").permitAll()
-                .antMatchers("/oauth2/**").permitAll() //oauth 로그인을 사용하겠다는 의미
-//                .antMatchers("/test/user").hasRole("USER")
-//                .antMatchers("/test/admin").hasRole("ADMIN")
-                .anyRequest().authenticated().and().oauth2Login();
+                .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/test/user").hasRole("USER")
+                .antMatchers("/test/admin").hasRole("ADMIN")
+                .antMatchers("/api/**").permitAll()
+                .anyRequest().authenticated();
+
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
