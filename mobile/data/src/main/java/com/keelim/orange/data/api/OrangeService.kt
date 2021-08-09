@@ -13,45 +13,41 @@ import retrofit2.http.Query
 
 interface OrangeService {
 
-    @Headers("Content-Type: application/json")
-    @POST("other/sue/")
-    fun sue(
-    ): Response<UserSampleResponse>
+  @Headers("Content-Type: application/json")
+  @POST("other/sue/")
+  fun sue(): Response<UserSampleResponse>
 
-    @Headers("Content-Type: application/json")
-    @POST("other/sue/")
-    fun like(
-    ): Response<UserSampleResponse>
+  @Headers("Content-Type: application/json")
+  @POST("other/sue/")
+  fun like(): Response<UserSampleResponse>
 
-    @Headers("Content-Type: application/json")
-    @POST("other/sue/")
-    fun authenticate(
-    ): Response<UserSampleResponse>
+  @Headers("Content-Type: application/json")
+  @POST("other/sue/")
+  fun authenticate(): Response<UserSampleResponse>
 
-    @Headers("Content-Type: application/json")
-    @POST("other/sue/")
-    fun share(
-    ): Response<UserSampleResponse>
+  @Headers("Content-Type: application/json")
+  @POST("other/sue/")
+  fun share(): Response<UserSampleResponse>
 
-    @Headers("Content-Type: application/json")
-    @POST("create/upload/")
-    fun upload(
-        @Field("title") title: String,
-        @Field("description") description: String
-    ): Response<UserSampleResponse>
+  @Headers("Content-Type: application/json")
+  @POST("create/upload/")
+  fun upload(
+    @Field("title") title: String,
+    @Field("description") description: String
+  ): Response<UserSampleResponse>
 
-    @GET("detail/")
-    fun detail(
-        @Query("uid") uid:String
-    ): Response<DetailResponse>
+  @GET("detail/")
+  fun detail(
+    @Query("uid") uid: String
+  ): Response<DetailResponse>
 
-    @POST("invite/")
-    fun invite(
-        @Query("uid") uid:String
-    ): Response<ResultResponse>
+  @POST("invite/")
+  fun invite(
+    @Query("uid") uid: String
+  ): Response<ResultResponse>
 
-    @GET("friends/{myid}")
-    fun getFriends(
-        @Query("myid") id:String
-    ): Response<FriendsResponse>
+  @GET("friends/{myid}")
+  fun getFriends(
+    @Query("myid") id: String
+  ): Response<FriendsResponse>
 }
