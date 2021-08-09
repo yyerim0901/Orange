@@ -1,5 +1,7 @@
 package com.project.orange.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.orange.entity.challenge.Challenges;
 import com.project.orange.entity.user.Users;
 import lombok.*;
@@ -11,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity(name="users_challenges")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class UsersChallenges {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
