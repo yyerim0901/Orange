@@ -1,19 +1,19 @@
 package com.project.orange.entity.article;
 
-import com.project.orange.entity.user.Users;
-import com.project.orange.entity.challenge.Challenges;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@NoArgsConstructor //(access = AccessLevel.PROTECTED)
 @Data
 @Entity
 @Table(name = "articles")
-public class Articles {
+@Builder
+public class Articles{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,13 +28,19 @@ public class Articles {
     private List<Comments> commentsList = new ArrayList<>();
 
 //    피드에서 챌린지와 유저에 접근
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "challenge_id")
-    private Challenges challenge;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "challenge_id")
+//    private Challenges challenge;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private Users user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @Column(name = "challenge_id")
+    private Long challenge;
+
+    @Column(name = "user_id")
+    private Long user;
 
     @Column(name = "title")
     private String title;
@@ -43,9 +49,9 @@ public class Articles {
     @Column(name = "article_content")
     private String articleContent;
 
-    @Temporal(TemporalType.DATE)
+//    @Temporal(TemporalType.DATE)
     @Column(name = "article_writetime")
-    private Date articleWritetime;
+    private LocalDateTime articleWritetime;
 
     @Column(name = "verified")
     private Boolean verified;
