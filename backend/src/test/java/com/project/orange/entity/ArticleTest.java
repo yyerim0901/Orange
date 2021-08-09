@@ -26,7 +26,7 @@ public class ArticleTest {
 
     @Test
     void createNewArticleTest(){
-        Long challengeId = 1L;
+        Long challengeId = 30L;
 //        Optional<Challenges> challenge = ChallengeService.selectByChallengeId(challengeId);
         Long userId = 17L;
         String title = "제목";
