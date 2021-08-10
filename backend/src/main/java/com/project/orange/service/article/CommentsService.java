@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentsService {
-    public Optional<Comments> selectOne(Long comment);
-    public Optional<Comments> selectByArticle(Long articleId);
+    public List<Comments> selectAllByArticleId(Long articleId);
     public List<Comments> selectAll();
+    public Optional<Comments> createComment(Comments comments);
+    public void deleteByCommentId(Long commentId);
 }

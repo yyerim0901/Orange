@@ -42,4 +42,26 @@ public class ArticlesController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+    @ApiOperation(value = "피드 목록", notes = "<big>챌린지</big>에 있는 <big>모든 피드</big>의 <big>목록</big> 반환")
+    @GetMapping("/challenge/{challengeId}")
+    public ResponseEntity<List<Articles>> selectAllByChallengeId(@PathVariable Long challengeId){
+        List<Articles> list;
+        list = articlesService.selectAllByChallengeId(challengeId);
+        if (list == null || list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/delete/{articleId}")
+    public ResponseEntity<String> delete(@PathVariable Long articleId){
+        try {
+            articlesService.deleteByArticleId(articleId);
+            return new ResponseEntity<>("success", HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>("failed", HttpStatus.NO_CONTENT);
+        }
+    }
 }
