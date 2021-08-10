@@ -36,6 +36,11 @@ const routes = [
         component: () => import('@/views/user/Profile.vue'),
       },
       {
+        path: 'profile/introduce',
+        name: 'Profile',
+        component: () => import('@/views/feed/Introduce.vue'),
+      },
+      {
         path: 'create-challenge',
         name: 'CreateChallenge',
         component: () => import('@/views/feed/CreateChallenge.vue')
