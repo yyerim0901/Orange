@@ -72,6 +72,15 @@
                 </v-btn>
               </v-form>
             </validation-observer>
+            <div class="mt-10">
+              <v-btn text @click="goBack">
+                뒤로 가기
+              </v-btn>
+              <v-btn text @click="goHome">
+                홈
+              </v-btn>
+            </div>
+            
           </v-card-text>
         </v-card>
       </v-col>
@@ -85,7 +94,6 @@ export default {
     data: () => ({
       feedname: null,
       feedtext: null,
-
   }),
   methods: {
     async createPost () {
@@ -93,8 +101,14 @@ export default {
       if (result) {
         alert('작성 완료')
       }
+    },
+    goBack() {
+      window.history.back()
+    },
+    goHome() {
+      this.$router.push({path:'/'}).catch(()=> {});
     }
-  }
+  },
 }
 </script>
 
