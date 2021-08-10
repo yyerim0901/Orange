@@ -43,8 +43,7 @@ class ProfileFragment: Fragment() {
         }
 
         btnBadge.setOnClickListener {
-//            findNavController().navigate()
-            requireContext().toast("준비 중입니다.")
+            findNavController().navigate(R.id.allBadgeFragment)
         }
         
         btnNoti.setOnClickListener { 

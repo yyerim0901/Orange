@@ -11,6 +11,7 @@ import com.google.android.material.chip.Chip
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Fight
 import com.keelim.orange.data.model.Filter
@@ -100,6 +101,17 @@ class FeedFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         searchRecycler.adapter = searchRecyclerAdapter
+        searchBar.setOnClickListener {
+            findNavController().navigate(R.id.searchDetailFragment)
+        }
+
+        btnNoti.setOnClickListener {
+            findNavController().navigate(R.id.notificationFragment)
+        }
+
+        btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
     }
 
     private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
