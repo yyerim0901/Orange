@@ -77,11 +77,12 @@ class LoginFragment : Fragment() {
     }
 
     login.setOnClickListener {
-      binding.loading.visibility = View.VISIBLE
       loginViewModel.login(
         username.text.toString(),
         password.text.toString()
       )
+
+      requireActivity().startActivity(Intent(requireContext(), MainActivity::class.java))
     }
 
     btnKakaoLogin.setOnClickListener {
@@ -108,8 +109,8 @@ class LoginFragment : Fragment() {
     }
 
     loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
+
       loginResult ?: return@observe
-      binding.loading.visibility = View.GONE
       loginResult.error?.let {
         requireContext().toast(it)
       }
@@ -121,7 +122,9 @@ class LoginFragment : Fragment() {
 
   private fun updateUiWithUser(model: LoggedInUserView) {
     val welcome = getString(R.string.welcome) + model.displayName
-    requireContext().toast(welcome)
+    requireActivity().toast(welcome)
+    requireActivity().startActivity(Intent(requireContext(), MainActivity::class.java))
+    requireActivity().finish()
   }
 
   private val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
