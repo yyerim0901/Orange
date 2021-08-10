@@ -5,6 +5,8 @@ import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
+import com.keelim.orange.data.response.badge.BadgeResponse
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -61,5 +63,8 @@ interface OrangeService {
   fun getCompletedList(
 
   ): List<Favorite>
+
+  @GET("api/badge/list")
+  fun getAllBadgeList():Response<BadgeResponse>
 
 }
