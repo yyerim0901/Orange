@@ -13,6 +13,8 @@ import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.friends.FriendsRepositoryImpl
 import com.keelim.orange.data.repository.history.HistoryRepository
 import com.keelim.orange.data.repository.history.HistoryRepositoryImpl
+import com.keelim.orange.data.repository.profile.ProfileRepository
+import com.keelim.orange.data.repository.profile.ProfileRepositoryImpl
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.create.CreateRepositoryImpl
@@ -126,6 +128,18 @@ object RepositoryModule {
     return HistoryRepositoryImpl(
       dispatcher,
       db
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideProfileRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): ProfileRepository{
+    return ProfileRepositoryImpl(
+      dispatcher = dispatcher,
+      apiRequestFactory = apiRequestFactory
     )
   }
 }

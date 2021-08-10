@@ -5,6 +5,7 @@ import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.feed.detail.DetailRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.history.HistoryRepository
+import com.keelim.orange.data.repository.profile.ProfileRepository
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -17,6 +18,8 @@ import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.fight.OtherUseCase
 import com.keelim.orange.domain.history.HistoryUseCase
+import com.keelim.orange.domain.profile.GetCompletedChallengeUseCase
+import com.keelim.orange.domain.profile.GetIngChallengeUseCase
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
 import dagger.Provides
@@ -114,6 +117,25 @@ object UseCaseModule {
   ): HistoryUseCase{
     return HistoryUseCase(
       historyRepository
+    )
+  }
+  @Provides
+  @ViewModelScoped
+  fun provideGetCompletedChallengeUseCase(
+    profileRepository: ProfileRepository
+  ): GetCompletedChallengeUseCase{
+    return GetCompletedChallengeUseCase(
+      profileRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideGetIngChallengeUseCase(
+    profileRepository:ProfileRepository
+  ): GetIngChallengeUseCase{
+    return GetIngChallengeUseCase(
+      profileRepository
     )
   }
 }

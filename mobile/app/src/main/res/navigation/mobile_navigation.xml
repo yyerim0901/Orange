@@ -98,4 +98,8 @@
             android:id="@+id/action_searchDetailFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.keelim.orange.ui.profile.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" />
 </navigation>

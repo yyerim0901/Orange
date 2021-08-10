@@ -1,5 +1,6 @@
 package com.keelim.orange.data.api
 
+import com.keelim.orange.data.model.Favorite
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ResultResponse
@@ -50,4 +51,15 @@ interface OrangeService {
   fun getFriends(
     @Query("myid") id: String
   ): Response<FriendsResponse>
+
+  @POST()
+  fun getIngList(
+
+  ):List<Favorite>
+
+  @POST
+  fun getCompletedList(
+
+  ): List<Favorite>
+
 }
