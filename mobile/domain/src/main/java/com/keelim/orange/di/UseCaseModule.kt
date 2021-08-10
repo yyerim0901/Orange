@@ -2,6 +2,7 @@ package com.keelim.orange.di
 
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
+import com.keelim.orange.data.repository.badge.BadgeRepository
 import com.keelim.orange.data.repository.feed.detail.DetailRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.history.HistoryRepository
@@ -14,6 +15,7 @@ import com.keelim.orange.domain.NotificationUseCase
 import com.keelim.orange.domain.SendTokenServerUseCase
 import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.domain.auth.FavoriteUseCase
+import com.keelim.orange.domain.badge.GetAllBadgeListUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.fight.OtherUseCase
@@ -136,6 +138,16 @@ object UseCaseModule {
   ): GetIngChallengeUseCase{
     return GetIngChallengeUseCase(
       profileRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideGetAllBadgeListUseCase(
+    badgeRepository: BadgeRepository,
+  ): GetAllBadgeListUseCase{
+    return GetAllBadgeListUseCase(
+      badgeRepository
     )
   }
 }
