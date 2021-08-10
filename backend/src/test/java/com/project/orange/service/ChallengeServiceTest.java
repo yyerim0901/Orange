@@ -99,16 +99,18 @@ public class ChallengeServiceTest {
         //when
         Optional<BattleMatching> matchMakingResult1 = challengeService.registerNewChallenge(blueTeam);
         List<UsersChallenges> usersChallengesList1 = usersChallengesRepository.findAll();
+        List<Notifications> notificationsList1 = challengeService.notifyMatchMaking(matchMakingResult1.get());
         assertEquals(true, matchMakingResult1.isEmpty());
         //assertEquals(1, usersChallengesList1.size());
 
         Optional<BattleMatching> matchMakingResult2 = challengeService.registerNewChallenge(redTeam);
         List<UsersChallenges> usersChallengesList2 = usersChallengesRepository.findAll();
+        List<Notifications> notificationsList2 = challengeService.notifyMatchMaking(matchMakingResult2.get());
         assertEquals(true, matchMakingResult2.isPresent());
         //assertEquals(2, usersChallengesList2.size());
 
-        List<Notifications> notificationsList = notificationsRepository.findAll();
-        //assertEquals(2, notificationsList.size());
+//        List<Notifications> notificationsList = notificationsRepository.findAll();
+//        assertEquals(2, notificationsList.size());
 
         //then
 //        usersChallengesRepository.deleteAll();
