@@ -72,7 +72,6 @@ class SignUpFragment : Fragment() {
     }
 
     login.setOnClickListener {
-      binding.loading.visibility = View.VISIBLE
       signupViewModel.signup(
         username.text.toString(),
         password.text.toString()
@@ -96,7 +95,6 @@ class SignUpFragment : Fragment() {
 
     signupViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
       loginResult ?: return@observe
-      binding.loading.visibility = View.GONE
       loginResult.error?.let {
         requireContext().toast(it)
       }
