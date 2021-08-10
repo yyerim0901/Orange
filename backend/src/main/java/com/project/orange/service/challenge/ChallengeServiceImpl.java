@@ -49,6 +49,11 @@ public class ChallengeServiceImpl implements ChallengeService{
     private EntityManager entityManager;
 
     @Override
+    public Optional<Challenges> save(Challenges challenge) {
+        return Optional.of(challengesRepository.save(challenge));
+    }
+
+    @Override
     public Optional<Challenges> selectByChallengeId(Long challengeId) {
         return challengesRepository.findById(challengeId);
     }

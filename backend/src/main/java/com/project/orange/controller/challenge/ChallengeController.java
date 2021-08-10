@@ -2,6 +2,7 @@ package com.project.orange.controller.challenge;
 
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.notification.Notifications;
 import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.service.challenge.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,11 +100,25 @@ public class ChallengeController {
 
         if(matchMakingResult.isPresent()){
             // Todo : notification 연동
-            challengeService.notifyMatchMaking(matchMakingResult.get());
-            return new ResponseEntity<>("matched", HttpStatus.OK);
+            List<Notifications> notificationsList = challengeService.notifyMatchMaking(matchMakingResult.get());
+            if(notificationsList != null && !notificationsList.isEmpty()) {
+                return new ResponseEntity<>("matched", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Notification Error", HttpStatus.NO_CONTENT);
+            }
         }
         else {
             return new ResponseEntity<>("unmatched", HttpStatus.OK);
+        }
+    }
+
+    @PutMapping("/modify")
+    public ResponseEntity<String> modify(@RequestBody Challenges challenge){
+        Optional<Challenges> modifiedChallenge = challengeService.save(challenge);
+        if(modifiedChallenge.isEmpty()){
+            return new ResponseEntity<>("failed", HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>("success", HttpStatus.OK);
         }
     }
 }

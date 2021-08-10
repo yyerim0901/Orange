@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ChallengeService {
+    public Optional<Challenges> save(Challenges challenge);
     public Optional<Challenges> selectByChallengeId(Long challengeId);
     public List<Challenges> selectAll();
     public List<Challenges> selectAllSortedByTotalPoint();
