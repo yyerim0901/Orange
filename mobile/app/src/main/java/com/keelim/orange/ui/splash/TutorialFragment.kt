@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import com.keelim.orange.databinding.FragmentTutorialBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TutorialFragment:Fragment(){
+class TutorialFragment(
+    @DrawableRes private val image:Int,
+    private val title_string:String,
+    private val sub_string:String,
+):Fragment(){
     private var _binding: FragmentTutorialBinding? = null
     private val binding get() = _binding!!
 
@@ -24,11 +29,17 @@ class TutorialFragment:Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = null
+        initViews()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initViews() = with(binding){
+        root.background = resources.getDrawable(image, null)
+        title.text = title_string
+        sub.text = sub_string
     }
 }

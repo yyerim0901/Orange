@@ -6,7 +6,7 @@ data class Sample(
   val imageUrl: String
 )
 
-val samples = listOf(
+val samples: List<History> = listOf(
   Sample("Architecture", 58, "https://source.unsplash.com/RFDP7_80v5A"),
   Sample("Arts & Crafts", 121, "https://source.unsplash.com/Tq4YjCa2BSc"),
   Sample("Business", 78, "https://source.unsplash.com/MYbhN8KaaEc"),
@@ -21,4 +21,10 @@ val samples = listOf(
   Sample("Painting", 172, "https://source.unsplash.com/FwF_fKj5tBo"),
   Sample("Photography", 321, "https://source.unsplash.com/8nXKXYdO-Wk"),
   Sample("Technology", 118, "https://source.unsplash.com/MxVkWPiJALs")
-)
+).map {
+  History(
+    it.courses,
+    it.name,
+    it.imageUrl
+  )
+}

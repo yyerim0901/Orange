@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.keelim.orange.R
 import com.keelim.orange.databinding.ActivityTutorialBinding
 import com.keelim.orange.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,7 @@ class TutorialActivity : AppCompatActivity() {
         }
         btnNext.setOnClickListener {
             val current = viewpager.currentItem + 1
-            if (current < 4) {
+            if (current < 3) {
                 viewpager.currentItem = current
             } else {
                 goNext()
@@ -44,10 +45,21 @@ class TutorialActivity : AppCompatActivity() {
 
     inner class ViewPager2Adapter : FragmentStateAdapter(this) {
         private val fragments = listOf<Fragment>(
-            TutorialFragment(),
-            TutorialFragment(),
-            TutorialFragment(),
-            TutorialFragment(),
+            TutorialFragment(
+                R.drawable.main,
+                "안녕하세요!\n 프로젝트 오렌지 입니다",
+                "당신을 기다렸어요!!",
+            ),
+            TutorialFragment(
+                R.drawable.fight,
+                "경쟁의 세계에는 \n 두 마디 어휘밖에 없다. \n 이기느냐 지느냐",
+                "윈스턴 처칠"
+            ),
+            TutorialFragment(
+                R.drawable.morning,
+                "당신의 습관이 \n 항상 누군가와 함께하길",
+                "프로젝트 오렌지 팀이 응원합니다."
+            ),
         )
 
         override fun getItemCount(): Int {
