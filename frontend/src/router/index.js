@@ -36,6 +36,11 @@ const routes = [
         component: () => import('@/views/user/Profile.vue'),
       },
       {
+        path: 'profile/introduce',
+        name: 'Profile',
+        component: () => import('@/views/feed/Introduce.vue'),
+      },
+      {
         path: 'create-challenge',
         name: 'CreateChallenge',
         component: () => import('@/views/feed/CreateChallenge.vue')
@@ -44,6 +49,16 @@ const routes = [
         path: 'challenge',
         name: 'ChallengeFeed',
         component: () => import('@/views/feed/ChallengeFeed.vue'),
+      },
+      {
+        path: 'create-feed',
+        name: 'CreateFeed',
+        component: () => import('@/views/feed/CreateFeed.vue'),
+      },
+      {
+        path: 'ranking',
+        name: 'Ranking',
+        component: () => import('@/views/feed/Ranking.vue'),
       },
     ]
   },
