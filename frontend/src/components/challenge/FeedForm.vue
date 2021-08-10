@@ -25,7 +25,11 @@
           랭킹
         </v-btn>
 
-        <v-btn text color="orange">
+        <v-btn 
+          text
+          color="orange"
+          @click="goCreateFeed"
+        >
           인증하기
         </v-btn>
       </v-card-actions>
@@ -45,6 +49,11 @@ export default {
     return {
       extext: '나도 김종국',
       expeople: "0명"
+    }
+  },
+  methods: {
+    goCreateFeed() {
+      this.$router.push({path:'/create-feed'}).catch(()=> {});
     }
   }
 }
