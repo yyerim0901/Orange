@@ -39,7 +39,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/noti_button"
+        android:id="@+id/btn_noti"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
@@ -49,14 +49,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/rank_button"
+        android:id="@+id/btn_rank"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_rank"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noti_button"
+        app:layout_constraintTop_toBottomOf="@id/btn_noti"
         app:layout_goneMarginTop="10dp" />
 
     <TextView

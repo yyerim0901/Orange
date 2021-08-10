@@ -6,10 +6,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class DetailRepositoryImpl(
-    private val apiRequestFactory: ApiRequestFactory,
-    private val dispatcher: CoroutineDispatcher,
+  private val apiRequestFactory: ApiRequestFactory,
+  private val dispatcher: CoroutineDispatcher,
 ) : DetailRepository {
-    override suspend fun getDetail(uid: String): DetailResponse = withContext(dispatcher){
-        return@withContext apiRequestFactory.retrofit.detail(uid).body() ?: DetailResponse(img_url = "", title = "",description = "")
-    }
+  override suspend fun getDetail(uid: String): DetailResponse = withContext(dispatcher) {
+    return@withContext apiRequestFactory.retrofit.detail(uid).body() ?: DetailResponse(img_url = "", title = "", description = "")
+  }
 }

@@ -41,8 +41,7 @@ class FriendsFragment
     viewModel.fetchData("12")
   }
 
-  private fun initViews() = with(binding) {
-
+  private fun initViews() {
   }
 
   override fun onDestroyView() {

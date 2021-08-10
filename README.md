@@ -117,6 +117,11 @@ gantt
 	Challange		 	   :done, 08-06,9d
 	sync (unit)                   :done, 08-14, 2d 
 	
+	section DevOps
+	docker-compose deploy passive :done, 08-06, 2d
+	docker-compose pipeline with gitlab :done, 08-08, 1d
+	docker-compose automation ci/cd :done, 08-09,3d
+	
 
 
 	section 문서 정리 및 마무리

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Fight
 import com.keelim.orange.databinding.FragmentFightBinding
@@ -39,6 +41,13 @@ class FightFragment : Fragment() {
   }
 
   private fun initViews() = with(binding) {
+    btnNoti.setOnClickListener {
+      findNavController().navigate(R.id.notificationFragment)
+    }
+
+    btnRank.setOnClickListener {
+      findNavController().navigate(R.id.rankingFragment)
+    }
   }
 
   override fun onDestroyView() {

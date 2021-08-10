@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout android:background="?attr/colorPrimarySurface"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -26,10 +25,17 @@
             android:minHeight="?attr/actionBarSize"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:menu="@menu/account"
             app:navigationIcon="@drawable/ic_search">
 
+            <ImageView
+                android:id="@+id/history"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_history" />
+
             <EditText
+                android:id="@+id/edit_query"
                 android:background="@null"
                 android:hint="검색해주세요"
                 android:imeOptions="actionSearch"
@@ -40,9 +46,10 @@
                 android:selectAllOnFocus="true"
                 android:textAppearance="?attr/textAppearanceSubtitle1" />
 
-        </androidx.appcompat.widget.Toolbar>
 
+        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results"
