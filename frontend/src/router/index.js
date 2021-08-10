@@ -50,6 +50,11 @@ const routes = [
         name: 'CreateFeed',
         component: () => import('@/views/feed/CreateFeed.vue'),
       },
+      {
+        path: 'ranking',
+        name: 'Ranking',
+        component: () => import('@/views/feed/Ranking.vue'),
+      },
     ]
   },
   {

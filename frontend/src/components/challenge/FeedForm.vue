@@ -21,7 +21,11 @@
       </v-img>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text color="blue">
+        <v-btn 
+          text 
+          color="blue"
+          @click="goRanking"
+        >
           랭킹
         </v-btn>
 
@@ -54,6 +58,9 @@ export default {
   methods: {
     goCreateFeed() {
       this.$router.push({path:'/create-feed'}).catch(()=> {});
+    },
+    goRanking() {
+      this.$router.push({path:'/ranking'}).catch(()=> {});
     }
   }
 }
