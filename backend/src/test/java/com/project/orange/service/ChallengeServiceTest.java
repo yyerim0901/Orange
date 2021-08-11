@@ -127,7 +127,7 @@ public class ChallengeServiceTest {
     void updateExistingChallenge(){
         //given
         Long targetChallengeId = 1L;
-        String newChallengeDescribe = "수정된 챌린지 소개";
+        String newChallengeDescribe = "수정된 챌린지 소개를 또 수정함";
         Challenges targetChallenge = challengeService.selectByChallengeId(targetChallengeId).get();
         targetChallenge.setChallengeDescribe(newChallengeDescribe);
 
