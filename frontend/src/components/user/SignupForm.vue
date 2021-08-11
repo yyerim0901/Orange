@@ -115,6 +115,7 @@
                 >
                   가입하기
                 </v-btn>
+                <p>{{ logMessage }}</p>
                 <div class="mt-5">
                   <router-link
                     class="text-decoration-none"
@@ -149,6 +150,8 @@ export default {
     nickname: "",
     password: "",
     passwordConfirm: "",
+    // log
+    logMessage: "",
   }),
   methods: {
     async checkForm () {
@@ -165,9 +168,19 @@ export default {
         password: this.password,
         passwordConfirm: this.passwordConfirm,
       }
-      const response = await registerUser(userData)
-      console.log(response)
-    }
+      const { data } = await registerUser(userData)
+      console.log(data.username)
+      console.log(data)
+      this.logMessage = `${data.username} 님이 가입되었습니다.`
+      this.initForm();
+    },
+    initForm() {
+      this.email = ''
+      this.username = ''
+      this.nickname = ''
+      this.password = ''
+      this.passwordConfirm = ''
+    },
   }
 }
 </script>

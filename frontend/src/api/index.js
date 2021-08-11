@@ -1,8 +1,17 @@
 import axios from 'axios'
 
+const instance = axios.create({
+  baseURL: 'http://i5b102.p.ssafy.io:8181'
+})
+
 function registerUser(userData) {
-  const url = 'http://i5b102.p.ssafy.io:8181/api/user/signup'
-  return axios.post(url, userData)
+  return instance.post('/api/user/signup', userData)
 }
 
-export { registerUser }
+function loginUser(userData) {
+  return instance.post('/api/user/login', userData)
+}
+
+
+
+export { registerUser, loginUser };
