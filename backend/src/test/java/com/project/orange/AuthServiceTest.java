@@ -2,6 +2,7 @@ package com.project.orange;
 
 import com.project.orange.entity.user.RequestLoginUser;
 import com.project.orange.entity.user.Users;
+import com.project.orange.repository.user.UserRepository;
 import com.project.orange.service.user.AuthService;
 import com.project.orange.service.user.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,6 +24,10 @@ public class AuthServiceTest {
     private AuthService authService;
 
     @Autowired
+    private UserRepository userRepository;
+
+
+    @Autowired
     private RedisUtil redisUtil;
 
     @Autowired
@@ -29,12 +36,31 @@ public class AuthServiceTest {
     @Test
     public void signUp(){
         Users user = new Users();
-        user.setEmail("jwtTest");
-        user.setNickname("jwtTest");
+        user.setEmail("test1");
+        user.setNickname("test1");
         user.setPassword("1234");
 
         authService.signUpUser(user);
     }
+
+//    @Test
+//    public void read(){
+//        Optional<Users> user = userRepository.findByEmail("test1");
+//
+//        user.ifPresent(selectUser ->{
+//            System.out.println("user: "+selectUser);
+//        });
+//    }
+
+    @Test
+    public void delete(){
+        Optional<Users> user = Optional.ofNullable(userRepository.findByUserId(17L));
+        user.ifPresent(selectUser->{
+            userRepository.delete(selectUser);
+        });
+    }
+
+
 
     @Test
     public void login(){
@@ -52,7 +78,7 @@ public class AuthServiceTest {
         redisUtil.setDataExpire("11","11",20);
     }
 
-    //성공하면 redis와 연결 잘 된 것것
+    //성공하면 redis와 연결 잘 된 것
    @Test
     void redisConnectionTest() {
         final String key = "a";
@@ -69,3 +95,4 @@ public class AuthServiceTest {
     //redis.cli 에서 get "\xac\xed\x00\x05t\x00\x01a" 하면 "\xac\xed\x00\x05t\x00\x011"로 잘 출력 됨
 
 }
+
