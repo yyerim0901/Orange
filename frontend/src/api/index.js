@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-function registerUser() {
+function registerUser(userData) {
   const url = 'http://i5b102.p.ssafy.io:8181/api/user/signup'
-  axios.post(url)
+  return axios.post(url, userData)
 }
+
+export { registerUser }
