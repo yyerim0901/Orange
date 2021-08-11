@@ -12,7 +12,7 @@
             >
               <v-form
                 ref="form"
-                @submit.prevent="signUp"
+                @submit.prevent="checkForm"
               >
                 <div class="text-h4 font-weight-black mb-10">
                   회원가입
@@ -111,6 +111,7 @@
                   rounded
                   color="primary"
                   :disabled="invalid"
+                  @click="signUp"
                 >
                   가입하기
                 </v-btn>
@@ -138,21 +139,34 @@
 </template>
 
 <script>
+import { registerUser } from '@/api/index'
+
 export default {
   name: 'SignupForm',
   data: () => ({
-    email: null,
-    username: null,
-    nickname: null,
-    password: null,
-    passwordConfirm: null,
+    email: "",
+    username: "",
+    nickname: "",
+    password: "",
+    passwordConfirm: "",
   }),
   methods: {
-    async signUp () {
+    async checkForm () {
       const result = await this.$refs.observer.validate()
       if (result) {
         alert('가입 완료')
       }
+    },
+    async signUp() {
+      const userData = {
+        email: this.email,
+        username: this.username,
+        nickname: this.nickname,
+        password: this.password,
+        passwordConfirm: this.passwordConfirm,
+      }
+      const response = await registerUser(userData)
+      console.log(response)
     }
   }
 }
