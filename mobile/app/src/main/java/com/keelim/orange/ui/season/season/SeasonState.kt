@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.season
+package com.keelim.orange.ui.season.season
 
 import com.keelim.orange.data.model.Fight
 

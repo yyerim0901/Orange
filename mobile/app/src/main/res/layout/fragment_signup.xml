@@ -88,13 +88,30 @@
             android:textColorHint="@android:color/black">
 
             <EditText
+                android:id="@+id/nickname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawablePadding="16dp"
+                android:hint="Nickname"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@android:color/black">
+
+            <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:drawablePadding="16dp"
                 android:hint="Password"
-                android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
@@ -112,7 +129,6 @@
                 android:background="@android:color/transparent"
                 android:drawablePadding="16dp"
                 android:hint="Password Confirmation"
-                android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
@@ -132,8 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Sign up"
-                android:textAllCaps="false"
-                android:textColor="#96ffffff"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

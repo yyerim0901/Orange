@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.season
+package com.keelim.orange.ui.season.season
 
 import android.os.Bundle
 import android.view.LayoutInflater

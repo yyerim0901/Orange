@@ -28,21 +28,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header" />
 
+    <ImageView
+        android:id="@+id/camera"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_medal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+
     <EditText
         android:id="@+id/description"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:hint="내용"
-        tools:text="@tools:sample/lorem/random"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/camera"
         android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        tools:text="safn asfn asfasl,sl,fl,sl,fls,fl,slf,sl,fls,fls,fls,fl,slf,slf,sl,fsl,fls,fl," />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/orange"
+        android:src="@drawable/ic_heart"
+        app:borderWidth="0dp"
         android:layout_marginBottom="10dp"
         app:fabSize="auto"
         app:layout_constraintBottom_toBottomOf="parent"

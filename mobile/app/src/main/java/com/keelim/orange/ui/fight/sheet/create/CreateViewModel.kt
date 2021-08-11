@@ -1,5 +1,6 @@
 package com.keelim.orange.ui.fight.sheet.create
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keelim.orange.domain.fight.CreateUseCase
@@ -12,7 +13,7 @@ class CreateViewModel @Inject constructor(
     private val createUseCase: CreateUseCase
 ): ViewModel() {
 
-    fun upload(title:String, description:String) = viewModelScope.launch{
-        createUseCase.upload(title, description)
+    fun upload(title:String, description:String, bitmap: Bitmap) = viewModelScope.launch{
+        createUseCase.upload(title, description, bitmap)
     }
 }

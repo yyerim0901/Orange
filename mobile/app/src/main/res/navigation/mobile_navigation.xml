@@ -77,7 +77,7 @@
         android:label="RankingFragment" />
     <fragment
         android:id="@+id/seasonFragment"
-        android:name="com.keelim.orange.ui.season.SeasonFragment"
+        android:name="com.keelim.orange.ui.season.season.SeasonFragment"
         android:label="SeasonFragment" />
     <fragment
         android:id="@+id/detailFragment"

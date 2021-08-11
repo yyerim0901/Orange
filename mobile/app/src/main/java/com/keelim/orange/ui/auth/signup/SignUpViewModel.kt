@@ -27,9 +27,9 @@ class SignUpViewModel @Inject constructor(
   private val _loginResult = MutableLiveData<LoginResult>()
   val loginResult: LiveData<LoginResult> = _loginResult
 
-  fun signup(username: String, password: String) = viewModelScope.launch {
+  fun signup(username: String, password: String, nickname:String) = viewModelScope.launch {
     // can be launched in a separate asynchronous job
-    when (val result = authUseCase.signup(username, password)) {
+    when (val result = authUseCase.signup(username, password, nickname)) {
       is Result.Success -> {
         setLoginResult(
           LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
@@ -47,8 +47,8 @@ class SignUpViewModel @Inject constructor(
     viewModelScope.launch {
       when {
         !isUserNameValid(username) -> setLoginForm(LoginFormState(usernameError = R.string.invalid_username))
-        !isPasswordValid(password) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_password))
-        !isPasswordConfirmation(password, passwordConfirmation) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_passwordConfirmation))
+//        !isPasswordValid(password) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_password))
+//        !isPasswordConfirmation(password, passwordConfirmation) -> setLoginForm(LoginFormState(passwordError = R.string.invalid_passwordConfirmation))
         else -> setLoginForm(LoginFormState(isDataValid = true))
       }
     }
@@ -74,7 +74,7 @@ class SignUpViewModel @Inject constructor(
 
   // A placeholder password validation check
   private fun isPasswordValid(password: String): Boolean {
-    return password.length > 5
+    return password.length <= 5
   }
 
   private fun isPasswordConfirmation(password: String, passwordConfirmation: String): Boolean =
