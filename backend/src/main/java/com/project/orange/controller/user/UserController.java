@@ -64,9 +64,9 @@ public class UserController {
             redisUtil.setDataExpire(refreshJwt, user.getEmail(), JwtUtil.REFRESH_TOKEN_VALIDATION_SECOND);
             res.addCookie(accessToken);
             res.addCookie(refreshToken);
-            return new ResponseEntity<>("success",HttpStatus.OK);
+            return new ResponseEntity<>(res,HttpStatus.OK);
         } catch (Exception e){
-            return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("login error",HttpStatus.NOT_FOUND);
         }
     }
 
