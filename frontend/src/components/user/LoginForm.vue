@@ -119,9 +119,11 @@ export default {
         }
         const { data } = await loginUser(userData)
         console.log(data.email)
+        alert("로그인에 성공하였습니다.")
         this.$router.push('/')
       } catch (error) {
         console.log(error)
+        alert("로그인에 실패하였습니다.")
       } finally {
         this.initForm()
       }
