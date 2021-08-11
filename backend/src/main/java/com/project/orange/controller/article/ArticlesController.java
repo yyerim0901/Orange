@@ -30,6 +30,17 @@ public class ArticlesController {
         }
     }
 
+    @GetMapping("/{articleId}")
+    public ResponseEntity<String> articleDetail(@PathVariable Long articleId){
+        Optional<Articles> article = articlesService.selectOne(articleId);
+        if(article != null && !article.isEmpty()) {
+            return new ResponseEntity(article.get(), HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     @ApiOperation(value = "생성된 피드", notes = "<big>생성된 피드</big> 반환")
     @PostMapping("/create")
     public ResponseEntity<String> createArticle(@RequestBody Articles article){
