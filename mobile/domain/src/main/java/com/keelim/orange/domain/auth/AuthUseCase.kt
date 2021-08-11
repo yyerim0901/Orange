@@ -16,7 +16,7 @@ class AuthUseCase(
     loginRepository.logout()
   }
 
-  suspend fun signup(username: String, password: String): Result<LoggedInUser> {
-    return loginRepository.signup(username, password)
+  suspend fun signup(username: String, password: String, nickname:String): Result<LoggedInUser> {
+    return loginRepository.signup(username, password, nickname)
   }
 }
