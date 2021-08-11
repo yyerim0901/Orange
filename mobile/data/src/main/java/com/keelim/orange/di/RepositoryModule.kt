@@ -39,9 +39,11 @@ object RepositoryModule {
   @Singleton
   fun provideNotificationRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
   ): NotificationRepository {
     return NotificationRepositoryImpl(
       dispatcher,
+      apiRequestFactory
     )
   }
 

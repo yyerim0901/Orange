@@ -1,17 +1,19 @@
 package com.keelim.orange.data.api
 
 import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.Notification
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
+import com.keelim.orange.data.response.auth.SignUpResponse
 import com.keelim.orange.data.response.badge.BadgeResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface OrangeService {
@@ -57,7 +59,7 @@ interface OrangeService {
   @POST()
   fun getIngList(
 
-  ):List<Favorite>
+  ): List<Favorite>
 
   @POST
   fun getCompletedList(
@@ -65,6 +67,15 @@ interface OrangeService {
   ): List<Favorite>
 
   @GET("api/badge/list")
-  suspend fun getAllBadgeList():Response<BadgeResponse>
+  suspend fun getAllBadgeList(): Response<BadgeResponse>
 
+  @GET("api/notification/select/{userId}")
+  suspend fun getNotificationList(@Path("userId") userId: Int):Response<Notification>
+
+  @POST("api/user/signup")
+  suspend fun signup(
+    @Field("username") username: String,
+    @Field("nickname") nickname: String,
+    @Field("password") password: String,
+  ): Response<SignUpResponse>
 }
