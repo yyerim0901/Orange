@@ -81,6 +81,11 @@ public class ChallengeController {
     public ResponseEntity<String>  registerNewUserToChallenge(@RequestBody Map<String, Long> parameters){
         Long challengeId = parameters.get("challengeId");
         Long userId = parameters.get("userId");
+        Optional<Challenges> targetChallenge = challengeService.selectByChallengeId(challengeId);
+        if(targetChallenge.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
         if(challengeService.isUserAlreadyInChallenge(challengeId, userId)){
             return new ResponseEntity<>("Already In Challenge",HttpStatus.OK);
         } else {
@@ -88,6 +93,7 @@ public class ChallengeController {
             if(newUser.isEmpty()){
                 return new ResponseEntity<>("Failed", HttpStatus.NO_CONTENT);
             } else {
+                Long managerId = targetChallenge.get().getManagerId();
                 return new ResponseEntity<>("Success", HttpStatus.OK);
             }
         }
@@ -112,7 +118,7 @@ public class ChallengeController {
         }
     }
 
-    @PutMapping("/modify")
+    @PutMapping("/update")
     public ResponseEntity<String> modify(@RequestBody Challenges challenge){
         Optional<Challenges> modifiedChallenge = challengeService.save(challenge);
         if(modifiedChallenge.isEmpty()){
