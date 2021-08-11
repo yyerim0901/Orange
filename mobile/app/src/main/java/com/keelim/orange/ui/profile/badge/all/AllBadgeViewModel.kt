@@ -21,7 +21,7 @@ class AllBadgeViewModel @Inject constructor(
         setState(
             BadgeState.Loading
         )
-        Timber.d("[retrofit] version1")
+        
         try {
             setState(
                 BadgeState.Success(

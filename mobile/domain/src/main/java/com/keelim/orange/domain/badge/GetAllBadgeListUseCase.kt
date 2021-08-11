@@ -8,7 +8,6 @@ class GetAllBadgeListUseCase(
     private val badgeRepository: BadgeRepository
 ) {
     suspend  operator fun invoke():List<Badge>{
-        Timber.d("[retrofit] version1")
         return badgeRepository.getAllBadge()
     }
 }
