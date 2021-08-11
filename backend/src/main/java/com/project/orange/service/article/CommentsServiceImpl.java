@@ -25,11 +25,21 @@ public class CommentsServiceImpl implements CommentsService{
     }
 
     @Override
+    public Optional<Comments> selectOne(Long commentId) { return commentsRepository.findById(commentId); }
+
+    @Override
     public List<Comments> selectAll() { return commentsRepository.findAll(); }
 
     @Override
     public  List<Comments> selectAllByArticleId(Long article) {
         return commentsRepository.findAllByArticle(article);
+    }
+
+    @Override
+    public Optional<Comments> updateComment(Comments comments) {
+        Comments updatedComment = commentsRepository.save(comments);
+
+        return Optional.ofNullable(updatedComment);
     }
 
     @Override

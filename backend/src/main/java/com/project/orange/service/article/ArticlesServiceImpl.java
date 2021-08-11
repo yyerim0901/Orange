@@ -31,6 +31,7 @@ public class ArticlesServiceImpl implements ArticlesService{
     @Override
     public List<Articles> selectAll() { return articlesRepository.findAll(); }
 
+
     @Override
     public Optional<Articles> createArticle(Articles article) {
         Articles newArticle = articlesRepository.save(article);
