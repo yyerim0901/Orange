@@ -118,7 +118,7 @@ export default {
           password: this.password,
         }
         const { data } = await loginUser(userData)
-        console.log(data)
+        console.log(data.email)
         this.$router.push('/')
       } catch (error) {
         console.log(error)
