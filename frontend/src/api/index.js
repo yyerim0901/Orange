@@ -8,10 +8,10 @@ function registerUser(userData) {
   return instance.post('/api/user/signup', userData)
 }
 
-function loginUser() {
-  return instance.post('')
+function loginUser(userData) {
+  return instance.post('/api/user/login', userData)
 }
 
 
 
-export { registerUser }
+export { registerUser, loginUser };
