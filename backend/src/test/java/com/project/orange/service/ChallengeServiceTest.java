@@ -122,4 +122,20 @@ public class ChallengeServiceTest {
 //        challengesRepository.deleteAll();
 //        notificationsRepository.deleteAll();
     }
+
+    @Test
+    void updateExistingChallenge(){
+        //given
+        Long targetChallengeId = 1L;
+        String newChallengeDescribe = "수정된 챌린지 소개";
+        Challenges targetChallenge = challengeService.selectByChallengeId(targetChallengeId).get();
+        targetChallenge.setChallengeDescribe(newChallengeDescribe);
+
+        //when
+        Optional<Challenges> updatedChallenge = challengeService.save(targetChallenge);
+
+        //then
+        assertEquals(true, updatedChallenge.isPresent());
+        assertEquals(newChallengeDescribe, updatedChallenge.get().getChallengeDescribe());
+    }
 }

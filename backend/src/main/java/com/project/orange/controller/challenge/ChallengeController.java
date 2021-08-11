@@ -104,12 +104,16 @@ public class ChallengeController {
                 response.put("result", "Failed");
                 return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
             } else {
+                String challengeTitle = challengeService.selectByChallengeId(challengeId).get().getChallengeTitle();
+                String newUserNickname = newUser.get().getUser().getNickname();
+                String content = challengeTitle + challengeNewMemberRegisteredContent + "@" + newUserNickname;
                 Long managerId = targetChallenge.get().getManagerId();
+
                 Optional<Notifications> notification;
                 notification = notificationService.sendNotificationTo(
                         managerId,
                         challengeNewMemberRegisteredTitle,
-                        challengeNewMemberRegisteredContent
+                        content
                 );
                 if(notification.isPresent()) {
                     response.put("result", "Success");
