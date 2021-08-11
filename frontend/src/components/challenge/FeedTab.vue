@@ -23,11 +23,7 @@
         <CertificationForm />
       </v-tab-item>
       <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            1:1 배틀
-          </v-card-text>
-        </v-card>
+        <BattleForm />
       </v-tab-item>
     </v-tabs-items>
   </v-card>
@@ -36,11 +32,13 @@
 <script>
 import IntroduceForm from '@/components/challenge/IntroduceForm.vue'
 import CertificationForm from '@/components/challenge/CertificationForm.vue'
+import BattleForm from '@/components/challenge/BattleForm.vue'
 export default {
   name: 'FeedTab',
   components: {
     IntroduceForm,
     CertificationForm,
+    BattleForm,
   },
   data () {
     return {
