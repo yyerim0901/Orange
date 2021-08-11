@@ -65,6 +65,6 @@ interface OrangeService {
   ): List<Favorite>
 
   @GET("api/badge/list")
-  fun getAllBadgeList():Response<BadgeResponse>
+  suspend fun getAllBadgeList():Response<BadgeResponse>
 
 }
