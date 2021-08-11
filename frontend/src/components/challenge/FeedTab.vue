@@ -20,11 +20,7 @@
         <IntroduceForm />
       </v-tab-item>
       <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            인증목록
-          </v-card-text>
-        </v-card>
+        <CertificationForm />
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
@@ -39,10 +35,12 @@
 
 <script>
 import IntroduceForm from '@/components/challenge/IntroduceForm.vue'
+import CertificationForm from '@/components/challenge/CertificationForm.vue'
 export default {
   name: 'FeedTab',
   components: {
     IntroduceForm,
+    CertificationForm,
   },
   data () {
     return {
