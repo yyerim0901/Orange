@@ -47,9 +47,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private RedisUtil redisUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                    FilterChain filterChain) throws ServletException, IOException {
 
         final Cookie jwtToken = cookieUtil.getCookie(httpServletRequest,JwtUtil.ACCESS_TOKEN_NAME);
+        //1. 쿠키에 access token을 들고온다.
 
         String email = null; //여기 들어가는게 email이 맞을까,,?
         String jwt = null;
@@ -57,21 +59,26 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String refreshUname = null;
 
         try{
-            if(jwtToken != null){
+            if(jwtToken != null){ //2. 액세스 토큰이 있으면 사용자 정보를 들고오면 됨
                 jwt = jwtToken.getValue();
                 email = jwtUtil.getEmail(jwt); //jwtUtil에서는 username으로 가져온다고 되어있음
             }
             if(email!=null){
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email); //UserDetailService에서도 username으로 들고온다고 되어 있음
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                //UserDetailService에서도 username으로 들고온다고 되어 있음 -? MyUserDetails로 바꿔야하지 않나?
 
-                if(jwtUtil.validateToken(jwt,userDetails)){ //유효한 토큰인지 검사한다.
+                if(jwtUtil.validateToken(jwt,userDetails)){ //액세스 토큰이 유효한 토큰인지 검사한다.
+                    //UsernamePasswordAuthenticationFilter 이거 spring security filter
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-                            = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities()); //getAuthorities...?
+                            = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());//getAuthorities...?
+
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                    //SecurityContextHolder안에 SecurityContext 객체가 있음
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
         }catch (ExpiredJwtException e){
+            //액세스 토큰이 없는 경우
             Cookie refreshToken = cookieUtil.getCookie(httpServletRequest,JwtUtil.REFRESH_TOKEN_NAME);
             if(refreshToken!=null){
                 refreshJwt = refreshToken.getValue();
@@ -80,8 +87,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         }
 
+        //리프레시 토큰이 있을 때
         try{
             if(refreshJwt != null){
+                //key가 refresh token이고, key값을 통해 redis에서 value(email)값을 받아서 refreshUname에 저장
                 refreshUname = redisUtil.getData(refreshJwt);
 
                 if(refreshUname.equals(jwtUtil.getEmail(refreshJwt))){ //JwtUtil에 getEmail 아무리 봐도 고쳐야 할 것 같은데 ㅎ
@@ -93,6 +102,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                     Users user = new Users();
                     user.setEmail(refreshUname); //여기서는 또 email이란 말이지
+                    //리프레시 토큰으로 받은 value값인 email을 setEmail로 넣고, 해당 유저에 대한 액세스 토큰을 만든다.
                     String newToken =jwtUtil.generateToken(user);
 
                     Cookie newAccessToken = cookieUtil.createCookie(JwtUtil.ACCESS_TOKEN_NAME,newToken);

@@ -11,13 +11,12 @@ import com.project.orange.repository.notification.NotificationsRepository;
 import com.project.orange.repository.user.UserRepository;
 import com.project.orange.repository.user.UsersChallengesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.project.orange.management.Constants.*;
 
@@ -50,6 +49,11 @@ public class ChallengeServiceImpl implements ChallengeService{
     private EntityManager entityManager;
 
     @Override
+    public Optional<Challenges> save(Challenges challenge) {
+        return Optional.of(challengesRepository.save(challenge));
+    }
+
+    @Override
     public Optional<Challenges> selectByChallengeId(Long challengeId) {
         return challengesRepository.findById(challengeId);
     }
@@ -57,6 +61,34 @@ public class ChallengeServiceImpl implements ChallengeService{
     @Override
     public List<Challenges> selectAll() {
         return challengesRepository.findAll();
+    }
+
+    @Override
+    public List<Challenges> selectAllSortedByTotalPoint() {
+        return challengesRepository.findAll(Sort.by(Sort.Direction.DESC, "totalPoint"));
+    }
+
+    @Override
+    public List<Challenges> selectAllSortedByStartDate() {
+        return challengesRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
+    }
+
+    @Override
+    public List<Challenges> selectAllByRandom(int number) {
+        List<Challenges> totalList = challengesRepository.findAll();
+        if(totalList.size() <= number){
+            return totalList;
+        } else {
+            List<Challenges> randomSelectedList = new ArrayList<>();
+            Set<Integer> selectedIdxSet = new HashSet<>();
+            do {
+                selectedIdxSet.add((int) (Math.random() * totalList.size()));
+            } while (selectedIdxSet.size() < number);
+            for(int selectedIdx : selectedIdxSet){
+                randomSelectedList.add(totalList.get(selectedIdx));
+            }
+            return randomSelectedList;
+        }
     }
 
     @Override
@@ -72,6 +104,8 @@ public class ChallengeServiceImpl implements ChallengeService{
         manager = UsersChallenges.builder()
                 .user(userRepository.findById(currentChallenge.getManagerId()).get())
                 .challenge(currentChallenge)
+                .isManager(true)
+                .point(initialPointForChallenge)
                 .build();
 
         UsersChallenges currentChallengeManager = usersChallengesRepository.save(manager);
@@ -88,8 +122,8 @@ public class ChallengeServiceImpl implements ChallengeService{
         // BattleMatching 테이블에 존재하지 않는 Challenge 만 선별
         for(Challenges each : samePeriodChallengesList){
             if(each.getChallengeId() != currentChallengeId &&
-                    battleMatchingRepository.findByBlueTeamChallengeId(currentChallengeId).isEmpty() &&
-                    battleMatchingRepository.findByRedTeamChallengeId(currentChallengeId).isEmpty()){
+                    battleMatchingRepository.findByBlueTeamChallengeId(each.getChallengeId()).isEmpty() &&
+                    battleMatchingRepository.findByRedTeamChallengeId(each.getChallengeId()).isEmpty()){
                 matchmakingPool.add(each);
             }
         }
@@ -108,33 +142,92 @@ public class ChallengeServiceImpl implements ChallengeService{
             savedBattleMatching = battleMatchingRepository.save(newBattleMatching);
 
             // 생성될 notification 을 담을 List
-            List<Notifications> notificationsForChallengeMembers;
-            notificationsForChallengeMembers = new ArrayList<>();
-
-            List<Challenges> matchedChallenges = new ArrayList<>();
-            matchedChallenges.add(opponentChallenge);
-            matchedChallenges.add(currentChallenge);
-
-            // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
-            // fetch join ??? -> 한번에 받아온다? JPQL ! N+1 문제 ! <<< 면접 단골 ㄷㄷㄷ
-            for(Challenges eachChallenge : matchedChallenges){
-                List<UsersChallenges> usersChallengesList = eachChallenge.getUsersChallengesList();
-                for(UsersChallenges eachUsersChallenges : usersChallengesList){
-                    Notifications notification = new Notifications();
-                    notification.setUser(eachUsersChallenges.getUser());
-                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
-                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
-                                                        challengeMatchingAcceptedContent);
-
-                    notificationsForChallengeMembers.add(notification);
-                }
-            }
-
-            // 생성한 notification 을 DB에 저장
-            notificationsRepository.saveAll(notificationsForChallengeMembers);
+//            List<Notifications> notificationsForChallengeMembers;
+//            notificationsForChallengeMembers = new ArrayList<>();
+//
+//            List<Challenges> matchedChallenges = new ArrayList<>();
+//            matchedChallenges.add(opponentChallenge);
+//            matchedChallenges.add(currentChallenge);
+//
+//            // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
+//            // fetch join ??? -> 한번에 받아온다? JPQL ! N+1 문제 ! <<< 면접 단골 ㄷㄷㄷ
+//            for(Challenges eachChallenge : matchedChallenges){
+//                List<UsersChallenges> usersChallengesList = eachChallenge.getUsersChallengesList();
+//                for(UsersChallenges eachUsersChallenges : usersChallengesList){
+//                    Notifications notification = new Notifications();
+//                    notification.setUser(eachUsersChallenges.getUser());
+//                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
+//                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
+//                                                        challengeMatchingAcceptedContent);
+//
+//                    notificationsForChallengeMembers.add(notification);
+//                }
+//            }
+//
+//            // 생성한 notification 을 DB에 저장
+//            notificationsRepository.saveAll(notificationsForChallengeMembers);
         }
 
         return Optional.ofNullable(savedBattleMatching);
+    }
+
+    @Override
+    public Optional<UsersChallenges> registerNewUserToChallenge(Long challengeId, Long userId) {
+        Challenges targetChallenge = challengesRepository.getById(challengeId);
+        UsersChallenges newMember;
+        newMember = UsersChallenges.builder()
+                .challenge(targetChallenge)
+                .isManager(false)
+                .point(initialPointForChallenge)
+                .user(userRepository.findById(userId).get())
+                .build();
+
+        targetChallenge.setTotalPoint(targetChallenge.getTotalPoint() + initialPointForChallenge);
+        usersChallengesRepository.save(newMember);
+        challengesRepository.save(targetChallenge);
+
+        return Optional.of(newMember);
+    }
+
+    @Override
+    public boolean isUserAlreadyInChallenge(Long challengeId, Long userId) {
+        Challenges targetChallenge = challengesRepository.getById(challengeId);
+        List<UsersChallenges> challengeMembers = targetChallenge.getUsersChallengesList();
+
+        for(UsersChallenges eachMember : challengeMembers){
+            Users user = eachMember.getUser();
+            if(user.getUserId() == userId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<Notifications> notifyMatchMaking(BattleMatching battleMatching) {
+        Challenges blueTeam = battleMatching.getBlueTeam();
+        Challenges redTeam = battleMatching.getRedTeam();
+
+        List<Challenges> targetTeams =  new ArrayList<>();
+        targetTeams.add(blueTeam);
+        targetTeams.add(redTeam);
+
+        List<Notifications> matchmakingNotificationList = new ArrayList<>();
+
+        for(Challenges eachTeam : targetTeams){
+            List<UsersChallenges> eachTeamMembers = eachTeam.getUsersChallengesList();
+            for(UsersChallenges eachMember : eachTeamMembers){
+                Notifications notification = new Notifications();
+                notification.setUser(eachMember.getUser());
+                notification.setNotificationTitle(challengeMatchingAcceptedTitle);
+                notification.setNotificationContent(eachTeam.getChallengeTitle() +
+                        challengeMatchingAcceptedContent);
+
+                matchmakingNotificationList.add(notification);
+            }
+        }
+
+        return notificationsRepository.saveAll(matchmakingNotificationList);
     }
 
     @Override
