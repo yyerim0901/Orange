@@ -1,16 +1,11 @@
-package com.project.orange.service.user;
+package com.project.orange.service.user.login;
 
 import com.project.orange.entity.user.Salt;
 import com.project.orange.entity.user.Users;
-import com.project.orange.repository.user.SaltRepository;
 import com.project.orange.repository.user.UserRepository;
-import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.UUID;
 
 
 @Service

@@ -1,4 +1,4 @@
-package com.project.orange.service.user;
+package com.project.orange.service.user.login;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;

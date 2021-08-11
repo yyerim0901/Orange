@@ -1,4 +1,4 @@
-package com.project.orange.service.user;
+package com.project.orange.service.user.login;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
