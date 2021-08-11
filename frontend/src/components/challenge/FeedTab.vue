@@ -4,21 +4,20 @@
       v-model="tab"
       centered
     >
-      <v-tab
-        v-for="item in items"
-        :key="item.tab"
-      >
-        {{ item.tab }}
+      <v-tab>
+        소개
+      </v-tab>
+      <v-tab>
+        인증목록
+      </v-tab>
+      <v-tab>
+        1:1 배틀
       </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            소개
-          </v-card-text>
-        </v-card>
+        <IntroduceForm />
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
@@ -39,19 +38,15 @@
 </template>
 
 <script>
+import IntroduceForm from '@/components/challenge/IntroduceForm.vue'
 export default {
   name: 'FeedTab',
-  conponents: {
-    
+  components: {
+    IntroduceForm,
   },
   data () {
     return {
       tab: null,
-      items: [
-        { tab: '소개' },
-        { tab: '인증 목록' },
-        { tab: '1:1 배틀' },
-      ],
     }
   },
 }
