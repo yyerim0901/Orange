@@ -39,6 +39,13 @@ public class ArticlesServiceImpl implements ArticlesService{
     }
 
     @Override
+    public Optional<Articles> updateArticle(Articles article) {
+        Articles updatedArticle = articlesRepository.save(article);
+
+        return Optional.ofNullable(updatedArticle);
+    }
+
+    @Override
     public List<Articles> selectAllByChallengeId(Long challenge) {
         return articlesRepository.findAllByChallenge(challenge);
     }

@@ -2,6 +2,7 @@ package com.project.orange.entity;
 
 import com.project.orange.entity.article.Articles;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.repository.article.ArticlesRepository;
 import com.project.orange.service.article.ArticlesService;
 import com.project.orange.service.challenge.ChallengeService;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,9 @@ public class ArticleTest {
 
     @Autowired
     private ArticlesService articlesService;
+
+    @Autowired
+    private ArticlesRepository articlesRepository;
 
     @Test
     void createNewArticleTest(){
@@ -46,6 +50,8 @@ public class ArticleTest {
 
         Optional<Articles> createdArticle = articlesService.createArticle(article);
         assertEquals(createdArticle.isEmpty(), false);
+
+//        articlesRepository.deleteAll();
 
 
     }
