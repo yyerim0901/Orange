@@ -86,7 +86,7 @@ public class UserController {
             redisUtil.setDataExpire(refreshJwt, user.getEmail(), JwtUtil.REFRESH_TOKEN_VALIDATION_SECOND);
             res.addCookie(accessToken);
             res.addCookie(refreshToken);
-            String error="error";
+
             return new Response("success", "로그인에 성공했습니다.", token, user.getUserId());
 
         } catch (Exception e){
