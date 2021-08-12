@@ -29,9 +29,6 @@
             android:id="@+id/action_navigation_home_to_notificationFragment"
             app:destination="@id/notificationFragment" />
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-        <action
             android:id="@+id/action_navigation_home_to_fightFragment"
             app:destination="@id/fightFragment" />
         <action
@@ -41,12 +38,6 @@
             android:id="@+id/action_navigation_home_to_searchDetailFragment"
             app:destination="@id/searchDetailFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.keelim.orange.ui.dashboard.DashboardFragment"
-        android:label="대시보드"
-        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/notificationFragment"
@@ -59,6 +50,9 @@
         <action
             android:id="@+id/action_feedFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/fightFragment"
@@ -74,7 +68,7 @@
         android:label="RankingFragment" />
     <fragment
         android:id="@+id/seasonFragment"
-        android:name="com.keelim.orange.ui.season.SeasonFragment"
+        android:name="com.keelim.orange.ui.season.season.SeasonFragment"
         android:label="SeasonFragment" />
     <fragment
         android:id="@+id/detailFragment"
@@ -98,4 +92,22 @@
             android:id="@+id/action_searchDetailFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.keelim.orange.ui.profile.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.keelim.orange.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allBadgeFragment"
+        android:name="com.keelim.orange.ui.profile.badge.AllBadgeFragment"
+        android:label="AllBadgeFragment" />
+
+
 </navigation>

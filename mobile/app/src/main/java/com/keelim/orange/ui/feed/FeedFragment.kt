@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,8 +15,10 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.keelim.orange.R
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Fight
 import com.keelim.orange.data.model.Filter
+import com.keelim.orange.data.model.Search
+import com.keelim.orange.data.response.feed.CategoryResponse
+import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.databinding.FragmentFeedBinding
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
@@ -29,7 +32,7 @@ class FeedFragment : Fragment() {
     private val viewModel by viewModels<FeedViewModel>()
     private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid ->
         findNavController().navigate(
-            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid)
+            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString())
         )
     }
 
@@ -101,14 +104,27 @@ class FeedFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
+        searchRecycler.setHasFixedSize(true)
         searchRecycler.adapter = searchRecyclerAdapter
+        searchRecycler.layoutManager = LinearLayoutManager(requireContext())
+        searchBar.setOnClickListener {
+            findNavController().navigate(R.id.searchDetailFragment)
+        }
+
+        btnNoti.setOnClickListener {
+            findNavController().navigate(R.id.notificationFragment)
+        }
+
+        btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
     }
 
     private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
         when (it) {
             is FeedState.UnInitialized -> handleUnInitialized()
             is FeedState.Loading -> handleLoading()
-            is FeedState.Success -> handleSuccess(it.data)
+            is FeedState.Success -> handleSuccess(it.data1, it.data2)
             is FeedState.Error -> handleError()
         }
     }
@@ -121,7 +137,25 @@ class FeedFragment : Fragment() {
         requireActivity().toast("데이터 초기화 중입니다.")
     }
 
-    private fun handleSuccess(data: List<Fight>) {
+    private fun handleSuccess(data1: List<CategoryResponse>, data2: List<ChallengeResponse>) {
+        data1.forEach {
+            binding.chips.addView(
+                Chip(requireContext()).apply {
+                    text = it.categoryName
+                    setChipBackgroundColorResource(R.color.orange)
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                }
+            )
+        }
+
+        val data3 = data2.map {
+            Search(
+                it.challengeId,
+                it.challengeTitle,
+                it.challengeDescribe
+            )
+        }
+        searchRecyclerAdapter.submitList(data3)
     }
 
     private fun handleError() {

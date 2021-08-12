@@ -1,11 +1,10 @@
 package com.project.orange.entity.user;
 
-import com.project.orange.entity.user.Users;
 import lombok.*;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
@@ -24,11 +23,4 @@ public class FollowerFollowing {
     @JoinColumn(name = "to")
     private Users to;
 
-
-//    @Builder
-//    public FollowerFollowing(Long followId, Long from, Long to) {
-//        this.followId = followId;
-//        this.from = from;
-//        this.to = to;
-//    }
 }

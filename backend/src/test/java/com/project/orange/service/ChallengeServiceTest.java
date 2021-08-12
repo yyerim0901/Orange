@@ -1,9 +1,14 @@
 package com.project.orange.service;
 
+import com.project.orange.entity.article.Articles;
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.notification.Notifications;
+import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
+import com.project.orange.repository.notification.NotificationsRepository;
+import com.project.orange.repository.user.UsersChallengesRepository;
 import com.project.orange.service.challenge.ChallengeService;
 import com.project.orange.service.challenge.PeriodService;
 import org.junit.jupiter.api.Test;
@@ -15,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -32,6 +38,10 @@ public class ChallengeServiceTest {
     private ChallengesRepository challengesRepository;
     @Autowired
     private BattleMatchingRepository battleMatchingRepository;
+    @Autowired
+    private UsersChallengesRepository usersChallengesRepository;
+    @Autowired
+    private NotificationsRepository notificationsRepository;
 
     @Test
     void registerNewChallengeTest(){
@@ -40,18 +50,19 @@ public class ChallengeServiceTest {
         Long categoryId = 1L;
         int minMembers = 1;
         int maxMembers = 10;
-        int totalPoint = 100;
+        int totalPoint1 = 250;
+        int totalPoint2 = 200;
         int currentMembers = 1;
         LocalDateTime now = LocalDateTime.now();
         int plusDate = periodService.selectOne(periodId).get().getPeriodDays();
-        assertEquals(plusDate, 30);
+        assertEquals(15, plusDate);
         String profileImagePath = "testPath";
 
-        Long blueTeamManagerId = 1L;
+        Long blueTeamManagerId = 17L;
         String blueTeamTitle = "blueTeamTitle";
         String blueTeamDescribe = "blueTeamDescribe";
 
-        Long redTeamManagerId = 2L;
+        Long redTeamManagerId = 18L;
         String redTeamTitle = "redTeamTitle";
         String redTeamDescribe = "redTeamDescribe";
 
@@ -63,7 +74,7 @@ public class ChallengeServiceTest {
                 .periodId(periodId)
                 .startDate(now)
                 .endDate(now.plusDays(plusDate))
-                .totalPoint(totalPoint)
+                .totalPoint(totalPoint1)
                 .minMembers(minMembers)
                 .maxMembers(maxMembers)
                 .currentMembers(currentMembers)
@@ -78,7 +89,7 @@ public class ChallengeServiceTest {
                 .periodId(periodId)
                 .startDate(now)
                 .endDate(now.plusDays(plusDate))
-                .totalPoint(totalPoint)
+                .totalPoint(totalPoint2)
                 .minMembers(minMembers)
                 .maxMembers(maxMembers)
                 .currentMembers(currentMembers)
@@ -87,13 +98,28 @@ public class ChallengeServiceTest {
 
         //when
         Optional<BattleMatching> matchMakingResult1 = challengeService.registerNewChallenge(blueTeam);
-        assertEquals(matchMakingResult1.isEmpty(), true);
+        List<UsersChallenges> usersChallengesList1 = usersChallengesRepository.findAll();
+        assertEquals(true, matchMakingResult1.isEmpty());
+        if(matchMakingResult1.isPresent()) {
+            List<Notifications> notificationsList1 = challengeService.notifyMatchMaking(matchMakingResult1.get());
+        }
+        //assertEquals(1, usersChallengesList1.size());
 
         Optional<BattleMatching> matchMakingResult2 = challengeService.registerNewChallenge(redTeam);
-        assertEquals(matchMakingResult2.isPresent(), true);
+        List<UsersChallenges> usersChallengesList2 = usersChallengesRepository.findAll();
+        assertEquals(true, matchMakingResult2.isPresent());
+        if(matchMakingResult2.isPresent()) {
+            List<Notifications> notificationsList2 = challengeService.notifyMatchMaking(matchMakingResult2.get());
+        }
+        //assertEquals(2, usersChallengesList2.size());
+
+//        List<Notifications> notificationsList = notificationsRepository.findAll();
+//        assertEquals(2, notificationsList.size());
 
         //then
-        battleMatchingRepository.deleteAll();
-        challengesRepository.deleteAll();
+//        usersChallengesRepository.deleteAll();
+//        battleMatchingRepository.deleteAll();
+//        challengesRepository.deleteAll();
+//        notificationsRepository.deleteAll();
     }
 }

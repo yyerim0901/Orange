@@ -1,5 +1,7 @@
 package com.project.orange.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.project.orange.entity.notification.Notifications;
 import com.project.orange.entity.report.Reports;
 import com.project.orange.entity.article.Articles;
@@ -11,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-@Data
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "userId")
 public class Users {
 
     @Id
@@ -46,14 +48,10 @@ public class Users {
         this.email = email;
     }
 
-
-    //일대다 관계는 엔티티를 하나 이상 참조할 수 있으므로, 자바 컬렉션인 Collection, List, Set, Map 중에 하나를 사용해야한다.(p209)
-    //@OneToMany는 연관관계의 주인이 될 수 없다.
-    //그래서 주인이 아닌 @OneToMany인 애가 주인을 가리키는 용도로 mappedby를 가짐
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<Notifications> notificationsList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY) //한 명의 user는 여러 개의 comment를 가진다.
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     List<Comments> commentsList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")

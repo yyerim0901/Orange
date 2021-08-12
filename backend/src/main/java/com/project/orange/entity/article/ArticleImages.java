@@ -4,25 +4,25 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor//(access = AccessLevel.PROTECTED)
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "images")
+@Table(name = "article_images")
 public class ArticleImages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "image_id")
-    private Long imageId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "article_id")
-    private Long articleId;
+//    @Column(name = "article_id")
+//    private Long articleId;
 
     @Column(name = "image_path")
     private String imagePath;
 
-    @JoinColumn(name="articles")
+    @JoinColumn(name="article_id")
     @ManyToOne
     private Articles article;
 }

@@ -1,5 +1,7 @@
 package com.project.orange.entity.notification;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.IntSequenceGenerator;
 import com.project.orange.entity.user.Users;
 import lombok.*;
 
@@ -9,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
+@JsonIdentityInfo(generator = IntSequenceGenerator.class, property = "notificationId")
 //@Table 속성 추가해야되나,,?
 public class Notifications {
 
@@ -21,8 +24,9 @@ public class Notifications {
     @Column(name = "notification_content")
     private String notificationContent;
 
+
     @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Users user;
     //이걸... private Users user; 이렇게 바꿔야하는 것 같기도 하고,,만약 바꾸면 notifications의 mappedby도 바꿔야함
     //users 와 notifications에서 주인은 notifications => 주인은 그저 위치 상 name

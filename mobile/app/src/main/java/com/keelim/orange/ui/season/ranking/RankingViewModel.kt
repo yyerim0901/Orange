@@ -8,6 +8,7 @@ import com.keelim.orange.domain.season.RankingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class RankingViewModel @Inject constructor(
@@ -24,10 +25,11 @@ class RankingViewModel @Inject constructor(
     try {
       setState(
         RankingState.Success(
-          rankingUseCase.invoke()
+          rankingUseCase.ranking(),
         )
       )
     } catch (e: Exception) {
+      Timber.d(e)
       setState(
         RankingState.Error
       )

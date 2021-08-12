@@ -19,6 +19,24 @@
           </v-chip>
         </div>
       </v-img>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn 
+          text 
+          color="blue"
+          @click="goRanking"
+        >
+          랭킹
+        </v-btn>
+
+        <v-btn 
+          text
+          color="orange"
+          @click="goCreateFeed"
+        >
+          인증하기
+        </v-btn>
+      </v-card-actions>
     </v-card>
     <FeedTab />
   </v-container>
@@ -35,6 +53,14 @@ export default {
     return {
       extext: '나도 김종국',
       expeople: "0명"
+    }
+  },
+  methods: {
+    goCreateFeed() {
+      this.$router.push({path:'/create-feed'}).catch(()=> {});
+    },
+    goRanking() {
+      this.$router.push({path:'/ranking'}).catch(()=> {});
     }
   }
 }

@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor//(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Data
 @Entity
@@ -23,9 +23,12 @@ public class Comments {
     @Column(name = "comment_writetime")
     private Date commentWritetime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id")
-    private Articles article;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "article_id")
+//    private Articles article;
+
+    @Column(name = "article_id")
+    private Long article;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

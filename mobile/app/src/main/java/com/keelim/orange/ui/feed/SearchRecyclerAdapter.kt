@@ -2,7 +2,6 @@ package com.keelim.orange.ui.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ExpandableListView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,7 @@ import com.keelim.orange.data.model.Search
 import com.keelim.orange.databinding.ItemSearchBinding
 
 class SearchRecyclerAdapter(
-    val clickListener:(String) -> Unit,
+    val clickListener:(Int) -> Unit,
 ): ListAdapter<Search, SearchRecyclerAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(val binding:ItemSearchBinding): RecyclerView.ViewHolder(binding.root){

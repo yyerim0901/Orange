@@ -7,10 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/api/notification")
 public class NotificationController {
 
     @Autowired
@@ -29,13 +31,16 @@ public class NotificationController {
 
     // Todo : delete url에 대한 권한 확인 작업 필요
     @DeleteMapping("/delete/{notificationId}")
-    public ResponseEntity<String> delete(@PathVariable Long notificationId){
+    public ResponseEntity<Map<String, String>> delete(@PathVariable Long notificationId){
+        Map<String, String> response = new HashMap<>();
         try {
             notificationService.deleteByNotificationId(notificationId);
-            return new ResponseEntity<>("success", HttpStatus.OK);
+            response.put("result", "success");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         catch (Exception e){
-            return new ResponseEntity<>("failed", HttpStatus.NO_CONTENT);
+            response.put("result", "failed");
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
     }
 }

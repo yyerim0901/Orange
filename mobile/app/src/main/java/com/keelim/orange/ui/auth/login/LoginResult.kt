@@ -5,5 +5,6 @@ package com.keelim.orange.ui.auth.login
  */
 data class LoginResult(
     val success: LoggedInUserView? = null,
-    val error: Int? = null
+    val error: Int? = null,
+    val token: String? = null,
 )

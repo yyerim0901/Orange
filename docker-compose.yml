@@ -1,35 +1,65 @@
-version: '3'
+# Docker compose 버전
+version: "3.7"
+# 가동할 컨테이너 목록
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:latest
+  db:
+    #사용할 이미지(Docker Hub 또는 로컬에 저장된 Image)
+    image: mysql
+    container_name: ssafy_db
+    restart: always
+    # 외부에서 컨테이너 내부로 연결되는 포트 목록
     ports:
-      - "5432:5000"
+      - "3306:3306"
+    # 컨테이너 내에서 사용되는 환경 변수
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_DB=demo
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-  backend:
-    container_name: backend
-    build: ./backend
+      MYSQL_ROOT_PASSWORD: root
+      TZ: "Asia/Seoul"
+      privileged: "true"
+      # 실제 드라이브와 컨테이너의 드라이브를 연결
+      # 컨테이너 내부에서 사용되는 네트워크
+      networks: back
+  redis:
+        image: redis
+        command: redis-server --port 6379
+        restart: always
+        container_name: redis
+        hostname: localhost
+        labels:
+          - "name=redis"
+          - "mode=standalone"
+        ports:
+          - 6379:6379
+  app:
+    # 공개된 Image가 아닌 Dockerfile을 통한 빌드 이미지 사용
+    build:
+      context: ./backend
+    container_name: ssafy_web
+    restart: always
     ports:
-      - "8080:5001"
-    depends_on:
-      - postgres
+      - "8181:8181"
+      - "8443:8443"
+    environment:
+      TZ: "Asia/Seoul"
+      # Spring application.properties DB 설정
+      # SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/ssafy_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://i5b102.p.ssafy.io:3306/project_orange?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true"
+      server.address: 0.0.0.0
+    # depends_on:
+    #   - db
+    networks:
+      - back
   frontend:
     container_name: frontend
     build: ./frontend
     ports:
-      - "3000:5002"
+    - "80:80"
+    expose:
+      - "80"
     depends_on:
-      - backend
-  nginx:
-    container_name: nginx
-    image: proxy
-    build: ./.nginx
-    depends_on:
-      - backend
-      - frontend
-    ports:
-      - 80:80
-      - 443:443
+      - app
+      
+networks:
+  back:
