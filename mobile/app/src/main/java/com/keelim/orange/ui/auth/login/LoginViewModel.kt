@@ -29,7 +29,10 @@ class LoginViewModel @Inject constructor(
     when (val result = authUseCase.login(username, password)) {
       is Result.Success -> {
         setLoginResult(
-          LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+          LoginResult(
+            success = LoggedInUserView(displayName = result.data.displayName),
+            token = result.data.token
+          )
         )
       }
       is Result.Error -> {

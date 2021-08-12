@@ -1,5 +1,6 @@
 package com.keelim.orange.data.api
 
+import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.Favorite
 import com.keelim.orange.data.response.DetailResponse
@@ -84,6 +85,11 @@ interface OrangeService {
   @POST("api/user/signup")
   suspend fun signup(
     @Body call:SignUpCall
+  ): Response<AuthResponse>
+
+  @POST("api/user/login")
+  suspend fun login(
+    @Body call:LoginCall
   ): Response<AuthResponse>
 
   @GET("api/challenge/ranking/point")
