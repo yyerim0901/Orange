@@ -29,9 +29,6 @@
             android:id="@+id/action_navigation_home_to_notificationFragment"
             app:destination="@id/notificationFragment" />
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-        <action
             android:id="@+id/action_navigation_home_to_fightFragment"
             app:destination="@id/fightFragment" />
         <action
@@ -41,12 +38,6 @@
             android:id="@+id/action_navigation_home_to_searchDetailFragment"
             app:destination="@id/searchDetailFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.keelim.orange.ui.dashboard.DashboardFragment"
-        android:label="대시보드"
-        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/notificationFragment"
