@@ -18,7 +18,7 @@ class NotificationViewModel @Inject constructor(
   private var _state = MutableLiveData<NotificationState>(NotificationState.UnInitialized)
   val state: LiveData<NotificationState> get() = _state
 
-  fun fetchData() = viewModelScope.launch {
+  fun fetchData(userId:Int) = viewModelScope.launch {
     setState(
         NotificationState.Loading
     )
@@ -26,7 +26,7 @@ class NotificationViewModel @Inject constructor(
     try {
       setState(
           NotificationState.Success(
-              notificationUseCase.invoke()
+              notificationUseCase.invoke(userId)
           )
       )
     } catch (e: Exception) {

@@ -2,19 +2,16 @@ package com.keelim.orange.data.api
 
 import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.Favorite
-import com.keelim.orange.data.model.Notification
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
-import com.keelim.orange.data.response.auth.SignUpResponse
 import com.keelim.orange.data.response.badge.BadgeResponse
+import com.keelim.orange.data.response.notification.NotificationResponse
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -75,7 +72,7 @@ interface OrangeService {
   suspend fun getAllBadgeList(): Response<BadgeResponse>
 
   @GET("api/notification/select/{userId}")
-  suspend fun getNotificationList(@Path("userId") userId: Int):Response<Notification>
+  suspend fun getNotificationList(@Path("userId") userId: Int):Response<List<NotificationResponse>>
 
   @POST("api/user/signup")
   suspend fun signup(
