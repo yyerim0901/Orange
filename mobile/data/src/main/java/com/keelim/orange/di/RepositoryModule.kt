@@ -18,6 +18,7 @@ import com.keelim.orange.data.repository.history.HistoryRepositoryImpl
 import com.keelim.orange.data.repository.profile.ProfileRepository
 import com.keelim.orange.data.repository.profile.ProfileRepositoryImpl
 import com.keelim.orange.data.repository.season.RankingRepository
+import com.keelim.orange.data.repository.season.RankingRepositoryImpl
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.create.CreateRepositoryImpl
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -71,8 +72,12 @@ object RepositoryModule {
   @Singleton
   fun provideRankingRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
   ): RankingRepository {
-    return RankingRepository(dispatcher)
+    return RankingRepositoryImpl(
+      dispatcher,
+      apiRequestFactory
+    )
   }
 
   @Provides

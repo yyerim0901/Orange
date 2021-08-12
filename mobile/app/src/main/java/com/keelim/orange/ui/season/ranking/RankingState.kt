@@ -7,6 +7,6 @@ sealed class RankingState {
   object Loading : RankingState()
   object Error : RankingState()
   data class Success(
-    val data: List<Ranking>
+    val data: List<Ranking>,
   ) : RankingState()
 }
