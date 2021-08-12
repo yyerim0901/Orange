@@ -9,8 +9,8 @@ import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.NotificationRepositoryImpl
 import com.keelim.orange.data.repository.badge.BadgeRepository
 import com.keelim.orange.data.repository.badge.BadgeRepositoryImpl
-import com.keelim.orange.data.repository.feed.detail.DetailRepository
-import com.keelim.orange.data.repository.feed.detail.DetailRepositoryImpl
+import com.keelim.orange.data.repository.feed.FeedRepository
+import com.keelim.orange.data.repository.feed.FeedRepositoryImpl
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.friends.FriendsRepositoryImpl
 import com.keelim.orange.data.repository.history.HistoryRepository
@@ -109,8 +109,8 @@ object RepositoryModule {
   fun provideDetailRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
     apiRequestFactory: ApiRequestFactory,
-  ): DetailRepository {
-    return DetailRepositoryImpl(
+  ): FeedRepository {
+    return FeedRepositoryImpl(
       apiRequestFactory,
       dispatcher
     )

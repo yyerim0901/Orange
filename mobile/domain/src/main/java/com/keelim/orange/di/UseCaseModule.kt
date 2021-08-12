@@ -1,9 +1,10 @@
 package com.keelim.orange.di
 
+import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.badge.BadgeRepository
-import com.keelim.orange.data.repository.feed.detail.DetailRepository
+import com.keelim.orange.data.repository.feed.FeedRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.history.HistoryRepository
 import com.keelim.orange.data.repository.profile.ProfileRepository
@@ -17,6 +18,8 @@ import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.domain.auth.FavoriteUseCase
 import com.keelim.orange.domain.badge.GetAllBadgeListUseCase
 import com.keelim.orange.domain.badge.MyBadgeListUseCase
+import com.keelim.orange.domain.feed.CategoryUseCase
+import com.keelim.orange.domain.feed.ChallengeListUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.fight.OtherUseCase
@@ -96,7 +99,7 @@ object UseCaseModule {
   @Provides
   @ViewModelScoped
   fun provideGetDetailInformationUseCase(
-    detailRepository: DetailRepository
+    detailRepository: FeedRepository
   ): GetDetailInformationUseCase {
     return GetDetailInformationUseCase(
       detailRepository
@@ -160,5 +163,21 @@ object UseCaseModule {
     return MyBadgeListUseCase(
       badgeRepository
     )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideCategoryUseCase(
+    feedRepository: FeedRepository
+  ):CategoryUseCase{
+    return CategoryUseCase(feedRepository)
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideChallengeListUseCase(
+    feedRepository: FeedRepository
+  ): ChallengeListUseCase {
+    return ChallengeListUseCase(feedRepository)
   }
 }
