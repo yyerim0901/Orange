@@ -1,7 +1,9 @@
 package com.project.orange.service.article;
 
 import com.project.orange.entity.article.Comments;
+import com.project.orange.entity.user.BadgesUsers;
 import com.project.orange.repository.article.CommentsRepository;
+import com.project.orange.repository.user.BadgesUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,29 @@ public class CommentsServiceImpl implements CommentsService{
     @Autowired
     private CommentsRepository commentsRepository;
 
+    // 뱃지 부여 위한 코드
+    @Autowired
+    public BadgesUsersRepository badgesUsersRepository;
+
     @Override
     public Optional<Comments> createComment(Comments comments) {
+        // 처음 댓글 작성시 10번 뱃지 부여 로직
+        List<BadgesUsers> badgesUsers;
+        badgesUsers = badgesUsersRepository.findByUserAndBadge(comments.getUser(), 10L);
+
+        // 처음 얻는 뱃지
+        if(badgesUsers.isEmpty()) {
+            Long badgeId = 10L;
+            Long userId = comments.getUser();
+
+            BadgesUsers badgeUser = BadgesUsers.builder()
+                    .badge(badgeId)
+                    .user(userId)
+                    .badgeCount(1)
+                    .build();
+            badgesUsersRepository.save(badgeUser);
+        }
+
         Comments newComment = commentsRepository.save(comments);
 
         return Optional.ofNullable(newComment);

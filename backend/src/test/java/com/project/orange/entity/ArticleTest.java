@@ -32,7 +32,7 @@ public class ArticleTest {
     void createNewArticleTest(){
         Long challengeId = 1L;
 //        Optional<Challenges> challenge = ChallengeService.selectByChallengeId(challengeId);
-        Long userId = 18L;
+        Long userId = 17L;
         String title = "제목";
         String articleContent = "내용";
         LocalDateTime now = LocalDateTime.now();

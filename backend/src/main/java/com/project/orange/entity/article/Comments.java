@@ -30,9 +30,12 @@ public class Comments {
     @Column(name = "article_id")
     private Long article;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Users user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private Users user;
+
+    @Column(name = "user_id")
+    private Long user;
 
     //    @Builder
 //    public Comments(Long commentId, Long articleId, Long userId, String commentContent, Timestamp commentWritetime) {
