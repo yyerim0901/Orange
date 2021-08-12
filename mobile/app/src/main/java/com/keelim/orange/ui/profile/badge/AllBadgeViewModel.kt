@@ -9,6 +9,7 @@ import com.keelim.orange.domain.badge.MyBadgeListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class AllBadgeViewModel @Inject constructor(
@@ -24,13 +25,15 @@ class AllBadgeViewModel @Inject constructor(
         )
 
         try {
+            val data1 = getAllBadgeListUseCase.invoke()
+            val data2 = myBadgeListUseCase.invoke(userId)
             setState(
                 BadgeState.Success(
-                    getAllBadgeListUseCase.invoke(),
-                    myBadgeListUseCase.invoke(userId)
+                    data1
                 )
             )
         } catch (e: Exception) {
+            Timber.e(e)
             setState(
                 BadgeState.Error
             )

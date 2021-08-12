@@ -6,8 +6,7 @@ sealed class BadgeState {
   object UnInitialized : BadgeState()
   object Loading : BadgeState()
   data class Success(
-    val data1: List<Badge>,
-    val data2:List<Badge>
+    val data: List<Badge>,
   ) : BadgeState()
   object Error : BadgeState()
 }

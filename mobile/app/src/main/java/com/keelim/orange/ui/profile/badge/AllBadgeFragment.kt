@@ -55,8 +55,7 @@ class AllBadgeFragment:Fragment() {
             is BadgeState.UnInitialized -> handleUnInitialized()
             is BadgeState.Loading -> handleLoading()
             is BadgeState.Success -> handleSuccess(
-                it.data1,
-                it.data2,
+                it.data,
             )
             is BadgeState.Error -> handleError()
         }
@@ -70,7 +69,7 @@ class AllBadgeFragment:Fragment() {
         requireActivity().toast("데이터 초기화 중입니다.")
     }
 
-    private fun handleSuccess(data1: List<Badge>, data2: List<Badge>) {
+    private fun handleSuccess(data1: List<Badge>) {
         requireContext().toast(data1.toString())
         badgeAdapter.submitList(data1)
     }
