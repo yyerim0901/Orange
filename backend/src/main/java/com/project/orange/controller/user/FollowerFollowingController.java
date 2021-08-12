@@ -1,8 +1,10 @@
 package com.project.orange.controller.user;
 
+import com.project.orange.entity.Response;
 import com.project.orange.entity.user.Users;
 import com.project.orange.repository.user.FollowFollowingRepository;
 import com.project.orange.repository.user.UserRepository;
+import com.project.orange.service.user.BadgesUsersService;
 import com.project.orange.service.user.FollowerFollowingService;
 import com.project.orange.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class FollowerFollowingController {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public BadgesUsersService badgesUsersService;
+
     @GetMapping("/check/{userId}")
     public ResponseEntity<?> checkMainUser(@PathVariable Long userId){
 
@@ -39,8 +44,20 @@ public class FollowerFollowingController {
     }
 
     @GetMapping("/follow/{fromUserId}/{toUserId}")
-    public void follow(@PathVariable Long fromUserId, @PathVariable Long toUserId){
+    public Response follow(@PathVariable Long fromUserId, @PathVariable Long toUserId){
+
+        Response response = new Response();
+
+        if(followerFollowingService.checkFirstFollower(toUserId)){
+            badgesUsersService.badgeAwardAndNotify(toUserId, 8L);
+            response.setData1("나를 처음 팔로우 한 사람이 있습니다.");
+        }
+        if(followerFollowingService.checkFirstFollowing(fromUserId)){
+            badgesUsersService.badgeAwardAndNotify(fromUserId, 7L);
+            response.setData2("내가 처음 팔로우 한 사람이 있습니다.");
+        }
         followerFollowingService.save(fromUserId,toUserId);
+        return response;
     }
 
     @GetMapping("/unfollow/{fromUserId}/{toUserId}")
