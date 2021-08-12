@@ -6,8 +6,10 @@ import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
+import com.keelim.orange.data.response.auth.AuthResponse
 import com.keelim.orange.data.response.badge.BadgeResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
+import com.keelim.orange.data.response.ranking.RankingResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -82,5 +84,11 @@ interface OrangeService {
   @POST("api/user/signup")
   suspend fun signup(
     @Body call:SignUpCall
-  ): Response<ResponseBody>
+  ): Response<AuthResponse>
+
+  @GET("api/challenge/ranking/point")
+  suspend fun getPointRanking(): Response<RankingResponse>
+
+  @GET("api/challenge/ranking/startdate")
+  suspend fun getStartRanking(): Response<RankingResponse>
 }

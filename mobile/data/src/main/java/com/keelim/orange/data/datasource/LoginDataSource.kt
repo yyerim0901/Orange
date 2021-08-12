@@ -7,8 +7,6 @@ import com.keelim.orange.data.model.Result
 import com.keelim.orange.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import okhttp3.ResponseBody
-import timber.log.Timber
 import java.io.IOException
 import java.util.UUID
 
@@ -35,13 +33,16 @@ class LoginDataSource(
   }
 
   suspend fun signup(username: String, password: String, nickname: String): Result<LoggedInUser> = withContext(dispatcher) {
-      val result = apiRequestFactory.retrofit.signup(SignUpCall(
+      val response = apiRequestFactory.retrofit.signup(SignUpCall(
           username,
           nickname,
           password,
           username
       ))
-      Timber.d("[retrofit] ${result}")
-      return@withContext Result.Error(IOException("Error logging in"))
+      if (response.isSuccessful && response.body()!!.response == "success") {
+          return@withContext Result.Success(LoggedInUser(username, username))
+      } else {
+          return@withContext Result.Error(IOException("Error logging in"))
+      }
     }
 }

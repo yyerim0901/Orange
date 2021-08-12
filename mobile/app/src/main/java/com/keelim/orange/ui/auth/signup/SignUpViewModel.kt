@@ -20,7 +20,6 @@ import com.keelim.orange.data.model.Result
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
   private val authUseCase: AuthUseCase,
-  private val apiRequestFactory: ApiRequestFactory,
 ) : ViewModel() {
 
   private val _loginForm = MutableLiveData<LoginFormState>()
@@ -42,13 +41,6 @@ class SignUpViewModel @Inject constructor(
         )
       }
     }
-//    val result = apiRequestFactory.retrofit.signup(SignUpCall(
-//      username,
-//      nickname,
-//      password,
-//      username
-//    ))
-//    Timber.d("[retrofit] ${result.body()}")
   }
 
   fun loginDataChanged(username: String, password: String, passwordConfirmation: String) =
