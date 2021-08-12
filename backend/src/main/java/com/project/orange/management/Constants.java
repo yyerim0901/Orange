@@ -18,8 +18,10 @@ public final class Constants {
     public static final Long WithBaSilBadgeId = 4L;
     public static final Long TimeForPillsBadgeId = 5L;
     public static final Long TrinityBadgeId = 6L;
+
     public static final Long BeMyColleagueBadgeId = 7L;
     public static final Long NowWeAreFriendsBadgeId = 8L;
+
     public static final Long HereICameBadgeId = 9L;
     public static final Long ReplyCommitteeBadgeId = 10L;
     public static final Long IAmInevitable = 11L;
