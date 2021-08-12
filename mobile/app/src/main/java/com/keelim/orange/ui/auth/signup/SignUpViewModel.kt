@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kakao.sdk.auth.model.OAuthToken
 import com.keelim.orange.R
-import com.keelim.orange.data.model.Result
+import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.ui.auth.login.LoggedInUserView
 import com.keelim.orange.ui.auth.login.LoginFormState
@@ -15,10 +15,12 @@ import com.keelim.orange.ui.auth.login.LoginResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
+import com.keelim.orange.data.model.Result
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
   private val authUseCase: AuthUseCase,
+  private val apiRequestFactory: ApiRequestFactory,
 ) : ViewModel() {
 
   private val _loginForm = MutableLiveData<LoginFormState>()
@@ -28,7 +30,6 @@ class SignUpViewModel @Inject constructor(
   val loginResult: LiveData<LoginResult> = _loginResult
 
   fun signup(username: String, password: String, nickname:String) = viewModelScope.launch {
-    // can be launched in a separate asynchronous job
     when (val result = authUseCase.signup(username, password, nickname)) {
       is Result.Success -> {
         setLoginResult(
@@ -41,6 +42,13 @@ class SignUpViewModel @Inject constructor(
         )
       }
     }
+//    val result = apiRequestFactory.retrofit.signup(SignUpCall(
+//      username,
+//      nickname,
+//      password,
+//      username
+//    ))
+//    Timber.d("[retrofit] ${result.body()}")
   }
 
   fun loginDataChanged(username: String, password: String, passwordConfirmation: String) =

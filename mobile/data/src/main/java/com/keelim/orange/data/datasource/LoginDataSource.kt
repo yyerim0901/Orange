@@ -1,12 +1,13 @@
 package com.keelim.orange.data.datasource
 
 import com.keelim.orange.data.api.ApiRequestFactory
+import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.LoggedInUser
 import com.keelim.orange.data.model.Result
-import com.keelim.orange.data.response.auth.SignUpResponse
 import com.keelim.orange.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 import timber.log.Timber
 import java.io.IOException
 import java.util.UUID
@@ -19,8 +20,7 @@ class LoginDataSource(
   private val apiRequestFactory: ApiRequestFactory,
 ) {
 
-  suspend fun login(username: String, password: String): Result<LoggedInUser> =
-    withContext(dispatcher) {
+  suspend fun login(username: String, password: String): Result<LoggedInUser> = withContext(dispatcher) {
       try {
         // TODO: handle loggedInUser authentication
         val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Jane Doe")
@@ -35,14 +35,13 @@ class LoginDataSource(
   }
 
   suspend fun signup(username: String, password: String, nickname: String): Result<LoggedInUser> = withContext(dispatcher) {
-//      val result = apiRequestFactory.retrofit.signup(username, nickname, password)
-//      if (result.isSuccessful) {
-//        val data = result.body() ?: SignUpResponse("false")
-//        Timber.d("[retrofit data] ${result.toString()}")
-//        if (data.result == "success") {
-//          return@withContext Result.Success(LoggedInUser(UUID.randomUUID().toString(), username))
-//        }
-//      }
+      val result = apiRequestFactory.retrofit.signup(SignUpCall(
+          username,
+          nickname,
+          password,
+          username
+      ))
+      Timber.d("[retrofit] ${result}")
       return@withContext Result.Error(IOException("Error logging in"))
     }
 }

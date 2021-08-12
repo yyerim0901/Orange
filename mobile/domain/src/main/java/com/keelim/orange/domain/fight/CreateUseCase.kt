@@ -7,6 +7,6 @@ class CreateUseCase(
   private val createRepository: CreateRepository,
 ) {
   suspend fun upload(title: String, description: String, bitmap:Bitmap): Boolean {
-    return createRepository.upload(title, description, bitmap)
+    return createRepository.upload(title, description )
   }
 }
