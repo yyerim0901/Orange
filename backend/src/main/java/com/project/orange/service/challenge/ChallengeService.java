@@ -22,6 +22,9 @@ public interface ChallengeService {
     public List<Challenges> selectAllSortedByTotalPoint();
     public List<Challenges> selectAllSortedByStartDate();
     public List<Challenges> selectAllByRandom(int number);
+    public List<Challenges> selectAllByChallengeTitleContaining(String searchTitle);
+    public List<Challenges> selectAllByCategoryId(Long categoryId);
+    public List<Challenges> selectAllByPeriodId(Long periodId);
 
     // registerNewChallenge : 새로운 Challenge 등록 -> Challenge의 BattleMatching 결과 리턴
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge);

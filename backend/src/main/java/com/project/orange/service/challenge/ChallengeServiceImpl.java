@@ -3,11 +3,13 @@ package com.project.orange.service.challenge;
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
 import com.project.orange.entity.notification.Notifications;
+import com.project.orange.entity.user.BadgesUsers;
 import com.project.orange.entity.user.Users;
 import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
 import com.project.orange.repository.notification.NotificationsRepository;
+import com.project.orange.repository.user.BadgesUsersRepository;
 import com.project.orange.repository.user.UserRepository;
 import com.project.orange.repository.user.UsersChallengesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ public class ChallengeServiceImpl implements ChallengeService{
     private final NotificationsRepository notificationsRepository;
     private final UsersChallengesRepository usersChallengesRepository;
     private final UserRepository userRepository;
+    private final BadgesUsersRepository badgesUsersRepository;
 
 
     @Autowired
@@ -37,12 +40,13 @@ public class ChallengeServiceImpl implements ChallengeService{
                                 BattleMatchingRepository battleMatchingRepository,
                                 NotificationsRepository notificationsRepository,
                                 UsersChallengesRepository usersChallengesRepository,
-                                UserRepository userRepository) {
+                                UserRepository userRepository, BadgesUsersRepository badgesUsersRepository) {
         this.challengesRepository = challengesRepository;
         this.battleMatchingRepository = battleMatchingRepository;
         this.notificationsRepository = notificationsRepository;
         this.usersChallengesRepository = usersChallengesRepository;
         this.userRepository = userRepository;
+        this.badgesUsersRepository = badgesUsersRepository;
     }
 
     @Autowired
@@ -92,6 +96,21 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
+    public List<Challenges> selectAllByChallengeTitleContaining(String searchTitle) {
+        return challengesRepository.findAllByChallengeTitleContaining(searchTitle);
+    }
+
+    @Override
+    public List<Challenges> selectAllByCategoryId(Long categoryId) {
+        return challengesRepository.findAllByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<Challenges> selectAllByPeriodId(Long periodId) {
+        return challengesRepository.findAllByPeriodId(periodId);
+    }
+
+    @Override
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
         // entity manager 를 autowire 로 불러와서 flush 혹은 clear
@@ -107,6 +126,9 @@ public class ChallengeServiceImpl implements ChallengeService{
                 .isManager(true)
                 .point(initialPointForChallenge)
                 .build();
+
+        // Todo : 첫 챌린지 주최 -> badge 지급
+        List<BadgesUsers> badgesUsers;
 
         UsersChallenges currentChallengeManager = usersChallengesRepository.save(manager);
 
@@ -140,32 +162,6 @@ public class ChallengeServiceImpl implements ChallengeService{
             newBattleMatching.setBlueTeam(currentChallenge);
             newBattleMatching.setRedTeam(opponentChallenge);
             savedBattleMatching = battleMatchingRepository.save(newBattleMatching);
-
-            // 생성될 notification 을 담을 List
-//            List<Notifications> notificationsForChallengeMembers;
-//            notificationsForChallengeMembers = new ArrayList<>();
-//
-//            List<Challenges> matchedChallenges = new ArrayList<>();
-//            matchedChallenges.add(opponentChallenge);
-//            matchedChallenges.add(currentChallenge);
-//
-//            // 두 챌린지에 소속된 모든 User 에 대한 notification 생성
-//            // fetch join ??? -> 한번에 받아온다? JPQL ! N+1 문제 ! <<< 면접 단골 ㄷㄷㄷ
-//            for(Challenges eachChallenge : matchedChallenges){
-//                List<UsersChallenges> usersChallengesList = eachChallenge.getUsersChallengesList();
-//                for(UsersChallenges eachUsersChallenges : usersChallengesList){
-//                    Notifications notification = new Notifications();
-//                    notification.setUser(eachUsersChallenges.getUser());
-//                    notification.setNotificationTitle(challengeMatchingAcceptedTitle);
-//                    notification.setNotificationContent(eachChallenge.getChallengeTitle() +
-//                                                        challengeMatchingAcceptedContent);
-//
-//                    notificationsForChallengeMembers.add(notification);
-//                }
-//            }
-//
-//            // 생성한 notification 을 DB에 저장
-//            notificationsRepository.saveAll(notificationsForChallengeMembers);
         }
 
         return Optional.ofNullable(savedBattleMatching);
@@ -183,6 +179,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                 .build();
 
         targetChallenge.setTotalPoint(targetChallenge.getTotalPoint() + initialPointForChallenge);
+        targetChallenge.setCurrentMembers(targetChallenge.getCurrentMembers() + 1);
         usersChallengesRepository.save(newMember);
         challengesRepository.save(targetChallenge);
 
@@ -196,7 +193,7 @@ public class ChallengeServiceImpl implements ChallengeService{
 
         for(UsersChallenges eachMember : challengeMembers){
             Users user = eachMember.getUser();
-            if(user.getUserId() == userId){
+            if(user.getUserId().equals(userId)){
                 return true;
             }
         }
