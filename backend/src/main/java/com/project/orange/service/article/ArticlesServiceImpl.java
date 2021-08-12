@@ -45,17 +45,14 @@ public class ArticlesServiceImpl implements ArticlesService{
 
     @Override
     public Optional<Articles> createArticle(Articles article) {
-        // 처음 피드 작성시 뱃지 부여 로직
+        // 처음 피드 작성시 9번 뱃지 부여 로직
         List<BadgesUsers> badgesUsers;
         badgesUsers = badgesUsersRepository.findByUserAndBadge(article.getUser(), 9L);
 
         // 처음 얻는 뱃지
         if(badgesUsers.isEmpty()) {
-//            Optional<Badges> badge = badgesService.selectOne(9L);
             Long badgeId = 9L;
             Long userId = article.getUser();
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            System.out.println(userId);
 
             BadgesUsers badgeUser = BadgesUsers.builder()
                     .badge(badgeId)
