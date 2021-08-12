@@ -1,4 +1,4 @@
-package com.project.orange.service.user;
+package com.project.orange.service.user.login;
 
 import com.project.orange.entity.user.Users;
 import io.jsonwebtoken.Claims;
@@ -44,7 +44,7 @@ public class JwtUtil {
 
     //추출한 Payload로부터 userName을 가져온다.
     public String getEmail(String token) throws ExpiredJwtException {
-        return extractAllClaims(token).get("username",String.class);
+        return extractAllClaims(token).get("email",String.class); //username->email로 변경했음
     }
 
     //토큰이 만료됐는지 안 됐는지 확인

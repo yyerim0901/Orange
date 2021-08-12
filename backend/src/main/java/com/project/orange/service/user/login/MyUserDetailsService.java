@@ -1,4 +1,4 @@
-package com.project.orange.service.user;
+package com.project.orange.service.user.login;
 
 //import com.project.orange.entity.user.SecurityUser;
 import com.project.orange.entity.user.Users;
@@ -23,11 +23,11 @@ public class MyUserDetailsService implements UserDetailsService {
 
     //유저의 정보를 불러와 UsersDetails로 리턴
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Users user = memberRepository.findByUsername(username);
+        Users user = memberRepository.findByEmail(email);
         if(user == null){
-            throw new UsernameNotFoundException(username + " : 사용자 존재하지 않음");
+            throw new UsernameNotFoundException(email + " : 사용자 존재하지 않음");
         }
 
         return new MyUserDetails();
