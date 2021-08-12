@@ -72,5 +72,15 @@ extend('ChallengeTitle', {
     }
   }
 })
+extend('FeedTitle', {
+  validate: value => {
+    let regex = /^([a-zA-Z|가-힣]).{2,45}$/.test(value);
+    if (!regex) {
+      return '제목은 3-45자리 이상 한글, 영문, 숫자만 가능합니다.';
+    } else {
+      return true;
+    }
+  }
+})
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)

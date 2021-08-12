@@ -1,9 +1,11 @@
 <template>
   <v-container>
-    <v-flex justify="space-around">
-      <div class="d-flex">{{ username }}</div>
-      <v-btn class="d-flex" outlined text color='red'>삭제</v-btn> 
-    </v-flex>
+    <v-row justify="space-between">
+      <v-col class="text-h5">{{ username }}</v-col>
+      <v-col class="mb-5">
+        <v-btn outlined text color='red'>삭제</v-btn> 
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

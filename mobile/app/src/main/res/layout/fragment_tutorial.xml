@@ -19,6 +19,7 @@
              />
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="튜토리얼 페이지 입니다."
@@ -27,6 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

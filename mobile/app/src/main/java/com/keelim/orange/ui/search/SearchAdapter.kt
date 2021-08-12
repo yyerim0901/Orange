@@ -21,42 +21,50 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.keelim.orange.data.model.Sample
+import com.keelim.orange.data.model.History
 import com.keelim.orange.databinding.ItemSearchDetailBinding
+import timber.log.Timber
 
-class SearchAdapter : ListAdapter<Sample, SearchAdapter.SearchViewHolder>(diffUtil) {
+class SearchAdapter(
+    private val click: (String) -> Unit,
+) : ListAdapter<History, SearchAdapter.SearchViewHolder>(diffUtil) {
 
 
     inner class SearchViewHolder(
-        private val binding: ItemSearchDetailBinding
+        private val binding: ItemSearchDetailBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(topic: Sample) {
-            binding.name.text = topic.name
+        fun bind(topic: History) {
+            binding.name.text = topic.keyword
+            binding.name.setOnClickListener {
+                Timber.d("왜 안넘어옴 ${topic.keyword}")
+                click(topic.keyword)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val binding = ItemSearchDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchViewHolder(binding)
+        return SearchViewHolder(ItemSearchDetailBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false))
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(currentList[position])
     }
 
     companion object{
-        val diffUtil = object :DiffUtil.ItemCallback<Sample>(){
+        val diffUtil = object : DiffUtil.ItemCallback<History>() {
             override fun areItemsTheSame(
-                oldItem: Sample,
-                newItem: Sample,
+                oldItem: History,
+                newItem: History,
             ): Boolean {
-                return oldItem==newItem
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: Sample,
-                newItem: Sample,
+                oldItem: History,
+                newItem: History,
             ): Boolean {
                 return oldItem==newItem
             }

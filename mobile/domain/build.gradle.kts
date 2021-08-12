@@ -5,7 +5,11 @@ plugins {
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
 }
-apply from: rootProject.file('gradle/android.gradle')
+listOf(
+    "android.gradle",
+).forEach { file ->
+    apply(from = "${rootDir}/gradle/${file}")
+}
 
 dependencies {
     implementation(project(":data"))
@@ -22,5 +26,5 @@ dependencies {
     androidTestImplementation(AppTest.androidJunit)
     androidTestImplementation(AppTest.espressoCore)
     androidTestImplementation(Coroutines.test)
-    
+
 }

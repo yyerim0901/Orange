@@ -26,8 +26,7 @@ class LoginViewModel @Inject constructor(
 
   fun login(username: String, password: String) = viewModelScope.launch {
     // can be launched in a separate asynchronous job
-    val result = authUseCase.login(username, password)
-    when (result) {
+    when (val result = authUseCase.login(username, password)) {
       is Result.Success -> {
         setLoginResult(
           LoginResult(success = LoggedInUserView(displayName = result.data.displayName))

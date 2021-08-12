@@ -12,7 +12,7 @@
             >
               <v-form
                 ref="form"
-                @submit.prevent="LoginForm"
+                @submit.prevent="checkForm"
               >
                 <div class="text-h4 font-weight-black mb-10">
                   로그인
@@ -57,6 +57,7 @@
                   large
                   color="primary"
                   :disabled="invalid"
+                  @click="loginForm"
                 >
                   로그인
                 </v-btn>
@@ -86,6 +87,7 @@
 </template>
 
 <script>
+import { loginUser } from '@/api/index.js'
 import KakaoLogin from '@/components/user/KakaoLogin.vue';
 
 export default {
@@ -94,20 +96,42 @@ export default {
   },
   name: 'LoginForm',
     data: () => ({
-    email: null,
-    password: null,
+    email: "",
+    password: "",
   }),
   methods: {
-    async LoginForm () {
+    async checkForm () {
       const result = await this.$refs.observer.validate()
-        if (result) {
-          alert('로그인 성공')
-        }
+        // if (result) {
+        //   alert('로그인 성공')
+        // }
       },
     KakaoLogin: function () {
       window.Kakao.Auth.authorize({
         redirectUri: "http://localhost:8080/auth/kakao/callback",
       });  
+    },
+    async loginForm() {
+      try {
+        const userData = {
+          email: this.email,
+          password: this.password,
+        }
+        const { data } = await loginUser(userData)
+        console.log(data.email)
+        alert("로그인에 성공하였습니다.")
+        this.$router.push('/')
+      } catch (error) {
+        console.log(error)
+        alert("로그인에 실패하였습니다.")
+      } finally {
+        this.initForm()
+      }
+    
+    },
+    initForm() {
+      this.email = ''
+      this.password = ''
     }
   },
   beforeMount(){

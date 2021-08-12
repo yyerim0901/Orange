@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keelim.orange.common.toast
 import com.keelim.orange.databinding.FragmentSignupBinding
-import com.keelim.orange.ui.auth.login.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,7 +72,6 @@ class SignUpFragment : Fragment() {
     }
 
     login.setOnClickListener {
-      binding.loading.visibility = View.VISIBLE
       signupViewModel.signup(
         username.text.toString(),
         password.text.toString()
@@ -97,7 +95,6 @@ class SignUpFragment : Fragment() {
 
     signupViewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
       loginResult ?: return@observe
-      binding.loading.visibility = View.GONE
       loginResult.error?.let {
         requireContext().toast(it)
       }

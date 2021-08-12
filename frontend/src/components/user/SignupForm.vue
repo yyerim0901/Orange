@@ -12,7 +12,7 @@
             >
               <v-form
                 ref="form"
-                @submit.prevent="signUp"
+                @submit.prevent="checkForm"
               >
                 <div class="text-h4 font-weight-black mb-10">
                   회원가입
@@ -111,9 +111,11 @@
                   rounded
                   color="primary"
                   :disabled="invalid"
+                  @click="signUp"
                 >
                   가입하기
                 </v-btn>
+                <!-- <p>{{ logMessage }}</p> -->
                 <div class="mt-5">
                   <router-link
                     class="text-decoration-none"
@@ -138,22 +140,54 @@
 </template>
 
 <script>
+import { registerUser } from '@/api/index'
+
 export default {
   name: 'SignupForm',
   data: () => ({
-    email: null,
-    username: null,
-    nickname: null,
-    password: null,
-    passwordConfirm: null,
+    email: "",
+    username: "",
+    nickname: "",
+    password: "",
+    passwordConfirm: "",
+    // log
+    // logMessage: "",
   }),
   methods: {
-    async signUp () {
+    async checkForm () {
       const result = await this.$refs.observer.validate()
-      if (result) {
-        alert('가입 완료')
+      // if (result) {
+      //   alert('가입 완료')
+      // }
+    },
+    async signUp() {
+      try {
+        const userData = {
+          email: this.email,
+          username: this.username,
+          nickname: this.nickname,
+          password: this.password,
+          passwordConfirm: this.passwordConfirm,
+        }
+        const { data } = await registerUser(userData)
+        // console.log(data.username)
+        console.log(data)
+        alert("회원 가입에 성공하였습니다.")
+        // this.logMessage = `${data.username} 님이 가입되었습니다.`
+      } catch (error) {
+        console.log(error)
+        alert("회원 가입에 실패하였습니다.")
+      } finally {
+        this.initForm();
       }
-    }
+    },
+    initForm() {
+      this.email = ''
+      this.username = ''
+      this.nickname = ''
+      this.password = ''
+      this.passwordConfirm = ''
+    },
   }
 }
 </script>

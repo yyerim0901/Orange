@@ -7,19 +7,19 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class FriendsRepositoryImpl(
-    private val dispatcher: CoroutineDispatcher,
-    private val apiRequestFactory: ApiRequestFactory,
+  private val dispatcher: CoroutineDispatcher,
+  private val apiRequestFactory: ApiRequestFactory,
 ) : FriendsRepository {
-    override suspend fun sendInvite(myId: String, uid: String): ResultResponse =
-        withContext(dispatcher) {
-            return@withContext apiRequestFactory.retrofit.invite(uid).body()
-                ?: ResultResponse("false")
-        }
-
-    override suspend fun getFriends(myId: String): FriendsResponse = withContext(dispatcher) {
-        return@withContext apiRequestFactory.retrofit.getFriends(myId).body()
-            ?: FriendsResponse(
-                emptyList()
-            )
+  override suspend fun sendInvite(myId: String, uid: String): ResultResponse =
+    withContext(dispatcher) {
+      return@withContext apiRequestFactory.retrofit.invite(uid).body()
+        ?: ResultResponse("false")
     }
+
+  override suspend fun getFriends(myId: String): FriendsResponse = withContext(dispatcher) {
+    return@withContext apiRequestFactory.retrofit.getFriends(myId).body()
+      ?: FriendsResponse(
+        emptyList()
+      )
+  }
 }

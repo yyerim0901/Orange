@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -102,6 +101,17 @@ class FeedFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         searchRecycler.adapter = searchRecyclerAdapter
+        searchBar.setOnClickListener {
+            findNavController().navigate(R.id.searchDetailFragment)
+        }
+
+        btnNoti.setOnClickListener {
+            findNavController().navigate(R.id.notificationFragment)
+        }
+
+        btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
     }
 
     private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {

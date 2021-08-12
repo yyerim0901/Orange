@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.auth.login
+package com.keelim.orange.ui.auth.signup
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -9,6 +9,9 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.keelim.orange.R
 import com.keelim.orange.data.model.Result
 import com.keelim.orange.domain.auth.AuthUseCase
+import com.keelim.orange.ui.auth.login.LoggedInUserView
+import com.keelim.orange.ui.auth.login.LoginFormState
+import com.keelim.orange.ui.auth.login.LoginResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -26,8 +29,7 @@ class SignUpViewModel @Inject constructor(
 
   fun signup(username: String, password: String) = viewModelScope.launch {
     // can be launched in a separate asynchronous job
-    val result = authUseCase.signup(username, password)
-    when (result) {
+    when (val result = authUseCase.signup(username, password)) {
       is Result.Success -> {
         setLoginResult(
           LoginResult(success = LoggedInUserView(displayName = result.data.displayName))

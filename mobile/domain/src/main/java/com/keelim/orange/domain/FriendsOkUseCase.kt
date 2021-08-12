@@ -7,11 +7,11 @@ import com.keelim.orange.data.response.ResultResponse
 class FriendsOkUseCase(
   private val friendsRepository: FriendsRepository
 ) {
-  suspend fun invite(myId:String, uid:String): ResultResponse{
+  suspend fun invite(myId: String, uid: String): ResultResponse {
     return friendsRepository.sendInvite(myId, uid)
   }
 
-  suspend fun getFriends(myId:String): FriendsResponse{
+  suspend fun getFriends(myId: String): FriendsResponse {
     return friendsRepository.getFriends(myId)
   }
 }
