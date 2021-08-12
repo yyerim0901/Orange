@@ -12,6 +12,7 @@ import com.project.orange.repository.notification.NotificationsRepository;
 import com.project.orange.repository.user.BadgesUsersRepository;
 import com.project.orange.repository.user.UserRepository;
 import com.project.orange.repository.user.UsersChallengesRepository;
+import com.project.orange.service.user.BadgesUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class ChallengeServiceImpl implements ChallengeService{
     private final NotificationsRepository notificationsRepository;
     private final UsersChallengesRepository usersChallengesRepository;
     private final UserRepository userRepository;
-    private final BadgesUsersRepository badgesUsersRepository;
+    private final BadgesUsersService badgesUsersService;
 
 
     @Autowired
@@ -40,13 +41,14 @@ public class ChallengeServiceImpl implements ChallengeService{
                                 BattleMatchingRepository battleMatchingRepository,
                                 NotificationsRepository notificationsRepository,
                                 UsersChallengesRepository usersChallengesRepository,
-                                UserRepository userRepository, BadgesUsersRepository badgesUsersRepository) {
+                                UserRepository userRepository, BadgesUsersRepository badgesUsersRepository,
+                                BadgesUsersService badgesUsersService) {
         this.challengesRepository = challengesRepository;
         this.battleMatchingRepository = battleMatchingRepository;
         this.notificationsRepository = notificationsRepository;
         this.usersChallengesRepository = usersChallengesRepository;
         this.userRepository = userRepository;
-        this.badgesUsersRepository = badgesUsersRepository;
+        this.badgesUsersService = badgesUsersService;
     }
 
     @Autowired
@@ -126,11 +128,10 @@ public class ChallengeServiceImpl implements ChallengeService{
                 .isManager(true)
                 .point(initialPointForChallenge)
                 .build();
+        Long managerId = manager.getUser().getUserId();
 
         // Todo : 첫 챌린지 주최 -> badge 지급
-        List<BadgesUsers> badgesUsers;
-
-        UsersChallenges currentChallengeManager = usersChallengesRepository.save(manager);
+        Optional<BadgesUsers> hostChallengeFirstTime = badgesUsersService.badgeAward(managerId, HandsInHandsBadgeId);
 
         // 현재 저장한 Challenge 정보
         Long currentChallengeId = currentChallenge.getChallengeId();
@@ -177,6 +178,9 @@ public class ChallengeServiceImpl implements ChallengeService{
                 .point(initialPointForChallenge)
                 .user(userRepository.findById(userId).get())
                 .build();
+
+        Optional<BadgesUsers> joinChallengeFirstTime;
+        joinChallengeFirstTime = badgesUsersService.badgeAward(userId, HereComesANewChallengerBadgeId);
 
         targetChallenge.setTotalPoint(targetChallenge.getTotalPoint() + initialPointForChallenge);
         targetChallenge.setCurrentMembers(targetChallenge.getCurrentMembers() + 1);
