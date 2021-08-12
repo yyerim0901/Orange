@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.profile.badge.all
+package com.keelim.orange.ui.profile.badge
 
 import com.keelim.orange.data.model.Badge
 

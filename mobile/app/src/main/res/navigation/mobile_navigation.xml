@@ -115,7 +115,7 @@
     </fragment>
     <fragment
         android:id="@+id/allBadgeFragment"
-        android:name="com.keelim.orange.ui.profile.badge.all.AllBadgeFragment"
+        android:name="com.keelim.orange.ui.profile.badge.AllBadgeFragment"
         android:label="AllBadgeFragment" />
 
 

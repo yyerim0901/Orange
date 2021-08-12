@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.profile.badge.all
+package com.keelim.orange.ui.profile.badge
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
