@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/report")
@@ -39,13 +41,16 @@ public class ReportController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<String> insert(@RequestBody Reports report){
+    public ResponseEntity<Map<String, String>> insert(@RequestBody Reports report){
+        Map<String, String> response = new HashMap<>();
         try{
             reportService.insert(report);
-            return new ResponseEntity<>("success", HttpStatus.OK);
+            response.put("result", "success");
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         catch (Exception e){
-            return new ResponseEntity<>("failed", HttpStatus.NO_CONTENT);
+            response.put("result", "failed");
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         }
     }
 }

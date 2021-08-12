@@ -42,6 +42,19 @@ public class CommentsController {
         }
     }
 
+    @PutMapping("/update/{commentId}")
+    public ResponseEntity<String> updateComment(@PathVariable Long commentId, @RequestBody Comments comments){
+        Optional<Comments> updateComment = commentsService.selectOne(commentId);
+
+        updateComment.ifPresent(selectComment->{
+            selectComment.setCommentContent(comments.getCommentContent());
+
+            commentsService.updateComment(selectComment);
+        });
+        return new ResponseEntity(updateComment, HttpStatus.OK);
+    }
+
+
     @GetMapping("/article/{articleId}")
     public ResponseEntity<List<Comments>> selectAllByArticleId(@PathVariable Long articleId){
         List<Comments> list;
@@ -53,7 +66,7 @@ public class CommentsController {
         }
     }
 
-    @DeleteMapping("/delete/{commentId")
+    @DeleteMapping("/delete/{commentId}")
     public ResponseEntity<String> delete(@PathVariable Long commentId){
         try {
             commentsService.deleteByCommentId(commentId);

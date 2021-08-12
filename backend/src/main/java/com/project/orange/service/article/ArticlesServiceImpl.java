@@ -1,9 +1,14 @@
 package com.project.orange.service.article;
 
 import com.project.orange.entity.article.Articles;
+import com.project.orange.entity.badge.Badges;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.user.BadgesUsers;
 import com.project.orange.repository.article.ArticlesRepository;
+import com.project.orange.repository.badge.BadgeRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
+import com.project.orange.repository.user.BadgesUsersRepository;
+import com.project.orange.service.badge.BadgesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +27,43 @@ public class ArticlesServiceImpl implements ArticlesService{
     @Autowired
     private ArticlesRepository articlesRepository;
 
-    @Autowired
-    private ChallengesRepository challengesRepository;
-
     @Override
     public Optional<Articles> selectOne(Long articleId) { return articlesRepository.findById(articleId); }
 
     @Override
     public List<Articles> selectAll() { return articlesRepository.findAll(); }
 
+//    @Autowired
+//    private ArticlesService articlesService;
+
+    @Autowired
+    private BadgesService badgesService;
+
+    @Autowired
+    public BadgesUsersRepository badgesUsersRepository;
+
+
     @Override
     public Optional<Articles> createArticle(Articles article) {
+        // 처음 피드 작성시 뱃지 부여 로직
+        List<BadgesUsers> badgesUsers;
+        badgesUsers = badgesUsersRepository.findByUserAndBadge(article.getUser(), 9L);
+
+        // 처음 얻는 뱃지
+        if(badgesUsers.isEmpty()) {
+//            Optional<Badges> badge = badgesService.selectOne(9L);
+            Long badgeId = 9L;
+            Long userId = article.getUser();
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println(userId);
+
+            BadgesUsers badgeUser = BadgesUsers.builder()
+                    .badge(badgeId)
+                    .user(userId)
+                    .build();
+            badgesUsersRepository.save(badgeUser);
+        }
+
         Articles newArticle = articlesRepository.save(article);
 
         return Optional.ofNullable(newArticle);
@@ -49,6 +80,11 @@ public class ArticlesServiceImpl implements ArticlesService{
     public List<Articles> selectAllByChallengeId(Long challenge) {
         return articlesRepository.findAllByChallenge(challenge);
     }
+
+//    @Override
+//    public List<Articles> selectAllByUserId(Long user) {
+//        return articlesRepository.findAllByUser(user);
+//    }
 
     @Override
     public void deleteByArticleId(Long articleId) { articlesRepository.deleteById(articleId); }
