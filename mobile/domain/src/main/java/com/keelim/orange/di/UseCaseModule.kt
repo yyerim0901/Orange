@@ -16,6 +16,7 @@ import com.keelim.orange.domain.SendTokenServerUseCase
 import com.keelim.orange.domain.auth.AuthUseCase
 import com.keelim.orange.domain.auth.FavoriteUseCase
 import com.keelim.orange.domain.badge.GetAllBadgeListUseCase
+import com.keelim.orange.domain.badge.MyBadgeListUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.fight.OtherUseCase
@@ -145,8 +146,18 @@ object UseCaseModule {
   @ViewModelScoped
   fun provideGetAllBadgeListUseCase(
     badgeRepository: BadgeRepository,
-  ): GetAllBadgeListUseCase{
+  ): GetAllBadgeListUseCase {
     return GetAllBadgeListUseCase(
+      badgeRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideMyBadgeListUseCase(
+    badgeRepository: BadgeRepository,
+  ): MyBadgeListUseCase {
+    return MyBadgeListUseCase(
       badgeRepository
     )
   }

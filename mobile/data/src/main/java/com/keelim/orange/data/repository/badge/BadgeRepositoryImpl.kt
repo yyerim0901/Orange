@@ -18,4 +18,14 @@ class BadgeRepositoryImpl(
             )
         }
     }
+
+    override suspend fun getMyBadge(userId: Int): List<Badge> = withContext(dispatcher) {
+        apiRequestFactory.retrofit.getMyBadge(userId).body()!!.mapNotNull {
+            Badge(
+                it.badgeTitle,
+                it.badgeDescribe,
+                it.badgeImagePath
+            )
+        }
+    }
 }

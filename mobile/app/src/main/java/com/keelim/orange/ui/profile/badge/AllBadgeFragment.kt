@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,6 +24,11 @@ class AllBadgeFragment:Fragment() {
         requireActivity().toast("뱃지 입니다")
     }
 
+    private val userId by lazy {
+        val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
+        return@lazy pref.getInt("userId", 20)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,7 +42,7 @@ class AllBadgeFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeData()
-        viewModel.fetchData()
+        viewModel.fetchData(userId)
     }
 
     override fun onDestroyView() {
@@ -48,7 +54,10 @@ class AllBadgeFragment:Fragment() {
         when (it) {
             is BadgeState.UnInitialized -> handleUnInitialized()
             is BadgeState.Loading -> handleLoading()
-            is BadgeState.Success -> handleSuccess(it.data)
+            is BadgeState.Success -> handleSuccess(
+                it.data1,
+                it.data2,
+            )
             is BadgeState.Error -> handleError()
         }
     }
@@ -61,16 +70,16 @@ class AllBadgeFragment:Fragment() {
         requireActivity().toast("데이터 초기화 중입니다.")
     }
 
-    private fun handleSuccess(data: List<Badge>) {
-        requireContext().toast(data.toString())
-        badgeAdapter.submitList(data)
+    private fun handleSuccess(data1: List<Badge>, data2: List<Badge>) {
+        requireContext().toast(data1.toString())
+        badgeAdapter.submitList(data1)
     }
 
     private fun handleError() {
         requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
     }
 
-    private fun initViews() = with(binding){
+    private fun initViews() = with(binding) {
         badgeRecycler.adapter = badgeAdapter
         badgeRecycler.layoutManager = LinearLayoutManager(requireContext())
         badgeRecycler.apply {

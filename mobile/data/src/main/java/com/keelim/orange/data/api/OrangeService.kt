@@ -71,6 +71,11 @@ interface OrangeService {
   @GET("api/badge/list")
   suspend fun getAllBadgeList(): Response<BadgeResponse>
 
+  @GET("api/badge/list/{userId}")
+  suspend fun getMyBadge(
+    @Path("userId") userId: Int
+  ): Response<BadgeResponse>
+
   @GET("api/notification/select/{userId}")
   suspend fun getNotificationList(@Path("userId") userId: Int):Response<List<NotificationResponse>>
 
