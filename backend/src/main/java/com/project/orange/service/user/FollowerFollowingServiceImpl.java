@@ -1,23 +1,23 @@
-package com.project.orange.service.user;
-
-import com.project.orange.entity.user.FollowerFollowing;
-import com.project.orange.repository.user.FollowFollowingRepository;
-import com.project.orange.repository.user.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-@Service
-public class FollowerFollowingServiceImpl implements FollowerFollowingService {
-
-    @Autowired
-    FollowFollowingRepository followFollowingRepository;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    UserRepository userRepository;
-
+//package com.project.orange.service.user;
+//
+//import com.project.orange.entity.user.FollowerFollowing;
+//import com.project.orange.repository.user.FollowFollowingRepository;
+//import com.project.orange.repository.user.UserRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//@Service
+//public class FollowerFollowingServiceImpl implements FollowerFollowingService {
+//
+//    @Autowired
+//    FollowFollowingRepository followFollowingRepository;
+//
+//    @Autowired
+//    UserService userService;
+//
+//    @Autowired
+//    UserRepository userRepository;
+//
 //    @Override
 //    public void save(Long fromUserId, Long toUserId){
 //        FollowerFollowing fw = new FollowerFollowing();
@@ -39,5 +39,5 @@ public class FollowerFollowingServiceImpl implements FollowerFollowingService {
 //            return false; // 팔로우 안되어있음
 //        return true; // 되어있음
 //    }
-
-}
+//
+//}
