@@ -4,4 +4,5 @@ import com.keelim.orange.data.model.Badge
 
 interface BadgeRepository {
     suspend fun getAllBadge(): List<Badge>
+    suspend fun getMyBadge(userId: Int): List<Badge>
 }

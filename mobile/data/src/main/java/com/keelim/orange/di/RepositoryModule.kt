@@ -9,8 +9,8 @@ import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.NotificationRepositoryImpl
 import com.keelim.orange.data.repository.badge.BadgeRepository
 import com.keelim.orange.data.repository.badge.BadgeRepositoryImpl
-import com.keelim.orange.data.repository.feed.detail.DetailRepository
-import com.keelim.orange.data.repository.feed.detail.DetailRepositoryImpl
+import com.keelim.orange.data.repository.feed.FeedRepository
+import com.keelim.orange.data.repository.feed.FeedRepositoryImpl
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.friends.FriendsRepositoryImpl
 import com.keelim.orange.data.repository.history.HistoryRepository
@@ -18,6 +18,7 @@ import com.keelim.orange.data.repository.history.HistoryRepositoryImpl
 import com.keelim.orange.data.repository.profile.ProfileRepository
 import com.keelim.orange.data.repository.profile.ProfileRepositoryImpl
 import com.keelim.orange.data.repository.season.RankingRepository
+import com.keelim.orange.data.repository.season.RankingRepositoryImpl
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.create.CreateRepositoryImpl
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -39,9 +40,11 @@ object RepositoryModule {
   @Singleton
   fun provideNotificationRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
   ): NotificationRepository {
     return NotificationRepositoryImpl(
       dispatcher,
+      apiRequestFactory
     )
   }
 
@@ -69,8 +72,12 @@ object RepositoryModule {
   @Singleton
   fun provideRankingRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
   ): RankingRepository {
-    return RankingRepository(dispatcher)
+    return RankingRepositoryImpl(
+      dispatcher,
+      apiRequestFactory
+    )
   }
 
   @Provides
@@ -102,8 +109,8 @@ object RepositoryModule {
   fun provideDetailRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
     apiRequestFactory: ApiRequestFactory,
-  ): DetailRepository {
-    return DetailRepositoryImpl(
+  ): FeedRepository {
+    return FeedRepositoryImpl(
       apiRequestFactory,
       dispatcher
     )

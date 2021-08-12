@@ -65,7 +65,8 @@ class SignUpFragment : Fragment() {
       if (actionId == EditorInfo.IME_ACTION_DONE) {
         signupViewModel.signup(
           username.text.toString(),
-          password.text.toString()
+          password.text.toString(),
+          nickname.text.toString()
         )
       }
       false
@@ -74,7 +75,8 @@ class SignUpFragment : Fragment() {
     login.setOnClickListener {
       signupViewModel.signup(
         username.text.toString(),
-        password.text.toString()
+        password.text.toString(),
+        nickname.text.toString()
       )
     }
   }

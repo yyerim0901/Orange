@@ -95,7 +95,6 @@ class SearchDetailFragment: Fragment() {
       }
 
       private fun handleUnInitialized() {
-//        requireActivity().toast("데이터 초기화 중입니다.")
       }
       private fun handleLoading() {
         requireActivity().toast("검색 이력을 불러오고 있습니다.")

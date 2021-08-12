@@ -1,6 +1,6 @@
 package com.keelim.orange.ui.noti
 
-import com.keelim.orange.data.model.Notification
+import com.keelim.orange.data.model.notification.Notification
 
 sealed class NotificationState {
   object UnInitialized : NotificationState()

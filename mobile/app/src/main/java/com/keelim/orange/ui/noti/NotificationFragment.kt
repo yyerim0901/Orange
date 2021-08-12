@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Notification
+import com.keelim.orange.data.model.notification.Notification
 import com.keelim.orange.databinding.FragmentNotificationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,10 +18,17 @@ class NotificationFragment : Fragment() {
   private var _binding: FragmentNotificationBinding? = null
   private val binding get() = _binding!!
   private val viewModel by viewModels<NotificationViewModel>()
+
+  private val userId by lazy {
+    val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
+    return@lazy pref.getInt("userId", 20)
+  }
+
   private val notificationAdapter by lazy {
     NotificationAdapter(
       clickListener = {
-        viewModel.friendsOk()
+        viewModel.deleteNoti(it)
+        viewModel.fetchData(userId)
       }
     )
   }
@@ -38,7 +46,7 @@ class NotificationFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
-    viewModel.fetchData()
+    viewModel.fetchData(userId)
   }
 
   override fun onDestroyView() {
@@ -67,6 +75,11 @@ class NotificationFragment : Fragment() {
     requireActivity().toast("데이터 초기화 중입니다.")
   }
   private fun handleSuccess(data: List<Notification>) {
+    if(data.isEmpty()){
+      binding.tvNoData.visibility = View.VISIBLE
+    } else{
+      binding.tvNoData.visibility = View.INVISIBLE
+    }
     notificationAdapter.submitList(data)
   }
 
