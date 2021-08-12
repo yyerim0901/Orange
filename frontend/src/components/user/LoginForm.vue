@@ -118,7 +118,8 @@ export default {
           password: this.password,
         }
         const { data } = await loginUser(userData)
-        console.log(data.email)
+        console.log(data.data)
+        this.$store.commit('setToken', data.data)
         alert("로그인에 성공하였습니다.")
         this.$router.push('/')
       } catch (error) {

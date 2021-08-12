@@ -5,16 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    email: '',
+    data: '',
   },
   getters: {
-    isLogin(state) {
-      return state.email !== ''
-    }
+
   },
-  mutations : {
-    setEmail(state, email) {
-      state.eamil = email
+  mutations: {
+    setToken(state, data) {
+      state.data = data
     }
   },
 })
