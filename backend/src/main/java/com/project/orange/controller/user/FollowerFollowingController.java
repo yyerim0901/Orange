@@ -6,6 +6,7 @@ import com.project.orange.repository.user.UserRepository;
 import com.project.orange.service.user.FollowerFollowingService;
 import com.project.orange.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +28,14 @@ public class FollowerFollowingController {
     public UserRepository userRepository;
 
     @GetMapping("/check/{userId}")
-    public ResponseEntity<String> checkMainUser(@PathVariable Long userId){
+    public ResponseEntity<?> checkMainUser(@PathVariable Long userId){
 
         String loginUserId = SecurityContextHolder.getContext().getAuthentication().getName(); //여기서 email을 얻어옴
+        System.out.println(loginUserId);
         Users userInfo = userRepository.findByEmail(loginUserId);
 
         followerFollowingService.checkFollowing(userInfo.getUserId(), userId);
-        ////////////얘는 뭘 return 해야하지,,?
-        return null;
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     @GetMapping("/follow/{fromUserId}/{toUserId}")
@@ -44,6 +45,7 @@ public class FollowerFollowingController {
 
     @GetMapping("/unfollow/{fromUserId}/{toUserId}")
     public void unFollow(@PathVariable Long fromUserId, @PathVariable Long toUserId){
+
         followerFollowingService.deleteByFollowingIdAndFollowerId(fromUserId,toUserId);
     }
 

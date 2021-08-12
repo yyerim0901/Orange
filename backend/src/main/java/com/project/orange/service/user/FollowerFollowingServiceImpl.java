@@ -31,7 +31,7 @@ public class FollowerFollowingServiceImpl implements FollowerFollowingService {
 
     @Override
     public void deleteByFollowingIdAndFollowerId(Long fromUserId, Long toUserId){
-        followFollowingRepository.deleteByFromAndTo(fromUserId,toUserId);
+        followFollowingRepository.deleteByFromUserIdAndToUserId(fromUserId,toUserId);
     }
 
     @Override
