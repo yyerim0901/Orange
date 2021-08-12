@@ -2,8 +2,6 @@ package com.keelim.orange.data.response.notification
 
 
 import com.google.gson.annotations.SerializedName
-import com.keelim.orange.data.model.notification.Notification
-import com.keelim.orange.data.model.notification.NotificationType
 
 data class NotificationResponse(
   @SerializedName("notificationContent")
@@ -15,38 +13,33 @@ data class NotificationResponse(
   @SerializedName("user")
   val user: User
 ) {
-  fun responseToNotification() = Notification(
-    title =notificationTitle,
-    description = notificationContent,
-    type = NotificationType.NOTIFICATION_BASIC,
-  )
   data class User(
     @SerializedName("articlesList")
-    val articlesList: List<Any>,
+    val articlesList: List<Articles>,
     @SerializedName("badgesUsersList")
-    val badgesUsersList: List<Any>,
+    val badgesUsersList: List<BadgesUsers>,
     @SerializedName("commentsList")
-    val commentsList: List<Any>,
+    val commentsList: List<Comments>,
     @SerializedName("email")
     val email: String,
     @SerializedName("followerList")
-    val followerList: List<Any>,
+    val followerList: List<Follower>,
     @SerializedName("followingList")
-    val followingList: List<Any>,
+    val followingList: List<Following>,
     @SerializedName("nickname")
     val nickname: String,
     @SerializedName("notificationsList")
-    val notificationsList: List<Int>,
+    val notificationsList: List<Any>,
     @SerializedName("password")
     val password: String,
     @SerializedName("profileImagePath")
-    val profileImagePath: Any,
+    val profileImagePath: String,
     @SerializedName("role")
-    val role: Any,
+    val role: String,
     @SerializedName("salt")
     val salt: Salt,
     @SerializedName("token")
-    val token: Any,
+    val token: String,
     @SerializedName("userId")
     val userId: Int,
     @SerializedName("username")
@@ -54,6 +47,79 @@ data class NotificationResponse(
     @SerializedName("usersChallengesList")
     val usersChallengesList: List<UsersChallenges>
   ) {
+    data class Articles(
+      @SerializedName("articleContent")
+      val articleContent: String,
+      @SerializedName("articleId")
+      val articleId: Int,
+      @SerializedName("articleWritetime")
+      val articleWritetime: String,
+      @SerializedName("challenge")
+      val challenge: Int,
+      @SerializedName("commentsList")
+      val commentsList: List<Comments>,
+      @SerializedName("imagesList")
+      val imagesList: List<Images>,
+      @SerializedName("title")
+      val title: String,
+      @SerializedName("user")
+      val user: Int,
+      @SerializedName("verified")
+      val verified: Boolean
+    ) {
+      data class Comments(
+        @SerializedName("article")
+        val article: Int,
+        @SerializedName("commentContent")
+        val commentContent: String,
+        @SerializedName("commentId")
+        val commentId: Int,
+        @SerializedName("commentWritetime")
+        val commentWritetime: String
+      )
+
+      data class Images(
+        @SerializedName("id")
+        val id: Int,
+        @SerializedName("imagePath")
+        val imagePath: String
+      )
+    }
+
+    data class BadgesUsers(
+      @SerializedName("badge")
+      val badge: Int,
+      @SerializedName("badgeCount")
+      val badgeCount: Int,
+      @SerializedName("id")
+      val id: Int,
+      @SerializedName("representBadge")
+      val representBadge: Boolean,
+      @SerializedName("user")
+      val user: Int
+    )
+
+    data class Comments(
+      @SerializedName("article")
+      val article: Int,
+      @SerializedName("commentContent")
+      val commentContent: String,
+      @SerializedName("commentId")
+      val commentId: Int,
+      @SerializedName("commentWritetime")
+      val commentWritetime: String
+    )
+
+    data class Follower(
+      @SerializedName("followId")
+      val followId: Int
+    )
+
+    data class Following(
+      @SerializedName("followId")
+      val followId: Int
+    )
+
     data class Salt(
       @SerializedName("id")
       val id: Int,
@@ -69,13 +135,11 @@ data class NotificationResponse(
       @SerializedName("manager")
       val manager: Boolean,
       @SerializedName("point")
-      val point: Int,
-      @SerializedName("user")
-      val user: Int
+      val point: Int
     ) {
       data class Challenge(
         @SerializedName("articlesList")
-        val articlesList: List<Any>,
+        val articlesList: List<Articles>,
         @SerializedName("categoryId")
         val categoryId: Int,
         @SerializedName("challengeDescribe")
@@ -103,8 +167,47 @@ data class NotificationResponse(
         @SerializedName("totalPoint")
         val totalPoint: Int,
         @SerializedName("usersChallengesList")
-        val usersChallengesList: List<Int>
-      )
+        val usersChallengesList: List<Any>
+      ) {
+        data class Articles(
+          @SerializedName("articleContent")
+          val articleContent: String,
+          @SerializedName("articleId")
+          val articleId: Int,
+          @SerializedName("articleWritetime")
+          val articleWritetime: String,
+          @SerializedName("challenge")
+          val challenge: Int,
+          @SerializedName("commentsList")
+          val commentsList: List<Comments>,
+          @SerializedName("imagesList")
+          val imagesList: List<Images>,
+          @SerializedName("title")
+          val title: String,
+          @SerializedName("user")
+          val user: Int,
+          @SerializedName("verified")
+          val verified: Boolean
+        ) {
+          data class Comments(
+            @SerializedName("article")
+            val article: Int,
+            @SerializedName("commentContent")
+            val commentContent: String,
+            @SerializedName("commentId")
+            val commentId: Int,
+            @SerializedName("commentWritetime")
+            val commentWritetime: String
+          )
+
+          data class Images(
+            @SerializedName("id")
+            val id: Int,
+            @SerializedName("imagePath")
+            val imagePath: String
+          )
+        }
+      }
     }
   }
 }

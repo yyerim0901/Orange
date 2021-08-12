@@ -9,6 +9,7 @@ import com.keelim.orange.domain.NotificationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class NotificationViewModel @Inject constructor(
@@ -30,17 +31,29 @@ class NotificationViewModel @Inject constructor(
           )
       )
     } catch (e: Exception) {
-      setState(
-          NotificationState.Error
-      )
+        Timber.e(e)
+        setState(
+            NotificationState.Error
+        )
     }
   }
 
-  private fun setState(state: NotificationState) {
-    _state.value = state
-  }
+    private fun setState(state: NotificationState) {
+        _state.value = state
+    }
 
-  fun friendsOk() = viewModelScope.launch {
+    fun friendsOk() = viewModelScope.launch {
 //    friendsOkUseCase.invoke()
-  }
+    }
+
+    fun deleteNoti(noti: Int) = viewModelScope.launch {
+        val result = notificationUseCase.delete(noti)
+        if (result.result == "success") {
+
+        } else {
+            setState(
+                NotificationState.Error
+            )
+        }
+    }
 }

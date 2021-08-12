@@ -1,15 +1,17 @@
 package com.keelim.orange.ui.noti
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.keelim.orange.data.model.notification.Notification
+import com.keelim.orange.data.model.notification.NotificationType
 import com.keelim.orange.databinding.ItemNotificationBinding
 
 class NotificationAdapter(
-  val clickListener: () -> Unit,
+  val clickListener: (Int) -> Unit,
 ) : ListAdapter<Notification, NotificationAdapter.ViewHolder>(diffUtil) {
 
   inner class ViewHolder(val binding: ItemNotificationBinding) :
@@ -17,9 +19,11 @@ class NotificationAdapter(
     fun bind(item: Notification) = with(binding) {
       title.text = item.title
       description.text = item.description
-
-      root.setOnClickListener {
-        clickListener.invoke()
+      if (item.type == NotificationType.NOTIFICATION_BASIC) {
+        accept.visibility = View.INVISIBLE
+      }
+      btnClose.setOnClickListener {
+        clickListener(item.id)
       }
     }
   }

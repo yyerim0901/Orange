@@ -18,19 +18,20 @@ class NotificationFragment : Fragment() {
   private var _binding: FragmentNotificationBinding? = null
   private val binding get() = _binding!!
   private val viewModel by viewModels<NotificationViewModel>()
-  private val notificationAdapter by lazy {
-    NotificationAdapter(
-      clickListener = {
-        viewModel.friendsOk()
-      }
-    )
-  }
 
   private val userId by lazy {
     val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
     return@lazy pref.getInt("userId", 20)
   }
-  //TODO
+
+  private val notificationAdapter by lazy {
+    NotificationAdapter(
+      clickListener = {
+        viewModel.deleteNoti(it)
+        viewModel.fetchData(userId)
+      }
+    )
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
