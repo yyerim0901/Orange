@@ -45,4 +45,14 @@ public class UserServiceImpl implements UserService{
     public void deleteById(Long userId){
         userRepository.deleteById(userId);
     }
+
+    @Override
+    public boolean checkNicknameDuplicate(String nickname){
+        return userRepository.existsByNickname(nickname);
+    }
+
+    @Override
+    public boolean checkEmailDuplicate(String email){
+        return userRepository.existsByEmail(email);
+    }
 }

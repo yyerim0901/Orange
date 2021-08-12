@@ -56,6 +56,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/check/email/{email}")
+    @ApiOperation(value = "email", notes = "이메일이 중복되면 true, 중복아니면 false 반환")
+    public ResponseEntity<Boolean> checkEmailDuplicate(@PathVariable String email){
+        return ResponseEntity.ok(userService.checkEmailDuplicate(email));
+    }
+
+    @GetMapping("/check/nickname/{nickname}")
+    @ApiOperation(value = "nickname", notes = "닉네임이 중복되면 true, 중복아니면 false 반환")
+    public ResponseEntity<Boolean> checkNicknameDuplicate(@PathVariable String nickname){
+        return ResponseEntity.ok(userService.checkNicknameDuplicate(nickname));
+    }
+
+
     @PostMapping("/login")
     public Response login(@RequestBody RequestLoginUser loginUser,
                           HttpServletRequest req,
