@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface BadgesUsersService {
     public List<BadgesUsers> selectAllByUserId(Long user);
-    public Optional<BadgesUsers> badgeAward(Long userId, Long badgeId);
+    public Optional<BadgesUsers> badgeAwardAndNotify(Long userId, Long badgeId);
 }

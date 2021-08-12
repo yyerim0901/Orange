@@ -1,17 +1,20 @@
 package com.project.orange.service.challenge;
 
+import com.project.orange.entity.badge.Badges;
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
 import com.project.orange.entity.notification.Notifications;
 import com.project.orange.entity.user.BadgesUsers;
 import com.project.orange.entity.user.Users;
 import com.project.orange.entity.user.UsersChallenges;
+import com.project.orange.repository.badge.BadgeRepository;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
 import com.project.orange.repository.notification.NotificationsRepository;
 import com.project.orange.repository.user.BadgesUsersRepository;
 import com.project.orange.repository.user.UserRepository;
 import com.project.orange.repository.user.UsersChallengesRepository;
+import com.project.orange.service.nofitication.NotificationService;
 import com.project.orange.service.user.BadgesUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,7 +36,9 @@ public class ChallengeServiceImpl implements ChallengeService{
     private final NotificationsRepository notificationsRepository;
     private final UsersChallengesRepository usersChallengesRepository;
     private final UserRepository userRepository;
+    private final BadgeRepository badgeRepository;
     private final BadgesUsersService badgesUsersService;
+    private final NotificationService notificationService;
 
 
     @Autowired
@@ -41,14 +46,19 @@ public class ChallengeServiceImpl implements ChallengeService{
                                 BattleMatchingRepository battleMatchingRepository,
                                 NotificationsRepository notificationsRepository,
                                 UsersChallengesRepository usersChallengesRepository,
-                                UserRepository userRepository, BadgesUsersRepository badgesUsersRepository,
-                                BadgesUsersService badgesUsersService) {
+                                UserRepository userRepository,
+                                BadgesUsersRepository badgesUsersRepository,
+                                BadgeRepository badgeRepository,
+                                BadgesUsersService badgesUsersService,
+                                NotificationService notificationService) {
         this.challengesRepository = challengesRepository;
         this.battleMatchingRepository = battleMatchingRepository;
         this.notificationsRepository = notificationsRepository;
         this.usersChallengesRepository = usersChallengesRepository;
         this.userRepository = userRepository;
+        this.badgeRepository = badgeRepository;
         this.badgesUsersService = badgesUsersService;
+        this.notificationService = notificationService;
     }
 
     @Autowired
@@ -131,7 +141,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         Long managerId = manager.getUser().getUserId();
 
         // Todo : 첫 챌린지 주최 -> badge 지급
-        Optional<BadgesUsers> hostChallengeFirstTime = badgesUsersService.badgeAward(managerId, HandsInHandsBadgeId);
+        badgesUsersService.badgeAwardAndNotify(managerId, HandsInHandsBadgeId);
 
         // 현재 저장한 Challenge 정보
         Long currentChallengeId = currentChallenge.getChallengeId();
@@ -179,8 +189,25 @@ public class ChallengeServiceImpl implements ChallengeService{
                 .user(userRepository.findById(userId).get())
                 .build();
 
+        Long targetChallengeCategoryId = targetChallenge.getCategoryId();
+
+        // 첫 챌린지 참여 뱃지
         Optional<BadgesUsers> joinChallengeFirstTime;
-        joinChallengeFirstTime = badgesUsersService.badgeAward(userId, HereComesANewChallengerBadgeId);
+        badgesUsersService.badgeAwardAndNotify(userId, HereComesANewChallengerBadgeId);
+
+        // 첫 "운동" 챌린지 참여 뱃지
+        if(targetChallengeCategoryId.equals(WorkoutCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(userId, WowFriendsItsYourBaldManBadgeId);
+        }
+        // 첫 "음식" 챌린지 참여 뱃지
+        else if(targetChallengeCategoryId.equals(FoodCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(userId, WithBaSilBadgeId);
+        }
+        // 첫 "영양제" 챌린지 참여 뱃지
+        else if(targetChallengeCategoryId.equals(SupplementCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(userId, TimeForPillsBadgeId);
+        }
+
 
         targetChallenge.setTotalPoint(targetChallenge.getTotalPoint() + initialPointForChallenge);
         targetChallenge.setCurrentMembers(targetChallenge.getCurrentMembers() + 1);
