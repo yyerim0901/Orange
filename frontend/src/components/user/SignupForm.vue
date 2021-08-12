@@ -115,7 +115,7 @@
                 >
                   가입하기
                 </v-btn>
-                <p>{{ logMessage }}</p>
+                <!-- <p>{{ logMessage }}</p> -->
                 <div class="mt-5">
                   <router-link
                     class="text-decoration-none"
@@ -151,28 +151,35 @@ export default {
     password: "",
     passwordConfirm: "",
     // log
-    logMessage: "",
+    // logMessage: "",
   }),
   methods: {
     async checkForm () {
       const result = await this.$refs.observer.validate()
-      if (result) {
-        alert('가입 완료')
-      }
+      // if (result) {
+      //   alert('가입 완료')
+      // }
     },
     async signUp() {
-      const userData = {
-        email: this.email,
-        username: this.username,
-        nickname: this.nickname,
-        password: this.password,
-        passwordConfirm: this.passwordConfirm,
+      try {
+        const userData = {
+          email: this.email,
+          username: this.username,
+          nickname: this.nickname,
+          password: this.password,
+          passwordConfirm: this.passwordConfirm,
+        }
+        const { data } = await registerUser(userData)
+        // console.log(data.username)
+        console.log(data)
+        alert("회원 가입에 성공하였습니다.")
+        // this.logMessage = `${data.username} 님이 가입되었습니다.`
+      } catch (error) {
+        console.log(error)
+        alert("회원 가입에 실패하였습니다.")
+      } finally {
+        this.initForm();
       }
-      const { data } = await registerUser(userData)
-      console.log(data.username)
-      console.log(data)
-      this.logMessage = `${data.username} 님이 가입되었습니다.`
-      this.initForm();
     },
     initForm() {
       this.email = ''

@@ -1,14 +1,14 @@
 <template>
   <v-card flat>
     <v-card-text>
-      소개
+      1:1 배틀
     </v-card-text>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: 'IntroduceForm',
+  name: 'BattleForm'
 }
 </script>
 

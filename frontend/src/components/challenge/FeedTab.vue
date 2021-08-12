@@ -4,54 +4,45 @@
       v-model="tab"
       centered
     >
-      <v-tab
-        v-for="item in items"
-        :key="item.tab"
-      >
-        {{ item.tab }}
+      <v-tab>
+        소개
+      </v-tab>
+      <v-tab>
+        인증목록
+      </v-tab>
+      <v-tab>
+        1:1 배틀
       </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            소개
-          </v-card-text>
-        </v-card>
+        <IntroduceForm />
       </v-tab-item>
       <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            인증목록
-          </v-card-text>
-        </v-card>
+        <CertificationForm />
       </v-tab-item>
       <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            1:1 배틀
-          </v-card-text>
-        </v-card>
+        <BattleForm />
       </v-tab-item>
     </v-tabs-items>
   </v-card>
 </template>
 
 <script>
+import IntroduceForm from '@/components/challenge/IntroduceForm.vue'
+import CertificationForm from '@/components/challenge/CertificationForm.vue'
+import BattleForm from '@/components/challenge/BattleForm.vue'
 export default {
   name: 'FeedTab',
-  conponents: {
-    
+  components: {
+    IntroduceForm,
+    CertificationForm,
+    BattleForm,
   },
   data () {
     return {
       tab: null,
-      items: [
-        { tab: '소개' },
-        { tab: '인증 목록' },
-        { tab: '1:1 배틀' },
-      ],
     }
   },
 }

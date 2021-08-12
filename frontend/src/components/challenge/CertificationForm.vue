@@ -1,14 +1,14 @@
 <template>
   <v-card flat>
     <v-card-text>
-      소개
-    </v-card-text>
+        인증목록
+      </v-card-text>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: 'IntroduceForm',
+  name: 'CertificationForm',
 }
 </script>
 
