@@ -18,7 +18,7 @@ class FavoriteAdapter(
 
   inner class ViewHolder(val binding: ItemFavoriteBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Favorite) = with(binding) {
+    fun bind(item: Favorite, position: Int) = with(binding) {
       favoriteTitle.text = item.title
       favoriteCount.text = item.challengeId.toString()
       favoriteImg.load(item.imageLink)
@@ -31,6 +31,10 @@ class FavoriteAdapter(
       btnExpand.setOnClickListener {
         val show = toggleLayout(!item.isFull, it, layoutExpand)
         item.isFull = show
+      }
+
+      btnDelete.setOnClickListener {
+
       }
     }
 
@@ -57,7 +61,7 @@ class FavoriteAdapter(
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(currentList[position])
+    holder.bind(currentList[position], position)
   }
 
   companion object {

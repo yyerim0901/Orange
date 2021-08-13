@@ -16,7 +16,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteFragment : Fragment() {
   private var _binding: FragmentFavoriteBinding? = null
   private val binding get() = _binding!!
-  private val favoriteAdapter = FavoriteAdapter { requireActivity().toast("hello") }
+  private val favoriteAdapter = FavoriteAdapter(
+    clickListener = {
+      requireActivity().toast("hello")
+    }
+  )
   private val viewModel by viewModels<FavoriteViewModel>()
 
   override fun onCreateView(
