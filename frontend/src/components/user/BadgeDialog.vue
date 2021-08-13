@@ -25,6 +25,7 @@
           <div class="d-flex justify-space-between">
             <v-card v-for="(badge, index) in badges" :key="index">
               <v-card-text cols="3">{{ badge.badgeTitle }}</v-card-text>
+              <v-card-text cols="3">{{ badge.badgeDescribe }}</v-card-text>
             </v-card>
           </div>
           <v-card-actions>
