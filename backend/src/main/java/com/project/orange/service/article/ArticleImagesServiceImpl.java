@@ -21,4 +21,9 @@ public class ArticleImagesServiceImpl implements ArticleImagesService{
 
     @Override
     public List<ArticleImages> selectAll() { return articleImagesRepository.findAll(); }
+
+    @Override
+    public List<ArticleImages> saveAll(List<ArticleImages> articleImagesList) {
+        return articleImagesRepository.saveAll(articleImagesList);
+    }
 }
