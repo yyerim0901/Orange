@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -23,7 +24,11 @@ class DetailViewModel @Inject constructor(
     try {
       setState(
         DetailState.Success(
-          getDetailInformationUseCase.invoke(uid)
+        DetailResponse(
+          "https://images.unsplash.com/photo-1511381939415-e44015466834?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=838&q=80",
+          "이것은 샘플 정보입니다.",
+          "이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다."
+        )
         )
       )
     } catch (e: Exception) {

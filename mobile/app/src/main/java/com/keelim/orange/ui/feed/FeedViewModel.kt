@@ -25,9 +25,9 @@ class FeedViewModel @Inject constructor(
 
     setState(
       FeedState.Success(
-//        categoryUseCase.invoke(),
+        categoryUseCase.invoke(),
         emptyList(),
-        challengeListUseCase.invoke(),
+//        challengeListUseCase.invoke(),
 //        emptyList(),
       )
     )
