@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.profile
+package com.keelim.orange.ui.profile.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keelim.orange.R
-import com.keelim.orange.common.toast
 import com.keelim.orange.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
