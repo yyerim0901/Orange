@@ -106,11 +106,11 @@ export default {
         //   alert('로그인 성공')
         // }
       },
-    KakaoLogin: function () {
-      window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:8080/auth/kakao/callback",
-      });  
-    },
+    // KakaoLogin: function () {
+    //   window.Kakao.Auth.authorize({
+    //     redirectUri: "http://localhost:8080/auth/kakao/callback",
+    //   });  
+    // },
     async loginForm() {
       try {
         const userData = {
@@ -118,8 +118,11 @@ export default {
           password: this.password,
         }
         const { data } = await loginUser(userData)
-        console.log(data.data)
-        this.$store.commit('setToken', data.data)
+        console.log(data)
+        console.log(data.data1)
+        console.log(data.data2)
+        this.$store.commit('setToken', data.data1)
+        this.$store.commit('setUserId', data.data2)
         alert("로그인에 성공하였습니다.")
         this.$router.push('/')
       } catch (error) {
@@ -135,9 +138,9 @@ export default {
       this.password = ''
     }
   },
-  beforeMount(){
+  // beforeMount(){
   
-  }
+  // }
 }
 
 
