@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface FollowFollowingRepository extends JpaRepository<FollowerFollowing, Long> {
@@ -18,4 +19,6 @@ public interface FollowFollowingRepository extends JpaRepository<FollowerFollowi
     int countByFromUserId(Long fromUserId);
     int countByToUserId(Long toUserId);
 
+    List<FollowerFollowing> findByFromUserId(Long fromUserId);
+    List<FollowerFollowing> findByToUserId(Long toUserId);
 }
