@@ -87,7 +87,8 @@ gantt
     develp->master :done, 08-12,1d
 	Challange		 	   :done, 08-06,7d
 	search                 :done, 08-12, 2d
-	sync (unit)                   :done, 08-14, 2d 
+	api-sync :done,08-11, 6d
+
 	
     section Mobile
     Feed		  	:done, 07-26, 5d
@@ -101,7 +102,8 @@ gantt
     profile	 	 		:done, 08-02,5d
 	Challange		 	   :done, 08-06,7d
 	search                 :done, 08-12, 2d
-	sync (unit)                   :done, 08-14, 2d 
+		api-sync :done,08-11, 6d
+
 	
     section Backend
     auth   	  		:done, 07-27, 4d

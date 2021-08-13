@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.profile
+package com.keelim.orange.ui.profile.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -57,10 +57,11 @@
             app:layout_constraintEnd_toStartOf="@id/btn_noti"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btn_heart"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_heart"
             app:layout_constraintEnd_toStartOf="@id/btn_badge"

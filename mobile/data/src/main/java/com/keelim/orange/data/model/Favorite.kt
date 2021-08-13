@@ -4,6 +4,7 @@ data class Favorite(
   val imageLink: String,
   val title: String,
   val level: String,
-  val number: String,
+  val challengeId: Int,
   val rating: Float,
+  var isFull:Boolean,
 )

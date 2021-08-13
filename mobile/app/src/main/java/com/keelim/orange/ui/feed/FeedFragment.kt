@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.google.android.material.chip.Chip
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -23,18 +24,22 @@ import com.keelim.orange.databinding.FragmentFeedBinding
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
 import org.json.JSONObject
-import timber.log.Timber
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<FeedViewModel>()
-    private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid ->
+    private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid, color ->
         findNavController().navigate(
-            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString())
+            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color)
         )
     }
+    private val colors = arrayOf(
+        R.color.bg_orange,
+        R.color.orange,
+        R.color.orange_w,
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,14 +72,13 @@ class FeedFragment : Fragment() {
         )
         remoteConfig.fetchAndActivate().addOnCompleteListener {
             if (it.isSuccessful) {
-                val quotes = parseJson(remoteConfig.getString("recents"))
-                Timber.d("$quotes")
+                val quotes = parseJson1(remoteConfig.getString("recents"))
                 displayPager(quotes)
             }
         }
     }
 
-    private fun parseJson(json: String): List<Filter> {
+    private fun parseJson1(json: String): List<Filter> {
         val jsonArray = JSONArray(json)
         var jsonList = emptyList<JSONObject>()
         for (index in 0 until jsonArray.length()) {
@@ -96,6 +100,7 @@ class FeedFragment : Fragment() {
             recents.forEach { element ->
                 addView(
                     Chip(requireContext()).apply {
+                        setChipBackgroundColorResource(colors.random())
                         text = element.value + ">"
                     }
                 )
@@ -103,7 +108,10 @@ class FeedFragment : Fragment() {
         }
     }
 
+
     private fun initViews() = with(binding) {
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(searchRecycler)
         searchRecycler.setHasFixedSize(true)
         searchRecycler.adapter = searchRecyclerAdapter
         searchRecycler.layoutManager = LinearLayoutManager(requireContext())
@@ -142,20 +150,20 @@ class FeedFragment : Fragment() {
             binding.chips.addView(
                 Chip(requireContext()).apply {
                     text = it.categoryName
-                    setChipBackgroundColorResource(R.color.orange)
-                    setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    setChipBackgroundColorResource(colors.random())
                 }
             )
         }
+        searchRecyclerAdapter.submitList(datas)
 
-        val data3 = data2.map {
-            Search(
-                it.challengeId,
-                it.challengeTitle,
-                it.challengeDescribe
-            )
-        }
-        searchRecyclerAdapter.submitList(data3)
+//        val data3 = data2.map {
+//            Search(
+//                it.challengeId,
+//                it.challengeTitle,
+//                it.challengeDescribe
+//            )
+//        }
+//        searchRecyclerAdapter.submitList(data3)
     }
 
     private fun handleError() {
@@ -164,5 +172,14 @@ class FeedFragment : Fragment() {
 
     companion object {
         fun newInstance() = FeedFragment()
+        val datas:List<Search> = listOf(
+            Search(1, "232323", "1"),
+            Search(2, "232323", "2"),
+            Search(3, "232323", "3"),
+            Search(4, "232323", "4"),
+            Search(5, "232323", "5"),
+            Search(6, "232323", "6"),
+            Search(7, "232323", "7"),
+        )
     }
 }

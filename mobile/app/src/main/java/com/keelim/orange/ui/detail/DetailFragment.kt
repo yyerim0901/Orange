@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -35,6 +36,7 @@ class DetailFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initViews()
     observeData()
     viewModel.fetchData(args.uid)
   }
@@ -75,5 +77,9 @@ class DetailFragment : Fragment() {
 
   private fun handleError() {
     requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
+  }
+
+  private fun initViews() = with(binding){
+    root.background = args.color.toDrawable()
   }
 }
