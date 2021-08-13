@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-dialog
         v-model="dialog"
-        class="my-3"
+       
         width="600px"
       >
         <template v-slot:activator="{ on, attrs }">
@@ -19,25 +19,18 @@
         <v-spacer></v-spacer>
         <v-card>
           <v-card-text>
-            <p class="text-center text-h6 font-weight-bold">나의 대표 배지</p>
-            <p class="text-center">나를 대표할 수 있는 배지를 선택해 주세요.</p>
-            <p class="text-center">배지 사진</p>
+            <p class="text-center text-h6 font-weight-bold">나의 배지</p>
           </v-card-text>
           <v-divider class="mx-4"></v-divider>
-          <v-row class="mx-3">
-            <v-col>
-              <p>나의 대표 배지</p>
-            </v-col>
-            <v-col>
-              <p>나의 대표 배지</p>
-            </v-col>
-            <v-col>
-              <p>나의 대표 배지</p>
-            </v-col>
-            <v-col>
-              <p>나의 대표 배지</p>
-            </v-col>
-          </v-row>
+          <div class="d-flex justify-space-between">
+            <v-card v-for="(badge, index) in badges" :key="index">
+              <v-card-text cols="3">{{ badge.badgeTitle }}</v-card-text>
+            </v-card>
+            <!-- <v-row v-for="(badge, index) in badges" :key="index">
+              <v-col cols="3">{{ badge.badgeTitle }}</v-col>
+              <p>{{ badge.badgeDescribe }}</p>
+            </v-row> -->
+          </div>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
@@ -55,12 +48,25 @@
 </template>
 
 <script>
-  export default {
-    name: 'BadgeDialog',
-    data () {
-      return {
-        dialog: false,
-      }
-    },
+import axios from 'axios'
+
+export default {
+  name: 'BadgeDialog',
+  data () {
+    return {
+      dialog: false,
+      badges: [],
+    }
+  },
+  created() {
+    axios.get('http://i5b102.p.ssafy.io:8181/api/badge/list')
+      .then(res => {
+        console.log(res.data)
+        this.badges = res.data
+      })
+      .catch(err=> {
+        console.error(err)
+      })
   }
+}
 </script>
