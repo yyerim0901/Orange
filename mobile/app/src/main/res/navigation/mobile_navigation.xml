@@ -101,7 +101,7 @@
         android:label="FavoriteFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.keelim.orange.ui.profile.ProfileFragment"
+        android:name="com.keelim.orange.ui.profile.profile.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_favoriteFragment"
