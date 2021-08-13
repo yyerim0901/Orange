@@ -23,10 +23,12 @@
           </v-card-text>
           <v-divider class="mx-4"></v-divider>
           <div class="d-flex justify-space-between">
-            <v-card v-for="(badge, index) in badges" :key="index">
-              <v-card-text cols="3">{{ badge.badgeTitle }}</v-card-text>
-              <v-card-text cols="3">{{ badge.badgeDescribe }}</v-card-text>
-            </v-card>
+            <div class="row">
+              <v-card v-for="(badge, index) in badges" :key="index" cols="4">
+                  <v-card-text class="text-center">{{ badge.badgeTitle }}</v-card-text>
+                  <v-card-text class="text-center">{{ badge.badgeDescribe }}</v-card-text>
+              </v-card>
+            </div>
           </div>
           <v-card-actions>
             <v-spacer></v-spacer>
