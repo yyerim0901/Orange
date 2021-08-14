@@ -23,6 +23,11 @@ public class ArticleImagesServiceImpl implements ArticleImagesService{
     public List<ArticleImages> selectAll() { return articleImagesRepository.findAll(); }
 
     @Override
+    public List<ArticleImages> selectAllByArticleId(Long articleId) {
+        return articleImagesRepository.findAllByArticleArticleId(articleId);
+    }
+
+    @Override
     public List<ArticleImages> saveAll(List<ArticleImages> articleImagesList) {
         return articleImagesRepository.saveAll(articleImagesList);
     }
