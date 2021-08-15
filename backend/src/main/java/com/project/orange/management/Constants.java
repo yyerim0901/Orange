@@ -32,5 +32,8 @@ public final class Constants {
     public static final Long FoodCategoryId = 2L;
     public static final Long SupplementCategoryId = 3L;
 
-    public static final String ImageRealPath = "C:/SSAFY/imageSaveTest";//"some" + File.separator + "path"; //"C:/SSAFY/imageSaveTest";
+    public static final String ImageRealPath = "some" + File.separator + "path";
+
+    public static int ArticleBasePoint = 10;
+    public static int ImageBonusPoint = 5;
 }

@@ -1,7 +1,11 @@
 package com.project.orange.service.article;
 
 import com.project.orange.entity.article.Articles;
+import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.article.ArticlesRepository;
+import com.project.orange.repository.challenge.ChallengesRepository;
+import com.project.orange.repository.user.UsersChallengesRepository;
 import com.project.orange.service.user.BadgesUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,12 @@ public class ArticlesServiceImpl implements ArticlesService{
     @Autowired
     private BadgesUsersService badgesUsersService;
 
+    @Autowired
+    private ChallengesRepository challengesRepository;
+
+    @Autowired
+    private UsersChallengesRepository usersChallengesRepository;
+
 
     @Override
     public Optional<Articles> createArticle(Articles article) {
@@ -35,6 +45,23 @@ public class ArticlesServiceImpl implements ArticlesService{
         badgesUsersService.badgeAwardAndNotify(article.getUser(), HereICameBadgeId);
 
         Articles newArticle = articlesRepository.save(article);
+        Long targetUserId = newArticle.getUser();
+        Long targetChallengeId = newArticle.getChallenge();
+
+        Challenges targetChallenge = challengesRepository.getById(targetChallengeId);
+        UsersChallenges targetUsersChallenges;
+        targetUsersChallenges = usersChallengesRepository.
+                findByUserUserIdAndChallengeChallengeId(targetUserId, targetChallengeId).get();
+
+        // 챌린지 total 점수에 반영
+        int currentTotalPoint = targetChallenge.getTotalPoint();
+        targetChallenge.setTotalPoint(currentTotalPoint + ArticleBasePoint);
+        challengesRepository.save(targetChallenge);
+
+        // 개인 기록에 반영
+        int currentPersonalPoint = targetUsersChallenges.getPoint();
+        targetUsersChallenges.setPoint(currentPersonalPoint + ArticleBasePoint);
+        usersChallengesRepository.save(targetUsersChallenges);
 
         return Optional.ofNullable(newArticle);
     }
