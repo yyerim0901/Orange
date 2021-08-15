@@ -32,7 +32,6 @@
 
 <script>
 import axios from 'axios'
-import _ from 'lodash'
 
 export default {
   name: 'PopularMainForm',
@@ -42,12 +41,12 @@ export default {
   created() {
     axios.get('http://i5b102.p.ssafy.io:8181/api/challenge/list')
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.cards = res.data
       })
       .catch(err=> {
         console.error(err)
       })
-  },
+  }
 }
 </script>
