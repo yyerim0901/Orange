@@ -47,22 +47,22 @@ public class ChallengeServiceTest {
     void registerNewChallengeTest(){
         //given
         Long periodId = 2L;
-        Long categoryId = 2L;
+        Long categoryId = 1L;
         int minMembers = 1;
         int maxMembers = 10;
         int totalPoint1 = 400;
-        int totalPoint2 = 350;
+        int totalPoint2 = 600;
         int currentMembers = 1;
         LocalDateTime now = LocalDateTime.now();
         int plusDate = periodService.selectOne(periodId).get().getPeriodDays();
         //assertEquals(15, plusDate);
         String profileImagePath = "testPath";
 
-        Long blueTeamManagerId = 22L;
+        Long blueTeamManagerId = 17L;
         String blueTeamTitle = "purpleTeamTitle";
         String blueTeamDescribe = "purpleTeamDescribe";
 
-        Long redTeamManagerId = 23L;
+        Long redTeamManagerId = 18L;
         String redTeamTitle = "greenTeamTitle";
         String redTeamDescribe = "greenTeamDescribe";
 

@@ -1,5 +1,7 @@
 package com.project.orange.management;
 
+import java.io.File;
+
 public final class Constants {
     public static final String challengeMatchingAcceptedTitle = "챌린지 매칭 완료";
     public static final String challengeMatchingAcceptedContent = " 챌린지의 매칭이 완료되었습니다! 지금 바로 시작하세요!";
@@ -29,4 +31,9 @@ public final class Constants {
     public static final Long WorkoutCategoryId = 1L;
     public static final Long FoodCategoryId = 2L;
     public static final Long SupplementCategoryId = 3L;
+
+    public static final String ImageRealPath = "some" + File.separator + "path";
+
+    public static int ArticleBasePoint = 10;
+    public static int ImageBonusPoint = 5;
 }
