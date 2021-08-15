@@ -2,18 +2,19 @@
   <v-container fluid class="mx-auto">
     <v-row dense>
       <v-col
-        v-for="(card, title) in cards"
-        :key="title"
+        v-for="(card, index) in cards"
+        :key="index"
         :cols="card.flex"
       >
         <v-card>
           <v-img
-            :src="card.src"
+            :src="card.imagePath"
             class="white--text align-end px-3"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <v-card-title v-text="card.title"></v-card-title>
+            <v-card-title>{{ card.challengeTitle }}</v-card-title>
+            <v-card-text>팀 점수: {{ card.totalPoint }}</v-card-text>
           </v-img>
 
           <v-card-actions>
@@ -30,19 +31,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'PopularMainForm',
-    data: () => ({
-      cards: [
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-      ],
-    }),
-  }
+import axios from 'axios'
+import _ from 'lodash'
+
+export default {
+  name: 'PopularMainForm',
+  data: () => ({
+    cards: []
+  }),
+  created() {
+    axios.get('http://i5b102.p.ssafy.io:8181/api/challenge/list')
+      .then(res => {
+        console.log(res.data)
+        this.cards = res.data
+      })
+      .catch(err=> {
+        console.error(err)
+      })
+  },
+}
 </script>
