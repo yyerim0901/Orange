@@ -32,6 +32,9 @@ export default new Vuex.Store({
     },
     clearUserId(state) {
       state.data2 = '';
+    },
+    clearToken(state) {
+      state.data1 = '';
     }
   },
   actions: {
