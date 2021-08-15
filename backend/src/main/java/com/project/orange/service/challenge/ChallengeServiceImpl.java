@@ -139,6 +139,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                 .point(initialPointForChallenge)
                 .build();
         Long managerId = manager.getUser().getUserId();
+        usersChallengesRepository.save(manager);
 
         // Todo : 첫 챌린지 주최 -> badge 지급
         badgesUsersService.badgeAwardAndNotify(managerId, HandsInHandsBadgeId);
