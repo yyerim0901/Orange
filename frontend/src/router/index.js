@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
+import store from '@/store/index'
 
 Vue.use(VueRouter);
 
@@ -34,21 +34,25 @@ const routes = [
         path: 'profile',
         name: 'Profile',
         component: () => import('@/views/user/Profile.vue'),
+        meta: { auth: true },
       },
       {
         path: 'create-challenge',
         name: 'CreateChallenge',
-        component: () => import('@/views/feed/CreateChallenge.vue')
+        component: () => import('@/views/feed/CreateChallenge.vue'),
+        meta: { auth: true },
       },
       {
         path: 'challenge',
         name: 'ChallengeFeed',
         component: () => import('@/views/feed/ChallengeFeed.vue'),
+        meta: { auth: true },
       },
       {
         path: 'create-feed',
         name: 'CreateFeed',
         component: () => import('@/views/feed/CreateFeed.vue'),
+        meta: { auth: true },
       },
       {
         path: 'ranking',
@@ -79,5 +83,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth && store.getters.isLogin ) {
+    console.log('인증이 필요합니다')
+    next('/authentication/login')
+    return;
+  }
+  next();
+})
 
 export default router;

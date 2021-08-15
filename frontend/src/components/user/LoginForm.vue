@@ -88,6 +88,7 @@
 
 <script>
 import { loginUser } from '@/api/index.js'
+import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies.js'
 import KakaoLogin from '@/components/user/KakaoLogin.vue';
 
 export default {
@@ -123,6 +124,8 @@ export default {
         console.log(data.data2)
         this.$store.commit('setToken', data.data1)
         this.$store.commit('setUserId', data.data2)
+        saveAuthToCookie(data.data1);
+        saveUserToCookie(data.data2)
         alert("로그인에 성공하였습니다.")
         this.$router.push('/')
       } catch (error) {
