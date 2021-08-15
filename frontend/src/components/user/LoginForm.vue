@@ -100,7 +100,7 @@ export default {
   }),
   methods: {
     async checkForm () {
-      const result = await this.$refs.observer.validate()
+      await this.$refs.observer.validate()
         // if (result) {
         //   alert('로그인 성공')
         // }

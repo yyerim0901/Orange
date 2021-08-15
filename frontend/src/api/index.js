@@ -20,5 +20,9 @@ function loginUser(userData) {
   return instance.post('/api/user/login', userData)
 }
 
+// 챌린지를 생성하는 API
+function createChallenge(challengeData) {
+  return instance.post('/api/challellge/register/new-challenge', challengeData)
+}
 
-export { registerUser, loginUser };
+export { registerUser, loginUser, createChallenge };
