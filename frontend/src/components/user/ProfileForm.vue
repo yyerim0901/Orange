@@ -8,19 +8,20 @@
         ></v-img> 
       </v-col>
       <v-col class="my-auto">
-        <v-col>
-        <v-card
-          outlined>
-          {{ username }}
-        </v-card> 
-        </v-col>
+        <v-row justify="space-between">
+          <v-col cols="auto" class="align-self-center">
+            {{ userDatas.username }}
+          </v-col>
+          <v-col cols="auto">
+            <v-btn outlined>프로필 편집</v-btn>
+          </v-col>
+        </v-row>
         <v-col>
           <v-row justify="space-between">
             <v-col cols="auto">
-              <v-card
-                outlined>
-                {{ bestbadge }}
-              </v-card>
+              <v-icon>
+                mdi-trophy-outline
+              </v-icon>
             </v-col>
             <v-col cols="auto">
               <BadgeDialog />
@@ -32,7 +33,7 @@
         <v-container class="d-flex flex-row justify-space-between text-center">
           <v-flex>
             <div>
-              <div class="subtitle-2">{{ join }}</div>
+              <div class="subtitle-2">57</div>
               <div class="caption grey--text">JOIN</div>
             </div>
           </v-flex>
@@ -54,6 +55,7 @@
 import BadgeDialog from '@/components/user/BadgeDialog.vue'
 import FollowerDialog from '@/components/user/FollowerDialog.vue'
 import FollowingDialog from '@/components/user/FollowingDialog.vue'
+import axios from 'axios'
 
 export default {
   name: 'ProfileForm',
@@ -64,11 +66,20 @@ export default {
   },
   data() {
     return {
-      join: '784',
-      username: 'username',
-      bestbadge: 'bestbadge'
+      userDatas: []
     }
-  }
+  },
+  created() {
+    const userId = this.$store.state.data2
+    axios.get(`http://i5b102.p.ssafy.io:8181/api/user/userinfo/${userId}`)
+        .then(res => {
+        // console.log(res.data.data1)
+        this.userDatas = res.data.data1
+      })
+      .catch(err=> {
+        console.error(err)
+      })
+  },
 }
 </script>
 

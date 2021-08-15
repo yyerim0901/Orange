@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { deleteCookie } from '@/utils/cookies'
+
 export default {
   name: 'AppHeader',
   methods: {
@@ -41,6 +43,9 @@ export default {
     },
     logoutUser() {
       this.$store.commit('clearUserId')
+      this.$store.commit('clearToken')
+      deleteCookie('til_auth')
+      deleteCookie('til_user')
       this.$router.push({path:'/authentication/login'}).catch(()=>{});
     }
   },

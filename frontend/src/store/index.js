@@ -32,19 +32,20 @@ export default new Vuex.Store({
     },
     clearUserId(state) {
       state.data2 = '';
+    },
+    clearToken(state) {
+      state.data1 = '';
     }
   },
-  // actions: {
-  //   async LOGIN({ commit }, userData) {
-  //     const { data } = await loginUser(userData)
-  //     console.log(data.data1)
-  //     // console.log(data.data1)
-  //     // console.log(data.data2)
-  //     commit('setToken', data.data1)
-  //     commit('setUserId', data.data2)
-  //     saveAuthToCookie(data.data1);
-  //     saveUserToCookie(data.data2)
-  //     return data
-  //   }
-  // }
+  actions: {
+    async LOGIN({ commit }, userData) {
+      const { data } = await loginUser(userData)
+      console.log(data)
+      commit('setToken', data.data1)
+      commit('setUserId', data.data2)
+      saveAuthToCookie(data.data1)
+      saveUserToCookie(data.data2)
+      return data
+    }
+  }
 })
