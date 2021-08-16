@@ -15,8 +15,14 @@ function recommendMain(challengeData) {
   return instance.get('/api/challenge/list/random/8', challengeData)
 }
 
+// 챌린지 전체 리스트 API
+function listMain(challengeData) {
+  return instance.get('/api/challenge/list', challengeData)
+}
+
 export { 
   popularMain, 
   newMain, 
   recommendMain,
+  listMain,
  }

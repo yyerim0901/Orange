@@ -43,7 +43,7 @@ const routes = [
         meta: { auth: true },
       },
       {
-        path: 'challenge',
+        path: 'challenge/:id',
         name: 'ChallengeFeed',
         component: () => import('@/views/feed/ChallengeFeed.vue'),
         meta: { auth: true },
