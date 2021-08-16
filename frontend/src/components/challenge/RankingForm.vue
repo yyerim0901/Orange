@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'RankingForm.vue',
   data() {
@@ -20,37 +22,22 @@ export default {
           text: '챌린지 랭킹',
           align: 'start',
           sortable: true,
-          value: 'team',
+          value: 'challengeTitle',
         },
-        { text: '점수', value: 'score' }
+        { text: '점수', value: 'totalPoint' }
       ],
-      teams: [
-        {
-          team: '챌린지 1',
-          score: 1234
-        },
-        {
-          team: '챌린지 2',
-          score: 12345
-        },
-        {
-          team: '챌린지 3',
-          score: 123456
-        },
-        {
-          team: '챌린지 4',
-          score: 124
-        },
-        {
-          team: '챌린지 5',
-          score: 135
-        },
-        {
-          team: '챌린지 6',
-          score: 2345
-        },
-      ]
+      teams: [],
     }
+  },
+  created() {
+    axios.get('http://i5b102.p.ssafy.io:8181/api/challenge/ranking/point')
+    .then(res => {
+      console.log(res.data)
+      this.teams = res.data
+    })
+    .catch(err=> {
+      console.error(err)
+    })
   }
 }
 </script>
