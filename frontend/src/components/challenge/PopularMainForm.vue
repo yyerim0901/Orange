@@ -31,22 +31,24 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { popularMain } from '@/api/index'
 
 export default {
   name: 'PopularMainForm',
-  data: () => ({
-    cards: []
-  }),
+  data() {
+    return {
+      cards: []
+    }
+  },
+  methods: {
+    async popularFeed() {
+      const { data } = await popularMain()
+      this.cards = data.slice(0,8)
+      // console.log(data)
+    }
+  },
   created() {
-    axios.get('http://i5b102.p.ssafy.io:8181/api/challenge/ranking/point')
-      .then(res => {
-        // console.log(res.data)
-        this.cards = res.data
-      })
-      .catch(err=> {
-        console.error(err)
-      })
+    this.popularFeed()
   }
 }
 </script>
