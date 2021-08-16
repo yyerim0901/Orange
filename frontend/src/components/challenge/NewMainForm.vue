@@ -2,11 +2,11 @@
   <v-container fluid class="mx-auto">
     <v-row dense>
       <v-col
-        v-for="(card, title) in cards"
+        v-for="(card, title) in cards" class="col-3 mb-10 pa-2"
         :key="title"
         :cols="card.flex"
       >
-        <v-card>
+        <v-card fill-height>
           <v-img
             :src="card.imagePath"
             class="white--text align-end px-3"
