@@ -44,9 +44,13 @@ export default {
   },
   methods: {
     async ranking() {
-      const { data } = await popularMain()
-      this.teams = data
-      // console.log(data)
+      try {
+        const { data } = await popularMain()
+        this.teams = data
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }
     }
   },
   created() {

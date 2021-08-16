@@ -42,9 +42,13 @@ export default {
   },
   methods: {
     async popularFeed() {
-      const { data } = await popularMain()
-      this.cards = data.slice(0,8)
-      // console.log(data)
+      try {
+        const { data } = await popularMain()
+        this.cards = data.slice(0,8)
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }  
     }
   },
   created() {

@@ -59,9 +59,13 @@ export default {
   },
   methods: {
     async myBadge() {
-      const { data } = await badgeList()
-      this.badges = data
-      // console.log(data)
+      try {
+        const { data } = await badgeList()
+        this.badges = data
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }
     }
   },
   created() {

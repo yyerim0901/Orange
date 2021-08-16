@@ -42,9 +42,13 @@ export default {
   },
   methods: {
     async newFeed() {
-      const { data } = await newMain()
-      this.cards = data.slice(0, 8)
-      // console.log(data)
+      try {
+        const { data } = await newMain()
+        this.cards = data.slice(0, 8)
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }
     }
   },
   created() {

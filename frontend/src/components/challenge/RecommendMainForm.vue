@@ -42,9 +42,13 @@ export default {
   },
   methods: {
     async recommendFeed() {
-      const { data } = await recommendMain()
-      this.cards = data
-      // console.log(data)
+      try {
+        const { data } = await recommendMain()
+        this.cards = data
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }
     }
   },
   created() {
