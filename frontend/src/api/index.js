@@ -25,7 +25,6 @@ function createChallenge(challengeData) {
   return instance.post('/api/challellge/register/new-challenge', challengeData)
 }
 
-
 // 메인 피드 인기 탭 API, 랭킹 조회 API
 function popularMain(challengeData) {
   return instance.get('/api/challenge/ranking/point', challengeData)
@@ -40,5 +39,6 @@ function newMain(challengeData) {
 function recommendMain(challengeData) {
   return instance.get('/api/challenge/list/random/8', challengeData)
 }
+
 
 export { registerUser, loginUser, createChallenge, popularMain, newMain, recommendMain };
