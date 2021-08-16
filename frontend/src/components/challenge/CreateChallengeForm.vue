@@ -121,7 +121,7 @@
 
 <script>
 import DateForm from '@/components/challenge/DateForm.vue'
-import { createChallenge } from '@/api/index'
+import { createChallenge } from '@/api/challenge'
 
 export default {
   name: 'CreateChallengeForm',

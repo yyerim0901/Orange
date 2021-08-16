@@ -43,7 +43,7 @@ const routes = [
         meta: { auth: true },
       },
       {
-        path: 'challenge',
+        path: 'challenge/:id',
         name: 'ChallengeFeed',
         component: () => import('@/views/feed/ChallengeFeed.vue'),
         meta: { auth: true },
@@ -58,6 +58,11 @@ const routes = [
         path: 'ranking',
         name: 'Ranking',
         component: () => import('@/views/feed/Ranking.vue'),
+      },
+      {
+        path: 'search/:query',
+        name: 'Search',
+        component: () => import('@/views/feed/Search.vue'),
       },
     ]
   },

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { badgeList } from '@/api/challenge'
 
 export default {
   name: 'BadgeDialog',
@@ -57,15 +57,19 @@ export default {
       badges: [],
     }
   },
+  methods: {
+    async myBadge() {
+      try {
+        const { data } = await badgeList()
+        this.badges = data
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }
+    }
+  },
   created() {
-    axios.get('http://i5b102.p.ssafy.io:8181/api/badge/list')
-      .then(res => {
-        // console.log(res.data)
-        this.badges = res.data
-      })
-      .catch(err=> {
-        console.error(err)
-      })
+    this.myBadge()
   }
 }
 </script>

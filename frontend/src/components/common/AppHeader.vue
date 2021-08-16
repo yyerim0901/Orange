@@ -1,12 +1,6 @@
 <template>
   <div>
     <div class="d-flex justify-content-end mx-3">
-      <v-btn text @click="goChall">
-        챌린지피드(임시)
-      </v-btn>
-      <v-btn text>
-        고객센터
-      </v-btn>
       <!-- 로그인이 되었을 때 -->
       <template v-if="isUserLogin">
         <v-btn
