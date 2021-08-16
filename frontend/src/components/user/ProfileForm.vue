@@ -69,17 +69,21 @@ export default {
       userDatas: []
     }
   },
-  created() {
-    const userId = this.$store.state.data2
-    axios.get(`http://i5b102.p.ssafy.io:8181/api/user/userinfo/${userId}`)
-        .then(res => {
-        // console.log(res.data.data1)
-        this.userDatas = res.data.data1
-      })
-      .catch(err=> {
-        console.error(err)
-      })
+  methods: {
+    async myProfile() {
+      try {
+        const userId = this.$store.state.data2
+        const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/user/userinfo/${userId}`)
+        console.log(data)
+        this.userDatas = data.data1
+      } catch (err) {
+        console.log(err)
+      }
+    }
   },
+  created() {
+    this.myProfile()
+  }
 }
 </script>
 
