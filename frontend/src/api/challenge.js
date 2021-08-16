@@ -5,4 +5,12 @@ function createChallenge(challengeData) {
   return instance.post('/api/challellge/register/new-challenge', challengeData)
 }
 
-export { createChallenge };
+// 뱃지를 조회하는 API
+function badgeList(badgeData) {
+  return instance.get('/api/badge/list', badgeData)
+}
+
+export { 
+  createChallenge,
+  badgeList,
+}

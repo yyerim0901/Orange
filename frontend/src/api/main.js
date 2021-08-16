@@ -15,4 +15,8 @@ function recommendMain(challengeData) {
   return instance.get('/api/challenge/list/random/8', challengeData)
 }
 
-export { popularMain, newMain, recommendMain }
+export { 
+  popularMain, 
+  newMain, 
+  recommendMain,
+ }
