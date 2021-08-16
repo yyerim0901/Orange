@@ -26,7 +26,7 @@ function createChallenge(challengeData) {
 }
 
 
-// 메인 피드 인기 탭 API
+// 메인 피드 인기 탭 API, 랭킹 조회 API
 function popularMain(challengeData) {
   return instance.get('/api/challenge/ranking/point', challengeData)
 }
