@@ -36,4 +36,9 @@ function newMain(challengeData) {
   return instance.get('/api/challenge/ranking/startdate', challengeData)
 }
 
-export { registerUser, loginUser, createChallenge, popularMain, newMain };
+// 메인 피드 추천 탭 API
+function recommendMain(challengeData) {
+  return instance.get('/api/challenge/list/random/8', challengeData)
+}
+
+export { registerUser, loginUser, createChallenge, popularMain, newMain, recommendMain };
