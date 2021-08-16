@@ -45,7 +45,9 @@
           </v-tooltip>
         </b-nav-item>
         
-        <b-nav-item><NotificationForm /></b-nav-item>
+        <b-nav-item v-if="isUserLogin">
+          <NotificationForm />
+        </b-nav-item>
         
         <b-nav-item>
           <v-tooltip bottom>
@@ -96,18 +98,11 @@ export default {
       this.$router.push({path:'/create-challenge'}).catch(()=> {});
     }
   },
-  // api 연결하고 사용할거임
-  // watch: {
-  //   model (val) {
-  //     if (val != null) this.tab = 0
-  //     else this.tab = null
-  //   },
-  //   search (val) {
-  //     if (this.items.length > 0) return
-
-  //     this.isLoading = true
-  //   }
-  // }
+  computed: {
+    isUserLogin() {
+      return this.$store.getters.isLogin;
+    }
+  }
 }
 </script>
 

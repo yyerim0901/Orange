@@ -39,7 +39,7 @@ export default {
     cards: []
   }),
   created() {
-    axios.get('http://i5b102.p.ssafy.io:8181/api/challenge/list')
+    axios.get('http://i5b102.p.ssafy.io:8181/api/challenge/ranking/point')
       .then(res => {
         // console.log(res.data)
         this.cards = res.data

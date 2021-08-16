@@ -23,15 +23,23 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
     name: 'NotificationForm',
     data: () => ({
       items: [
-        { title: '당신은 사랑받기 위해 태어난 사람 알림입니다 1' },
-        { title: '당신은 사랑받기 위해 태어난 사람 알림입니다 2' },
-        { title: '당신은 사랑받기 위해 태어난 사람 알림입니다 3' },
-        { title: '당신은 사랑받기 위해 태어난 사람 알림입니다 4' },
       ],
     }),
+    created() {
+      const userId = this.$store.state.data2
+      axios.get(`http://i5b102.p.ssafy.io:8181/api/notification/select/${userId}`)
+        .then(res => {
+        console.log(res.data)
+        this.items = res.data
+      })
+      .catch(err=> {
+        console.error(err)
+      })
+    },
   }
 </script>
