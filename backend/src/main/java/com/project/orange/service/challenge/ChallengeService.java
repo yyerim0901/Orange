@@ -25,6 +25,7 @@ public interface ChallengeService {
     public List<Challenges> selectAllByChallengeTitleContaining(String searchTitle);
     public List<Challenges> selectAllByCategoryId(Long categoryId);
     public List<Challenges> selectAllByPeriodId(Long periodId);
+    public List<Challenges> selectAllByUserId(Long userId);
 
     // registerNewChallenge : 새로운 Challenge 등록 -> Challenge의 BattleMatching 결과 리턴
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge);

@@ -74,6 +74,11 @@ public class ArticlesServiceImpl implements ArticlesService{
     }
 
     @Override
+    public List<Articles> selectAllByUserId(Long userId) {
+        return articlesRepository.findAllByUser(userId);
+    }
+
+    @Override
     public List<Articles> selectAllByChallengeId(Long challenge) {
         return articlesRepository.findAllByChallenge(challenge);
     }
