@@ -8,12 +8,13 @@
       >
         <v-card>
           <v-img
-            :src="card.src"
+            :src="card.imagePath"
             class="white--text align-end px-3"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <v-card-title v-text="card.title"></v-card-title>
+            <v-card-title>{{ card.challengeTitle }}</v-card-title>
+            <v-card-text>팀 점수: {{ card.totalPoint }}</v-card-text>
           </v-img>
 
           <v-card-actions>
@@ -30,19 +31,24 @@
 </template>
 
 <script>
-  export default {
-    name: 'NewMainForm',
-    data: () => ({
-      cards: [
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-      ],
-    }),
+import { newMain } from '@/api/index'
+
+export default {
+  name: 'NewMainForm',
+  data() {
+    return {
+      cards: [],
+    }
+  },
+  methods: {
+    async newFeed() {
+      const { data } = await newMain()
+      this.cards = data.slice(0, 8)
+      // console.log(data)
+    }
+  },
+  created() {
+    this.newFeed()
   }
+}
 </script>

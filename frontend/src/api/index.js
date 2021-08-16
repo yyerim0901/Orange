@@ -25,4 +25,15 @@ function createChallenge(challengeData) {
   return instance.post('/api/challellge/register/new-challenge', challengeData)
 }
 
-export { registerUser, loginUser, createChallenge };
+
+// 메인 피드 인기 탭 API
+function popularMain(challengeData) {
+  return instance.get('/api/challenge/ranking/point', challengeData)
+}
+
+// 메인 피드 신규 탭 API
+function newMain(challengeData) {
+  return instance.get('/api/challenge/ranking/startdate', challengeData)
+}
+
+export { registerUser, loginUser, createChallenge, popularMain, newMain };
