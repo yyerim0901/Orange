@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { newMain } from '@/api/index'
+import { newMain } from '@/api/main'
 
 export default {
   name: 'NewMainForm',

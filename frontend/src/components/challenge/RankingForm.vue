@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { popularMain } from '@/api/index'
+import { popularMain } from '@/api/main'
 
 export default {
   name: 'RankingForm.vue',

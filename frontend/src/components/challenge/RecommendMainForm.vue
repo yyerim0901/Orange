@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { recommendMain } from '@/api/index'
+import { recommendMain } from '@/api/main'
 
 export default {
   name: 'RecommendMainForm',
