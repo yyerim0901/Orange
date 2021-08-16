@@ -1,6 +1,6 @@
 package com.keelim.orange.data.repository.profile
 
-import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.entity.Favorite
 
 interface ProfileRepository {
     suspend fun getIngChallengeList():List<Favorite>

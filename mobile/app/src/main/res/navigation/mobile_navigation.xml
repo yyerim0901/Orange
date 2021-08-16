@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_feedFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
     </fragment>
     <fragment
         android:id="@+id/fightFragment"
@@ -111,6 +114,10 @@
         android:id="@+id/allBadgeFragment"
         android:name="com.keelim.orange.ui.profile.badge.AllBadgeFragment"
         android:label="AllBadgeFragment" />
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.keelim.orange.ui.event.EventFragment"
+        android:label="EventFragment" />
 
 
 </navigation>

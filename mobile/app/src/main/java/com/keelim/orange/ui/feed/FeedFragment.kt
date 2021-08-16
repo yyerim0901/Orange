@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import coil.load
 import com.google.android.material.chip.Chip
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
+import com.jama.carouselview.enums.IndicatorAnimationType
+import com.jama.carouselview.enums.OffsetType
 import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Filter
@@ -125,6 +128,25 @@ class FeedFragment : Fragment() {
 
         btnProfile.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
+        }
+        val images =  arrayOf(
+            R.drawable.carousel1,
+            R.drawable.carousel6_gold,
+            R.drawable.carousel3,
+        )
+        carouselView.apply {
+            size = images.size
+            autoPlay = true
+            indicatorAnimationType = IndicatorAnimationType.THIN_WORM
+            carouselOffset = OffsetType.CENTER
+            setCarouselViewListener { view, position ->
+                val imageView = view.findViewById<ImageView>(R.id.item_carousel)
+                imageView.load(images[position])
+            }
+            show()
+        }
+        carouselView.setOnClickListener {
+            findNavController().navigate(R.id.eventFragment)
         }
     }
 

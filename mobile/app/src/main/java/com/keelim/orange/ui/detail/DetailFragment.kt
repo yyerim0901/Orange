@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.keelim.orange.common.toast
+import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,7 @@ class DetailFragment : Fragment() {
   companion object {
     fun newInstance() = DetailFragment()
   }
-  private val viewModel by viewModels<DetailViewModel>()
+  private val viewModel:DetailViewModel by viewModels()
   private var _binding: FragmentDetailBinding? = null
   private val binding get() = _binding!!
   private val args by navArgs<DetailFragmentArgs>()
@@ -70,7 +71,6 @@ class DetailFragment : Fragment() {
       detailDesc.text = data.description
 
       btnJoin.setOnClickListener {
-
       }
     }
   }
@@ -81,5 +81,16 @@ class DetailFragment : Fragment() {
 
   private fun initViews() = with(binding){
     root.background = args.color.toDrawable()
+    btnHeart.setOnClickListener {
+      viewModel.favoriteAdd(
+        Favorite(
+          args.uid,
+          args.uid,
+          "",
+          333,
+        )
+      )
+      requireContext().toast("관심 목록에 추가 하였습니다.")
+    }
   }
 }

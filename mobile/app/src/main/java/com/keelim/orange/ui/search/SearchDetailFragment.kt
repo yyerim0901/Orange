@@ -5,22 +5,15 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.core.view.doOnNextLayout
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.History
+import com.keelim.orange.data.model.entity.History
 import com.keelim.orange.data.model.samples
 import com.keelim.orange.databinding.FragmentSearchDetailBinding
-import com.keelim.orange.ui.noti.NotificationState
 import com.keelim.orange.utils.SpringAddItemAnimator
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import java.time.LocalTime
-import java.util.Date
 
 @AndroidEntryPoint
 class SearchDetailFragment: Fragment() {

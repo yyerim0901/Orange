@@ -8,24 +8,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.databinding.ItemFavoriteBinding
 import com.keelim.orange.utils.ToggleAnimation
 
 class FavoriteAdapter(
-  val clickListener: () -> Unit,
+  private val delete: (Favorite) -> Unit
 ) : ListAdapter<Favorite, FavoriteAdapter.ViewHolder>(diffUtil) {
 
   inner class ViewHolder(val binding: ItemFavoriteBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Favorite, position: Int) = with(binding) {
-      favoriteTitle.text = item.title
-      favoriteCount.text = item.challengeId.toString()
-      favoriteImg.load(item.imageLink)
-      subDescription.text = item.rating.toString()
+      favoriteTitle.text = item.ranking_title
+      favoriteCount.text = item.rank.toString()
+      favoriteImg.load(item.image_address)
+      subDescription.text = item.ranking_description.toString()
 
       root.setOnClickListener {
-        clickListener.invoke()
       }
 
       btnExpand.setOnClickListener {
@@ -34,7 +33,7 @@ class FavoriteAdapter(
       }
 
       btnDelete.setOnClickListener {
-
+        delete.invoke(item)
       }
     }
 
@@ -67,11 +66,11 @@ class FavoriteAdapter(
   companion object {
     val diffUtil = object : DiffUtil.ItemCallback<Favorite>() {
       override fun areItemsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
-        return oldItem.title == newItem.title
+        return oldItem == newItem
       }
 
       override fun areContentsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
-        return oldItem.imageLink == newItem.imageLink
+        return oldItem == newItem
       }
     }
   }

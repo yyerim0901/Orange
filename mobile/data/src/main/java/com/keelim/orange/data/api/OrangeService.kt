@@ -2,7 +2,7 @@ package com.keelim.orange.data.api
 
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
-import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
@@ -96,10 +96,10 @@ interface OrangeService {
   ): Response<AuthResponse>
 
   @GET("api/challenge/ranking/point")
-  suspend fun getPointRanking(): Response<RankingResponse>
+  suspend fun getPointRanking(): Response<List<RankingResponse>>
 
   @GET("api/challenge/ranking/startdate")
-  suspend fun getStartRanking(): Response<RankingResponse>
+  suspend fun getStartRanking(): Response<List<RankingResponse>>
 
   @GET("api/category/list")
   suspend fun category(): Response<List<CategoryResponse>>

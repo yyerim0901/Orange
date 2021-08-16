@@ -5,16 +5,16 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.keelim.orange.data.model.entity.History
+import com.keelim.orange.data.model.entity.Favorite
 
 @Dao
-interface HistoryDao {
-    @Query("SELECT * FROM history")
-    suspend fun getAll(): List<History>
+interface FavoriteDao {
+    @Query("SELECT * FROM favorite")
+    suspend fun getAll(): List<Favorite>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHistory(history: History)
+    suspend fun insertFavorite(favorite: Favorite)
 
     @Delete
-    suspend fun deleteHistory(history: History)
+    suspend fun deleteFavorite(favorite: Favorite)
 }

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,11 +17,13 @@ class FavoriteFragment : Fragment() {
   private var _binding: FragmentFavoriteBinding? = null
   private val binding get() = _binding!!
   private val favoriteAdapter = FavoriteAdapter(
-    clickListener = {
-      requireActivity().toast("hello")
+    delete = {
+      viewModel.favoriteDelete(it)
+      viewModel.fetchData()
+      requireContext().toast("삭~제")
     }
   )
-  private val viewModel by viewModels<FavoriteViewModel>()
+  private val viewModel: FavoriteViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -36,6 +38,7 @@ class FavoriteFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
+    viewModel.fetchData()
   }
 
   override fun onDestroyView() {
@@ -47,20 +50,20 @@ class FavoriteFragment : Fragment() {
     when (it) {
       is FavoriteState.UnInitialized -> handleUnInitialized()
       is FavoriteState.Loading -> handleLoading()
-      is FavoriteState.Success -> handleSuccess(favorites)
+      is FavoriteState.Success -> handleSuccess(it.data)
       is FavoriteState.Error -> handleError()
     }
   }
 
   private fun handleUnInitialized() = with(binding) {
-
   }
 
   private fun handleLoading() {
-    requireActivity().toast("데이터 초기화 중입니다.")
+    requireActivity().toast("데이터 로딩 중입니다.")
   }
 
   private fun handleSuccess(data: List<Favorite>) {
+    requireActivity().toast("데이터 ${data.toString()}")
     if (data.isEmpty()) {
       binding.tvNoData.visibility = View.VISIBLE
     } else {
@@ -76,64 +79,5 @@ class FavoriteFragment : Fragment() {
   private fun initViews() = with(binding){
     favoriteRecycler.adapter = favoriteAdapter
     favoriteRecycler.layoutManager = LinearLayoutManager(requireContext())
-    handleSuccess(favorites)
-  }
-
-  companion object {
-    val favorites = listOf(
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-    )
   }
 }

@@ -1,6 +1,6 @@
 package com.keelim.orange.ui.search
 
-import com.keelim.orange.data.model.History
+import com.keelim.orange.data.model.entity.History
 
 sealed class HistoryState {
     object UnInitialized: HistoryState()
