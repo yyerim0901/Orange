@@ -132,8 +132,8 @@ class FeedFragment : Fragment() {
         }
         val images =  arrayOf(
             R.drawable.carousel1,
-            R.drawable.carousel3,
             R.drawable.carousel6_gold,
+            R.drawable.carousel3,
         )
         carouselView.apply {
             size = images.size
