@@ -85,6 +85,7 @@ dependencies {
 
     implementation("com.github.dhaval2404:imagepicker:2.1")
     api(Room.runtime)
+    implementation("com.github.jama5262:CarouselView:1.2.2")
 }
 
 kapt {
