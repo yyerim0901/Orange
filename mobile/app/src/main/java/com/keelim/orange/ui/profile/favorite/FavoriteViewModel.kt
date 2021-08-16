@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-  private val favoriteUseCase: FavoriteUseCase,
+    private val favoriteUseCase: FavoriteUseCase,
 ) : ViewModel() {
   private val _state = MutableLiveData<FavoriteState>(FavoriteState.UnInitialized)
   val state: LiveData<FavoriteState> get() = _state
@@ -24,7 +24,7 @@ class FavoriteViewModel @Inject constructor(
     try {
       setState(
           FavoriteState.Success(
-              favoriteUseCase.invoke()
+              favoriteUseCase.getListAll()
           )
       )
     } catch (e: Exception) {

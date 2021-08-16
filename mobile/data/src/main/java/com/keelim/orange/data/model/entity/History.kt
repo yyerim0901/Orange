@@ -1,4 +1,4 @@
-package com.keelim.orange.data.model
+package com.keelim.orange.data.model.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keelim.orange.R
 import com.keelim.orange.data.model.ranking.Ranking
 import com.keelim.orange.databinding.ItemRankingBinding
-import com.keelim.orange.databinding.ItemSearchBinding
 
 class RankingAdapter(
+    private val longClick: (Ranking) -> Unit,
 ) : ListAdapter<Ranking, RankingAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(val binding: ItemRankingBinding) :
@@ -25,7 +25,9 @@ class RankingAdapter(
             val color = itemView.context.resources.getColor(random)
             container.setBackgroundColor(color)
 
-            root.setOnClickListener {
+            root.setOnLongClickListener {
+                longClick.invoke(item)
+                return@setOnLongClickListener true
             }
         }
     }

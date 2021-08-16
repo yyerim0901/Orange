@@ -1,9 +1,9 @@
 package com.keelim.orange.di
 
-import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.repository.LoginRepository
 import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.badge.BadgeRepository
+import com.keelim.orange.data.repository.favorite.FavoriteRepository
 import com.keelim.orange.data.repository.feed.FeedRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.history.HistoryRepository
@@ -62,8 +62,12 @@ object UseCaseModule {
 
   @Provides
   @ViewModelScoped
-  fun provideFavoriteUseCase(): FavoriteUseCase {
-    return FavoriteUseCase()
+  fun provideFavoriteUseCase(
+    favoriteRepository: FavoriteRepository,
+  ): FavoriteUseCase {
+    return FavoriteUseCase(
+      favoriteRepository
+    )
   }
 
   @Provides

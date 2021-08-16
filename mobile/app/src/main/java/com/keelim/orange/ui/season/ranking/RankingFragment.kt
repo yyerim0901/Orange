@@ -1,5 +1,6 @@
 package com.keelim.orange.ui.season.ranking
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +12,23 @@ import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.ranking.Ranking
 import com.keelim.orange.databinding.FragmentRankingBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.internal.artificialFrame
 
 @AndroidEntryPoint
 class RankingFragment : Fragment() {
     private var _binding: FragmentRankingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RankingViewModel by viewModels()
-    private val pointAdapter = RankingAdapter()
-    private val startAdapter = RankingAdapter()
+    private val pointAdapter = RankingAdapter(
+        longClick = {
+            dialog(it)
+        }
+    )
+    private val startAdapter = RankingAdapter(
+        longClick = {
+            dialog(it)
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,4 +90,14 @@ class RankingFragment : Fragment() {
         requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
     }
 
+    private fun dialog(ranking:Ranking) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("관심 목록 추가")
+            .setMessage("관심 목록에 추가를 하겠습니까?")
+            .setPositiveButton("ok") { _, _ ->
+                viewModel.favoriteAdd(ranking)
+            }
+            .setNegativeButton("Nope") { _, _ -> }
+            .show()
+    }
 }

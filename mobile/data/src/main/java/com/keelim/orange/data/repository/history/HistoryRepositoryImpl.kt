@@ -1,7 +1,7 @@
 package com.keelim.orange.data.repository.history
 
 import com.keelim.orange.data.db.AppDatabase
-import com.keelim.orange.data.model.History
+import com.keelim.orange.data.model.entity.History
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -13,7 +13,7 @@ class HistoryRepositoryImpl(
         db.historyDao().getAll()
     }
 
-    override suspend fun insertHistory(history:History) = withContext(dispatcher) {
+    override suspend fun insertHistory(history: History) = withContext(dispatcher) {
         db.historyDao().insertHistory(history)
     }
 

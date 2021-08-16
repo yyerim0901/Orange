@@ -1,7 +1,7 @@
 package com.keelim.orange.data.repository.profile
 
 import com.keelim.orange.data.api.ApiRequestFactory
-import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.entity.Favorite
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 

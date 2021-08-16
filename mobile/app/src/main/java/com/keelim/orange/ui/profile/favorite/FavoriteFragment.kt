@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Favorite
+import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +47,7 @@ class FavoriteFragment : Fragment() {
     when (it) {
       is FavoriteState.UnInitialized -> handleUnInitialized()
       is FavoriteState.Loading -> handleLoading()
-      is FavoriteState.Success -> handleSuccess(favorites)
+      is FavoriteState.Success -> handleSuccess(it.data)
       is FavoriteState.Error -> handleError()
     }
   }
@@ -76,64 +76,5 @@ class FavoriteFragment : Fragment() {
   private fun initViews() = with(binding){
     favoriteRecycler.adapter = favoriteAdapter
     favoriteRecycler.layoutManager = LinearLayoutManager(requireContext())
-    handleSuccess(favorites)
-  }
-
-  companion object {
-    val favorites = listOf(
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-
-      Favorite(
-        "",
-        "23232323232",
-        "adkmadkmaksdmaskmdksm",
-        23,
-        4.5F,
-        false,
-      ),
-    )
   }
 }
