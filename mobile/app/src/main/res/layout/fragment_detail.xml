@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
-        android:id="@+id/orange_btn"
+        android:id="@+id/btn_heart"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/project_orange"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_heart_white"
+        app:layout_constraintEnd_toStartOf="@id/btn_join"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/title"
@@ -25,7 +27,7 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/orange_btn"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

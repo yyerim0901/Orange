@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.DetailResponse
+import com.keelim.orange.domain.auth.FavoriteUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,7 +14,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-  private val getDetailInformationUseCase: GetDetailInformationUseCase
+  private val getDetailInformationUseCase: GetDetailInformationUseCase,
+  private val favoriteUseCase: FavoriteUseCase,
 ) : ViewModel() {
   private val _state = MutableLiveData<DetailState>()
   val state: LiveData<DetailState> = _state
@@ -36,6 +39,10 @@ class DetailViewModel @Inject constructor(
         DetailState.Error
       )
     }
+  }
+
+  fun favoriteAdd(favorite: Favorite) = viewModelScope.launch{
+    favoriteUseCase.insert(favorite)
   }
 
   private fun setState(value: DetailState) {

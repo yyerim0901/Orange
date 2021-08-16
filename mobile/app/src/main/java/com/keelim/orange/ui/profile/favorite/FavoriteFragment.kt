@@ -17,11 +17,13 @@ class FavoriteFragment : Fragment() {
   private var _binding: FragmentFavoriteBinding? = null
   private val binding get() = _binding!!
   private val favoriteAdapter = FavoriteAdapter(
-    clickListener = {
-      requireActivity().toast("hello")
+    delete = {
+      viewModel.favoriteDelete(it)
+      viewModel.fetchData()
+      requireContext().toast("삭~제")
     }
   )
-  private val viewModel by viewModels<FavoriteViewModel>()
+  private val viewModel: FavoriteViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -36,6 +38,7 @@ class FavoriteFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
+    viewModel.fetchData()
   }
 
   override fun onDestroyView() {
@@ -53,14 +56,14 @@ class FavoriteFragment : Fragment() {
   }
 
   private fun handleUnInitialized() = with(binding) {
-
   }
 
   private fun handleLoading() {
-    requireActivity().toast("데이터 초기화 중입니다.")
+    requireActivity().toast("데이터 로딩 중입니다.")
   }
 
   private fun handleSuccess(data: List<Favorite>) {
+    requireActivity().toast("데이터 ${data.toString()}")
     if (data.isEmpty()) {
       binding.tvNoData.visibility = View.VISIBLE
     } else {

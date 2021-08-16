@@ -13,7 +13,7 @@ import com.keelim.orange.databinding.ItemFavoriteBinding
 import com.keelim.orange.utils.ToggleAnimation
 
 class FavoriteAdapter(
-  val clickListener: () -> Unit,
+  private val delete: (Favorite) -> Unit
 ) : ListAdapter<Favorite, FavoriteAdapter.ViewHolder>(diffUtil) {
 
   inner class ViewHolder(val binding: ItemFavoriteBinding) :
@@ -25,7 +25,6 @@ class FavoriteAdapter(
       subDescription.text = item.ranking_description.toString()
 
       root.setOnClickListener {
-        clickListener.invoke()
       }
 
       btnExpand.setOnClickListener {
@@ -34,7 +33,7 @@ class FavoriteAdapter(
       }
 
       btnDelete.setOnClickListener {
-
+        delete.invoke(item)
       }
     }
 
