@@ -27,6 +27,7 @@ export default {
       .catch(err => {
         console.log(err)
       })
+      // 머지
   }
 }
 </script>
