@@ -1,4 +1,4 @@
-package com.keelim.orange.data.model
+package com.keelim.orange.data.model.ranking
 
 data class Ranking(
   val image_address: String,

@@ -8,14 +8,13 @@ import com.keelim.orange.domain.season.RankingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @HiltViewModel
 class RankingViewModel @Inject constructor(
   private val rankingUseCase: RankingUseCase,
 ) : ViewModel() {
-  private var _state = MutableLiveData<RankingState>(RankingState.UnInitialized)
-  val state: LiveData<RankingState> = _state
+  private val _state = MutableLiveData<RankingState>(RankingState.UnInitialized)
+  val state: LiveData<RankingState> get() = _state
 
   fun fetchData() = viewModelScope.launch {
     setState(
@@ -24,19 +23,24 @@ class RankingViewModel @Inject constructor(
 
     try {
       setState(
-        RankingState.Success(
-          rankingUseCase.ranking(),
+        RankingState.Success1(
+          rankingUseCase.start()
+        )
+      )
+
+      setState(
+        RankingState.Success2(
+          rankingUseCase.point()
         )
       )
     } catch (e: Exception) {
-      Timber.d(e)
       setState(
         RankingState.Error
       )
     }
   }
 
-  private fun setState(state: RankingState) {
-    _state.value = state
+  private fun setState(value: RankingState) {
+    _state.value = value
   }
 }

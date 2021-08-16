@@ -1,7 +1,7 @@
 package com.keelim.orange.data.repository.season
 
 import com.keelim.orange.data.api.ApiRequestFactory
-import com.keelim.orange.data.model.Ranking
+import com.keelim.orange.data.model.ranking.Ranking
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -18,7 +18,7 @@ class RankingRepositoryImpl(
                     ranking_title = rankingResponse.challengeTitle,
                     ranking_description = rankingResponse.challengeDescribe,
                     rank = index,
-                    image_address = rankingResponse.imagePath
+                    image_address = rankingResponse.imagePath?:""
                 )
             } ?: emptyList()
         } else {
@@ -34,7 +34,7 @@ class RankingRepositoryImpl(
                     ranking_title = rankingResponse.challengeTitle,
                     ranking_description = rankingResponse.challengeDescribe,
                     rank = index,
-                    image_address = rankingResponse.imagePath
+                    image_address = rankingResponse.imagePath?:""
                 )
             } ?: emptyList()
         } else {

@@ -96,10 +96,10 @@ interface OrangeService {
   ): Response<AuthResponse>
 
   @GET("api/challenge/ranking/point")
-  suspend fun getPointRanking(): Response<RankingResponse>
+  suspend fun getPointRanking(): Response<List<RankingResponse>>
 
   @GET("api/challenge/ranking/startdate")
-  suspend fun getStartRanking(): Response<RankingResponse>
+  suspend fun getStartRanking(): Response<List<RankingResponse>>
 
   @GET("api/category/list")
   suspend fun category(): Response<List<CategoryResponse>>
