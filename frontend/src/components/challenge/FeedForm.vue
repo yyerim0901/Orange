@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import FeedTab from '@/components/challenge/FeedTab.vue'
 import { challengeDetail } from '@/api/challenge'
 export default {
