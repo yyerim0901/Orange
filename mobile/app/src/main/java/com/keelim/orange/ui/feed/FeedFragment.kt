@@ -148,6 +148,10 @@ class FeedFragment : Fragment() {
         carouselView.setOnClickListener {
             findNavController().navigate(R.id.eventFragment)
         }
+
+        btnCreate.setOnClickListener {
+            findNavController().navigate(R.id.createChallengeFragmentDialog)
+        }
     }
 
     private fun observeData() = viewModel.state.observe(viewLifecycleOwner) {
