@@ -64,7 +64,7 @@ export default {
         }
         const { data } = await axios.post('http://i5b102.p.ssafy.io:8181/api/challenge/register/new-user', userData)
         // console.log(data)
-        if (data.result == 'success') {
+        if (data.result == 'Success') {
           alert('챌린지 가입이 완료되었습니다.')
         } else {
           alert('이미 가입한 챌린지입니다.')
