@@ -8,13 +8,9 @@ import com.project.orange.service.article.ArticlesService;
 import com.project.orange.service.challenge.ChallengeService;
 import com.project.orange.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.hazelcast.HazelcastJpaDependencyAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -22,7 +18,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.project.orange.management.Constants.ImageRealPath;
+import static com.project.orange.management.Constants.*;
 
 @RestController
 @RequestMapping("/api/image")
@@ -40,7 +36,7 @@ public class ImageHandleController {
     @Autowired
     private ChallengeService challengeService;
 
-    @PostMapping("/article/save")
+    @PostMapping("/save/article")
     private ResponseEntity<?> saveArticleImage(@RequestParam("image") MultipartFile[] images,
                                                @RequestParam("articleId") Long articleId) throws IOException {
 
@@ -61,7 +57,7 @@ public class ImageHandleController {
                     String saveImageName = UUID.randomUUID().toString() + extension;
 
                     eachImage.transferTo(new File(dir, saveImageName));
-                    savedImageNameList.add(saveImageName);
+                    savedImageNameList.add(today + "/" + saveImageName);
                 }
             }
 
@@ -82,7 +78,7 @@ public class ImageHandleController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/profile/save")
+    @PostMapping("/save/profile")
     private ResponseEntity<?> saveProfileImage(@RequestParam("image") MultipartFile[] images,
                                                @RequestParam("userId") Long userId) throws IOException {
 
@@ -92,7 +88,7 @@ public class ImageHandleController {
             if (!images[0].isEmpty()) {
                 List<String> savedImageNameList = new ArrayList<>();
                 String today = new SimpleDateFormat("yyMMdd").format(new Date());
-                String saveDirectory = ImageRealPath + File.separator + today;
+                String saveDirectory = ImageRealPath + "/" + today;
 
                 File dir = new File(saveDirectory);
                 if (!dir.exists()) {
@@ -105,7 +101,7 @@ public class ImageHandleController {
                         String saveImageName = UUID.randomUUID().toString() + extension;
 
                         eachImage.transferTo(new File(dir, saveImageName));
-                        savedImageNameList.add(saveImageName);
+                        savedImageNameList.add(today + "/" + saveImageName);
                     }
                 }
 
@@ -125,7 +121,7 @@ public class ImageHandleController {
         }
     }
 
-    @PostMapping("/challenge/save")
+    @PostMapping("/save/challenge")
     private ResponseEntity<?> saveChallengeImage(@RequestParam("image") MultipartFile[] images,
                                                @RequestParam("challengeId") Long challengeId) throws IOException {
 
@@ -135,7 +131,7 @@ public class ImageHandleController {
             if (!images[0].isEmpty()) {
                 List<String> savedImageNameList = new ArrayList<>();
                 String today = new SimpleDateFormat("yyMMdd").format(new Date());
-                String saveDirectory = ImageRealPath + File.separator + today;
+                String saveDirectory = ImageRealPath + "/" + today;
 
                 File dir = new File(saveDirectory);
                 if (!dir.exists()) {
@@ -148,7 +144,7 @@ public class ImageHandleController {
                         String saveImageName = UUID.randomUUID().toString() + extension;
 
                         eachImage.transferTo(new File(dir, saveImageName));
-                        savedImageNameList.add(saveImageName);
+                        savedImageNameList.add(today + "/" + saveImageName);
                     }
                 }
 
@@ -165,6 +161,67 @@ public class ImageHandleController {
         else {
             response.put("result", "expected 1 image, received : " + images.length);
             return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping("/get/article/{articleId}")
+    public ResponseEntity<?> getArticleImageUrl(@PathVariable Long articleId){
+        List<ArticleImages> articleImagesList;
+        articleImagesList = articleImagesService.selectAllByArticleId(articleId);
+        if(articleImagesList != null && !articleImagesList.isEmpty()) {
+            List<String> result = new ArrayList<>();
+            for (ArticleImages eachArticleImages : articleImagesList) {
+                String image = eachArticleImages.getImagePath();
+                result.add(ContextPath + ImageShowUrlPrefix + image);
+            }
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        else {
+            Map<String, String> noContentResult = new HashMap<>();
+            noContentResult.put("result", "No Image!");
+            return new ResponseEntity<>(noContentResult, HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @GetMapping("/get/challenge/{challengeId}")
+    public ResponseEntity<?> getChallengeImageUrl(@PathVariable Long challengeId){
+        Map<String, String> result = new HashMap<>();
+        try {
+            Challenges targetChallenge = challengeService.selectByChallengeId(challengeId).get();
+            String challengeImage = targetChallenge.getImagePath();
+            if(challengeImage != null) {
+                result.put("result", ContextPath + ImageShowUrlPrefix + challengeImage);
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+            else {
+                result.put("result", "No Image!");
+                return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
+            }
+        }
+        catch (Exception e){
+            result.put("result", "Internal Server Error");
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/get/profile/{userId}")
+    public ResponseEntity<?> getProfileImageUrl(@PathVariable Long userId){
+        Map<String, String> result = new HashMap<>();
+        try {
+            Users targetUser = userService.selectAllByUserId(userId);
+            String profileImage = targetUser.getProfileImagePath();
+            if(profileImage != null) {
+                result.put("result", ContextPath + ImageShowUrlPrefix + profileImage);
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+            else {
+                result.put("result", "No Image!");
+                return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
+            }
+        }
+        catch (Exception e){
+            result.put("result", "Internal Server Error");
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
