@@ -61,4 +61,30 @@ public class BadgesUsersServiceImpl implements BadgesUsersService{
             return Optional.empty();
         }
     }
+
+    @Override
+    public Boolean isTrinityCondition(Long userId) {
+        Boolean workout = false;
+        Boolean food = false;
+        Boolean supplement = false;
+
+        List<BadgesUsers> badgesUsersList = badgesUsersRepository.findAllByUser(userId);
+        for(BadgesUsers eachBadgesUsers : badgesUsersList){
+            if(eachBadgesUsers.getBadge().equals(WowFriendsItsYourBaldManBadgeId)){
+                workout = true;
+            }
+            if(eachBadgesUsers.getBadge().equals(WithBaSilBadgeId)){
+                food = true;
+            }
+            if(eachBadgesUsers.getBadge().equals(TimeForPillsBadgeId)){
+                supplement = true;
+            }
+        }
+        if(workout && food && supplement){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
