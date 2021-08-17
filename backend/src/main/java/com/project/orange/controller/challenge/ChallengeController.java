@@ -226,7 +226,7 @@ public class ChallengeController {
         }
     }
 
-    @GetMapping("/opponenet/{challengeId}")
+    @GetMapping("/opponent/{challengeId}")
     public ResponseEntity<?> findOpponentByChallengeId(@PathVariable Long challengeId){
         Map<String, String> result = new HashMap<>();
         Optional<Challenges> opponent = challengeService.findOpponentByChallengeId(challengeId);
