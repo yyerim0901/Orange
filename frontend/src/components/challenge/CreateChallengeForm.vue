@@ -12,7 +12,7 @@
             >
               <v-form
                 ref="form"
-                @submit.prevent="createPost"
+                @submit.prevent="submitForm"
               >
                 <div class="text-h4 font-weight-black mb-10">
                   챌린지 생성
@@ -28,7 +28,7 @@
                   }"
                 >
                   <v-text-field
-                    v-model="challengename"
+                    v-model="challengeTitle"
                     label="챌린지 제목"
                     clearable
                     prepend-icon="mdi-email"
@@ -45,7 +45,7 @@
                 >
                   <v-select
                     v-model="select"
-                    :items="items"
+                    :items="category"
                     label="카테고리"
                     data-vv-name="select"
                     prepend-icon="mdi-account"
@@ -83,7 +83,7 @@
                   }"
                 >
                   <v-textarea
-                    v-model="challengetext"
+                    v-model="challengeDescribe"
                     label="챌린지 내용"
                     clearable
                     hint="챌린지 내용을 성의있게 입력해주세요."
@@ -106,6 +106,7 @@
                   rounded
                   color="primary"
                   :disabled="invalid"
+                  @click="createForm"
                 >
                   챌린지 생성
                 </v-btn>
@@ -120,6 +121,7 @@
 
 <script>
 import DateForm from '@/components/challenge/DateForm.vue'
+import { createChallenge } from '@/api/challenge'
 
 export default {
   name: 'CreateChallengeForm',
@@ -127,28 +129,39 @@ export default {
     DateForm,
   },
   data: () => ({
-    challengename: null,
-    challengetext: null,
+    challengeTitle: null,
+    challengeDescribe: null,
     slider: null,
     select: null,
-    items: [
-      '운동',
-      '음식',
-      '영양제',
+    category: [
+      "운동",
+      "음식",
+      "영양제",
     ],
     rules: [
       v => v <= 50 || '50명 제한',
     ],
   }),
   methods: {
-    async createPost () {
-      const result = await this.$refs.observer.validate()
-      if (result) {
-        alert('챌린지 생성 완료')
-      }
+    async submitForm () {
+      await this.$refs.observer.validate()
+    },
+    async createForm () {
+      const response = await createChallenge({
+        challengeTitle: this.challengeTitle,
+        challengeDescribe: this.challengeDescribe,
+      })
+      console.log(response)
     }
   }
 }
+// 카테고리 ID
+// 챌린지 내용 (유저가 공란으로 받아도댐)
+// 챌린지 제목
+// 최소멤버, 최대멤버
+// 히든으로 manaerID를 넣어줘야함
+// 기간id
+// 스타트데이트를 나우로
 </script>
 
 <style>

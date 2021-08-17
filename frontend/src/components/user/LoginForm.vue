@@ -87,7 +87,6 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index.js'
 import KakaoLogin from '@/components/user/KakaoLogin.vue';
 
 export default {
@@ -101,26 +100,24 @@ export default {
   }),
   methods: {
     async checkForm () {
-      const result = await this.$refs.observer.validate()
+      await this.$refs.observer.validate()
         // if (result) {
         //   alert('로그인 성공')
         // }
       },
-    KakaoLogin: function () {
-      window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:8080/auth/kakao/callback",
-      });  
-    },
+    // KakaoLogin: function () {
+    //   window.Kakao.Auth.authorize({
+    //     redirectUri: "http://localhost:8080/auth/kakao/callback",
+    //   });  
+    // },
     async loginForm() {
       try {
         const userData = {
           email: this.email,
           password: this.password,
         }
-        const { data } = await loginUser(userData)
-        console.log(data.data)
-        this.$store.commit('setToken', data.data)
-        alert("로그인에 성공하였습니다.")
+        await this.$store.dispatch('LOGIN', userData)
+        alert("로그인에 성공했습니다.")
         this.$router.push('/')
       } catch (error) {
         console.log(error)
@@ -135,9 +132,9 @@ export default {
       this.password = ''
     }
   },
-  beforeMount(){
+  // beforeMount(){
   
-  }
+  // }
 }
 
 

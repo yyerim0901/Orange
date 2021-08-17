@@ -7,7 +7,7 @@
         class="white--text align-center"
       >
         <v-card-title class="justify-center text-h2 font-weight-bold">
-          {{ extext }}
+          {{ challengeItems.challengeTitle }}
         </v-card-title>
         <div class="text-center">
           <v-chip
@@ -15,7 +15,7 @@
             outlined
             color="white"
           >
-            참여 : {{ expeople }}
+            <!-- 참여 : {{ challengeItems.currentMembers }} -->
           </v-chip>
         </div>
       </v-img>
@@ -44,6 +44,7 @@
 
 <script>
 import FeedTab from '@/components/challenge/FeedTab.vue'
+import { challengeDetail } from '@/api/challenge'
 export default {
   name: 'FeedForm',
   components: {
@@ -51,8 +52,7 @@ export default {
   },
   data() {
     return {
-      extext: '나도 김종국',
-      expeople: "0명"
+      challengeItems: [],
     }
   },
   methods: {
@@ -61,7 +61,13 @@ export default {
     },
     goRanking() {
       this.$router.push({path:'/ranking'}).catch(()=> {});
-    }
+    },
+  },
+  async created() {
+    const challengeId = this.$route.params.id
+    const { data } = await challengeDetail(challengeId)
+    console.log(data)
+    this.challengeItems = data
   }
 }
 </script>

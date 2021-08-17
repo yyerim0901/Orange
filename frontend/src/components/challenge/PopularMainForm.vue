@@ -2,18 +2,19 @@
   <v-container fluid class="mx-auto">
     <v-row dense>
       <v-col
-        v-for="(card, title) in cards"
-        :key="title"
+        v-for="(card, index) in cards" class="col-3 mb-10 pa-2"
+        :key="index"
         :cols="card.flex"
       >
-        <v-card>
+        <v-card fill-height>
           <v-img
-            :src="card.src"
+            :src="card.imagePath"
             class="white--text align-end px-3"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <v-card-title v-text="card.title"></v-card-title>
+            <v-card-title>{{ card.challengeTitle }}</v-card-title>
+            <v-card-text>팀 점수: {{ card.totalPoint }}</v-card-text>
           </v-img>
 
           <v-card-actions>
@@ -30,19 +31,28 @@
 </template>
 
 <script>
-  export default {
-    name: 'PopularMainForm',
-    data: () => ({
-      cards: [
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-        { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
-        { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
-      ],
-    }),
+import { popularMain } from '@/api/main'
+
+export default {
+  name: 'PopularMainForm',
+  data() {
+    return {
+      cards: []
+    }
+  },
+  methods: {
+    async popularFeed() {
+      try {
+        const { data } = await popularMain()
+        this.cards = data.slice(0,8)
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }  
+    }
+  },
+  created() {
+    this.popularFeed()
   }
+}
 </script>

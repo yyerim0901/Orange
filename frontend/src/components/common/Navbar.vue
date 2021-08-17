@@ -16,7 +16,7 @@
             v-model="model"
             :loading="isloading"
             :items="items"
-            :search-input.sync="search"
+            :search-input.sync="query"
             cache-items
             class="mx-4"
             flat
@@ -25,6 +25,7 @@
             hide-selected
             label="야너두 할 수 있어!"
             solo
+            @keyup.enter="goSearch"
           ></v-autocomplete>
         </b-nav-item>
         <b-nav-item>
@@ -45,7 +46,9 @@
           </v-tooltip>
         </b-nav-item>
         
-        <b-nav-item><NotificationForm /></b-nav-item>
+        <b-nav-item v-if="isUserLogin">
+          <NotificationForm />
+        </b-nav-item>
         
         <b-nav-item>
           <v-tooltip bottom>
@@ -81,7 +84,7 @@ export default {
     return {
       isloading: false,
       items: [],
-      search: null,
+      query: '',
       model: null,
     }
   },
@@ -94,20 +97,16 @@ export default {
     },
     goCreateChallenge() {
       this.$router.push({path:'/create-challenge'}).catch(()=> {});
+    },
+    goSearch() {
+      this.$router.push({path:`/search/${query}`})
     }
   },
-  // api 연결하고 사용할거임
-  // watch: {
-  //   model (val) {
-  //     if (val != null) this.tab = 0
-  //     else this.tab = null
-  //   },
-  //   search (val) {
-  //     if (this.items.length > 0) return
-
-  //     this.isLoading = true
-  //   }
-  // }
+  computed: {
+    isUserLogin() {
+      return this.$store.getters.isLogin;
+    }
+  }
 }
 </script>
 
