@@ -170,6 +170,7 @@ export default {
         console.log(data)
         if (data.response == 'success') {
           alert(data.message)
+          this.$router.push('/authentication/login')
         } else {
           alert(data.message)
         }
