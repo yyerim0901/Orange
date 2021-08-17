@@ -66,7 +66,7 @@ export default {
   async created() {
     const challengeId = this.$route.params.id
     const { data } = await challengeDetail(challengeId)
-    console.log(data)
+    // console.log(data)
     this.challengeItems = data
   }
 }

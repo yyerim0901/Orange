@@ -7,6 +7,7 @@
         :cols="card.flex"
       >
         <v-card fill-height>
+          <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
           <v-img
             :src="card.imagePath"
             class="white--text align-end px-3"
@@ -16,6 +17,7 @@
             <v-card-title>{{ card.challengeTitle }}</v-card-title>
             <v-card-text>팀 점수: {{ card.totalPoint }}</v-card-text>
           </v-img>
+          </router-link>
 
           <v-card-actions>
             <v-spacer></v-spacer>
