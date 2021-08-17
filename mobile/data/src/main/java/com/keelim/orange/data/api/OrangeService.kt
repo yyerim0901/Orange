@@ -14,6 +14,7 @@ import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.data.response.notification.NotificationDeleteResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
 import com.keelim.orange.data.response.ranking.RankingResponse
+import com.keelim.orange.data.response.search.SearchResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -105,4 +106,7 @@ interface OrangeService {
 
   @GET("api/challenge/list")
   suspend fun challengeList(): Response<List<ChallengeResponse>>
+
+  @GET("api/challenge/search/user/{searchTitle}")
+  suspend fun search(@Path("searchTitle") query: String): Response<List<SearchResponse>>
 }

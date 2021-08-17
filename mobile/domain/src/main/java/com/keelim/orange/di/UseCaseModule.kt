@@ -8,6 +8,7 @@ import com.keelim.orange.data.repository.feed.FeedRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.history.HistoryRepository
 import com.keelim.orange.data.repository.profile.ProfileRepository
+import com.keelim.orange.data.repository.search.SearchRepository
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -26,6 +27,7 @@ import com.keelim.orange.domain.fight.OtherUseCase
 import com.keelim.orange.domain.history.HistoryUseCase
 import com.keelim.orange.domain.profile.GetCompletedChallengeUseCase
 import com.keelim.orange.domain.profile.GetIngChallengeUseCase
+import com.keelim.orange.domain.search.SearchUseCase
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
 import dagger.Provides
@@ -180,8 +182,16 @@ object UseCaseModule {
   @Provides
   @ViewModelScoped
   fun provideChallengeListUseCase(
-    feedRepository: FeedRepository
+    feedRepository: FeedRepository,
   ): ChallengeListUseCase {
     return ChallengeListUseCase(feedRepository)
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideSearchUseCase(
+    searchRepository: SearchRepository
+  ): SearchUseCase {
+    return SearchUseCase(searchRepository)
   }
 }

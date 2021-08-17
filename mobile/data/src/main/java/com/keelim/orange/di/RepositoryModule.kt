@@ -19,6 +19,8 @@ import com.keelim.orange.data.repository.history.HistoryRepository
 import com.keelim.orange.data.repository.history.HistoryRepositoryImpl
 import com.keelim.orange.data.repository.profile.ProfileRepository
 import com.keelim.orange.data.repository.profile.ProfileRepositoryImpl
+import com.keelim.orange.data.repository.search.SearchRepository
+import com.keelim.orange.data.repository.search.SearchRepositoryImpl
 import com.keelim.orange.data.repository.season.RankingRepository
 import com.keelim.orange.data.repository.season.RankingRepositoryImpl
 import com.keelim.orange.data.repository.season.create.CreateRepository
@@ -31,8 +33,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineDispatcher
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -175,6 +177,18 @@ object RepositoryModule {
     return FavoriteRepositoryImpl(
       dispatcher = dispatcher,
       db = db
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideSearchRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): SearchRepository {
+    return SearchRepositoryImpl(
+      dispatcher = dispatcher,
+      apiRequestFactory = apiRequestFactory
     )
   }
 }
