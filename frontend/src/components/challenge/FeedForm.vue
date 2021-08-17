@@ -15,7 +15,7 @@
             outlined
             color="white"
           >
-            <!-- 참여 : {{ challengeItems.currentMembers }} -->
+          참여 : {{challengeItems.currentMembers}} 명
           </v-chip>
         </div>
       </v-img>
