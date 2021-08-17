@@ -64,6 +64,7 @@ const routes = [
         path: 'ranking',
         name: 'Ranking',
         component: () => import('@/views/feed/Ranking.vue'),
+        meta: { auth: true },
       },
       {
         path: 'search/:id',
