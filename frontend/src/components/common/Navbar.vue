@@ -13,7 +13,7 @@
         <b-nav-item>
           <v-autocomplete
             prepend-icon="mdi-magnify"
-            v-model="model"
+            v-model="query"
             :loading="isloading"
             :items="items"
             :search-input.sync="query"
