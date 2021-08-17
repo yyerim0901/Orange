@@ -5,28 +5,30 @@
         v-for="(feedItem, index) in feedItems"
         :key="index"
       >
-        <v-card
-          class="mx-auto my-5"
-          max-width="800"
-        >
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            height="300px"
-          ></v-img>
+        <router-link :to="`/feed/${feedItem.articleId}`" class="text-decoration-none">
+          <v-card
+            class="mx-auto my-5"
+            max-width="800"
+          >
+            <v-img
+              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              height="300px"
+            ></v-img>
 
-          <v-card-title>
-            {{ feedItem.title }}
-          </v-card-title>
+            <v-card-title>
+              {{ feedItem.title }}
+            </v-card-title>
 
-          <v-card-subtitle>
-            {{ feedItem.articleWritetime | moment('YYYY-MM-DD')}}&nbsp;
-          </v-card-subtitle>
+            <v-card-subtitle>
+              {{ feedItem.articleWritetime | moment('YYYY-MM-DD')}}&nbsp;
+            </v-card-subtitle>
 
-          <v-card-text>
-            {{ feedItem.articleContent }}
-          </v-card-text>
-          
-        </v-card>
+            <v-card-text>
+              {{ feedItem.articleContent }}
+            </v-card-text>
+            
+          </v-card>
+        </router-link> 
       </v-col>
     </v-row>
   </v-container>
@@ -47,7 +49,7 @@ export default {
       try {
         const challengeId = this.$route.params.id
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/article/challenge/${challengeId}`)
-        // console.log(data)
+        console.log(data)
         this.feedItems = data
       } catch (err) {
         console.log(err)

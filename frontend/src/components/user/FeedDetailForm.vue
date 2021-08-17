@@ -4,7 +4,7 @@
       <v-row d-flex>
         <v-col outlined>
           <v-img
-            src='https://cdn.vuetifyjs.com/images/cards/house.jpg'
+            :src="feedImg"
             height="500"
             max-width="600"
           >
@@ -20,15 +20,13 @@
             height="400"
             max-height="400"
           >
-            🍊 : {{ CommentItem.commentContent }}
+            🍊 : {{ CommentItem.commentContent }} 
             <!-- <p class="text-end data-color">{{ CommentItem.commentWritetime| moment('YYYY-MM-DD')}}&nbsp;</p> -->
           </v-card-text>
-          <v-text-field
-            v-model="commentContent"
-            label="comment"
-          >
-          </v-text-field>
-          <v-btn text @click="newComment">작성</v-btn>
+          <div class="input-group mb-3">
+            <input v-model.trim="commentContent" type="text" class="form-control border-warning" placeholder="댓글">
+            <div class="text-end"><button class="btn btn-outline-warning" @click="newComment()">작성</button></div>
+          </div>
         </v-col>
       </v-row>
     </v-card>
@@ -37,7 +35,6 @@
 
 <script>
 import axios from 'axios'
-import { createComment } from '@/api/challenge'
 export default {
   name: 'FeedDetailForm',
   data() {
@@ -45,8 +42,9 @@ export default {
       feedItems: [],
       CommentItems: [],
       commentContent: '',
-      user: this.$store.state.data2,
-      articleId: this.$route.params.id,
+      user: '',
+      article: '',
+      feedImg: '',
     }
   },
   methods: {
@@ -56,6 +54,16 @@ export default {
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/article/challenge/${articleId}`)
         console.log(data[0])
         this.feedItems = data[0]
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async getFeedImg() {
+      try {
+        const articleId = this.$route.params.id
+        const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/image/get/article/${articleId}`)
+        // console.log(data)
+        this.feedImg = data[0]
       } catch (err) {
         console.log(err)
       }
@@ -70,26 +78,25 @@ export default {
         console.log(err)
       }
     },
-    newComment() {
-      const commentData = {
-        articleId: this.articleId,
-        commentContent: this.commentContent,
-        user: this.user,
+    async newComment() {
+      try {
+        const commentData = {
+          commentContent: this.commentContent,
+          user: this.$store.state.data2,
+          article: this.$route.params.id,
+        }
+        const { data } = await axios.post('http://i5b102.p.ssafy.io:8181/api/comment/create', commentData)
+        // console.log(data)
+        location.reload()
+      } catch(error) {
+        console.log(error)
       }
-      axios.post('http://i5b102.p.ssafy.io:8181/api/comment/create', {commentData})
-        .then(res =>{
-          console.log(res)
-        })
-        .catch(err =>{
-          console.error(err)
-        })
-      console.log(commentData)
     },
-
   },
   created() {
     this.getFeed()
     this.getComment()
+    this.getFeedImg()
   }
 }
 </script>
