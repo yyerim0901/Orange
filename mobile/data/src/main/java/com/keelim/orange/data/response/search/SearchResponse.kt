@@ -1,6 +1,5 @@
 package com.keelim.orange.data.response.search
 
-
 import com.google.gson.annotations.SerializedName
 
 data class SearchResponse(
