@@ -139,6 +139,26 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
+    public Optional<Challenges> findOpponentByChallengeId(Long challengeId) {
+        Optional<BattleMatching> blueTeamSearchResult = battleMatchingRepository.findByBlueTeamChallengeId(challengeId);
+        Optional<BattleMatching> redTeamSearchResult = battleMatchingRepository.findByRedTeamChallengeId(challengeId);
+
+        if(blueTeamSearchResult.isEmpty() && redTeamSearchResult.isEmpty()){
+            return Optional.empty();
+        }
+        else{
+            Challenges opponent = null;
+            if(blueTeamSearchResult.isPresent()){
+                opponent = blueTeamSearchResult.get().getRedTeam();
+            }
+            if(redTeamSearchResult.isPresent()){
+                opponent = redTeamSearchResult.get().getBlueTeam();
+            }
+            return Optional.of(opponent);
+        }
+    }
+
+    @Override
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
         // entity manager 를 autowire 로 불러와서 flush 혹은 clear

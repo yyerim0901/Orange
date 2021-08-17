@@ -58,7 +58,7 @@ public class ImageHandleController {
 
             File dir = new File(saveDirectory);
             if(!dir.exists()){
-                dir.mkdir();
+                dir.mkdirs();
             }
             for(MultipartFile eachImage : images){
                 String originalImageName = eachImage.getOriginalFilename();
@@ -102,7 +102,7 @@ public class ImageHandleController {
 
                 File dir = new File(saveDirectory);
                 if (!dir.exists()) {
-                    dir.mkdir();
+                    dir.mkdirs();
                 }
                 for (MultipartFile eachImage : images) {
                     String originalImageName = eachImage.getOriginalFilename();
@@ -145,7 +145,7 @@ public class ImageHandleController {
 
                 File dir = new File(saveDirectory);
                 if (!dir.exists()) {
-                    dir.mkdir();
+                    dir.mkdirs();
                 }
                 for (MultipartFile eachImage : images) {
                     String originalImageName = eachImage.getOriginalFilename();

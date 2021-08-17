@@ -32,14 +32,14 @@ public final class Constants {
     public static final Long FoodCategoryId = 2L;
     public static final Long SupplementCategoryId = 3L;
 
-    public static final String ImageRealPath = "C:/SSAFY/imageSaveTest";//"some" + File.separator + "path";
+    public static final String ImageRealPath = "./testDir";//"some" + File.separator + "path";
     public static final String DefaultImage = "default_image";
 
     public static final int ArticleBasePoint = 10;
     public static final int ImageBonusPoint = 5;
 
     public static final String ImageUploadUrl = "/api/image/show/**";
-    public static final String ResourcePath = "file:///C:/SSAFY/imageSaveTest/";
+    public static final String ResourcePath = "file:///./testDir"; //C:/SSAFY/imageSaveTest/";
     public static final String ContextPath = "http://127.0.0.1:8181";
     public static final String ImageShowUrlPrefix = "/api/image/show/";
 

@@ -225,4 +225,17 @@ public class ChallengeController {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
+
+    @GetMapping("/opponenet/{challengeId}")
+    public ResponseEntity<?> findOpponentByChallengeId(@PathVariable Long challengeId){
+        Map<String, String> result = new HashMap<>();
+        Optional<Challenges> opponent = challengeService.findOpponentByChallengeId(challengeId);
+        if(opponent.isEmpty()){
+            result.put("result", "no content");
+            return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
+        }
+        else{
+            return new ResponseEntity<>(opponent, HttpStatus.OK);
+        }
+    }
 }
