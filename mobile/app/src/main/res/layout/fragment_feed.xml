@@ -158,5 +158,19 @@
         tools:itemCount="10"
         tools:listitem="@layout/item_search" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/orange"
+        android:src="@drawable/ic_baseline_exposure_plus_1_24"
+        app:borderWidth="0dp"
+        android:layout_marginBottom="10dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
