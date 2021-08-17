@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class History(
-    @PrimaryKey val uid: Int?,
-    @ColumnInfo(name = "keyword") val keyword: String,
-    @ColumnInfo(name="image_url") val image:String,
+  @PrimaryKey val uid: Int?,
+  @ColumnInfo(name = "keyword") val keyword: String,
+  @ColumnInfo(name = "image_url") val image: String,
 )

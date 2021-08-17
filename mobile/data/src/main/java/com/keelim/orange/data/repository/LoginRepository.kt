@@ -3,14 +3,13 @@ package com.keelim.orange.data.repository
 import com.keelim.orange.data.datasource.LoginDataSource
 import com.keelim.orange.data.model.LoggedInUser
 import com.keelim.orange.data.model.Result
-import javax.inject.Inject
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository (
+class LoginRepository(
   private val dataSource: LoginDataSource
 ) {
 
@@ -45,7 +44,7 @@ class LoginRepository (
     return result
   }
 
-  suspend fun signup(username: String, password: String, nickname:String): Result<LoggedInUser> {
+  suspend fun signup(username: String, password: String, nickname: String): Result<LoggedInUser> {
     // handle login
     val result = dataSource.signup(username, password, nickname)
 

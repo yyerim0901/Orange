@@ -12,7 +12,6 @@ import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.ranking.Ranking
 import com.keelim.orange.databinding.FragmentRankingBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.internal.artificialFrame
 
 @AndroidEntryPoint
 class RankingFragment : Fragment() {

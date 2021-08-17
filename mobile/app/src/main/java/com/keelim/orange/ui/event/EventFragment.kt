@@ -10,8 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.keelim.orange.R
 import com.keelim.orange.databinding.FragmentEventBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

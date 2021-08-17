@@ -124,7 +124,7 @@ object UseCaseModule {
   @ViewModelScoped
   fun provideHistoryUseCase(
     historyRepository: HistoryRepository,
-  ): HistoryUseCase{
+  ): HistoryUseCase {
     return HistoryUseCase(
       historyRepository
     )
@@ -133,7 +133,7 @@ object UseCaseModule {
   @ViewModelScoped
   fun provideGetCompletedChallengeUseCase(
     profileRepository: ProfileRepository
-  ): GetCompletedChallengeUseCase{
+  ): GetCompletedChallengeUseCase {
     return GetCompletedChallengeUseCase(
       profileRepository
     )
@@ -142,8 +142,8 @@ object UseCaseModule {
   @Provides
   @ViewModelScoped
   fun provideGetIngChallengeUseCase(
-    profileRepository:ProfileRepository
-  ): GetIngChallengeUseCase{
+    profileRepository: ProfileRepository
+  ): GetIngChallengeUseCase {
     return GetIngChallengeUseCase(
       profileRepository
     )
@@ -173,7 +173,7 @@ object UseCaseModule {
   @ViewModelScoped
   fun provideCategoryUseCase(
     feedRepository: FeedRepository
-  ):CategoryUseCase{
+  ): CategoryUseCase {
     return CategoryUseCase(feedRepository)
   }
 

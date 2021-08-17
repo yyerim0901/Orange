@@ -31,8 +31,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -147,7 +147,7 @@ object RepositoryModule {
   fun provideProfileRepository(
     @IoDispatcher dispatcher: CoroutineDispatcher,
     apiRequestFactory: ApiRequestFactory,
-  ): ProfileRepository{
+  ): ProfileRepository {
     return ProfileRepositoryImpl(
       dispatcher = dispatcher,
       apiRequestFactory = apiRequestFactory

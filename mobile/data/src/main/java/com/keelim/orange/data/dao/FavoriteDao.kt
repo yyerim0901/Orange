@@ -9,12 +9,12 @@ import com.keelim.orange.data.model.entity.Favorite
 
 @Dao
 interface FavoriteDao {
-    @Query("SELECT * FROM favorite")
-    suspend fun getAll(): List<Favorite>
+  @Query("SELECT * FROM favorite")
+  suspend fun getAll(): List<Favorite>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavorite(favorite: Favorite)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  suspend fun insertFavorite(favorite: Favorite)
 
-    @Delete
-    suspend fun deleteFavorite(favorite: Favorite)
+  @Delete
+  suspend fun deleteFavorite(favorite: Favorite)
 }

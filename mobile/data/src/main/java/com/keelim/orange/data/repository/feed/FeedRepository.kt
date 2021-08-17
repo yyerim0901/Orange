@@ -1,7 +1,7 @@
 package com.keelim.orange.data.repository.feed
 
-import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.DetailResponse
+import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.feed.ChallengeResponse
 
 interface FeedRepository {

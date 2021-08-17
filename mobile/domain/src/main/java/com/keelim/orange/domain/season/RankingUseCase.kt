@@ -6,11 +6,11 @@ import com.keelim.orange.data.repository.season.RankingRepository
 class RankingUseCase(
   private val rankingRepository: RankingRepository
 ) {
-  suspend fun point():List<Ranking>{
+  suspend fun point(): List<Ranking> {
     return rankingRepository.point()
   }
 
-  suspend fun start():List<Ranking>{
+  suspend fun start(): List<Ranking> {
     return rankingRepository.start()
   }
 }

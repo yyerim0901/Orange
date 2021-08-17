@@ -9,12 +9,12 @@ import com.keelim.orange.data.model.entity.History
 
 @Dao
 interface HistoryDao {
-    @Query("SELECT * FROM history")
-    suspend fun getAll(): List<History>
+  @Query("SELECT * FROM history")
+  suspend fun getAll(): List<History>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHistory(history: History)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  suspend fun insertHistory(history: History)
 
-    @Delete
-    suspend fun deleteHistory(history: History)
+  @Delete
+  suspend fun deleteHistory(history: History)
 }

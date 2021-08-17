@@ -6,18 +6,18 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class FavoriteRepositoryImpl(
-    private val dispatcher: CoroutineDispatcher,
-    private val db: AppDatabase,
+  private val dispatcher: CoroutineDispatcher,
+  private val db: AppDatabase,
 ) : FavoriteRepository {
-    override suspend fun getAll(): List<Favorite> = withContext(dispatcher) {
-        db.favoriteDao().getAll()
-    }
+  override suspend fun getAll(): List<Favorite> = withContext(dispatcher) {
+    db.favoriteDao().getAll()
+  }
 
-    override suspend fun insertFavorite(favorite: Favorite) = withContext(dispatcher) {
-        db.favoriteDao().insertFavorite(favorite)
-    }
+  override suspend fun insertFavorite(favorite: Favorite) = withContext(dispatcher) {
+    db.favoriteDao().insertFavorite(favorite)
+  }
 
-    override suspend fun deleteFavorite(favorite: Favorite) = withContext(dispatcher) {
-        db.favoriteDao().deleteFavorite(favorite)
-    }
+  override suspend fun deleteFavorite(favorite: Favorite) = withContext(dispatcher) {
+    db.favoriteDao().deleteFavorite(favorite)
+  }
 }

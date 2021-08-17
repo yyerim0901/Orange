@@ -3,13 +3,13 @@ package com.keelim.orange.data.api
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.entity.Favorite
-import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
 import com.keelim.orange.data.response.auth.AuthResponse
 import com.keelim.orange.data.response.badge.BadgeResponse
+import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.data.response.notification.NotificationDeleteResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
@@ -65,14 +65,10 @@ interface OrangeService {
   ): Response<FriendsResponse>
 
   @POST()
-  fun getIngList(
-
-  ): List<Favorite>
+  fun getIngList(): List<Favorite>
 
   @POST
-  fun getCompletedList(
-
-  ): List<Favorite>
+  fun getCompletedList(): List<Favorite>
 
   @GET("api/badge/list")
   suspend fun getAllBadgeList(): Response<BadgeResponse>
@@ -83,11 +79,11 @@ interface OrangeService {
   ): Response<BadgeResponse>
 
   @GET("api/notification/select/{userId}")
-  suspend fun getNotificationList(@Path("userId") userId: Int):Response<List<NotificationResponse>>
+  suspend fun getNotificationList(@Path("userId") userId: Int): Response<List<NotificationResponse>>
 
   @POST("api/user/signup")
   suspend fun signup(
-    @Body call:SignUpCall
+    @Body call: SignUpCall
   ): Response<AuthResponse>
 
   @POST("api/user/login")
@@ -105,8 +101,8 @@ interface OrangeService {
   suspend fun category(): Response<List<CategoryResponse>>
 
   @DELETE("/api/notification/delete/{notificationId}")
-  suspend fun deleteNoti(@Path("notificationId") notificationId:Int):Response<NotificationDeleteResponse>
+  suspend fun deleteNoti(@Path("notificationId") notificationId: Int): Response<NotificationDeleteResponse>
 
   @GET("api/challenge/list")
-  suspend fun challengeList():Response<List<ChallengeResponse>>
+  suspend fun challengeList(): Response<List<ChallengeResponse>>
 }

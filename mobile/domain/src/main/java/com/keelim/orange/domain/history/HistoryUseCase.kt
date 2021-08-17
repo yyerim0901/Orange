@@ -6,15 +6,15 @@ import com.keelim.orange.data.repository.history.HistoryRepository
 class HistoryUseCase(
   private val historyRepository: HistoryRepository,
 ) {
-  suspend fun getListAll():List<History>{
+  suspend fun getListAll(): List<History> {
     return historyRepository.getAll()
   }
 
-  suspend fun insert(history: History){
+  suspend fun insert(history: History) {
     return historyRepository.insertHistory(history)
   }
 
-  suspend fun delete(history: History){
+  suspend fun delete(history: History) {
     return historyRepository.deleteHistory(history)
   }
 }

@@ -6,14 +6,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class ProfileRepositoryImpl(
-    private val dispatcher:CoroutineDispatcher,
-    private val apiRequestFactory: ApiRequestFactory,
+  private val dispatcher: CoroutineDispatcher,
+  private val apiRequestFactory: ApiRequestFactory,
 ) : ProfileRepository {
-    override suspend fun getIngChallengeList(): List<Favorite>  = withContext(dispatcher){
-        return@withContext apiRequestFactory.retrofit.getIngList()
-    }
+  override suspend fun getIngChallengeList(): List<Favorite> = withContext(dispatcher) {
+    return@withContext apiRequestFactory.retrofit.getIngList()
+  }
 
-    override suspend fun getCompletedChallengeList(): List<Favorite>  = withContext(dispatcher){
-        return@withContext apiRequestFactory.retrofit.getCompletedList()
-    }
+  override suspend fun getCompletedChallengeList(): List<Favorite> = withContext(dispatcher) {
+    return@withContext apiRequestFactory.retrofit.getCompletedList()
+  }
 }
