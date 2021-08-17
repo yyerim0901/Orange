@@ -33,6 +33,7 @@ public final class Constants {
     public static final Long SupplementCategoryId = 3L;
 
     public static final String ImageRealPath = "some" + File.separator + "path";
+    public static final String DefaultImage = "default_image";
 
     public static int ArticleBasePoint = 10;
     public static int ImageBonusPoint = 5;
