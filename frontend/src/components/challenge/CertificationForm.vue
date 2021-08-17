@@ -1,14 +1,62 @@
 <template>
-  <v-card flat>
-    <v-card-text>
-        인증목록
-      </v-card-text>
-  </v-card>
+  <v-container>
+    <v-row dense>
+      <v-col
+        v-for="(feedItem, index) in feedItems"
+        :key="index"
+      >
+        <v-card
+          class="mx-auto my-5"
+          max-width="800"
+        >
+          <v-img
+            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            height="300px"
+          ></v-img>
+
+          <v-card-title>
+            {{ feedItem.title }}
+          </v-card-title>
+
+          <v-card-subtitle>
+            {{ feedItem.articleWritetime }}
+          </v-card-subtitle>
+
+          <v-card-text>
+            {{ feedItem.articleContent }}
+          </v-card-text>
+          
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'CertificationForm',
+  data() {
+    return {
+      feedItems: [],
+    }
+  },
+  methods: {
+    async getFeed() {
+      try {
+        const challengeId = this.$route.params.id
+        const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/article/challenge/${challengeId}`)
+        // console.log(data)
+        this.feedItems = data
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  created() {
+    this.getFeed()
+  }
 }
 </script>
 
