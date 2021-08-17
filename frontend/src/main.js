@@ -8,7 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import axios from 'axios'
+import vueMoment from 'vue-moment'
 
+Vue.use(vueMoment)
 Vue.use(BootstrapVueIcons)
 Vue.use(BootstrapVue)
 

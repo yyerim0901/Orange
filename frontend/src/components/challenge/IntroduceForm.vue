@@ -1,27 +1,43 @@
 <template>
-  <v-card
+  <container class="text-center">
+    <v-card
+    flat
     class="mx-auto my-12"
-    max-width="500"
+    max-width="800"
   >
 
-    <v-card-title>우리 챌린지를 소개합니다.</v-card-title>
+    <v-card-title
+    class="text-h4 text--primary justify-center"
+    ><b>About Challenge</b></v-card-title>
+    <div class="mt-4 text-subtitle-1">
+        <v-row>
+          <v-col></v-col>
+          <v-col>
+            <v-icon>mdi-calendar-multiple-check </v-icon> &nbsp;
+              {{ challengeItems.startDate | moment('YYYY-MM-DD')}}&nbsp;  ~  &nbsp;{{ challengeItems.endDate | moment('YYYY-MM-DD')}}</v-col>
+          <v-col></v-col>
+        </v-row>
+      </div>
+
 
     <v-card-text>
-      <v-row
-        align="center"
-        class="mx-0"
-      >
-        <div class="grey--text my-2">
-          현재 포인트 : {{ challengeItems.totalPoint }}
-        </div>
-      </v-row>
+      <v-row>
+        <v-col></v-col>
+        <v-col>
+          <v-alert
+            text
+            dense
+            shaped
+            color="deep-orange"
+            icon="mdi-fire"
+            class="text-left"
+          >
+            현재 포인트 : {{ challengeItems.totalPoint }}
+          </v-alert>
 
-      <div class="mt-4 text-subtitle-1">
-        시작일 : {{ challengeItems.startDate }}
-      </div>
-      <div class="mb-4 text-subtitle-1">
-        종료일 : {{ challengeItems.endDate }}
-      </div>
+        </v-col>
+        <v-col></v-col>
+      </v-row>
 
     </v-card-text>
 
@@ -33,15 +49,19 @@
       {{ challengeItems.challengeDescribe }}
     </v-card-text>
   </v-card>
+
+  </container>
+  
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
   name: 'IntroduceForm',
   data() {
     return {
-      challengeItems: []
+      challengeItems: [],
     }
   },
   methods: {
