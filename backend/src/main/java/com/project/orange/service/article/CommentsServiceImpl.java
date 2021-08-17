@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class CommentsServiceImpl implements CommentsService{
     public Optional<Comments> createComment(Comments comments) {
         // 처음 댓글 작성시 10번 뱃지 부여 로직
         badgesUsersService.badgeAwardAndNotify(comments.getUser(), ReplyCommitteeBadgeId);
-
+        comments.setCommentWritetime(LocalDateTime.now());
         Comments newComment = commentsRepository.save(comments);
 
         return Optional.ofNullable(newComment);

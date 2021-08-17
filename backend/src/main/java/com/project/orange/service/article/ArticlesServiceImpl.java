@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import static com.project.orange.management.Constants.*;
@@ -44,7 +45,9 @@ public class ArticlesServiceImpl implements ArticlesService{
         // 처음 피드 작성시 9번 뱃지 부여 로직
         badgesUsersService.badgeAwardAndNotify(article.getUser(), HereICameBadgeId);
 
+        article.setArticleWritetime(LocalDateTime.now());
         Articles newArticle = articlesRepository.save(article);
+
         Long targetUserId = newArticle.getUser();
         Long targetChallengeId = newArticle.getChallenge();
 

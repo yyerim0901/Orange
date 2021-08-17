@@ -58,7 +58,7 @@ public class ImageHandleController {
 
             File dir = new File(saveDirectory);
             if(!dir.exists()){
-                dir.mkdir();
+                dir.mkdirs();
             }
             for(MultipartFile eachImage : images){
                 String originalImageName = eachImage.getOriginalFilename();
@@ -102,7 +102,7 @@ public class ImageHandleController {
 
                 File dir = new File(saveDirectory);
                 if (!dir.exists()) {
-                    dir.mkdir();
+                    dir.mkdirs();
                 }
                 for (MultipartFile eachImage : images) {
                     String originalImageName = eachImage.getOriginalFilename();
@@ -145,7 +145,7 @@ public class ImageHandleController {
 
                 File dir = new File(saveDirectory);
                 if (!dir.exists()) {
-                    dir.mkdir();
+                    dir.mkdirs();
                 }
                 for (MultipartFile eachImage : images) {
                     String originalImageName = eachImage.getOriginalFilename();
@@ -238,6 +238,11 @@ public class ImageHandleController {
     @GetMapping("/get/badge-status/{userId}")
     public ResponseEntity<?> getBadgeStatusOfUser(@PathVariable Long userId){
         Map<String, String> result = new HashMap<>();
+        if(userService.selectAllByUserId(userId)==null){
+            result.put("result", "No User");
+            return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
+        }
+
         try {
             List<Badges> badgesList = badgesService.selectAll();
             List<BadgesUsers> targetUserBadgeList = badgesUsersService.selectAllByUserId(userId);

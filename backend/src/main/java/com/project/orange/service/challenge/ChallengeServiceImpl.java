@@ -139,6 +139,26 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
+    public Optional<Challenges> findOpponentByChallengeId(Long challengeId) {
+        Optional<BattleMatching> blueTeamSearchResult = battleMatchingRepository.findByBlueTeamChallengeId(challengeId);
+        Optional<BattleMatching> redTeamSearchResult = battleMatchingRepository.findByRedTeamChallengeId(challengeId);
+
+        if(blueTeamSearchResult.isEmpty() && redTeamSearchResult.isEmpty()){
+            return Optional.empty();
+        }
+        else{
+            Challenges opponent = null;
+            if(blueTeamSearchResult.isPresent()){
+                opponent = blueTeamSearchResult.get().getRedTeam();
+            }
+            if(redTeamSearchResult.isPresent()){
+                opponent = redTeamSearchResult.get().getBlueTeam();
+            }
+            return Optional.of(opponent);
+        }
+    }
+
+    @Override
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
         // entity manager 를 autowire 로 불러와서 flush 혹은 clear
@@ -168,6 +188,23 @@ public class ChallengeServiceImpl implements ChallengeService{
         // 첫 챌린지 참여 뱃지 지급
         Optional<BadgesUsers> joinChallengeFirstTime;
         badgesUsersService.badgeAwardAndNotify(managerId, HereComesANewChallengerBadgeId);
+        Long targetChallengeCategoryId = currentChallenge.getCategoryId();
+        // 첫 "운동" 챌린지 참여 뱃지
+        if(targetChallengeCategoryId.equals(WorkoutCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, WowFriendsItsYourBaldManBadgeId);
+        }
+        // 첫 "음식" 챌린지 참여 뱃지
+        else if(targetChallengeCategoryId.equals(FoodCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, WithBaSilBadgeId);
+        }
+        // 첫 "영양제" 챌린지 참여 뱃지
+        else if(targetChallengeCategoryId.equals(SupplementCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, TimeForPillsBadgeId);
+        }
+        // "삼위일체" 뱃지
+        if(badgesUsersService.isTrinityCondition(managerId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, TrinityBadgeId);
+        }
 
         // 첫 챌린지 주최 badge 지급
         badgesUsersService.badgeAwardAndNotify(managerId, HandsInHandsBadgeId);
@@ -236,7 +273,10 @@ public class ChallengeServiceImpl implements ChallengeService{
         else if(targetChallengeCategoryId.equals(SupplementCategoryId)){
             badgesUsersService.badgeAwardAndNotify(userId, TimeForPillsBadgeId);
         }
-
+        // "삼위일체" 뱃지
+        if(badgesUsersService.isTrinityCondition(userId)){
+            badgesUsersService.badgeAwardAndNotify(userId, TrinityBadgeId);
+        }
 
         targetChallenge.setTotalPoint(targetChallenge.getTotalPoint() + initialPointForChallenge);
         targetChallenge.setCurrentMembers(targetChallenge.getCurrentMembers() + 1);
