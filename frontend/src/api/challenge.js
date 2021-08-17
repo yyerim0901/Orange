@@ -15,8 +15,14 @@ function badgeList(badgeData) {
   return instance.get('/api/badge/list', badgeData)
 }
 
+// 유저 챌린지 정보를 불러오는 API
+function userChallenge(myData) {
+  return instance.get('/api/challenge/search/user', myData)
+}
+
 export { 
   createChallenge,
   badgeList,
-  challengeDetail
+  challengeDetail,
+  userChallenge,
 }
