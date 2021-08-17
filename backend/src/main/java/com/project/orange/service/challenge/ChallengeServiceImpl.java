@@ -1,6 +1,5 @@
 package com.project.orange.service.challenge;
 
-import com.project.orange.entity.badge.Badges;
 import com.project.orange.entity.challenge.BattleMatching;
 import com.project.orange.entity.challenge.Challenges;
 import com.project.orange.entity.notification.Notifications;
@@ -10,6 +9,7 @@ import com.project.orange.entity.user.UsersChallenges;
 import com.project.orange.repository.badge.BadgeRepository;
 import com.project.orange.repository.challenge.BattleMatchingRepository;
 import com.project.orange.repository.challenge.ChallengesRepository;
+import com.project.orange.repository.challenge.PeriodsRepository;
 import com.project.orange.repository.notification.NotificationsRepository;
 import com.project.orange.repository.user.BadgesUsersRepository;
 import com.project.orange.repository.user.UserRepository;
@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static com.project.orange.management.Constants.*;
@@ -37,6 +38,7 @@ public class ChallengeServiceImpl implements ChallengeService{
     private final UsersChallengesRepository usersChallengesRepository;
     private final UserRepository userRepository;
     private final BadgeRepository badgeRepository;
+    private final PeriodsRepository periodsRepository;
     private final BadgesUsersService badgesUsersService;
     private final NotificationService notificationService;
 
@@ -49,6 +51,7 @@ public class ChallengeServiceImpl implements ChallengeService{
                                 UserRepository userRepository,
                                 BadgesUsersRepository badgesUsersRepository,
                                 BadgeRepository badgeRepository,
+                                PeriodsRepository periodsRepository,
                                 BadgesUsersService badgesUsersService,
                                 NotificationService notificationService) {
         this.challengesRepository = challengesRepository;
@@ -57,6 +60,7 @@ public class ChallengeServiceImpl implements ChallengeService{
         this.usersChallengesRepository = usersChallengesRepository;
         this.userRepository = userRepository;
         this.badgeRepository = badgeRepository;
+        this.periodsRepository = periodsRepository;
         this.badgesUsersService = badgesUsersService;
         this.notificationService = notificationService;
     }
@@ -138,6 +142,14 @@ public class ChallengeServiceImpl implements ChallengeService{
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
         // entity manager 를 autowire 로 불러와서 flush 혹은 clear
+
+        LocalDateTime startDate = challenge.getStartDate();
+        int plusDate = periodsRepository.getById(challenge.getPeriodId()).getPeriodDays();
+        challenge.setEndDate(startDate.plusDays(plusDate));
+        challenge.setCurrentMembers(1);
+        challenge.setTotalPoint(initialPointForChallenge);
+        challenge.setImagePath(DefaultImage);
+
         Challenges currentChallenge = challengesRepository.save(challenge);
         entityManager.flush(); // DB에 반영 (transaction 마지막에 flush 해줌)
         entityManager.clear(); //
@@ -153,7 +165,11 @@ public class ChallengeServiceImpl implements ChallengeService{
         Long managerId = manager.getUser().getUserId();
         usersChallengesRepository.save(manager);
 
-        // Todo : 첫 챌린지 주최 -> badge 지급
+        // 첫 챌린지 참여 뱃지 지급
+        Optional<BadgesUsers> joinChallengeFirstTime;
+        badgesUsersService.badgeAwardAndNotify(managerId, HereComesANewChallengerBadgeId);
+
+        // 첫 챌린지 주최 badge 지급
         badgesUsersService.badgeAwardAndNotify(managerId, HandsInHandsBadgeId);
 
         // 현재 저장한 Challenge 정보
