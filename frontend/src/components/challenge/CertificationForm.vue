@@ -19,7 +19,7 @@
           </v-card-title>
 
           <v-card-subtitle>
-            {{ feedItem.articleWritetime }}
+            {{ feedItem.articleWritetime | moment('YYYY-MM-DD')}}&nbsp;
           </v-card-subtitle>
 
           <v-card-text>

@@ -55,6 +55,12 @@ const routes = [
         meta: { auth: true },
       },
       {
+        path: 'feed/:id',
+        name: 'FeedDetail',
+        component: () => import('@/views/feed/FeedDetail.vue'),
+        meta: { auth: true },
+      },
+      {
         path: 'ranking',
         name: 'Ranking',
         component: () => import('@/views/feed/Ranking.vue'),
