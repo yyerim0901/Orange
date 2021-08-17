@@ -188,6 +188,23 @@ public class ChallengeServiceImpl implements ChallengeService{
         // 첫 챌린지 참여 뱃지 지급
         Optional<BadgesUsers> joinChallengeFirstTime;
         badgesUsersService.badgeAwardAndNotify(managerId, HereComesANewChallengerBadgeId);
+        Long targetChallengeCategoryId = currentChallenge.getCategoryId();
+        // 첫 "운동" 챌린지 참여 뱃지
+        if(targetChallengeCategoryId.equals(WorkoutCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, WowFriendsItsYourBaldManBadgeId);
+        }
+        // 첫 "음식" 챌린지 참여 뱃지
+        else if(targetChallengeCategoryId.equals(FoodCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, WithBaSilBadgeId);
+        }
+        // 첫 "영양제" 챌린지 참여 뱃지
+        else if(targetChallengeCategoryId.equals(SupplementCategoryId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, TimeForPillsBadgeId);
+        }
+        // "삼위일체" 뱃지
+        if(badgesUsersService.isTrinityCondition(managerId)){
+            badgesUsersService.badgeAwardAndNotify(managerId, TrinityBadgeId);
+        }
 
         // 첫 챌린지 주최 badge 지급
         badgesUsersService.badgeAwardAndNotify(managerId, HandsInHandsBadgeId);
@@ -256,7 +273,10 @@ public class ChallengeServiceImpl implements ChallengeService{
         else if(targetChallengeCategoryId.equals(SupplementCategoryId)){
             badgesUsersService.badgeAwardAndNotify(userId, TimeForPillsBadgeId);
         }
-
+        // "삼위일체" 뱃지
+        if(badgesUsersService.isTrinityCondition(userId)){
+            badgesUsersService.badgeAwardAndNotify(userId, TrinityBadgeId);
+        }
 
         targetChallenge.setTotalPoint(targetChallenge.getTotalPoint() + initialPointForChallenge);
         targetChallenge.setCurrentMembers(targetChallenge.getCurrentMembers() + 1);

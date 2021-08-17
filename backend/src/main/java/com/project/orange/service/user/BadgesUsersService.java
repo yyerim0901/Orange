@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface BadgesUsersService {
     public List<BadgesUsers> selectAllByUserId(Long user);
     public Optional<BadgesUsers> badgeAwardAndNotify(Long userId, Long badgeId);
+    public Boolean isTrinityCondition(Long userId);
 }
