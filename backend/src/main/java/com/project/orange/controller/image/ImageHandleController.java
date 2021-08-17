@@ -1,11 +1,15 @@
 package com.project.orange.controller.image;
 
 import com.project.orange.entity.article.ArticleImages;
+import com.project.orange.entity.badge.Badges;
 import com.project.orange.entity.challenge.Challenges;
+import com.project.orange.entity.user.BadgesUsers;
 import com.project.orange.entity.user.Users;
 import com.project.orange.service.article.ArticleImagesService;
 import com.project.orange.service.article.ArticlesService;
+import com.project.orange.service.badge.BadgesService;
 import com.project.orange.service.challenge.ChallengeService;
+import com.project.orange.service.user.BadgesUsersService;
 import com.project.orange.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +39,12 @@ public class ImageHandleController {
 
     @Autowired
     private ChallengeService challengeService;
+
+    @Autowired
+    private BadgesService badgesService;
+
+    @Autowired
+    private BadgesUsersService badgesUsersService;
 
     @PostMapping("/save/article")
     private ResponseEntity<?> saveArticleImage(@RequestParam("image") MultipartFile[] images,
@@ -218,6 +228,43 @@ public class ImageHandleController {
                 result.put("result", "No Image!");
                 return new ResponseEntity<>(result, HttpStatus.NO_CONTENT);
             }
+        }
+        catch (Exception e){
+            result.put("result", "Internal Server Error");
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/get/badge-status/{userId}")
+    public ResponseEntity<?> getBadgeStatusOfUser(@PathVariable Long userId){
+        Map<String, String> result = new HashMap<>();
+        try {
+            List<Badges> badgesList = badgesService.selectAll();
+            List<BadgesUsers> targetUserBadgeList = badgesUsersService.selectAllByUserId(userId);
+            List<Long> targetUserBadgeIdList = new ArrayList<>();
+
+            for(BadgesUsers eachBadgesUsers : targetUserBadgeList){
+                targetUserBadgeIdList.add(eachBadgesUsers.getBadge());
+            }
+
+            List<String> badgeImageUrlList = new ArrayList<>();
+            for(Badges eachBadge : badgesList){
+                Long badgeId = eachBadge.getBadgeId();
+                boolean occupied = false;
+                for(Long eachTargetUserBadgeId : targetUserBadgeIdList){
+                    if(eachTargetUserBadgeId.equals(badgeId)){
+                        occupied = true;
+                        break;
+                    }
+                }
+                String urlPrefix = ContextPath + ImageShowUrlPrefix + BadgeImageDirectory + BadgeImageNamePrefix;
+                if(occupied){
+                    badgeImageUrlList.add(urlPrefix + String.valueOf(badgeId) + BadgeImageExtension);
+                } else {
+                    badgeImageUrlList.add(urlPrefix + String.valueOf(badgeId) + DefaultBadgePostfix +BadgeImageExtension);
+                }
+            }
+            return new ResponseEntity<>(badgeImageUrlList, HttpStatus.OK);
         }
         catch (Exception e){
             result.put("result", "Internal Server Error");

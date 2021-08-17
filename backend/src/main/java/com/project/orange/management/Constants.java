@@ -42,4 +42,9 @@ public final class Constants {
     public static final String ResourcePath = "file:///C:/SSAFY/imageSaveTest/";
     public static final String ContextPath = "http://127.0.0.1:8181";
     public static final String ImageShowUrlPrefix = "/api/image/show/";
+
+    public static final String DefaultBadgePostfix = "_none";
+    public static final String BadgeImageExtension = ".png";
+    public static final String BadgeImageDirectory = "badge/";
+    public static final String BadgeImageNamePrefix = "badge";
 }
