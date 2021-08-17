@@ -101,15 +101,7 @@ export default {
   methods: {
     async checkForm () {
       await this.$refs.observer.validate()
-        // if (result) {
-        //   alert('로그인 성공')
-        // }
-      },
-    // KakaoLogin: function () {
-    //   window.Kakao.Auth.authorize({
-    //     redirectUri: "http://localhost:8080/auth/kakao/callback",
-    //   });  
-    // },
+    },
     async loginForm() {
       try {
         const userData = {
@@ -117,24 +109,19 @@ export default {
           password: this.password,
         }
         await this.$store.dispatch('LOGIN', userData)
-        alert("로그인에 성공했습니다.")
         this.$router.push('/')
       } catch (error) {
         console.log(error)
         alert("로그인에 실패하였습니다.")
       } finally {
         this.initForm()
-      }
-    
+      } 
     },
     initForm() {
       this.email = ''
       this.password = ''
     }
   },
-  // beforeMount(){
-  
-  // }
 }
 
 
