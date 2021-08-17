@@ -123,6 +123,17 @@ public class ChallengeController {
         }
     }
 
+    @GetMapping("/search/user/{userId}")
+    public ResponseEntity<List<Challenges>> selectdAllByUserId(@PathVariable Long userId){
+        List<Challenges> list;
+        list = challengeService.selectAllByUserId(userId);
+        if (list == null || list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
     @PostMapping("/register/new-user")
     public ResponseEntity<Map<String, String>>  registerNewUserToChallenge(@RequestBody Map<String, Long> parameters){
         Long challengeId = parameters.get("challengeId");

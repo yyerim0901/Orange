@@ -123,6 +123,18 @@ public class ChallengeServiceImpl implements ChallengeService{
     }
 
     @Override
+    public List<Challenges> selectAllByUserId(Long userId) {
+        List<UsersChallenges> usersChallengesList;
+        usersChallengesList = usersChallengesRepository.findAllByUserUserId(userId);
+
+        List<Challenges> challengesList = new ArrayList<>();
+        for(UsersChallenges eachUsersChallenges : usersChallengesList){
+            challengesList.add(eachUsersChallenges.getChallenge());
+        }
+        return challengesList;
+    }
+
+    @Override
     public Optional<BattleMatching> registerNewChallenge(Challenges challenge) {
         // 전달받은 Challenge 객체로 DB 저장
         // entity manager 를 autowire 로 불러와서 flush 혹은 clear
