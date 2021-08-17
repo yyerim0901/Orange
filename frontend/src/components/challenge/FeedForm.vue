@@ -15,7 +15,7 @@
             outlined
             color="white"
           >
-            <!-- 참여 : {{ challengeItems.currentMembers }} -->
+          참여 : {{challengeItems.currentMembers}} 명
           </v-chip>
         </div>
       </v-img>
@@ -66,7 +66,7 @@ export default {
   async created() {
     const challengeId = this.$route.params.id
     const { data } = await challengeDetail(challengeId)
-    console.log(data)
+    // console.log(data)
     this.challengeItems = data
   }
 }
