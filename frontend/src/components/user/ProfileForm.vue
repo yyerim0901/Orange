@@ -12,9 +12,6 @@
           <v-col cols="auto" class="align-self-center">
             {{ userDatas.username }}
           </v-col>
-          <v-col cols="auto">
-            <v-btn outlined>프로필 편집</v-btn>
-          </v-col>
         </v-row>
         <v-col>
           <v-row justify="space-between">
@@ -90,6 +87,10 @@ export default {
       } catch(err) {
         console.log(err)
       }  
+    },
+    goEdit() {
+      const userId = this.$store.state.data2
+      this.$router.push({path:`/user/${userId}`}).catch(()=> {});
     }
   },
   created() {

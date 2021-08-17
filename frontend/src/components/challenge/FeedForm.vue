@@ -21,21 +21,20 @@
       </v-img>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn 
-          text 
-          color="blue"
-          @click="goRanking"
-        >
-          랭킹
-        </v-btn>
-
-        <v-btn 
-          text
-          color="orange"
-          @click="goCreateFeed"
-        >
-          인증하기
-        </v-btn>
+        <div class="btn-flex d-flex">
+          <v-col>
+            <v-btn 
+              text 
+              color="blue"
+              @click="goRanking"
+            >
+              랭킹
+            </v-btn>
+          </v-col>
+          
+          <JoinDialog />
+        </div>
+        
       </v-card-actions>
     </v-card>
     <FeedTab />
@@ -43,13 +42,14 @@
 </template>
 
 <script>
-import moment from 'moment';
 import FeedTab from '@/components/challenge/FeedTab.vue'
+import JoinDialog from '@/components/challenge/JoinDialog.vue'
 import { challengeDetail } from '@/api/challenge'
 export default {
   name: 'FeedForm',
   components: {
     FeedTab,
+    JoinDialog,
   },
   data() {
     return {
@@ -57,9 +57,6 @@ export default {
     }
   },
   methods: {
-    goCreateFeed() {
-      this.$router.push({path:'/create-feed'}).catch(()=> {});
-    },
     goRanking() {
       this.$router.push({path:'/ranking'}).catch(()=> {});
     },
@@ -74,5 +71,7 @@ export default {
 </script>
 
 <style>
-
+.btn-flex {
+  justify-content: end;
+}
 </style>

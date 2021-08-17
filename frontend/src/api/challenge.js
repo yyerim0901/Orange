@@ -20,9 +20,15 @@ function userChallenge(myData) {
   return instance.get('/api/challenge/search/user', myData)
 }
 
+// 댓글을 작성하는 API
+function createComment(commentData) {
+  return instance.post('/api/comment/create', commentData)
+}
+
 export { 
   createChallenge,
   badgeList,
   challengeDetail,
   userChallenge,
+  createComment,
 }

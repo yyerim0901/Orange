@@ -1,5 +1,5 @@
 <template>
-  <container class="text-center">
+  <v-container class="text-center">
     <v-card
     flat
     class="mx-auto my-12"
@@ -50,7 +50,7 @@
     </v-card-text>
   </v-card>
 
-  </container>
+  </v-container>
   
 </template>
 
