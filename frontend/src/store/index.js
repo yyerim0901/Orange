@@ -40,12 +40,17 @@ export default new Vuex.Store({
   actions: {
     async LOGIN({ commit }, userData) {
       const { data } = await loginUser(userData)
-      // console.log(data)
-      commit('setToken', data.data1)
-      commit('setUserId', data.data2)
-      saveAuthToCookie(data.data1)
-      saveUserToCookie(data.data2)
-      return data
+      console.log(data)
+      if (data.response == 'success') {
+        commit('setToken', data.data1)
+        commit('setUserId', data.data2)
+        saveAuthToCookie(data.data1)
+        saveUserToCookie(data.data2)
+        alert(data.message)
+        return data
+      } else {
+        alert(data.data1)
+      }
     },
   }
 })

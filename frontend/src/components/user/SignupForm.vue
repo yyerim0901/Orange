@@ -150,15 +150,11 @@ export default {
     nickname: "",
     password: "",
     passwordConfirm: "",
-    // log
-    // logMessage: "",
+
   }),
   methods: {
     async checkForm () {
-      const result = await this.$refs.observer.validate()
-      // if (result) {
-      //   alert('가입 완료')
-      // }
+      await this.$refs.observer.validate()
     },
     async signUp() {
       try {
@@ -172,8 +168,12 @@ export default {
         const { data } = await registerUser(userData)
         // console.log(data.username)
         console.log(data)
-        alert("회원 가입에 성공하였습니다.")
-        // this.logMessage = `${data.username} 님이 가입되었습니다.`
+        if (data.response == 'success') {
+          alert(data.message)
+          this.$router.push('/authentication/login')
+        } else {
+          alert(data.message)
+        }
       } catch (error) {
         console.log(error)
         alert("회원 가입에 실패하였습니다.")

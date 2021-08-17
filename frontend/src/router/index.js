@@ -60,7 +60,7 @@ const routes = [
         component: () => import('@/views/feed/Ranking.vue'),
       },
       {
-        path: 'search/:query',
+        path: 'search/:id',
         name: 'Search',
         component: () => import('@/views/feed/Search.vue'),
       },

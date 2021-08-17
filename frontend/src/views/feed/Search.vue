@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ query }}
+    {{ searched }}
   </div>
 </template>
 
@@ -17,10 +17,7 @@ export default {
   },
   created() {
     this.query = this.$router.params.query
-    const params = {
-      query: this.query
-    }
-    axios.get(`http://i5b102.p.ssafy.io:8181/api/challenge/search/title`, { params })
+    axios.get(`http://i5b102.p.ssafy.io:8181/api/challenge/search/title/${query}`,)
       .then(res => {
         console.log(res)
       })

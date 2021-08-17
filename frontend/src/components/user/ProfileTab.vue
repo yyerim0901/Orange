@@ -9,7 +9,7 @@
         진행 중인 챌린지
       </v-tab>
       <v-tab>
-        완료한 챌린지
+        작성한 피드
       </v-tab>
       
     </v-tabs>
@@ -45,25 +45,37 @@
         </v-col>
         <!-- 반복되는 카드 끝 -->
       </v-tab-item>
+      
       <v-tab-item>
-        <v-card flat>
-          <v-card-title class="text-h5">
-            An awesome title
-          </v-card-title>
-          <v-card-text>
-            <p>
-              Duis lobortis massa imperdiet quam. Donec vitae orci sed dolor rutrum auctor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Praesent congue erat at massa.
-            </p>
+        <!-- 반복되는 피드 -->
+        <v-col
+          v-for="(feedData, index) in feedDatas"
+          :key="index"
+        >
+          <v-card
+            class="mx-auto my-5"
+            max-width="800"
+          >
+            <v-img
+              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              height="300px"
+            ></v-img>
 
-            <p>
-              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Etiam sit amet orci eget eros faucibus tincidunt. Donec sodales sagittis magna.
-            </p>
+            <v-card-title>
+              {{ feedData.title }}
+            </v-card-title>
 
-            <p class="mb-0">
-              Ut leo. Suspendisse potenti. Duis vel nibh at velit scelerisque suscipit. Fusce pharetra convallis urna.
-            </p>
-          </v-card-text>
-        </v-card>
+            <v-card-subtitle>
+              {{ feedData.articleWritetime }}
+            </v-card-subtitle>
+
+            <v-card-text>
+              {{ feedData.articleContent }}
+            </v-card-text>
+            
+          </v-card>
+        </v-col>
+        <!-- 반복되는 피드 끝 -->
       </v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -77,6 +89,7 @@ export default {
     return { 
       tabs: null,
       myDatas: [],
+      feedDatas: [],
     };
   },
   methods: {
@@ -89,10 +102,21 @@ export default {
       } catch(err) {
         console.log(err)
       }  
+    },
+    async userFeed() {
+      try {
+        const userId = this.$store.state.data2
+        const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/article/list/${userId}`)
+        this.feedDatas = data
+        // console.log(data)
+      } catch(err) {
+        console.log(err)
+      }  
     }
   },
   created() {
     this.userData()
+    this.userFeed()
   }
 }
 </script>
