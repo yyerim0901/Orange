@@ -123,7 +123,7 @@
         android:label="EventFragment" />
     <dialog
         android:id="@+id/createChallengeFragmentDialog"
-        android:name="com.keelim.orange.ui.feed.CreateChallengeFragmentDialog"
+        android:name="com.keelim.orange.ui.feed.create.CreateChallengeFragmentDialog"
         android:label="CreateChallengeFragmentDialog" />
 
 

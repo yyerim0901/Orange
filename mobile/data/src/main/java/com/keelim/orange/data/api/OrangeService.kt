@@ -1,5 +1,6 @@
 package com.keelim.orange.data.api
 
+import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.entity.Favorite
@@ -109,4 +110,9 @@ interface OrangeService {
 
   @GET("api/challenge/search/user/{searchTitle}")
   suspend fun search(@Path("searchTitle") query: String): Response<List<SearchResponse>>
+
+  @POST("api/challenge/register/new-challenge")
+  suspend fun createChallengeList(
+    @Body call: ChallengeCall,
+  ): Response<ResultResponse>
 }

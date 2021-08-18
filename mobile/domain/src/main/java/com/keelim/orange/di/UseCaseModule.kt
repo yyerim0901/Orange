@@ -21,6 +21,7 @@ import com.keelim.orange.domain.badge.GetAllBadgeListUseCase
 import com.keelim.orange.domain.badge.MyBadgeListUseCase
 import com.keelim.orange.domain.feed.CategoryUseCase
 import com.keelim.orange.domain.feed.ChallengeListUseCase
+import com.keelim.orange.domain.feed.CreateChallengeUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
 import com.keelim.orange.domain.fight.CreateUseCase
 import com.keelim.orange.domain.fight.OtherUseCase
@@ -190,8 +191,16 @@ object UseCaseModule {
   @Provides
   @ViewModelScoped
   fun provideSearchUseCase(
-    searchRepository: SearchRepository
+    searchRepository: SearchRepository,
   ): SearchUseCase {
     return SearchUseCase(searchRepository)
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideCreateChallengeUseCase(
+    feedRepository: FeedRepository,
+  ): CreateChallengeUseCase {
+    return CreateChallengeUseCase(feedRepository)
   }
 }

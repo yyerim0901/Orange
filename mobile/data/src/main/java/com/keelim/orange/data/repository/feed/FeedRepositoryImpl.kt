@@ -1,7 +1,9 @@
 package com.keelim.orange.data.repository.feed
 
 import com.keelim.orange.data.api.ApiRequestFactory
+import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.response.DetailResponse
+import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.feed.ChallengeResponse
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,5 +24,14 @@ class FeedRepositoryImpl(
   override suspend fun challengeList(): List<ChallengeResponse> = withContext(dispatcher) {
     apiRequestFactory.retrofit.challengeList().body() ?: listOf()
     emptyList()
+  }
+
+  override suspend fun createChallenge(information: Any): ResultResponse = withContext(dispatcher) {
+    return@withContext apiRequestFactory.retrofit.createChallengeList(ChallengeCall(
+      "",
+      "",
+      "",
+      "",
+    )).body()!!
   }
 }
