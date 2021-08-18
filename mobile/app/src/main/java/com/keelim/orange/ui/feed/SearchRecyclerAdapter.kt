@@ -2,6 +2,7 @@ package com.keelim.orange.ui.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,15 +18,16 @@ class SearchRecyclerAdapter(
         fun bind(item:Search) = with(binding){
 
             title.text = item.title
-            number.text = item.number
+            description.text = item.description
             val random = arrayOf(
                 R.color.bg_orange, R.color.orange, R.color.orange_w,
             ).random()
-            val color=  itemView.context.resources.getColor(random)
+            val color = ResourcesCompat.getColor(itemView.context.resources, random, null)
+
             container.setBackgroundColor(color)
 
             root.setOnClickListener {
-                clickListener.invoke(item.uid, color)
+                clickListener.invoke(item.challengeId, color)
             }
         }
     }
@@ -41,11 +43,11 @@ class SearchRecyclerAdapter(
     companion object{
         val diffUtil = object:DiffUtil.ItemCallback<Search>(){
             override fun areItemsTheSame(oldItem: Search, newItem: Search): Boolean {
-                return oldItem.uid == newItem.uid
+                return oldItem.challengeId == newItem.challengeId
             }
 
             override fun areContentsTheSame(oldItem: Search, newItem: Search): Boolean {
-                return oldItem.uid == newItem.uid
+                return oldItem.challengeId == newItem.challengeId
             }
         }
     }

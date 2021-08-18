@@ -22,10 +22,7 @@ class FavoriteAdapter(
       favoriteTitle.text = item.ranking_title
       favoriteCount.text = item.rank.toString()
       favoriteImg.load(item.image_address)
-      subDescription.text = item.ranking_description.toString()
-
-      root.setOnClickListener {
-      }
+      subDescription.text = item.ranking_description
 
       btnExpand.setOnClickListener {
         val show = toggleLayout(!item.isFull, it, layoutExpand)

@@ -26,8 +26,8 @@ class LoginDataSource(
       )
     )
     if (response.isSuccessful && response.body()!!.response == "success") {
-      val token = response.body()!!.data
-      return@withContext Result.Success(LoggedInUser(username, username, token))
+      val token = response.body()!!.data1
+      return@withContext Result.Success(LoggedInUser(response.body()!!.data2.toString(), username, token))
     } else {
       return@withContext Result.Error(IOException("Error logging in"))
     }

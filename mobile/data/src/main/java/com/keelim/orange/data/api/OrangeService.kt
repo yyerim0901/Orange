@@ -1,10 +1,12 @@
 package com.keelim.orange.data.api
 
+import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.Favorite
-import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
+import com.keelim.orange.data.response.ProfileResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
 import com.keelim.orange.data.response.auth.AuthResponse
@@ -14,6 +16,7 @@ import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.data.response.notification.NotificationDeleteResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
 import com.keelim.orange.data.response.ranking.RankingResponse
+import com.keelim.orange.data.response.search.SearchResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -49,10 +52,7 @@ interface OrangeService {
     @Field("description") description: String
   ): Response<UserSampleResponse>
 
-  @GET("detail/")
-  fun detail(
-    @Query("uid") uid: String
-  ): Response<DetailResponse>
+
 
   @POST("invite/")
   fun invite(
@@ -64,8 +64,7 @@ interface OrangeService {
     @Query("myid") id: String
   ): Response<FriendsResponse>
 
-  @POST()
-  fun getIngList(): List<Favorite>
+
 
   @POST
   fun getCompletedList(): List<Favorite>
@@ -105,4 +104,23 @@ interface OrangeService {
 
   @GET("api/challenge/list")
   suspend fun challengeList(): Response<List<ChallengeResponse>>
+
+
+  @GET("api/challenge/search/title/{searchTitle}")
+  suspend fun search(@Path(value = "searchTitle", encoded = true) query: String): Response<List<SearchResponse>>
+
+  @POST("api/challenge/register/new-challenge")
+  suspend fun createChallengeList(
+    @Body call: ChallengeCall,
+  ): Response<ResultResponse>
+
+
+  @GET("api/user/userinfo/{userId}")
+  suspend fun profile(@Path("userId") userId: Int): Response<ProfileResponse>
+
+  @GET("api/challenge/{challengeId}")
+  suspend fun detail(@Path("challengeId") uid: Int): Response<ChallengeResponse>
+
+  @GET("api/challenge/search/user/{userId}")
+  suspend fun getIngList(@Path("userId") userId: Int): Response<List<SearchResponse>>
 }

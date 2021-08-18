@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.domain.auth.FavoriteUseCase
@@ -20,18 +21,28 @@ class DetailViewModel @Inject constructor(
   private val _state = MutableLiveData<DetailState>()
   val state: LiveData<DetailState> = _state
 
-  fun fetchData(uid:String) = viewModelScope.launch{
+  fun fetchData(uid:Int) = viewModelScope.launch{
     setState(
       DetailState.UnInitialized
     )
     try {
       setState(
         DetailState.Success(
-        DetailResponse(
-          "https://images.unsplash.com/photo-1511381939415-e44015466834?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=838&q=80",
-          "이것은 샘플 정보입니다.",
-          "이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다.이것은 샘플 정보입니다."
-        )
+            getDetailInformationUseCase.invoke(uid)?: Search2(
+              categoryId = -1,
+              challengeDescribe = "",
+              challengeId = -1,
+              challengeTitle = "",
+              currentMembers = -1,
+              endDate = "",
+              imagePath = "",
+              managerId = -1,
+              maxMembers = -1,
+              minMembers = -1,
+              periodId = -1,
+              startDate = "",
+              totalPoint = -1
+            )
         )
       )
     } catch (e: Exception) {

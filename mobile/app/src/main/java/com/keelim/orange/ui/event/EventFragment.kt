@@ -40,7 +40,7 @@ class EventFragment:Fragment() {
     private fun initViews() = with(binding){
         val anim = AnimationUtils.loadAnimation(requireContext(), R.anim.zoom_in)
         lifecycleScope.launch {
-            delay(3000)
+            delay(1000)
             second.startAnimation(anim)
             first.startAnimation(anim)
         }
