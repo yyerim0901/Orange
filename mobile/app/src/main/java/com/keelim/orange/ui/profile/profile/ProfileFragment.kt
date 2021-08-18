@@ -1,5 +1,6 @@
 package com.keelim.orange.ui.profile.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,10 @@ import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Profile
 import com.keelim.orange.data.model.Search
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.databinding.FragmentProfileBinding
+import com.keelim.orange.ui.auth.AuthActivity
 import com.keelim.orange.ui.feed.SearchRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -26,7 +29,7 @@ class ProfileFragment: Fragment() {
     private val viewModel: ProfileViewModel by viewModels()
     private val userId by lazy {
         val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
-        return@lazy pref.getInt("userId", 20)
+        return@lazy pref.getInt("userId", -1)
     }
     private val ingChallengeAdapter = SearchRecyclerAdapter(
         clickListener = { _, _ ->
@@ -52,7 +55,12 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        Timber.e("uerID $userId")
+
+        if(userId==-1){
+            startActivity(Intent(requireContext(), AuthActivity::class.java))
+            requireActivity().finish()
+        }
+
         viewModel.fetchData(userId)
         observeData()
     }
@@ -71,20 +79,34 @@ class ProfileFragment: Fragment() {
         requireContext().toast("프로필을 불러오는 중입니다")
     }
 
-    private fun handleSuccess(completed: List<Favorite>, ing: List<Favorite>) {
+    private fun handleSuccess(completed: List<Search2>, ing: List<Search2>) {
         if (ing.isEmpty()) {
-
+            binding.tvIng.visibility = View.VISIBLE
+            binding.ingChallenge.visibility = View.INVISIBLE
         } else {
+            binding.tvIng.visibility = View.INVISIBLE
+            binding.ingChallenge.visibility = View.VISIBLE
             completedChallengeAdapter.submitList(completed.map {
-                Search(it.rank, it.ranking_title, it.rank.toString())
+                Search(
+                    challengeId = it.challengeId,
+                    title = it.challengeTitle,
+                    description = it.challengeDescribe
+                )
             })
         }
 
         if (completed.isEmpty()) {
-
+            binding.tvCompleted.visibility = View.VISIBLE
+            binding.completeChange.visibility = View.INVISIBLE
         } else {
+            binding.tvCompleted.visibility = View.INVISIBLE
+            binding.completeChange.visibility = View.VISIBLE
             ingChallengeAdapter.submitList(ing.map {
-                Search(it.rank, it.ranking_title, it.rank.toString())
+                Search(
+                    challengeId = it.challengeId,
+                    title = it.challengeTitle,
+                    description = it.challengeDescribe
+                )
             })
         }
     }

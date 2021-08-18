@@ -13,6 +13,7 @@ import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {

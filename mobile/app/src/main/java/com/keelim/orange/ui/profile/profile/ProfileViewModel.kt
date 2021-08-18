@@ -25,17 +25,18 @@ class ProfileViewModel @Inject constructor(
 
         try {
             setState(
+                ProfileState.ProfileSuccess(
+                    profileUseCase.invoke(userId)
+                )
+            )
+
+            setState(
                 ProfileState.Success(
                     emptyList(),
                     getIngChallengeUseCase.invoke(userId)
                 )
             )
 
-            setState(
-                ProfileState.ProfileSuccess(
-                    profileUseCase.invoke(userId)
-                )
-            )
         } catch (e: Exception) {
             setState(
                 ProfileState.Error
