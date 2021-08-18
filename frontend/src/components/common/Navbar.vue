@@ -2,12 +2,13 @@
   <div>
     <b-navbar variant="navbar-light bg-light justify-content-between px-5" type="light">
       <b-navbar-brand tag="h1">
-        <v-btn 
-          text
-          color="orange"
+        <v-img 
+          src='../../assets/images/logo2.png'
+          width='100'
+          height='50'
           @click="goHome"
         >
-        Orange</v-btn>
+        </v-img>
       </b-navbar-brand>
       <b-navbar-nav class="d-flex">
         <b-nav-item>

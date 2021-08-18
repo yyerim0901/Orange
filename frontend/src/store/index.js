@@ -40,7 +40,7 @@ export default new Vuex.Store({
   actions: {
     async LOGIN({ commit }, userData) {
       const { data } = await loginUser(userData)
-      console.log(data)
+      // console.log(data)
       if (data.response == 'success') {
         commit('setToken', data.data1)
         commit('setUserId', data.data2)
