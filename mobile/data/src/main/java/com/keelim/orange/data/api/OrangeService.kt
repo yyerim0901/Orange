@@ -4,7 +4,6 @@ import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.entity.Favorite
-import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ProfileResponse
 import com.keelim.orange.data.response.ResultResponse

@@ -17,6 +17,7 @@ import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.databinding.FragmentProfileBinding
 import com.keelim.orange.ui.feed.SearchRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ProfileFragment: Fragment() {
@@ -51,6 +52,7 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        Timber.e("uerID $userId")
         viewModel.fetchData(userId)
         observeData()
     }
