@@ -15,8 +15,29 @@ class FeedRepositoryImpl(
   private val apiRequestFactory: ApiRequestFactory,
   private val dispatcher: CoroutineDispatcher,
 ) : FeedRepository {
-  override suspend fun getDetail(uid: String): DetailResponse = withContext(dispatcher) {
-    return@withContext apiRequestFactory.retrofit.detail(uid).body() ?: DetailResponse(img_url = "", title = "", description = "")
+  override suspend fun getDetail(uid: Int): Search2? = withContext(dispatcher) {
+    val response = apiRequestFactory.retrofit.detail(uid)
+    if (response.isSuccessful) {
+      return@withContext response.body()?.let {
+        Search2(
+          it.categoryId,
+          it.challengeDescribe,
+          it.challengeId,
+          it.challengeTitle,
+          it.currentMembers,
+          it.endDate,
+          it.imagePath,
+          it.managerId,
+          it.maxMembers,
+          it.minMembers,
+          it.periodId,
+          it.startDate,
+          it.totalPoint
+        )
+      }
+    } else {
+      return@withContext null
+    }
   }
 
   override suspend fun getCategory(): List<CategoryResponse> = withContext(dispatcher) {

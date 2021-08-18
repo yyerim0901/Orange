@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.keelim.orange.common.toast
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.Favorite
-import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +24,7 @@ class DetailFragment : Fragment() {
   private var _binding: FragmentDetailBinding? = null
   private val binding get() = _binding!!
   private val args by navArgs<DetailFragmentArgs>()
+  private lateinit var have: Search2
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -39,7 +39,7 @@ class DetailFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
-    viewModel.fetchData(args.uid)
+    viewModel.fetchData(args.uid.toInt())
   }
 
   override fun onDestroyView() {
@@ -64,13 +64,14 @@ class DetailFragment : Fragment() {
     requireActivity().toast("데이터 초기화 중입니다.")
   }
 
-  private fun handleSuccess(data: DetailResponse) {
-    with(binding){
-      mainImg.load(data.img_url)
-      detailTitle.text = data.title
-      detailDesc.text = data.description
-
+  private fun handleSuccess(data: Search2) {
+    with(binding) {
+      have = data
+      mainImg.load(data.imagePath)
+      detailTitle.text = data.challengeTitle
+      detailDesc.text = data.challengeDescribe
       btnJoin.setOnClickListener {
+
       }
     }
   }
@@ -80,14 +81,13 @@ class DetailFragment : Fragment() {
   }
 
   private fun initViews() = with(binding){
-    root.background = args.color.toDrawable()
     btnHeart.setOnClickListener {
       viewModel.favoriteAdd(
         Favorite(
-          args.uid,
-          args.uid,
-          "",
-          333,
+          have.challengeTitle,
+          have.challengeDescribe,
+          have.imagePath,
+          have.categoryId,
         )
       )
       requireContext().toast("관심 목록에 추가 하였습니다.")

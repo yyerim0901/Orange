@@ -52,10 +52,7 @@ interface OrangeService {
     @Field("description") description: String
   ): Response<UserSampleResponse>
 
-  @GET("detail/")
-  fun detail(
-    @Query("uid") uid: String
-  ): Response<DetailResponse>
+
 
   @POST("invite/")
   fun invite(
@@ -119,6 +116,9 @@ interface OrangeService {
   ): Response<ResultResponse>
 
 
-  @GET("/api/user/userinfo/{userId}")
+  @GET("api/user/userinfo/{userId}")
   suspend fun profile(@Path("userId") userId: Int): Response<ProfileResponse>
+
+  @GET("api/challenge/{challengeId}")
+  suspend fun detail(@Path("challengeId") uid: Int): Response<ChallengeResponse>
 }
