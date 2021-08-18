@@ -276,4 +276,35 @@ public class ImageHandleController {
             return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/init/badge-image")
+    public ResponseEntity<?> initializeBadgeImages(@RequestParam("image") MultipartFile[] images) throws IOException {
+
+        Map<String, String> response = new HashMap<>();
+        System.out.println(images.length);
+        if(images.length < 2) {
+            if (!images[0].isEmpty()) {
+
+                File dir = new File(BadgeImageRealPath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                for (MultipartFile eachImage : images) {
+                    String originalImageName = eachImage.getOriginalFilename();
+                    if (!originalImageName.isEmpty()) {
+                        eachImage.transferTo(new File(dir, originalImageName));
+                    }
+                }
+
+                response.put("result", "success");
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+            response.put("result", "there is no image.");
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+        }
+        else {
+            response.put("result", "expected 1 image, received : " + images.length);
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        }
+    }
 }

@@ -33,6 +33,7 @@ public final class Constants {
     public static final Long SupplementCategoryId = 3L;
 
     public static final String ImageRealPath = "/media/image";//"/media/image";
+    public static final String BadgeImageRealPath = "/media/image/badge";
     public static final String DefaultImage = "default_image";
 
     public static final int ArticleBasePoint = 10;
