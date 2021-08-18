@@ -14,7 +14,7 @@ public interface FollowFollowingRepository extends JpaRepository<FollowerFollowi
 
     @Modifying
     @Transactional
-    void deleteByFromUserIdAndToUserId(Long fromUserId, Long toUserId); //언팔
+    void deleteByFromUserIdAndToUserId(Long fromUserId, Long toUserId);
     int countByFromAndTo(Long fromUserId, Long toUserId);
     int countByFromUserId(Long fromUserId);
     int countByToUserId(Long toUserId);

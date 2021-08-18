@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -109,7 +110,6 @@ public class UserController {
         }else return new Response("success", "회원 리스트를 불러오는데 성공했습니다.", list,null,null);
     }
 
-    ///////////////////////////////////////////////////////////////////////////
 
     @GetMapping("/userinfo/{userId}")
     public Response readUser(@PathVariable Long userId){ //@Param Long userId 로 바뀔 가능성 있음
@@ -120,6 +120,8 @@ public class UserController {
             List<FollowerFollowing> followerList = followFollowingRepository.findByToUserId(userId);
             List<FollowerFollowing> followingList = followFollowingRepository.findByFromUserId(userId);
 //            System.out.println(followerList);
+//            Map<List<FollowerFollowing>, List<FollowerFollowing>> fwList;
+//            fwList.
             return new Response("success", "회원을 불러오는데 성공했습니다.", userInfo, followerList,followingList);
         }
     }
