@@ -2,7 +2,7 @@
   <v-container fluid class="mx-auto">
     <v-row dense>
       <v-col
-        v-for="(card, index) in cards" class="col-3 mb-10 pa-2"
+        v-for="(card, index) in cards" class="col-3 mb-10 pa-2 col-sm-6"
         :key="index"
         :cols="card.flex"
       >
@@ -15,16 +15,20 @@
             height="300px"
           >
             <v-card-title>{{ card.challengeTitle }}</v-card-title>
-            <v-card-text>팀 점수: {{ card.totalPoint }}</v-card-text>
+            <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}} ~ {{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
           </v-img>
           </router-link>
 
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn icon>
-              <v-icon>mdi-account-plus</v-icon>
-            </v-btn>
+            <v-chip
+              class="ma-2"
+              color="orange accent-4"
+              outlined
+            >
+              {{ card.totalPoint }} 점
+            </v-chip>
           </v-card-actions>
         </v-card>
       </v-col>
