@@ -2,7 +2,7 @@ import { instance } from './index'
 
 // 챌린지를 생성하는 API
 function createChallenge(challengeData) {
-  return instance.post('/api/challellge/register/new-challenge', challengeData)
+  return instance.post('/api/challenge/register/new-challenge', challengeData)
 }
 
 // 특정 챌린지 1개를 조회하는 API
@@ -25,10 +25,22 @@ function createComment(commentData) {
   return instance.post('/api/comment/create', commentData)
 }
 
+// 챌린지 기간을 조회하는 API
+function getPeriod(periodData) {
+  return instance.get('/api/period/list', periodData)
+}
+
+// 챌린지 카테고리를 조회하는 API
+function getCategory(categoryData) {
+  return instance.get('/api/category/list', categoryData)
+}
+
 export { 
   createChallenge,
   badgeList,
   challengeDetail,
   userChallenge,
   createComment,
+  getPeriod,
+  getCategory,
 }

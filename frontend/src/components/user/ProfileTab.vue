@@ -17,9 +17,8 @@
       <v-tab-item>
         <!-- 반복되는 카드 -->
         <v-col
-          v-for="(myData, title) in myDatas" class="col-3 mb-10 pa-2"
-          :key="title"
-          :cols="myData.flex"
+          v-for="(myData, title) in myDatas" cols="12"
+          :key="title"  
         >
           <v-card fill-height>
             <router-link :to="`/challenge/${myData.challengeId}`" class="text-decoration-none">
@@ -36,9 +35,9 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-
-              <v-btn icon>
-                <v-icon>mdi-account-plus</v-icon>
+            
+              <v-btn text color="orange">
+                챌린지 상세보기
               </v-btn>
             </v-card-actions>
           </v-card>
