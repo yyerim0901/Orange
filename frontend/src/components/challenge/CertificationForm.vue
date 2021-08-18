@@ -11,7 +11,7 @@
             max-width="800"
           >
             <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              src="@/assets/images/article.jpg"
               height="300px"
             ></v-img>
 

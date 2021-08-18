@@ -66,8 +66,10 @@ export default {
         // console.log(data)
         if (data.result == 'Success') {
           alert('챌린지 가입이 완료되었습니다.')
+          this.dialog= false
         } else {
           alert('이미 가입한 챌린지입니다.')
+          this.dialog= false
         }
       } catch(error) {
         console.log(error)
