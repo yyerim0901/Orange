@@ -2,6 +2,8 @@ package com.keelim.orange.data.repository.feed
 
 import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.call.ChallengeCall
+import com.keelim.orange.data.model.Search
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.feed.CategoryResponse
@@ -21,9 +23,29 @@ class FeedRepositoryImpl(
     apiRequestFactory.retrofit.category().body() ?: listOf()
   }
 
-  override suspend fun challengeList(): List<ChallengeResponse> = withContext(dispatcher) {
-    apiRequestFactory.retrofit.challengeList().body() ?: listOf()
-    emptyList()
+  override suspend fun challengeList(): List<Search2> = withContext(dispatcher) {
+    val response = apiRequestFactory.retrofit.challengeList()
+    if (response.isSuccessful) {
+      return@withContext response.body()?.map {
+        Search2(
+          it.categoryId,
+          it.challengeDescribe,
+          it.challengeId,
+          it.challengeTitle,
+          it.currentMembers,
+          it.endDate,
+          it.imagePath,
+          it.managerId,
+          it.maxMembers,
+          it.minMembers,
+          it.periodId,
+          it.startDate,
+          it.totalPoint
+        )
+      } ?: emptyList()
+    } else {
+      return@withContext emptyList()
+    }
   }
 
   override suspend fun createChallenge(information: Any): ResultResponse = withContext(dispatcher) {

@@ -21,8 +21,8 @@ import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Filter
 import com.keelim.orange.data.model.Search
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.response.feed.CategoryResponse
-import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.databinding.FragmentFeedBinding
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
@@ -171,7 +171,7 @@ class FeedFragment : Fragment() {
         requireActivity().toast("데이터 초기화 중입니다.")
     }
 
-    private fun handleSuccess(data1: List<CategoryResponse>, data2: List<ChallengeResponse>) {
+    private fun handleSuccess(data1: List<CategoryResponse>, data2: List<Search2>) {
         data1.forEach {
             binding.chips.addView(
                 Chip(requireContext()).apply {
@@ -182,14 +182,14 @@ class FeedFragment : Fragment() {
         }
         searchRecyclerAdapter.submitList(emptyList())
 
-//        val data3 = data2.map {
-//            Search(
-//                it.challengeId,
-//                it.challengeTitle,
-//                it.challengeDescribe
-//            )
-//        }
-//        searchRecyclerAdapter.submitList(data3)
+        val data3 = data2.map {
+            Search(
+                challengeId = it.challengeId,
+                title = it.challengeTitle,
+                description = it.challengeDescribe
+            )
+        }
+        searchRecyclerAdapter.submitList(data3)
     }
 
     private fun handleError() {
