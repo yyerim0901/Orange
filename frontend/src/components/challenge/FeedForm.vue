@@ -132,7 +132,7 @@ export default {
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/image/get/challenge/${challengeId}`)
         // console.log(data.result)
         if (data.result == 'http://i5b102.p.ssafy.io:8181/api/image/show/default_image') {
-          console.log('이미지 없음')
+          // console.log('이미지 없음')
           this.challengeImg = 'error'
         } else {
           this.challengeImg = data.result

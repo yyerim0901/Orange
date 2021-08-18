@@ -67,7 +67,7 @@ const routes = [
         meta: { auth: true },
       },
       {
-        path: 'search/:id',
+        path: 'search/:title',
         name: 'Search',
         component: () => import('@/views/feed/Search.vue'),
       },
