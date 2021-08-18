@@ -1,50 +1,61 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col align-self="center">
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-          class="profile_image"
-        ></v-img> 
-      </v-col>
-      <v-col class="my-auto">
-        <v-row justify="space-between">
-          <v-col cols="auto" class="align-self-center">
-            {{ userDatas.username }}
-          </v-col>
-        </v-row>
-        <v-col>
+    <v-card outlined>
+      <v-row>
+        <v-col align-self="center">
+          <template v-if="profileImg='error'">
+            <v-img
+              src="@/assets/images/basic.png"
+              class="profile_image"
+            ></v-img>
+          </template>
+          <template v-else>
+            <v-img
+              :src="profileImg"
+              class="profile_image"
+            ></v-img>
+          </template>  
+        </v-col>
+        <v-col class="my-auto">
           <v-row justify="space-between">
-            <v-col cols="auto">
-              <v-icon>
-                mdi-trophy-outline
-              </v-icon>
+            <v-col cols="auto" class="align-self-center">
+              {{ userDatas.username }}
             </v-col>
-            <v-col cols="auto">
-              <BadgeDialog />
-            </v-col>
+
           </v-row>
+          <v-col>
+            <v-row justify="space-between">
+              <v-col cols="auto">
+                <v-icon>
+                  mdi-trophy-outline
+                </v-icon>
+              </v-col>
+              <v-col cols="auto">
+                <BadgeDialog />
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-divider class="ma-4"></v-divider>
+          <v-col>
+          <v-container class="d-flex flex-row justify-space-between text-center">
+            <v-flex>
+              <div>
+                <div class="subtitle-2">{{ challengeDates.length }}</div>
+                <div class="caption grey--text">JOIN</div>
+              </div>
+            </v-flex>
+            <v-flex>
+              <FollowerDialog />
+            </v-flex>
+            <v-flex>
+              <FollowingDialog />
+            </v-flex>
+          </v-container>
+          </v-col>
+          <v-divider class="ma-4"></v-divider>
         </v-col>
-        <v-divider class="ma-4"></v-divider>
-        <v-col>
-        <v-container class="d-flex flex-row justify-space-between text-center">
-          <v-flex>
-            <div>
-              <div class="subtitle-2">{{ challengeDates.length }}</div>
-              <div class="caption grey--text">JOIN</div>
-            </div>
-          </v-flex>
-          <v-flex>
-            <FollowerDialog />
-          </v-flex>
-          <v-flex>
-            <FollowingDialog />
-          </v-flex>
-        </v-container>
-        </v-col>
-        <v-divider class="ma-4"></v-divider>
-      </v-col>
-    </v-row>
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 
@@ -65,6 +76,8 @@ export default {
     return {
       userDatas: [],
       challengeDates: [],
+      profileImg: '',
+      userId: '',
     }
   },
   methods: {
@@ -88,14 +101,30 @@ export default {
         console.log(err)
       }  
     },
+    async getProfileImg() {
+      try {
+        const userId = this.$store.state.data2
+        const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/image/get/profile/${userId}`)
+        // console.log(data.result)
+        if (data.result == 'http://i5b102.p.ssafy.io:8181/api/image/show/string') {
+          // console.log('이미지 없음')
+          this.profileImg = 'error'
+        } else {
+          this.profileImg = data.result
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    },
     goEdit() {
       const userId = this.$store.state.data2
       this.$router.push({path:`/user/${userId}`}).catch(()=> {});
-    }
+    },
   },
   created() {
     this.myProfile()
     this.challengeDate()
+    this.getProfileImg()
   }
 }
 </script>
@@ -108,5 +137,6 @@ export default {
   overflow: hidden;
   display: block;
   margin: auto;
+  border: black;
 }
 </style>

@@ -21,17 +21,47 @@
           :key="title"  
         >
           <v-card fill-height>
-            <router-link :to="`/challenge/${myData.challengeId}`" class="text-decoration-none">
-            <v-img
-              :src="myData.imagePath"
-              class="white--text align-end px-3"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="300px"
-            >
-              <v-card-title>{{ myData.challengeTitle }}</v-card-title>
-              <v-card-text>팀 점수: {{ myData.totalPoint }}</v-card-text>
-            </v-img>
-            </router-link>
+            <template v-if="myData.categoryId == '1'">
+              <router-link :to="`/challenge/${myData.challengeId}`" class="text-decoration-none">
+              <v-img
+                src="@/assets/images/health.png"
+                class="white--text align-end px-3"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title>{{ myData.challengeTitle }}</v-card-title>
+                <v-card-text>팀 점수: {{ myData.totalPoint }}</v-card-text>
+              </v-img>
+              </router-link>
+            </template>
+
+            <template v-if="myData.categoryId == '2'">
+              <router-link :to="`/challenge/${myData.challengeId}`" class="text-decoration-none">
+              <v-img
+                src="@/assets/images/food.png"
+                class="white--text align-end px-3"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title>{{ myData.challengeTitle }}</v-card-title>
+                <v-card-text>팀 점수: {{ myData.totalPoint }}</v-card-text>
+              </v-img>
+              </router-link>
+            </template>
+
+            <template v-if="myData.categoryId == '3'">
+              <router-link :to="`/challenge/${myData.challengeId}`" class="text-decoration-none">
+              <v-img
+                src="@/assets/images/nutrients.jpg"
+                class="white--text align-end px-3"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title>{{ myData.challengeTitle }}</v-card-title>
+                <v-card-text>팀 점수: {{ myData.totalPoint }}</v-card-text>
+              </v-img>
+              </router-link>
+            </template>
 
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -56,7 +86,7 @@
             max-width="800"
           >
             <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              src="@/assets/images/article.jpg"
               height="300px"
             ></v-img>
 
@@ -111,7 +141,7 @@ export default {
       } catch(err) {
         console.log(err)
       }  
-    }
+    },
   },
   created() {
     this.userData()

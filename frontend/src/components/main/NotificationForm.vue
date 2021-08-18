@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-menu offset-y open-on-hover>
+    <v-menu offset-y open-on-hover max-height="200" max-width="400">
       <template v-slot:activator="{ on, attrs }">
         <v-btn 
           icon
