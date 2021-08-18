@@ -49,10 +49,10 @@ export default {
       try {
         const challengeId = this.$route.params.id
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/article/challenge/${challengeId}`)
-        console.log(data)
+        // console.log(data)
         this.feedItems = data
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     }
   },
