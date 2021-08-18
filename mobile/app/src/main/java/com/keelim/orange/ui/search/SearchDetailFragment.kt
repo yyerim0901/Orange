@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Search
+import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.History
 import com.keelim.orange.data.model.samples
 import com.keelim.orange.databinding.FragmentSearchDetailBinding
-import com.keelim.orange.ui.feed.SearchRecyclerAdapter
 import com.keelim.orange.utils.SpringAddItemAnimator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,8 +23,12 @@ class SearchDetailFragment: Fragment() {
     private val binding get() = _binding!!
     private val searchViewModel: SearchViewModel by viewModels()
     private lateinit var searchAdapter: SearchAdapter
-    private val resultAdapter = SearchRecyclerAdapter(
-        clickListener = { _, _ -> Unit }
+    private val resultAdapter = SearchRecyclerAdapter2(
+        clickListener = {
+            findNavController().navigate(
+                SearchDetailFragmentDirections.actionSearchDetailFragmentToDetailFragment("", -1, it)
+            )
+        }
     )
 
     override fun onCreateView(
@@ -115,7 +119,8 @@ class SearchDetailFragment: Fragment() {
         requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
     }
 
-    private fun handleSearchSuccess(data: List<Search>) = with(binding) {
+    private fun handleSearchSuccess(data: List<Search2>) = with(binding) {
+        requireContext().toast(data.toString())
         if(data.isNotEmpty()){
             searchResults.visibility = View.INVISIBLE
             searchRecycler.apply {

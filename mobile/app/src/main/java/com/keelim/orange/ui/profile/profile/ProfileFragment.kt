@@ -94,14 +94,10 @@ class ProfileFragment: Fragment() {
             email = data.email ?: "NaN",
             imagePath = data.imagePath ?: "",
         )
-        profileId.text = profile.id
-        profileEmail.text = profile.email
-        profileNickname.text = profile.nickname
-        if ("" == profile.imagePath){
-            accountIvProfile.load(R.drawable.project_orange)
-        } else{
-            accountIvProfile.load(profile.imagePath)
-        }
+        profileId.text = "id: ${profile.id}"
+        profileEmail.text = "email: ${profile.email}"
+        profileNickname.text = "nickname: ${profile.nickname}"
+        accountIvProfile.load(R.drawable.project_orange)
     }
 
     private fun handleLoading() {

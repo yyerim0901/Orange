@@ -27,7 +27,7 @@ class ProfileViewModel @Inject constructor(
             setState(
                 ProfileState.Success(
                     emptyList(),
-                    emptyList()
+                    getIngChallengeUseCase.invoke(userId)
                 )
             )
 

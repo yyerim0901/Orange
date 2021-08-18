@@ -109,13 +109,15 @@ interface OrangeService {
   @GET("api/challenge/list")
   suspend fun challengeList(): Response<List<ChallengeResponse>>
 
-  @GET("api/challenge/search/user/{searchTitle}")
-  suspend fun search(@Path("searchTitle") query: String): Response<List<SearchResponse>>
+
+  @GET("api/challenge/search/title/{searchTitle}")
+  suspend fun search(@Path(value = "searchTitle", encoded = true) query: String): Response<List<SearchResponse>>
 
   @POST("api/challenge/register/new-challenge")
   suspend fun createChallengeList(
     @Body call: ChallengeCall,
   ): Response<ResultResponse>
+
 
   @GET("/api/user/userinfo/{userId}")
   suspend fun profile(@Path("userId") userId: Int): Response<ProfileResponse>

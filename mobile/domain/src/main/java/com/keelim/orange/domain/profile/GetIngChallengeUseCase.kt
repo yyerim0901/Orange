@@ -6,7 +6,7 @@ import com.keelim.orange.data.repository.profile.ProfileRepository
 class GetIngChallengeUseCase(
   private val profileRepository: ProfileRepository
 ) {
-  suspend operator fun invoke(): List<Favorite> {
+  suspend operator fun invoke(userId:Int): List<Favorite> {
     return profileRepository.getIngChallengeList()
   }
 }

@@ -35,7 +35,7 @@ class FeedFragment : Fragment() {
     private val viewModel by viewModels<FeedViewModel>()
     private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid, color ->
         findNavController().navigate(
-            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color)
+            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color, null)
         )
     }
     private val colors = arrayOf(
@@ -180,7 +180,7 @@ class FeedFragment : Fragment() {
                 }
             )
         }
-        searchRecyclerAdapter.submitList(datas)
+        searchRecyclerAdapter.submitList(emptyList())
 
 //        val data3 = data2.map {
 //            Search(
@@ -198,14 +198,5 @@ class FeedFragment : Fragment() {
 
     companion object {
         fun newInstance() = FeedFragment()
-        val datas:List<Search> = listOf(
-            Search(1, "232323", "1"),
-            Search(2, "232323", "2"),
-            Search(3, "232323", "3"),
-            Search(4, "232323", "4"),
-            Search(5, "232323", "5"),
-            Search(6, "232323", "6"),
-            Search(7, "232323", "7"),
-        )
     }
 }
