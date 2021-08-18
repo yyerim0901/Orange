@@ -73,14 +73,14 @@ const routes = [
       },
     ]
   },
-  // {
-  //   path: '*',
-  //   redirect: '/NotFoundPage'
-  // },
-  // {
-  //   path: '/NotFoundPage',
-  //   component: () => import('@/views/user/NotFoundPage.vue'),
-  // },
+  {
+    path: '*',
+    redirect: '/NotFoundPage'
+  },
+  {
+    path: '/NotFoundPage',
+    component: () => import('@/views/user/NotFoundPage.vue'),
+  },
   // kakao callback
   // {
   //   path: '/auth/kakao/callback',
