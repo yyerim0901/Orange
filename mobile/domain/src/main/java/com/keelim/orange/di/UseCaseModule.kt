@@ -28,6 +28,7 @@ import com.keelim.orange.domain.fight.OtherUseCase
 import com.keelim.orange.domain.history.HistoryUseCase
 import com.keelim.orange.domain.profile.GetCompletedChallengeUseCase
 import com.keelim.orange.domain.profile.GetIngChallengeUseCase
+import com.keelim.orange.domain.profile.ProfileUseCase
 import com.keelim.orange.domain.search.SearchUseCase
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
@@ -202,5 +203,15 @@ object UseCaseModule {
     feedRepository: FeedRepository,
   ): CreateChallengeUseCase {
     return CreateChallengeUseCase(feedRepository)
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideProfileUseCase(
+    profileRepository: ProfileRepository,
+  ): ProfileUseCase {
+    return ProfileUseCase(
+      profileRepository
+    )
   }
 }

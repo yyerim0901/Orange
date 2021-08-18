@@ -6,6 +6,7 @@ import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.FriendsResponse
+import com.keelim.orange.data.response.ProfileResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
 import com.keelim.orange.data.response.auth.AuthResponse
@@ -115,4 +116,7 @@ interface OrangeService {
   suspend fun createChallengeList(
     @Body call: ChallengeCall,
   ): Response<ResultResponse>
+
+  @GET("/api/user/userinfo/{userId}")
+  suspend fun profile(@Path("userId") userId: Int): Response<ProfileResponse>
 }
