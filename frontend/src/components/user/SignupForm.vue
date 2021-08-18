@@ -82,7 +82,7 @@ export default {
           alert(data.message)
         }
       } catch (error) {
-        console.log(error)
+        console.error(error)
         alert("회원 가입에 실패하였습니다.")
       } finally {
         this.initForm();

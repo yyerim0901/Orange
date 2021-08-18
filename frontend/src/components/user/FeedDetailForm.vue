@@ -62,7 +62,7 @@ export default {
       try {
         const articleId = this.$route.params.id
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/image/get/article/${articleId}`)
-        // console.log(data)
+        console.log(data)
         this.feedImg = data[0]
       } catch (err) {
         console.log(err)

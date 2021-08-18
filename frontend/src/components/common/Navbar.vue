@@ -3,7 +3,7 @@
     <b-navbar variant="navbar-light bg-light justify-content-between px-5" type="light">
       <b-navbar-brand tag="h1">
         <v-img 
-          src='../../assets/images/logo2.png'
+          src='@/assets/images/logo.png'
           width='100'
           height='50'
           @click="goHome"
