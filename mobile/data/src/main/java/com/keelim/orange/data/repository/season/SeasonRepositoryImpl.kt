@@ -1,7 +1,8 @@
 package com.keelim.orange.data.repository.season
 
 import com.keelim.orange.data.api.ApiRequestFactory
-import com.keelim.orange.data.model.Article
+import com.keelim.orange.data.model.season.Article
+import com.keelim.orange.data.model.season.Comment
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -35,6 +36,20 @@ class SeasonRepositoryImpl(
             response.body()?.result ?: ""
         } else {
             ""
+        }
+    }
+
+    override suspend fun comments(articleId: Int): List<Comment> = withContext(dispatcher) {
+        val response = apiRequestFactory.retrofit.comments(articleId)
+        if (response.isSuccessful) {
+            return@withContext response.body()?.mapNotNull {
+                Comment(
+                    it.user.toString(),
+                    it.commentContent,
+                )
+            } ?: emptyList()
+        } else {
+            return@withContext emptyList()
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.keelim.orange.ui.season.season
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,8 +13,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.keelim.orange.R
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Article
+import com.keelim.orange.data.model.season.Article
 import com.keelim.orange.databinding.FragmentSeasonBinding
+import com.keelim.orange.ui.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +32,9 @@ class SeasonFragment : Fragment() {
       )
     },
     comment = {
-
+      findNavController().navigate(
+        SeasonFragmentDirections.actionSeasonFragmentToCommentFragment(it)
+      )
     }
   )
 
@@ -45,6 +50,7 @@ class SeasonFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    authCheck()
     initViews()
     observeData()
     viewModel.fetchData(args.challengeId)
@@ -95,5 +101,5 @@ class SeasonFragment : Fragment() {
 
   private fun handleError() {
     requireActivity().toast("에러가 발생했습니다. 다시 한번 로드해주세요")
-  }
+    }
 }

@@ -17,6 +17,7 @@ import com.keelim.orange.data.response.notification.NotificationResponse
 import com.keelim.orange.data.response.ranking.RankingResponse
 import com.keelim.orange.data.response.search.SearchResponse
 import com.keelim.orange.data.response.season.ArticleResponse
+import com.keelim.orange.data.response.season.CommentResponse
 import com.keelim.orange.data.response.season.ImageResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -135,5 +136,6 @@ interface OrangeService {
   @GET("api/image/get/article/{articleId}")
   suspend fun image(@Path("articleId") article: Int): Response<ImageResponse>
 
-
+  @GET("api/comment/article/{articleId}")
+  suspend fun comments(@Path("articleId") article: Int): Response<List<CommentResponse>>
 }

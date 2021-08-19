@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.keelim.orange.data.model.Article
+import com.keelim.orange.data.model.season.Article
 import com.keelim.orange.databinding.ItemSeasonBinding
 
 class SeasonAdapter(

@@ -1,6 +1,6 @@
 package com.keelim.orange.ui.season.season
 
-import com.keelim.orange.data.model.Article
+import com.keelim.orange.data.model.season.Article
 
 sealed class SeasonState {
   object UnInitialized : SeasonState()

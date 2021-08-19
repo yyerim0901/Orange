@@ -1,6 +1,10 @@
-package com.keelim.orange.data.model
+package com.keelim.orange.data.model.season
+
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class Article(
     var articleContent: String,
     var articleId: Int,
@@ -10,4 +14,4 @@ data class Article(
     var user: Int,
     var verified: Boolean,
     var articleImage: String,
-)
+): Parcelable

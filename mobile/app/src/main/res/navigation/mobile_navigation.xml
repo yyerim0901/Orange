@@ -67,6 +67,9 @@
         <argument
             android:name="challengeId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_seasonFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -130,6 +133,14 @@
         android:id="@+id/createChallengeFragmentDialog"
         android:name="com.keelim.orange.ui.feed.create.CreateChallengeFragmentDialog"
         android:label="CreateChallengeFragmentDialog" />
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.keelim.orange.ui.season.comment.CommentFragment"
+        android:label="CommentFragment" >
+        <argument
+            android:name="article"
+            app:argType="com.keelim.orange.data.model.season.Article" />
+    </fragment>
 
 
 </navigation>
