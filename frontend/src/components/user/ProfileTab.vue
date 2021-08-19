@@ -81,28 +81,30 @@
           v-for="(feedData, index) in feedDatas"
           :key="index"
         >
-          <v-card
-            class="mx-auto my-5"
-            max-width="800"
-          >
-            <v-img
-              src="@/assets/images/article.jpg"
-              height="300px"
-            ></v-img>
+          <router-link :to="`/feed/${feedData.articleId}`" class="text-decoration-none">
+            <v-card
+              class="mx-auto my-5"
+              max-width="800"
+            >
+              <v-img
+                src="@/assets/images/article.jpg"
+                height="300px"
+              ></v-img>
 
-            <v-card-title>
-              {{ feedData.title }}
-            </v-card-title>
+              <v-card-title>
+                {{ feedData.title }}
+              </v-card-title>
 
-            <v-card-subtitle>
-              {{ feedData.articleWritetime }}
-            </v-card-subtitle>
+              <v-card-subtitle>
+                {{ feedData.articleWritetime }}
+              </v-card-subtitle>
 
-            <v-card-text>
-              {{ feedData.articleContent }}
-            </v-card-text>
-            
-          </v-card>
+              <v-card-text>
+                {{ feedData.articleContent }}
+              </v-card-text>
+              
+            </v-card>
+          </router-link>
         </v-col>
         <!-- 반복되는 피드 끝 -->
       </v-tab-item>

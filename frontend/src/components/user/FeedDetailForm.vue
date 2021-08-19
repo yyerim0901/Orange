@@ -3,12 +3,22 @@
     <v-card outlined>
       <v-row d-flex>
         <v-col outlined>
-          <v-img
-            :src="feedImg"
-            height="500"
-            max-width="600"
-          >
-          </v-img>
+          <template v-if="feedImg=='error'">
+            <v-img
+              src="@/assets/images/article.jpg"
+              height="500"
+              max-width="600"
+            >
+            </v-img>
+          </template>
+          <template v-else>
+            <v-img
+              :src="feedImg"
+              height="500"
+              max-width="600"
+            >
+            </v-img>
+          </template>
         </v-col>
         <v-col>
           <v-card-title>{{ feedItems.title }}</v-card-title>
@@ -63,7 +73,11 @@ export default {
         const articleId = this.$route.params.id
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/image/get/article/${articleId}`)
         // console.log(data)
-        this.feedImg = data[0]
+        if (data == '') {
+          this.feedImg = 'error'
+        } else {
+          this.feedImg = data[0]
+        }
       } catch (err) {
         console.log(err)
       }
@@ -72,7 +86,7 @@ export default {
       try {
         const articleId = this.$route.params.id
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/comment/article/${articleId}`)
-        console.log(data)
+        // console.log(data)
         this.CommentItems = data
       } catch (err) {
         console.log(err)
