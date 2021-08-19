@@ -93,19 +93,27 @@ class FightFragment : Fragment() {
       youEnddate.text = other.endDate
 
       mySection.setOnClickListener {
-        
+        findNavController().navigate(
+          FightFragmentDirections.actionFightFragmentToSeasonFragment(you.challengeId)
+        )
       }
 
       firstSection.setOnClickListener {
-
+        findNavController().navigate(
+          FightFragmentDirections.actionFightFragmentToSeasonFragment(you.challengeId)
+        )
       }
 
       youSection.setOnClickListener {
-
+        findNavController().navigate(
+          FightFragmentDirections.actionFightFragmentToSeasonFragment(other.challengeId)
+        )
       }
 
       secondSection.setOnClickListener {
-
+        findNavController().navigate(
+          FightFragmentDirections.actionFightFragmentToSeasonFragment(other.challengeId)
+        )
       }
     }
   }

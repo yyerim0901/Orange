@@ -23,8 +23,10 @@ import com.keelim.orange.data.repository.profile.ProfileRepository
 import com.keelim.orange.data.repository.profile.ProfileRepositoryImpl
 import com.keelim.orange.data.repository.search.SearchRepository
 import com.keelim.orange.data.repository.search.SearchRepositoryImpl
-import com.keelim.orange.data.repository.season.RankingRepository
-import com.keelim.orange.data.repository.season.RankingRepositoryImpl
+import com.keelim.orange.data.repository.season.SeasonRepository
+import com.keelim.orange.data.repository.season.SeasonRepositoryImpl
+import com.keelim.orange.data.repository.season.ranking.RankingRepository
+import com.keelim.orange.data.repository.season.ranking.RankingRepositoryImpl
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.create.CreateRepositoryImpl
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -201,6 +203,18 @@ object RepositoryModule {
     apiRequestFactory: ApiRequestFactory,
   ): FightRepository{
     return FightRepositoryImpl(
+      dispatcher = dispatcher,
+      apiRequestFactory = apiRequestFactory
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideSeasonRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): SeasonRepository{
+    return SeasonRepositoryImpl(
       dispatcher = dispatcher,
       apiRequestFactory = apiRequestFactory
     )

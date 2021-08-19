@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.keelim.orange.common.toast
-import com.keelim.orange.data.model.Fight
+import com.keelim.orange.data.model.Article
 import com.keelim.orange.databinding.FragmentSeasonBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,11 +18,13 @@ class SeasonFragment : Fragment() {
   private val viewModel by viewModels<SeasonViewModel>()
   private var _binding: FragmentSeasonBinding? = null
   private val binding get() = _binding!!
+  private val args by navArgs<SeasonFragmentArgs>()
+
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View {
     _binding = FragmentSeasonBinding.inflate(inflater, container, false)
     return binding.root
@@ -31,7 +34,7 @@ class SeasonFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
-    viewModel.fetchData()
+    viewModel.fetchData(args.challengeId)
   }
 
   private fun initViews() = with(binding) {
@@ -60,7 +63,8 @@ class SeasonFragment : Fragment() {
     requireActivity().toast("데이터 초기화 중입니다.")
   }
 
-  private fun handleSuccess(data: List<Fight>) {
+  private fun handleSuccess(data: List<Article>) {
+    requireContext().toast(data.toString())
   }
 
   private fun handleError() {

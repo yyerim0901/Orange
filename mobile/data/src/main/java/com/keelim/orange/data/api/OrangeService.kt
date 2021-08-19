@@ -3,7 +3,6 @@ package com.keelim.orange.data.api
 import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignUpCall
-import com.keelim.orange.data.model.Search2
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ProfileResponse
@@ -17,6 +16,8 @@ import com.keelim.orange.data.response.notification.NotificationDeleteResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
 import com.keelim.orange.data.response.ranking.RankingResponse
 import com.keelim.orange.data.response.search.SearchResponse
+import com.keelim.orange.data.response.season.ArticleResponse
+import com.keelim.orange.data.response.season.ImageResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -127,5 +128,12 @@ interface OrangeService {
 
   @GET("api/challenge/opponent/{challengeId}")
   suspend fun getOpponent(@Path("challengeId") uid: Int): Response<ChallengeResponse>
+
+  @GET("api/article/challenge/{challengeId}")
+  suspend fun article(@Path("challengeId") challenge: Int): Response<List<ArticleResponse>>
+
+  @GET("api/image/get/article/{articleId}")
+  suspend fun image(@Path("articleId") article: Int): Response<ImageResponse>
+
 
 }

@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_seasonFragment_to_otherFragment"
             app:destination="@id/otherFragment" />
+        <argument
+            android:name="challengeId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

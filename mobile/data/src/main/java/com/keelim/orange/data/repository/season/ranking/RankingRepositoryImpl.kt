@@ -1,4 +1,4 @@
-package com.keelim.orange.data.repository.season
+package com.keelim.orange.data.repository.season.ranking
 
 import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.model.ranking.Ranking
