@@ -6,61 +6,63 @@
         :key="index"
         :cols="card.flex"
       >
-        <v-card fill-height>
-          <template v-if="card.categoryId == '1'">
-            <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
-            <v-img
-              src="@/assets/images/health.png"
-              class="white--text align-end px-3"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="300px"
-            >
-              <v-card-title>{{ card.challengeTitle }}</v-card-title>
-              <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}}&nbsp; ~ &nbsp;{{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
-            </v-img>
-            </router-link>
-          </template>
-          
-          <template v-else-if="card.categoryId =='2'">
-            <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
-            <v-img
-              src="@/assets/images/food.png"
-              class="white--text align-end px-3"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="300px"
-            >
-              <v-card-title>{{ card.challengeTitle }}</v-card-title>
-              <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}}&nbsp; ~ &nbsp;{{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
-            </v-img>
-            </router-link>
-          </template>
+        <v-hover v-slot="{ hover }">
+          <v-card fill-height :class="{ 'on-hover': hover }" :elevation="hover ? 16 : 2">
+            <template v-if="card.categoryId == '1'">
+              <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
+              <v-img
+                src="@/assets/images/health.png"
+                class="white--text align-end px-3"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title>{{ card.challengeTitle }}</v-card-title>
+                <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}}&nbsp; ~ &nbsp;{{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
+              </v-img>
+              </router-link>
+            </template>
+            
+            <template v-else-if="card.categoryId =='2'">
+              <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
+              <v-img
+                src="@/assets/images/food.png"
+                class="white--text align-end px-3"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title>{{ card.challengeTitle }}</v-card-title>
+                <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}}&nbsp; ~ &nbsp;{{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
+              </v-img>
+              </router-link>
+            </template>
 
-          <template v-else-if="card.categoryId == '3'">
-            <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
-            <v-img
-              src="@/assets/images/nutrients.jpg"
-              class="white--text align-end px-3"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="300px"
-            >
-              <v-card-title>{{ card.challengeTitle }}</v-card-title>
-              <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}}&nbsp; ~ &nbsp;{{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
-            </v-img>
-            </router-link>
-          </template>
+            <template v-else-if="card.categoryId == '3'">
+              <router-link :to="`/challenge/${card.challengeId}`" class="text-decoration-none">
+              <v-img
+                src="@/assets/images/nutrients.jpg"
+                class="white--text align-end px-3"
+                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title>{{ card.challengeTitle }}</v-card-title>
+                <!-- <v-card-subtitle class="text-end">{{ card.startDate | moment('YYYY-MM-DD')}}&nbsp; ~ &nbsp;{{ card.endDate | moment('YYYY-MM-DD')}}</v-card-subtitle> -->
+              </v-img>
+              </router-link>
+            </template>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-card-actions>
+              <v-spacer></v-spacer>
 
-            <v-chip
-              class="ma-2"
-              color="orange accent-4"
-              outlined
-            >
-              {{ card.totalPoint }} 점
-            </v-chip>
-          </v-card-actions>
-        </v-card>
+              <v-chip
+                class="ma-2"
+                color="orange accent-4"
+                outlined
+              >
+                {{ card.totalPoint }} 점
+              </v-chip>
+            </v-card-actions>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
   </v-container>
