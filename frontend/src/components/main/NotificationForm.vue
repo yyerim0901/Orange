@@ -1,14 +1,24 @@
 <template>
   <div class="text-center">
-    <v-menu offset-y open-on-hover max-height="200" max-width="400">
+    <v-menu offset-y open-on-hover :nudge-height="400" :nudge-width="600">
       <template v-slot:activator="{ on, attrs }">
+          
         <v-btn 
           icon
           v-bind="attrs"
           v-on="on"
         >
-          <v-icon>mdi-bell-ring-outline</v-icon>
+          <v-badge
+          :content="num"
+          :value="num"
+          color="green"
+          overlap
+        >
+        <v-icon>mdi-bell-ring-outline</v-icon>
+        </v-badge>
+          
         </v-btn>
+        
       </template>
       <v-list>
         <v-list-item-title class="mx-3 mt-3">
@@ -35,7 +45,9 @@ export default {
   name: 'NotificationForm',
   data() {
     return {
-      items: []
+      items: [],
+      num: "",
+      show: false,
     }
   },
   methods: {
@@ -45,6 +57,7 @@ export default {
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/notification/select/${userId}`)
         // console.log(data)
         this.items = data
+        this.num = this.items.length;
       } catch (err) {
         console.log(err)
       }

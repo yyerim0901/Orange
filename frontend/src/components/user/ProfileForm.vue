@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card outlined>
+    <v-card flat>
       <v-row>
         <v-col align-self="center">
           <template v-if="profileImg=='error'">

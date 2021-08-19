@@ -3,7 +3,6 @@
     <v-card flat>
       <div class="text-h3 text-center mb-10">랭킹</div>
       <v-card-title>
-        <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
