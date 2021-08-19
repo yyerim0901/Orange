@@ -93,7 +93,7 @@ class FightFragment : Fragment() {
       youEnddate.text = other.endDate
 
       mySection.setOnClickListener {
-
+        
       }
 
       firstSection.setOnClickListener {
@@ -103,7 +103,7 @@ class FightFragment : Fragment() {
       youSection.setOnClickListener {
 
       }
-      
+
       secondSection.setOnClickListener {
 
       }
