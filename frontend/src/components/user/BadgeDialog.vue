@@ -18,13 +18,13 @@
           </v-btn>
         </template>
         <v-spacer></v-spacer>
-        <v-card>
+        <v-card style="padding-top:20px; padding-down:5px;" flat>
           <v-card-text>
             <p class="text-center text-h5 font-weight-bold">나의 배지</p>
           </v-card-text>
-          <v-divider></v-divider>
+          <v-divider style="margin-top:0px; padding-top:0px;"></v-divider>
 
-          <v-card v-for="(badge, i) in userbadges" :key="i">
+          <v-card flat v-for="(badge, i) in userbadges" :key="i">
             <div v-if="badge.badge == '1'">
               <v-img
                 src="@/assets/images/badge/badge1.png"
