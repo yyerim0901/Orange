@@ -55,12 +55,19 @@ const routes = [
         meta: { auth: true },
       },
       {
+        path: 'feed/:id',
+        name: 'FeedDetail',
+        component: () => import('@/views/feed/FeedDetail.vue'),
+        meta: { auth: true },
+      },
+      {
         path: 'ranking',
         name: 'Ranking',
         component: () => import('@/views/feed/Ranking.vue'),
+        meta: { auth: true },
       },
       {
-        path: 'search/:query',
+        path: 'search/:title',
         name: 'Search',
         component: () => import('@/views/feed/Search.vue'),
       },
@@ -75,11 +82,11 @@ const routes = [
     component: () => import('@/views/user/NotFoundPage.vue'),
   },
   // kakao callback
-  {
-    path: '/auth/kakao/callback',
-    name: 'AuthKakaoCallback',
-    component: () => import('@/views/user/AuthKakaoCallback.vue')
-  },
+  // {
+  //   path: '/auth/kakao/callback',
+  //   name: 'AuthKakaoCallback',
+  //   component: () => import('@/views/user/AuthKakaoCallback.vue')
+  // },
 
 ];
 

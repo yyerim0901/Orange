@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import carousel1 from '@/assets/images/carousel1.jpg'
-import carousel3 from '@/assets/images/carousel3.jpg'
-import carousel6 from '@/assets/images/carousel6.jpg'
+import carousel1 from '@/assets/images/carousel1_long.jpg'
+import carousel3 from '@/assets/images/carousel3_long.jpg'
+import carousel6 from '@/assets/images/carousel6_gold_long.jpg'
 export default {
   data () {
     return {

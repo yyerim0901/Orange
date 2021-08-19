@@ -2,31 +2,31 @@
   <div>
     <b-navbar variant="navbar-light bg-light justify-content-between px-5" type="light">
       <b-navbar-brand tag="h1">
-        <v-btn 
-          text
-          color="orange"
+        <v-img 
+          src='@/assets/images/logo.png'
+          width='100'
+          height='50'
           @click="goHome"
         >
-        Orange</v-btn>
+        </v-img>
       </b-navbar-brand>
       <b-navbar-nav class="d-flex">
         <b-nav-item>
-          <v-autocomplete
+          <v-text-field
             prepend-icon="mdi-magnify"
-            v-model="model"
-            :loading="isloading"
-            :items="items"
-            :search-input.sync="query"
+            v-model="title"
             cache-items
             class="mx-4"
             flat
             hide-no-data
             hide-details
             hide-selected
-            label="야너두 할 수 있어!"
+            label="야 너두 할 수 있어!"
             solo
-            @keyup.enter="goSearch"
-          ></v-autocomplete>
+            @keyup.enter="goSearch()"
+          >
+          </v-text-field>
+          
         </b-nav-item>
         <b-nav-item>
           <v-tooltip bottom>
@@ -82,9 +82,8 @@ export default {
   },
   data () {
     return {
-      isloading: false,
       items: [],
-      query: '',
+      title: '',
       model: null,
     }
   },
@@ -99,7 +98,7 @@ export default {
       this.$router.push({path:'/create-challenge'}).catch(()=> {});
     },
     goSearch() {
-      this.$router.push({path:`/search/${query}`})
+      this.$router.push({path:`/search/${this.title}`}).catch(()=> {});
     }
   },
   computed: {
