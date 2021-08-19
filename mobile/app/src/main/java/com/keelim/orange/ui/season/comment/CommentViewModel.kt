@@ -35,7 +35,7 @@ class CommentViewModel @Inject constructor(
   }
 
   fun writeComment(articleId:Int, userId:Int, message:String) = viewModelScope.launch {
-    seasonUseCase.write(articleId, userId, message)
+//    seasonUseCase.write(articleId, userId, message)
   }
 
   private fun setState(value: CommentState) {

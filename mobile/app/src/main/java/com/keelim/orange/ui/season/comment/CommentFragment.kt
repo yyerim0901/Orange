@@ -26,7 +26,7 @@ class CommentFragment : Fragment() {
     )
     private val viewModel: CommentViewModel by viewModels()
     private val args by navArgs<CommentFragmentArgs>()
-
+    private lateinit var own:Comment
 
     private val userId by lazy {
         val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
@@ -74,7 +74,7 @@ class CommentFragment : Fragment() {
 
         username.setOnKeyListener { view, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                viewModel.writeComment(args.article.articleId, userId, binding.username.text)
+                viewModel.writeComment(args.article.articleId, userId, binding.username.text.toString() )
                 viewModel.fetchData(args.article.articleId)
                 return@setOnKeyListener true
             }

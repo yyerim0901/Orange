@@ -50,7 +50,6 @@ class SeasonFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    authCheck()
     initViews()
     observeData()
     viewModel.fetchData(args.challengeId)
