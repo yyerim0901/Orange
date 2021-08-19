@@ -55,6 +55,9 @@ class DetailViewModel @Inject constructor(
   fun favoriteAdd(favorite: Favorite) = viewModelScope.launch{
     favoriteUseCase.insert(favorite)
   }
+  fun sign(challengeId:Int, userId:Int) = viewModelScope.launch {
+    getDetailInformationUseCase.sign(challengeId, userId)
+  }
 
   private fun setState(value: DetailState) {
     _state.value = value

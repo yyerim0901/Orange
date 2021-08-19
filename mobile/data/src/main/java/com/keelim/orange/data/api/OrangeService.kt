@@ -2,6 +2,7 @@ package com.keelim.orange.data.api
 
 import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.call.LoginCall
+import com.keelim.orange.data.call.SignCall
 import com.keelim.orange.data.call.SignUpCall
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.FriendsResponse
@@ -138,4 +139,9 @@ interface OrangeService {
 
   @GET("api/comment/article/{articleId}")
   suspend fun comments(@Path("articleId") article: Int): Response<List<CommentResponse>>
+
+  @POST("api/challenge/register/new-user")
+  suspend fun sign(
+    @Body call: SignCall,
+  ): Response<ResultResponse>
 }

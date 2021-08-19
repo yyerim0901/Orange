@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -26,6 +27,11 @@ class DetailFragment : Fragment() {
   private val binding get() = _binding!!
   private val args by navArgs<DetailFragmentArgs>()
   private lateinit var have: Search2
+
+  private val userId by lazy {
+    val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
+    return@lazy pref.getInt("userId", 20)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -90,6 +96,7 @@ class DetailFragment : Fragment() {
         DetailFragmentDirections.actionDetailFragmentToFightFragment(have.challengeId)
       )
       requireContext().toast("관심 목록에 추가 하였습니다. 이동합니다")
+      viewModel.sign(have.challengeId, userId)
     }
   }
 }
