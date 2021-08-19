@@ -8,7 +8,19 @@ class SeasonUseCase(
     private val seasonRepository: SeasonRepository,
 ) {
     suspend fun articleFeed(challenge: Int): List<Article> {
-        return seasonRepository.article(challenge)
+        val result = seasonRepository.article(challenge)
+        return result.map {
+            Article(
+                it.articleContent,
+                it.articleId,
+                it.articleWritetime,
+                it.challenge,
+                it.title,
+                it.user,
+                it.verified,
+                seasonRepository.image(it.articleId) ?: ""
+            )
+        }
     }
 
     suspend fun getComments(articleId:Int): List<Comment>{

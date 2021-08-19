@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.keelim.orange.R
 import com.keelim.orange.data.model.season.Article
 import com.keelim.orange.databinding.ItemSeasonBinding
 
@@ -23,7 +24,11 @@ class SeasonAdapter(
             }
             articleTitle.text = item.title
             user.text = item.user.toString()
-            articleImage.load(item.articleImage)
+            if(item.articleImage ==""){
+                articleImage.load(R.drawable.morning)
+            } else{
+                articleImage.load(item.articleImage)
+            }
             date.text = item.articleWritetime
             btnComment.text = item.articleContent
 

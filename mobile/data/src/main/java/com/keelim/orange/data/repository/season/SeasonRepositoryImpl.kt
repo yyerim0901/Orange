@@ -31,12 +31,12 @@ class SeasonRepositoryImpl(
         }
     }
 
-    override suspend fun image(article: Int): String = withContext(dispatcher) {
+    override suspend fun image(article: Int): String? = withContext(dispatcher) {
         val response = apiRequestFactory.retrofit.image(article)
         return@withContext if (response.isSuccessful) {
-            response.body()?.result ?: ""
+            response.body()?.get(0)
         } else {
-            ""
+            null
         }
     }
 

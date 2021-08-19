@@ -22,7 +22,6 @@ import com.keelim.orange.data.response.search.SearchResponse
 import com.keelim.orange.data.response.season.ArticleCreateResponse
 import com.keelim.orange.data.response.season.ArticleResponse
 import com.keelim.orange.data.response.season.CommentResponse
-import com.keelim.orange.data.response.season.ImageResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -136,8 +135,7 @@ interface OrangeService {
   @GET("api/article/challenge/{challengeId}")
   suspend fun article(@Path("challengeId") challenge: Int): Response<List<ArticleResponse>>
 
-  @GET("api/image/get/article/{articleId}")
-  suspend fun image(@Path("articleId") article: Int): Response<ImageResponse>
+
 
   @GET("api/comment/article/{articleId}")
   suspend fun comments(@Path("articleId") article: Int): Response<List<CommentResponse>>
@@ -164,4 +162,7 @@ interface OrangeService {
     @PartMap data: HashMap<String, RequestBody>,
     @Part image: MultipartBody.Part,
   )
+
+  @GET("api/image/get/article/{articleId}")
+  suspend fun image(@Path("articleId") article: Int): Response<List<String>>
 }
