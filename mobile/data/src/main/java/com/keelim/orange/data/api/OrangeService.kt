@@ -1,6 +1,7 @@
 package com.keelim.orange.data.api
 
 import com.keelim.orange.data.call.ChallengeCall
+import com.keelim.orange.data.call.CreateCall
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignCall
 import com.keelim.orange.data.call.SignUpCall
@@ -18,16 +19,22 @@ import com.keelim.orange.data.response.notification.NotificationDeleteResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
 import com.keelim.orange.data.response.ranking.RankingResponse
 import com.keelim.orange.data.response.search.SearchResponse
+import com.keelim.orange.data.response.season.ArticleCreateResponse
 import com.keelim.orange.data.response.season.ArticleResponse
 import com.keelim.orange.data.response.season.CommentResponse
 import com.keelim.orange.data.response.season.ImageResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.PartMap
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -52,9 +59,8 @@ interface OrangeService {
   @Headers("Content-Type: application/json")
   @POST("create/upload/")
   fun upload(
-    @Field("title") title: String,
-    @Field("description") description: String
-  ): Response<UserSampleResponse>
+    @Body call: CreateCall,
+  ): Response<ArticleCreateResponse>
 
 
 
@@ -148,6 +154,13 @@ interface OrangeService {
 
   @POST("api/comment/create")
   suspend fun writeComment(
-    @Body call:WriteComment
+    @Body call: WriteComment,
+  )
+
+  @Multipart
+  @POST(" api/image/save/article")
+  suspend fun imageUpload(
+    @PartMap data: HashMap<String, RequestBody>,
+    @Part image: MultipartBody.Part,
   )
 }

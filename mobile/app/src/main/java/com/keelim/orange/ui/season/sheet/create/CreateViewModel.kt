@@ -13,7 +13,8 @@ class CreateViewModel @Inject constructor(
     private val createUseCase: CreateUseCase
 ): ViewModel() {
 
-    fun upload(title:String, description:String, bitmap: Bitmap) = viewModelScope.launch{
-        createUseCase.upload(title, description, bitmap)
-    }
+    fun upload(challengeId: Int, userId:Int, title: String, description: String, bitmap: Bitmap) =
+        viewModelScope.launch {
+            createUseCase.upload(challengeId, userId, title, description, bitmap)
+        }
 }

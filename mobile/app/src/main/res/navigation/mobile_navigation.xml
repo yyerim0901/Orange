@@ -93,7 +93,11 @@
     <dialog
         android:id="@+id/createFragment2"
         android:name="com.keelim.orange.ui.season.sheet.create.CreateFragment"
-        android:label="CreateFragment" />
+        android:label="CreateFragment" >
+        <argument
+            android:name="challengeId"
+            app:argType="integer" />
+    </dialog>
     <fragment
         android:id="@+id/searchDetailFragment"
         android:name="com.keelim.orange.ui.search.SearchDetailFragment"

@@ -1,11 +1,9 @@
 package com.keelim.orange.ui.season.season
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,7 +13,7 @@ import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.season.Article
 import com.keelim.orange.databinding.FragmentSeasonBinding
-import com.keelim.orange.ui.auth.AuthActivity
+import com.keelim.orange.ui.search.SearchDetailFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,6 +61,11 @@ class SeasonFragment : Fragment() {
     }
     snapHelper.attachToRecyclerView(seasonRecycler)
 
+    addArticle.setOnClickListener {
+      findNavController().navigate(
+        SeasonFragmentDirections.actionSeasonFragmentToCreateFragment2(args.challengeId)
+      )
+    }
   }
 
   override fun onDestroyView() {

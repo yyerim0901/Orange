@@ -27,7 +27,6 @@ class CommentFragment : Fragment() {
     )
     private val viewModel: CommentViewModel by viewModels()
     private val args by navArgs<CommentFragmentArgs>()
-    private lateinit var own:Comment
 
     private val userId by lazy {
         val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)

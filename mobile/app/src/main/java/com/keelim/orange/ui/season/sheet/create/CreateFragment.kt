@@ -10,12 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keelim.orange.common.toast
 import com.keelim.orange.databinding.FragmentCreateBinding
+import com.keelim.orange.ui.season.season.SeasonFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +26,14 @@ class CreateFragment:BottomSheetDialogFragment() {
     private var _binding: FragmentCreateBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CreateViewModel by viewModels()
+    private val args by navArgs<CreateFragmentArgs>()
     private lateinit var bitMap: Bitmap
+
+    private val userId by lazy {
+        val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
+        return@lazy pref.getInt("userId", 20)
+    }
+
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val resultCode = result.resultCode
@@ -86,7 +96,7 @@ class CreateFragment:BottomSheetDialogFragment() {
 
             if (title.isEmpty() or description.isEmpty()) return@setOnClickListener
 
-            viewModel.upload(title, description, bitMap)
+            viewModel.upload(args.challengeId,userId, title, description, bitMap)
         }
 
         camera.setOnClickListener {
