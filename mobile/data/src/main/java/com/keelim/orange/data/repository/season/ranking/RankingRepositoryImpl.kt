@@ -17,7 +17,7 @@ class RankingRepositoryImpl(
         Ranking(
           ranking_title = rankingResponse.challengeTitle,
           ranking_description = rankingResponse.challengeDescribe,
-          rank = index,
+          rank = index+1,
           image_address = rankingResponse.imagePath ?: ""
         )
       } ?: emptyList()
@@ -33,7 +33,7 @@ class RankingRepositoryImpl(
         Ranking(
           ranking_title = rankingResponse.challengeTitle,
           ranking_description = rankingResponse.challengeDescribe,
-          rank = index,
+          rank = index+1,
           image_address = rankingResponse.imagePath ?: ""
         )
       } ?: emptyList()

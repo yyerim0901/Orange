@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearSnapHelper
+import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Article
 import com.keelim.orange.databinding.FragmentSeasonBinding
@@ -19,6 +22,16 @@ class SeasonFragment : Fragment() {
   private var _binding: FragmentSeasonBinding? = null
   private val binding get() = _binding!!
   private val args by navArgs<SeasonFragmentArgs>()
+  private val seasonAdapter = SeasonAdapter(
+    more = {
+      findNavController().navigate(
+        R.id.otherFragment
+      )
+    },
+    comment = {
+
+    }
+  )
 
 
   override fun onCreateView(
@@ -38,6 +51,13 @@ class SeasonFragment : Fragment() {
   }
 
   private fun initViews() = with(binding) {
+    val snapHelper = LinearSnapHelper()
+    seasonRecycler.apply {
+      setHasFixedSize(true)
+      adapter = seasonAdapter
+    }
+    snapHelper.attachToRecyclerView(seasonRecycler)
+
   }
 
   override fun onDestroyView() {
@@ -65,6 +85,12 @@ class SeasonFragment : Fragment() {
 
   private fun handleSuccess(data: List<Article>) {
     requireContext().toast(data.toString())
+    if (data.isEmpty()) {
+      binding.noData.visibility = View.VISIBLE
+    } else {
+      binding.noData.visibility = View.INVISIBLE
+    }
+    seasonAdapter.submitList(data)
   }
 
   private fun handleError() {
