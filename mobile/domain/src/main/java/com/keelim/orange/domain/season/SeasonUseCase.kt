@@ -15,5 +15,9 @@ class SeasonUseCase(
         return seasonRepository.comments(articleId)
     }
 
+    suspend fun write(articleId:Int, userId:Int, message:String){
+        return seasonRepository.writeComment(articleId, userId, message)
+    }
+
 
 }

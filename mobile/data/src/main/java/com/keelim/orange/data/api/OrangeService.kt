@@ -4,6 +4,7 @@ import com.keelim.orange.data.call.ChallengeCall
 import com.keelim.orange.data.call.LoginCall
 import com.keelim.orange.data.call.SignCall
 import com.keelim.orange.data.call.SignUpCall
+import com.keelim.orange.data.call.WriteComment
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ProfileResponse
@@ -144,4 +145,9 @@ interface OrangeService {
   suspend fun sign(
     @Body call: SignCall,
   ): Response<ResultResponse>
+
+  @POST("api/comment/create")
+  suspend fun writeComment(
+    @Body call:WriteComment
+  )
 }

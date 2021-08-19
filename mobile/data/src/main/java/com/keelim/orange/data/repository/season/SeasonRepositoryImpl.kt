@@ -1,6 +1,7 @@
 package com.keelim.orange.data.repository.season
 
 import com.keelim.orange.data.api.ApiRequestFactory
+import com.keelim.orange.data.call.WriteComment
 import com.keelim.orange.data.model.season.Article
 import com.keelim.orange.data.model.season.Comment
 import kotlinx.coroutines.CoroutineDispatcher
@@ -51,5 +52,15 @@ class SeasonRepositoryImpl(
         } else {
             return@withContext emptyList()
         }
+    }
+
+    override suspend fun writeComment(articleId: Int, userId: Int, message: String):Unit = withContext(dispatcher) {
+        apiRequestFactory.retrofit.writeComment(
+            WriteComment(
+                articleId,
+                message,
+                userId
+            )
+        )
     }
 }

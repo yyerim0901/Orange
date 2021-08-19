@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.google.android.material.snackbar.Snackbar
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.season.Comment
 import com.keelim.orange.databinding.FragmentCommentBinding
@@ -74,8 +75,14 @@ class CommentFragment : Fragment() {
 
         username.setOnKeyListener { view, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                viewModel.writeComment(args.article.articleId, userId, binding.username.text.toString() )
-                viewModel.fetchData(args.article.articleId)
+                val value = binding.username.text.toString()
+                if (value.isEmpty()){
+                    Snackbar.make(binding.root, "댓글을 적어주세요", Snackbar.LENGTH_SHORT).show()
+                }else{
+                    viewModel.writeComment(args.article.articleId, userId, binding.username.text.toString() )
+                    viewModel.fetchData(args.article.articleId)
+                    binding.username.text.clear()
+                }
                 return@setOnKeyListener true
             }
             return@setOnKeyListener false
