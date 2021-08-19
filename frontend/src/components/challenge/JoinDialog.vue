@@ -67,8 +67,14 @@ export default {
         if (data.result == 'Success') {
           alert('챌린지 가입이 완료되었습니다.')
           this.dialog= false
-        } else {
+        } else if (data.result == 'Max Member Reached') {
+          alert('이미 마감된 챌린지입니다.')
+          this.dialog= false
+        } else if (data.result == 'Already In Challenge') {
           alert('이미 가입한 챌린지입니다.')
+          this.dialog= false
+        } else {
+          alert('챌린지에 가입할 수 없습니다.')
           this.dialog= false
         }
       } catch(error) {

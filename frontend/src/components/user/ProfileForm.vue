@@ -111,8 +111,8 @@ export default {
       try {
         const userId = this.$store.state.data2
         const { data } = await axios.get(`http://i5b102.p.ssafy.io:8181/api/image/get/profile/${userId}`)
-        // console.log(data.result)
-        if (data.result == 'http://i5b102.p.ssafy.io:8181/api/image/show/string') {
+        console.log(data.result)
+        if (data.result == null) {
           // console.log('이미지 없음')
           this.profileImg = 'error'
         } else {
