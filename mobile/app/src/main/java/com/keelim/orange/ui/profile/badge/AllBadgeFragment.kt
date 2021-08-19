@@ -9,6 +9,7 @@ import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Badge
 import com.keelim.orange.databinding.FragmentAllBadgeBinding
@@ -21,7 +22,6 @@ class AllBadgeFragment:Fragment() {
     private val binding get() = _binding!!
     private val viewModel: AllBadgeViewModel by viewModels()
     private val badgeAdapter = BadgeAdapter {
-        requireActivity().toast("뱃지 입니다")
     }
 
     private val userId by lazy {
@@ -66,12 +66,31 @@ class AllBadgeFragment:Fragment() {
     }
 
     private fun handleLoading() {
-        //requireActivity().toast("데이터 초기화 중입니다.")
+//        requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleSuccess(data1: List<Badge>) {
-        requireContext().toast(data1.toString())
-        badgeAdapter.submitList(data1)
+//        requireContext().toast(data1.toString())
+        val dark = arrayOf(
+            R.drawable.badge1_none,
+            R.drawable.badge2_none,
+            R.drawable.badge3_none,
+            R.drawable.badge4_none,
+            R.drawable.badge5_none,
+            R.drawable.badge6_none,
+            R.drawable.badge7_none,
+            R.drawable.badge8_none,
+            R.drawable.badge9_none,
+            R.drawable.badge10_none,
+            R.drawable.badge11_none,
+        )
+        badgeAdapter.submitList(data1.mapIndexed { index, badge ->
+            Badge(
+                badge.title,
+                badge.description,
+                dark[index].toString()
+            )
+        })
     }
 
     private fun handleError() {
