@@ -92,13 +92,13 @@ class SeasonFragment : Fragment() {
   }
 
   private fun handleSuccess(data: List<Article>) {
-    requireContext().toast(data.toString())
     if (data.isEmpty()) {
       binding.noData.visibility = View.VISIBLE
     } else {
       binding.noData.visibility = View.INVISIBLE
     }
-    seasonAdapter.submitList(data)
+    val dataReversed = data.reversed()
+    seasonAdapter.submitList(dataReversed)
   }
 
   private fun handleError() {

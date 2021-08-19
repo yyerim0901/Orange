@@ -1,16 +1,17 @@
 package com.keelim.orange.data.call
 
+
 import com.google.gson.annotations.SerializedName
 
 data class CreateCall(
   @SerializedName("articleContent")
-  val articleContent: String,
+  var articleContent: String,
   @SerializedName("challenge")
-  val challenge: Int,
+  var challenge: Int,
   @SerializedName("title")
-  val title: String,
+  var title: String,
   @SerializedName("user")
-  val user: Int,
+  var user: Int,
   @SerializedName("verified")
-  val verified: Boolean,
+  var verified: Boolean
 )
