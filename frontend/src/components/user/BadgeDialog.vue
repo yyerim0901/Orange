@@ -25,72 +25,94 @@
           <v-divider></v-divider>
 
           <v-card v-for="(badge, i) in userbadges" :key="i">
-            <v-img
-              v-if="badge.badge == '1'"
-              src="@/assets/images/badge/badge1.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '2'"
-              src="@/assets/images/badge/badge2.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '3'"
-              src="@/assets/images/badge/badge3.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '4'"
-              src="@/assets/images/badge/badge4.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '5'"
-              src="@/assets/images/badge/badge5.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '6'"
-              src="@/assets/images/badge/badge6.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '7'"
-              src="@/assets/images/badge/badge7.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '8'"
-              src="@/assets/images/badge/badge8.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '9'"
-              src="@/assets/images/badge/badge9.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '10'"
-              src="@/assets/images/badge/badge10.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
-            <v-img
-              v-if="badge.badge == '11'"
-              src="@/assets/images/badge/badge11.png"
-              width="100" height="100"
-              class="badge-position"
-            ></v-img>
+            <div v-if="badge.badge == '1'">
+              <v-img
+                src="@/assets/images/badge/badge1.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">Here comes a new challenger!</p>
+            </div>
+            <div v-if="badge.badge == '2'">
+              <v-img
+                src="@/assets/images/badge/badge2.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">손에 손 잡고, 첫 챌린지 개최</p>
+            </div>
+            <div v-if="badge.badge == '3'">
+              <v-img
+                src="@/assets/images/badge/badge3.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">와우 친구들, 대머리 아저씨야</p>
+            </div>
+            <div v-if="badge.badge == '4'">
+              <v-img
+                src="@/assets/images/badge/badge4.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">이제 바질을 곁들인, '식단' 첫 참여</p>
+            </div>
+            <div v-if="badge.badge == '5'">
+              <v-img
+                src="@/assets/images/badge/badge5.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">약 먹을 시간, '영양제' 첫 참여</p>
+            </div>
+            <div v-if="badge.badge == '6'">
+              <v-img
+                src="@/assets/images/badge/badge6.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">삼위일체, 모든 챌린지 참여</p>
+            </div>
+            <div v-if="badge.badge == '7'">
+              <v-img
+                src="@/assets/images/badge/badge7.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">내 동료가 돼라!</p>
+            </div>
+            <div v-if="badge.badge == '8'">
+              <v-img
+                src="@/assets/images/badge/badge8.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">우린 이제 칭구칭긔</p>
+            </div>
+            <div v-if="badge.badge == '9'">
+              <v-img
+                src="@/assets/images/badge/badge9.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">나, 강림, 최초 게시글 작성</p>
+            </div>
+            <div v-if="badge.badge == '10'">
+              <v-img
+                src="@/assets/images/badge/badge10.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">무플방지위원회</p>
+            </div>
+            <div v-if="badge.badge == '11'">
+              <v-img
+                src="@/assets/images/badge/badge11.png"
+                width="100" height="100"
+                class="badge-position"
+              ></v-img>
+              <p class="text-center">난 필연적인 존재다</p>
+            </div>
           </v-card>
           <v-card-actions>
             <v-spacer></v-spacer>

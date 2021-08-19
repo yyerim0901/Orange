@@ -93,7 +93,6 @@ export default {
     },
     goHome() {
       this.$router.push({path:'/'}).catch(()=> {});
-      location.reload()
     },
     goCreateChallenge() {
       this.$router.push({path:'/create-challenge'}).catch(()=> {});

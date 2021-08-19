@@ -3,7 +3,7 @@
     <v-card outlined>
       <v-row>
         <v-col align-self="center">
-          <template v-if="profileImg='error'">
+          <template v-if="profileImg=='error'">
             <v-img
               src="@/assets/images/basic.png"
               class="profile_image"
@@ -18,17 +18,27 @@
         </v-col>
         <v-col class="my-auto">
           <v-row justify="space-between">
-            <v-col cols="auto" class="align-self-center">
-              {{ userDatas.username }}
+            <v-col cols="auto" class="align-self-center h4 my-5">
+              {{ userDatas.nickname }}
             </v-col>
 
           </v-row>
           <v-col>
             <v-row justify="space-between">
               <v-col cols="auto">
-                <v-icon>
-                  mdi-trophy-outline
-                </v-icon>
+                <v-tooltip right>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      color="primary"
+                      dark
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      mdi-trophy-outline
+                    </v-icon>
+                  </template>
+                  <span>현재 갖고 있는 뱃지</span>
+                </v-tooltip>
               </v-col>
               <v-col cols="auto">
                 <BadgeDialog />
@@ -40,15 +50,11 @@
           <v-container class="d-flex flex-row justify-space-between text-center">
             <v-flex>
               <div>
-                <div class="subtitle-2">{{ challengeDates.length }}</div>
-                <div class="caption grey--text">JOIN</div>
+                <div class="caption grey--text">현재 가입중인 챌린지</div>
               </div>
             </v-flex>
             <v-flex>
-              <FollowerDialog />
-            </v-flex>
-            <v-flex>
-              <FollowingDialog />
+              <div class="subtitle-2">{{ challengeDates.length }}</div>
             </v-flex>
           </v-container>
           </v-col>
