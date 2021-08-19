@@ -66,7 +66,7 @@ class AllBadgeFragment:Fragment() {
     }
 
     private fun handleLoading() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleSuccess(data1: List<Badge>) {

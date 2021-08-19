@@ -164,11 +164,11 @@ class FeedFragment : Fragment() {
     }
 
     private fun handleUnInitialized() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleLoading() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleSuccess(data1: List<CategoryResponse>, data2: List<Search2>) {

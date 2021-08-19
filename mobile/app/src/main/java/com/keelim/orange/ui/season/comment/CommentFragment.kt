@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSnapHelper
-import com.google.android.material.snackbar.Snackbar
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.season.Comment
 import com.keelim.orange.databinding.FragmentCommentBinding
@@ -72,33 +71,27 @@ class CommentFragment : Fragment() {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(commentRecyclerview)
 
-        username.setOnKeyListener { view, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                val value = binding.username.text.toString()
-                if (value.isEmpty()){
-                    Snackbar.make(binding.root, "댓글을 적어주세요", Snackbar.LENGTH_SHORT).show()
-                }else{
-                    viewModel.writeComment(args.article.articleId, userId, binding.username.text.toString() )
-                    viewModel.fetchData(args.article.articleId)
-                    binding.username.text.clear()
-                }
-                return@setOnKeyListener true
-            }
-            return@setOnKeyListener false
+        btnEnter.setOnClickListener {
+            if(binding.username.text.toString()=="") return@setOnClickListener
+
+            viewModel.writeComment(args.article.articleId,
+                userId,
+                binding.username.text.toString())
+            binding.username.text.clear()
+            viewModel.fetchData(args.article.articleId)
         }
     }
 
 
     private fun handleUnInitialized() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleLoading() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleSuccess(data: List<Comment>) {
-        requireContext().toast(data.toString())
         commentAdapter.submitList(data)
     }
 

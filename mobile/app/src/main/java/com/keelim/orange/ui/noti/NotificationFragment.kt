@@ -68,11 +68,11 @@ class NotificationFragment : Fragment() {
   }
 
   private fun handleUnInitialized() {
-    requireActivity().toast("데이터 초기화 중입니다.")
+    //requireActivity().toast("데이터 초기화 중입니다.")
   }
 
   private fun handleLoading() {
-    requireActivity().toast("데이터 초기화 중입니다.")
+    //requireActivity().toast("데이터 초기화 중입니다.")
   }
   private fun handleSuccess(data: List<Notification>) {
     if(data.isEmpty()){
