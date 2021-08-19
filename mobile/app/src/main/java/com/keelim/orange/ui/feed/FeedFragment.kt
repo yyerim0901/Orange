@@ -35,7 +35,7 @@ class FeedFragment : Fragment() {
     private val viewModel by viewModels<FeedViewModel>()
     private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid, color ->
         findNavController().navigate(
-            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color, null)
+            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color, null, -1)
         )
     }
     private val colors = arrayOf(

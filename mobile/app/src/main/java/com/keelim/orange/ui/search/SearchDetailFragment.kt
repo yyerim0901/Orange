@@ -26,7 +26,7 @@ class SearchDetailFragment: Fragment() {
     private val resultAdapter = SearchRecyclerAdapter2(
         clickListener = {
             findNavController().navigate(
-                SearchDetailFragmentDirections.actionSearchDetailFragmentToDetailFragment(it.challengeId.toString(), -1, it)
+                SearchDetailFragmentDirections.actionSearchDetailFragmentToDetailFragment(it.challengeId.toString(), -1, it, -1)
             )
         }
     )
