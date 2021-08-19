@@ -1,8 +1,8 @@
 package com.keelim.orange.domain.season
 
-import android.graphics.Bitmap
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import timber.log.Timber
+import java.io.File
 
 class CreateUseCase(
   private val createRepository: CreateRepository,
@@ -12,13 +12,13 @@ class CreateUseCase(
     userId: Int,
     title: String,
     description: String,
-    bitmap: Bitmap,
+    file: File,
   ) {
     //1.
     try {
       val article = createRepository.upload(challengeId, userId, title, description)
 
-      val imageUpload = createRepository.image(article.articleId, bitmap)
+      val imageUpload = createRepository.image(article.articleId, file)
     } catch (e:Exception){
       Timber.e("[what the] $e")
     }

@@ -156,13 +156,13 @@ interface OrangeService {
     @Body call: CreateCall,
   ): Response<ArticleCreateResponse>
 
-  @Multipart
-  @POST(" api/image/save/article")
-  suspend fun imageUpload(
-    @PartMap data: HashMap<String, RequestBody>,
-    @Part image: MultipartBody.Part,
-  )
-
   @GET("api/image/get/article/{articleId}")
   suspend fun image(@Path("articleId") article: Int): Response<List<String>>
+
+  @Multipart
+  @POST("api/image/save/article")
+  suspend fun imageUpload(
+    @Part articleId:MultipartBody.Part,
+    @Part file: MultipartBody.Part?,
+  )
 }

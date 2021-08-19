@@ -1,16 +1,13 @@
 package com.keelim.orange.ui.season.sheet.create
 
 import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
@@ -18,8 +15,8 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keelim.orange.common.toast
 import com.keelim.orange.databinding.FragmentCreateBinding
-import com.keelim.orange.ui.season.season.SeasonFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class CreateFragment:BottomSheetDialogFragment() {
@@ -27,7 +24,7 @@ class CreateFragment:BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private val viewModel: CreateViewModel by viewModels()
     private val args by navArgs<CreateFragmentArgs>()
-    private lateinit var bitMap: Bitmap
+    private lateinit var file: File
 
     private val userId by lazy {
         val pref = requireActivity().getSharedPreferences("userId", AppCompatActivity.MODE_PRIVATE)
@@ -45,19 +42,9 @@ class CreateFragment:BottomSheetDialogFragment() {
                     val fileUri = data?.data!!
 //                    mProfileUri = fileUri
 //                    imgProfile.setImageURI(fileUri)
-                    //TODO
+                    file = fileUri.toFile()
                     binding.camera.load(fileUri)
 
-
-                    bitMap = if (Build.VERSION.SDK_INT < 28) {
-                        MediaStore.Images.Media.getBitmap(
-                            requireContext().contentResolver,
-                            fileUri
-                        )
-                    } else {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver,
-                            fileUri))
-                    }
                 }
 
                 ImagePicker.RESULT_ERROR -> {
@@ -96,7 +83,7 @@ class CreateFragment:BottomSheetDialogFragment() {
 
             if (title.isEmpty() or description.isEmpty()) return@setOnClickListener
 
-            viewModel.upload(args.challengeId,userId, title, description, bitMap)
+            viewModel.upload(args.challengeId, userId, title, description, file)
         }
 
         camera.setOnClickListener {
