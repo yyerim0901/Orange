@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.keelim.orange.R
-import com.keelim.orange.data.model.Search
 import com.keelim.orange.data.model.Search2
 import com.keelim.orange.databinding.ItemSearch2Binding
-import com.keelim.orange.ui.feed.SearchRecyclerAdapter
 
 class SearchRecyclerAdapter2(
     val clickListener:(Search2) -> Unit,
@@ -18,7 +16,11 @@ class SearchRecyclerAdapter2(
 
     inner class ViewHolder(val binding:ItemSearch2Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(item:Search2) = with(binding){
-            imgChallenge.load("https://images.unsplash.com/photo-1520853504280-249b72dc947c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80")
+            if ("" == item.imagePath) {
+                imgChallenge.load(R.drawable.morning)
+            } else {
+                imgChallenge.load("http://i5b102.p.ssafy.io:8181/api/image/show/${item.imagePath}")
+            }
             title.text = item.challengeTitle
             describe.text = item.challengeDescribe
             managerId.text = "관리자 id: ${item.managerId}"

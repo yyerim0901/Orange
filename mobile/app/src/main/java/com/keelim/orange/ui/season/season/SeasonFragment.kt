@@ -68,6 +68,11 @@ class SeasonFragment : Fragment() {
     }
   }
 
+  override fun onResume() {
+    super.onResume()
+    viewModel.fetchData(args.challengeId)
+  }
+
   override fun onDestroyView() {
     super.onDestroyView()
 
