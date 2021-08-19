@@ -13,6 +13,7 @@ import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
 import com.keelim.orange.data.response.auth.AuthResponse
 import com.keelim.orange.data.response.badge.BadgeResponse
+import com.keelim.orange.data.response.badge.BadgeResponse2
 import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.data.response.notification.NotificationDeleteResponse
@@ -76,10 +77,10 @@ interface OrangeService {
   @GET("api/badge/list")
   suspend fun getAllBadgeList(): Response<BadgeResponse>
 
-  @GET("api/badge/list/{userId}")
+  @GET("/api/badgesusers/{userId}")
   suspend fun getMyBadge(
     @Path("userId") userId: Int
-  ): Response<BadgeResponse>
+  ): Response<List<BadgeResponse2>>
 
   @GET("api/notification/select/{userId}")
   suspend fun getNotificationList(@Path("userId") userId: Int): Response<List<NotificationResponse>>
