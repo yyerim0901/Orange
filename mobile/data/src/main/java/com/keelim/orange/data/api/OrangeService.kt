@@ -123,4 +123,9 @@ interface OrangeService {
 
   @GET("api/challenge/search/user/{userId}")
   suspend fun getIngList(@Path("userId") userId: Int): Response<List<SearchResponse>>
+
+
+  @GET("api/challenge/opponent/{challengeId}")
+  suspend fun getOpponent(@Path("challengeId") uid: Int): Response<ChallengeResponse>
+
 }

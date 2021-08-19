@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.fight.sheet.other
+package com.keelim.orange.ui.season.sheet.other
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -5,6 +5,7 @@ import com.keelim.orange.data.repository.NotificationRepository
 import com.keelim.orange.data.repository.badge.BadgeRepository
 import com.keelim.orange.data.repository.favorite.FavoriteRepository
 import com.keelim.orange.data.repository.feed.FeedRepository
+import com.keelim.orange.data.repository.fight.FightRepository
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.history.HistoryRepository
 import com.keelim.orange.data.repository.profile.ProfileRepository
@@ -23,13 +24,14 @@ import com.keelim.orange.domain.feed.CategoryUseCase
 import com.keelim.orange.domain.feed.ChallengeListUseCase
 import com.keelim.orange.domain.feed.CreateChallengeUseCase
 import com.keelim.orange.domain.feed.GetDetailInformationUseCase
-import com.keelim.orange.domain.fight.CreateUseCase
-import com.keelim.orange.domain.fight.OtherUseCase
+import com.keelim.orange.domain.fight.OpponentUseCase
 import com.keelim.orange.domain.history.HistoryUseCase
 import com.keelim.orange.domain.profile.GetCompletedChallengeUseCase
 import com.keelim.orange.domain.profile.GetIngChallengeUseCase
 import com.keelim.orange.domain.profile.ProfileUseCase
 import com.keelim.orange.domain.search.SearchUseCase
+import com.keelim.orange.domain.season.CreateUseCase
+import com.keelim.orange.domain.season.OtherUseCase
 import com.keelim.orange.domain.season.RankingUseCase
 import dagger.Module
 import dagger.Provides
@@ -212,6 +214,18 @@ object UseCaseModule {
   ): ProfileUseCase {
     return ProfileUseCase(
       profileRepository
+    )
+  }
+
+  @Provides
+  @ViewModelScoped
+  fun provideOpponentUseCase(
+    fightRepository: FightRepository,
+    detailRepository: FeedRepository,
+  ): OpponentUseCase {
+    return OpponentUseCase(
+      fightRepository,
+      detailRepository,
     )
   }
 }

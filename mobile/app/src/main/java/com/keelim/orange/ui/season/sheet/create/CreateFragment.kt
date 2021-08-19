@@ -1,4 +1,4 @@
-package com.keelim.orange.ui.fight.sheet.create
+package com.keelim.orange.ui.season.sheet.create
 
 import android.app.Activity
 import android.graphics.Bitmap

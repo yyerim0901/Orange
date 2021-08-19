@@ -13,6 +13,8 @@ import com.keelim.orange.data.repository.favorite.FavoriteRepository
 import com.keelim.orange.data.repository.favorite.FavoriteRepositoryImpl
 import com.keelim.orange.data.repository.feed.FeedRepository
 import com.keelim.orange.data.repository.feed.FeedRepositoryImpl
+import com.keelim.orange.data.repository.fight.FightRepository
+import com.keelim.orange.data.repository.fight.FightRepositoryImpl
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.friends.FriendsRepositoryImpl
 import com.keelim.orange.data.repository.history.HistoryRepository
@@ -187,6 +189,18 @@ object RepositoryModule {
     apiRequestFactory: ApiRequestFactory,
   ): SearchRepository {
     return SearchRepositoryImpl(
+      dispatcher = dispatcher,
+      apiRequestFactory = apiRequestFactory
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideFightRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): FightRepository{
+    return FightRepositoryImpl(
       dispatcher = dispatcher,
       apiRequestFactory = apiRequestFactory
     )

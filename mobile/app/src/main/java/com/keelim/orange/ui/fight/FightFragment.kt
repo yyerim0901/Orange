@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.keelim.orange.R
 import com.keelim.orange.common.toast
 import com.keelim.orange.data.model.Fight
 import com.keelim.orange.databinding.FragmentFightBinding
+import com.keelim.orange.ui.detail.DetailFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +25,8 @@ class FightFragment : Fragment() {
   private val viewModel by viewModels<FightViewModel>()
   private var _binding: FragmentFightBinding? = null
   private val binding get() = _binding!!
+  private val args by navArgs<FightFragmentArgs>()
+
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -37,7 +41,7 @@ class FightFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     initViews()
     observeData()
-    viewModel.fetchData()
+    viewModel.fetchData(args.challengId)
   }
 
   private fun initViews() = with(binding) {

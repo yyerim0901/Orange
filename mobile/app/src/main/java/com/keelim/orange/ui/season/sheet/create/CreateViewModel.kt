@@ -1,9 +1,9 @@
-package com.keelim.orange.ui.fight.sheet.create
+package com.keelim.orange.ui.season.sheet.create
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keelim.orange.domain.fight.CreateUseCase
+import com.keelim.orange.domain.season.CreateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
