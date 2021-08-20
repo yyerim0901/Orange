@@ -32,16 +32,13 @@ class ProfileFragment: Fragment() {
         return@lazy pref.getInt("userId", -1)
     }
     private val ingChallengeAdapter = SearchRecyclerAdapter(
-        clickListener = { _, _ ->
-
+        clickListener = { id, _ ->
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToDetailFragment(id.toString(), -1, null, -1)
+                )
         }
     )
 
-    private val completedChallengeAdapter = SearchRecyclerAdapter(
-        clickListener = { _, _ ->
-
-        }
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +67,7 @@ class ProfileFragment: Fragment() {
             is ProfileState.Error -> handleError()
             is ProfileState.Loading -> handleLoading()
             is ProfileState.ProfileSuccess -> handleProfileSuccess(it.data)
-            is ProfileState.Success -> handleSuccess(it.completed, it.ing)
+            is ProfileState.Success -> handleSuccess(it.ing, it.completed)
             is ProfileState.UnInitialized -> handleUnInitialized()
         }
     }
@@ -79,36 +76,21 @@ class ProfileFragment: Fragment() {
         requireContext().toast("프로필을 불러오는 중입니다")
     }
 
-    private fun handleSuccess(completed: List<Search2>, ing: List<Search2>) {
+    private fun handleSuccess(ing: List<Search2>, completed: List<Search2>) {
         if (ing.isEmpty()) {
             binding.tvIng.visibility = View.VISIBLE
             binding.ingChallenge.visibility = View.INVISIBLE
         } else {
             binding.tvIng.visibility = View.INVISIBLE
             binding.ingChallenge.visibility = View.VISIBLE
-            completedChallengeAdapter.submitList(completed.map {
-                Search(
-                    challengeId = it.challengeId,
-                    title = it.challengeTitle,
-                    description = it.challengeDescribe
-                )
-            })
         }
-
-        if (completed.isEmpty()) {
-            binding.tvCompleted.visibility = View.VISIBLE
-            binding.completeChange.visibility = View.INVISIBLE
-        } else {
-            binding.tvCompleted.visibility = View.INVISIBLE
-            binding.completeChange.visibility = View.VISIBLE
-            ingChallengeAdapter.submitList(ing.map {
-                Search(
-                    challengeId = it.challengeId,
-                    title = it.challengeTitle,
-                    description = it.challengeDescribe
-                )
-            })
-        }
+        ingChallengeAdapter.submitList(ing.map {
+            Search(
+                it.challengeId,
+                it.challengeTitle,
+                it.challengeDescribe
+            )
+        })
     }
 
     private fun handleProfileSuccess(data: Profile) = with(binding) {
@@ -140,7 +122,6 @@ class ProfileFragment: Fragment() {
 
     private fun initViews() = with(binding) {
         ingChallenge.adapter = ingChallengeAdapter
-        completeChange.adapter = completedChallengeAdapter
         btnHome.setOnClickListener {
             findNavController().navigateUp()
         }

@@ -2,12 +2,10 @@ package com.keelim.orange.data.repository.feed
 
 import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.call.ChallengeCall
-import com.keelim.orange.data.model.Search
+import com.keelim.orange.data.call.SignCall
 import com.keelim.orange.data.model.Search2
-import com.keelim.orange.data.response.DetailResponse
 import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.feed.CategoryResponse
-import com.keelim.orange.data.response.feed.ChallengeResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -76,5 +74,14 @@ class FeedRepositoryImpl(
       "",
       "",
     )).body()!!
+  }
+
+  override suspend fun sign(challengeId: Int, userId: Int): Unit = withContext(dispatcher) {
+    apiRequestFactory.retrofit.sign(
+      SignCall(
+        challengeId,
+        userId
+      )
+    )
   }
 }

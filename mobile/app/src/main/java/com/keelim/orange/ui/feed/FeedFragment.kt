@@ -35,7 +35,7 @@ class FeedFragment : Fragment() {
     private val viewModel by viewModels<FeedViewModel>()
     private val searchRecyclerAdapter = SearchRecyclerAdapter{ uid, color ->
         findNavController().navigate(
-            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color, null)
+            FeedFragmentDirections.actionFeedFragmentToDetailFragment(uid.toString(), color, null, -1)
         )
     }
     private val colors = arrayOf(
@@ -164,11 +164,11 @@ class FeedFragment : Fragment() {
     }
 
     private fun handleUnInitialized() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleLoading() {
-        requireActivity().toast("데이터 초기화 중입니다.")
+        //requireActivity().toast("데이터 초기화 중입니다.")
     }
 
     private fun handleSuccess(data1: List<CategoryResponse>, data2: List<Search2>) {

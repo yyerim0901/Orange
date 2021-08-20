@@ -1,8 +1,8 @@
-package com.keelim.orange.ui.fight.sheet.other
+package com.keelim.orange.ui.season.sheet.other
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.keelim.orange.domain.fight.OtherUseCase
+import com.keelim.orange.domain.season.OtherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch

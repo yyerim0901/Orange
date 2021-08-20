@@ -49,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
         android:text="관심을 가져주세요 \(￣︶￣*\))"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

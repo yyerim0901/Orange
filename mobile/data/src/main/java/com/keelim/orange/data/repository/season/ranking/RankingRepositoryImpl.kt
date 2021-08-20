@@ -1,4 +1,4 @@
-package com.keelim.orange.data.repository.season
+package com.keelim.orange.data.repository.season.ranking
 
 import com.keelim.orange.data.api.ApiRequestFactory
 import com.keelim.orange.data.model.ranking.Ranking
@@ -17,7 +17,7 @@ class RankingRepositoryImpl(
         Ranking(
           ranking_title = rankingResponse.challengeTitle,
           ranking_description = rankingResponse.challengeDescribe,
-          rank = index,
+          rank = index+1,
           image_address = rankingResponse.imagePath ?: ""
         )
       } ?: emptyList()
@@ -33,7 +33,7 @@ class RankingRepositoryImpl(
         Ranking(
           ranking_title = rankingResponse.challengeTitle,
           ranking_description = rankingResponse.challengeDescribe,
-          rank = index,
+          rank = index+1,
           image_address = rankingResponse.imagePath ?: ""
         )
       } ?: emptyList()

@@ -13,6 +13,8 @@ import com.keelim.orange.data.repository.favorite.FavoriteRepository
 import com.keelim.orange.data.repository.favorite.FavoriteRepositoryImpl
 import com.keelim.orange.data.repository.feed.FeedRepository
 import com.keelim.orange.data.repository.feed.FeedRepositoryImpl
+import com.keelim.orange.data.repository.fight.FightRepository
+import com.keelim.orange.data.repository.fight.FightRepositoryImpl
 import com.keelim.orange.data.repository.friends.FriendsRepository
 import com.keelim.orange.data.repository.friends.FriendsRepositoryImpl
 import com.keelim.orange.data.repository.history.HistoryRepository
@@ -21,8 +23,10 @@ import com.keelim.orange.data.repository.profile.ProfileRepository
 import com.keelim.orange.data.repository.profile.ProfileRepositoryImpl
 import com.keelim.orange.data.repository.search.SearchRepository
 import com.keelim.orange.data.repository.search.SearchRepositoryImpl
-import com.keelim.orange.data.repository.season.RankingRepository
-import com.keelim.orange.data.repository.season.RankingRepositoryImpl
+import com.keelim.orange.data.repository.season.SeasonRepository
+import com.keelim.orange.data.repository.season.SeasonRepositoryImpl
+import com.keelim.orange.data.repository.season.ranking.RankingRepository
+import com.keelim.orange.data.repository.season.ranking.RankingRepositoryImpl
 import com.keelim.orange.data.repository.season.create.CreateRepository
 import com.keelim.orange.data.repository.season.create.CreateRepositoryImpl
 import com.keelim.orange.data.repository.season.other.OtherRepository
@@ -187,6 +191,30 @@ object RepositoryModule {
     apiRequestFactory: ApiRequestFactory,
   ): SearchRepository {
     return SearchRepositoryImpl(
+      dispatcher = dispatcher,
+      apiRequestFactory = apiRequestFactory
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideFightRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): FightRepository{
+    return FightRepositoryImpl(
+      dispatcher = dispatcher,
+      apiRequestFactory = apiRequestFactory
+    )
+  }
+
+  @Provides
+  @Singleton
+  fun provideSeasonRepository(
+    @IoDispatcher dispatcher: CoroutineDispatcher,
+    apiRequestFactory: ApiRequestFactory,
+  ): SeasonRepository{
+    return SeasonRepositoryImpl(
       dispatcher = dispatcher,
       apiRequestFactory = apiRequestFactory
     )

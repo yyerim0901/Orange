@@ -11,4 +11,5 @@ interface FeedRepository {
   suspend fun getCategory(): List<CategoryResponse>
   suspend fun challengeList(): List<Search2>
   suspend fun createChallenge(information: Any): ResultResponse
+  suspend fun sign(challengeId:Int, userId:Int)
 }

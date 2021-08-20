@@ -26,7 +26,7 @@ class SearchDetailFragment: Fragment() {
     private val resultAdapter = SearchRecyclerAdapter2(
         clickListener = {
             findNavController().navigate(
-                SearchDetailFragmentDirections.actionSearchDetailFragmentToDetailFragment(it.challengeId.toString(), -1, it)
+                SearchDetailFragmentDirections.actionSearchDetailFragmentToDetailFragment(it.challengeId.toString(), -1, it, -1)
             )
         }
     )
@@ -106,7 +106,7 @@ class SearchDetailFragment: Fragment() {
     }
 
     private fun handleLoading() {
-        requireActivity().toast("검색 이력을 불러오고 있습니다.")
+//        requireActivity().toast("검색 이력을 불러오고 있습니다.")
     }
 
     private fun handleSuccess(data: List<History>) {
@@ -120,7 +120,7 @@ class SearchDetailFragment: Fragment() {
     }
 
     private fun handleSearchSuccess(data: List<Search2>) = with(binding) {
-        requireContext().toast(data.toString())
+//        requireContext().toast(data.toString())
         if(data.isNotEmpty()){
             searchResults.visibility = View.INVISIBLE
             searchRecycler.apply {

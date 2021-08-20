@@ -27,12 +27,10 @@ class NotificationViewModel @Inject constructor(
     try {
       setState(
           NotificationState.Success(
-//              notificationUseCase.invoke(userId)
-              notificationUseCase.invoke(20)
+              notificationUseCase.invoke(userId)
           )
       )
     } catch (e: Exception) {
-        Timber.e(e)
         setState(
             NotificationState.Error
         )

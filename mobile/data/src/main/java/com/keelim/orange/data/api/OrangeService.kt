@@ -1,9 +1,11 @@
 package com.keelim.orange.data.api
 
 import com.keelim.orange.data.call.ChallengeCall
+import com.keelim.orange.data.call.CreateCall
 import com.keelim.orange.data.call.LoginCall
+import com.keelim.orange.data.call.SignCall
 import com.keelim.orange.data.call.SignUpCall
-import com.keelim.orange.data.model.Search2
+import com.keelim.orange.data.call.WriteComment
 import com.keelim.orange.data.model.entity.Favorite
 import com.keelim.orange.data.response.FriendsResponse
 import com.keelim.orange.data.response.ProfileResponse
@@ -11,19 +13,27 @@ import com.keelim.orange.data.response.ResultResponse
 import com.keelim.orange.data.response.UserSampleResponse
 import com.keelim.orange.data.response.auth.AuthResponse
 import com.keelim.orange.data.response.badge.BadgeResponse
+import com.keelim.orange.data.response.badge.BadgeResponse2
 import com.keelim.orange.data.response.feed.CategoryResponse
 import com.keelim.orange.data.response.feed.ChallengeResponse
 import com.keelim.orange.data.response.notification.NotificationDeleteResponse
 import com.keelim.orange.data.response.notification.NotificationResponse
 import com.keelim.orange.data.response.ranking.RankingResponse
 import com.keelim.orange.data.response.search.SearchResponse
+import com.keelim.orange.data.response.season.ArticleCreateResponse
+import com.keelim.orange.data.response.season.ArticleResponse
+import com.keelim.orange.data.response.season.CommentResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
-import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.PartMap
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -45,12 +55,7 @@ interface OrangeService {
   @POST("other/sue/")
   fun share(): Response<UserSampleResponse>
 
-  @Headers("Content-Type: application/json")
-  @POST("create/upload/")
-  fun upload(
-    @Field("title") title: String,
-    @Field("description") description: String
-  ): Response<UserSampleResponse>
+
 
 
 
@@ -72,10 +77,10 @@ interface OrangeService {
   @GET("api/badge/list")
   suspend fun getAllBadgeList(): Response<BadgeResponse>
 
-  @GET("api/badge/list/{userId}")
+  @GET("/api/badgesusers/{userId}")
   suspend fun getMyBadge(
     @Path("userId") userId: Int
-  ): Response<BadgeResponse>
+  ): Response<List<BadgeResponse2>>
 
   @GET("api/notification/select/{userId}")
   suspend fun getNotificationList(@Path("userId") userId: Int): Response<List<NotificationResponse>>
@@ -123,4 +128,42 @@ interface OrangeService {
 
   @GET("api/challenge/search/user/{userId}")
   suspend fun getIngList(@Path("userId") userId: Int): Response<List<SearchResponse>>
+
+
+  @GET("api/challenge/opponent/{challengeId}")
+  suspend fun getOpponent(@Path("challengeId") uid: Int): Response<ChallengeResponse>
+
+  @GET("api/article/challenge/{challengeId}")
+  suspend fun article(@Path("challengeId") challenge: Int): Response<List<ArticleResponse>>
+
+
+
+  @GET("api/comment/article/{articleId}")
+  suspend fun comments(@Path("articleId") article: Int): Response<List<CommentResponse>>
+
+  @POST("api/challenge/register/new-user")
+  suspend fun sign(
+    @Body call: SignCall,
+  ): Response<ResultResponse>
+
+  @POST("api/comment/create")
+  suspend fun writeComment(
+    @Body call: WriteComment,
+  )
+
+
+  @POST("api/article/create")
+  suspend fun upload(
+    @Body call: CreateCall,
+  ): Response<ArticleCreateResponse>
+
+  @GET("api/image/get/article/{articleId}")
+  suspend fun image(@Path("articleId") article: Int): Response<List<String>>
+
+  @Multipart
+  @POST("api/image/save/article")
+  suspend fun imageUpload(
+    @Part articleId:MultipartBody.Part,
+    @Part file: MultipartBody.Part?,
+  )
 }

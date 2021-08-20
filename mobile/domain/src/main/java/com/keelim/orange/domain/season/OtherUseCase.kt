@@ -1,4 +1,4 @@
-package com.keelim.orange.domain.fight
+package com.keelim.orange.domain.season
 
 import com.keelim.orange.data.repository.season.other.OtherRepository
 
