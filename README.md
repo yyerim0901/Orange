@@ -114,8 +114,8 @@
 | 기능 | Web | Mobile |
 | -- | --------------- | --------------- |
 | 메인화면 | ![웹메인](./README.assets/1_웹화면.png)| ![모바일메인](./README.assets/1_모바일화면.png)|
-|회원가입|![웹회원가입](./README.assets/0_웹화면_회원가입.png)|![모바일회원가입](./README.assets/0_모바일화면_회원가입.png)|
-|로그인|![웹로그인](./README.assets/0_웹화면_로그인.png)|![모바일로그인](./README.assets/0_모바일화면_로그인.png)|
+|회원가입|![웹회원가입](./README.assets/0_웹화면_회원가입.PNG)|![모바일회원가입](./README.assets/0_모바일화면_회원가입.png)|
+|로그인|![웹로그인](./README.assets/0_웹화면_로그인.PNG)|![모바일로그인](./README.assets/0_모바일화면_로그인.png)|
 | 챌린지생성 | ![웹챌린지생성](./README.assets/2_웹화면_챌린지생성화면.png) | ![모바일챌린지생성](./README.assets/2_모바일화면_챌린지생성.gif) |
 | 챌린지내게시글 | ![웹챌린지게시글](./README.assets/3_1_웹화면_챌린지게시글(인증).png) | ![모바일게시글](./README.assets/3_1_모바일화면_챌린지게시글(인증).png) |
 | 그룹챌린지경쟁현황 | ![웹경쟁](./README.assets/4_웹화면_그룹챌린지상황.png) | ![모바일경쟁](./README.assets/5_모바일화면_랭킹2.png) |
